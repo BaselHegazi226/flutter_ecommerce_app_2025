@@ -19,18 +19,34 @@ final class GetProductSuccess extends ProductState {
   GetProductSuccess({required this.products});
 }
 
-final class GetProductByCategoryNumberInitial extends ProductState {}
+final class GetProductByCategoryInitial extends ProductState {}
 
-final class GetProductByCategoryNumberLoading extends ProductState {}
+final class GetProductByCategoryLoading extends ProductState {}
 
-final class GetProductByCategoryNumberFailure extends ProductState {
+final class GetProductByCategoryFailure extends ProductState {
   final String errorMessage;
 
-  GetProductByCategoryNumberFailure({required this.errorMessage});
+  GetProductByCategoryFailure({required this.errorMessage});
 }
 
-final class GetProductByCategoryNumberSuccess extends ProductState {
+final class GetProductByCategorySuccess extends ProductState {
   final List<ProductModel> products;
 
-  GetProductByCategoryNumberSuccess({required this.products});
+  GetProductByCategorySuccess({required this.products});
+}
+
+final class GetProductByIdInitial extends ProductState {}
+
+final class GetProductByIdLoading extends ProductState {}
+
+final class GetProductByIdFailure extends ProductState {
+  final String errorMessage;
+
+  GetProductByIdFailure({required this.errorMessage});
+}
+
+final class GetProductByIdSuccess extends ProductState {
+  final ProductModel productModel;
+
+  GetProductByIdSuccess({required this.productModel});
 }

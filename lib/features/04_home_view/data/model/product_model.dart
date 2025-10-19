@@ -217,3 +217,53 @@ class Review {
     "comment": comment,
   };
 }
+
+extension ProductModelCopyWith on ProductModel {
+  ProductModel copyWith({
+    List<String>? images,
+    String? thumbnail,
+    int? minimumOrderQuantity,
+    double? rating,
+    String? returnPolicy,
+    String? description,
+    int? weight,
+    String? warrantyInformation,
+    String? title,
+    List<String>? tags,
+    double? discountPercentage,
+    List<Review>? reviews,
+    double? price,
+    Meta? meta,
+    String? shippingInformation,
+    int? id,
+    String? availabilityStatus,
+    String? category,
+    int? stock,
+    String? sku,
+    Dimensions? dimensions,
+  }) {
+    return ProductModel(
+      images: images ?? this.images,
+      thumbnail: thumbnail ?? this.thumbnail,
+      minimumOrderQuantity: minimumOrderQuantity ?? this.minimumOrderQuantity,
+      rating: rating ?? this.rating,
+      returnPolicy: returnPolicy ?? this.returnPolicy,
+      description: description ?? this.description,
+      weight: weight ?? this.weight,
+      warrantyInformation: warrantyInformation ?? this.warrantyInformation,
+      title: title ?? this.title,
+      tags: tags ?? this.tags,
+      discountPercentage: discountPercentage ?? this.discountPercentage,
+      reviews: reviews ?? this.reviews,
+      price: price ?? this.price,
+      meta: meta ?? this.meta,
+      shippingInformation: shippingInformation ?? this.shippingInformation,
+      id: id ?? this.id,
+      availabilityStatus: availabilityStatus ?? this.availabilityStatus,
+      category: category ?? this.category,
+      stock: stock ?? this.stock,
+      sku: sku ?? this.sku,
+      dimensions: dimensions ?? this.dimensions,
+    );
+  }
+}

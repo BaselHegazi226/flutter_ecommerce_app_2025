@@ -26,19 +26,36 @@ class ProductCubit extends Cubit<ProductState> {
     );
   }
 
-  Future<void> getProductsByCategoryNumber({required String category}) async {
-    emit(GetProductByCategoryNumberLoading());
-    final result = await homeViewRepo.getProductsByCategoryNumber(category);
+  Future<void> getProductsByCategory({required String category}) async {
+    emit(GetProductByCategoryLoading());
+    final result = await homeViewRepo.getProductsByCategory(category);
     result.fold(
       (error) {
         emit(
-          GetProductByCategoryNumberFailure(
+          GetProductByCategoryFailure(
             errorMessage: error.errorMessage ?? 'unknown error',
           ),
         );
       },
       (successProducts) {
-        emit(GetProductByCategoryNumberSuccess(products: successProducts));
+        emit(GetProductByCategorySuccess(products: successProducts));
+      },
+    );
+  }
+
+  Future<void> getProductById({required int productId}) async {
+    emit(GetProductByIdLoading());
+    final result = await homeViewRepo.getProductById(productId);
+    result.fold(
+      (error) {
+        emit(
+          GetProductByIdFailure(
+            errorMessage: error.errorMessage ?? 'unknown error',
+          ),
+        );
+      },
+      (successProduct) {
+        emit(GetProductByIdSuccess(productModel: successProduct));
       },
     );
   }
