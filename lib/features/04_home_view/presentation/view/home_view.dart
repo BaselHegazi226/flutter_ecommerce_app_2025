@@ -13,20 +13,15 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(
-          create: (context) =>
-              AppGet().getIt.get<CategoryCubit>()..getCategories(),
+        BlocProvider.value(
+          value: AppGet().getIt.get<CategoryCubit>()..getCategories(),
         ),
-        BlocProvider(
-          create: (context) =>
-              AppGet().getIt.get<ProductCubit>()..getBestSellingProducts(),
+        BlocProvider.value(
+          value: AppGet().getIt.get<ProductCubit>()..getBestSellingProducts(),
         ),
       ],
-      child: SafeArea(
-        child: Scaffold(
-          backgroundColor: kScaffoldColor,
-          body: const HomeViewBody(),
-        ),
+      child: const SafeArea(
+        child: Scaffold(backgroundColor: kScaffoldColor, body: HomeViewBody()),
       ),
     );
   }
