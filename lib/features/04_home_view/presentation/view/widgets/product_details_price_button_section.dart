@@ -27,10 +27,14 @@ class ProductDetailsPriceButtonSection extends StatelessWidget {
         builder: (context, state) {
           return CustomButton(
             onPressed: () {
+              final CartModel cartModel = CartModel(
+                id: productModel.id,
+                price: productModel.price,
+                title: productModel.title,
+                imageUrl: productModel.images[0],
+              );
               context.read<CartBloc>().add(
-                AddToCartEvent(
-                  cartModel: CartModel(productModel: productModel),
-                ),
+                AddToCartEvent(cartModel: cartModel),
               );
             },
             text: 'Add To Cart',

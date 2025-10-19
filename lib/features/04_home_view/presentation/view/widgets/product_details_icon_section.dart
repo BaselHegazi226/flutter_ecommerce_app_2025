@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_e_commerce_app_2025/core/utilities/icon_with_circle_style.dart';
 import 'package:flutter_e_commerce_app_2025/features/04_home_view/data/model/product_model.dart';
 import 'package:flutter_e_commerce_app_2025/features/04_home_view/presentation/view_model/favourite_product_cubit/favourite_product_cubit.dart';
 import 'package:go_router/go_router.dart';
@@ -25,17 +26,13 @@ class ProductDetailsIconSection extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Container(
-              decoration: BoxDecoration(
-                color: Colors.grey.shade50,
-                shape: BoxShape.circle,
-              ),
-              child: IconButton(
+            IconWithCircleStyle(
+              widget: IconButton(
                 padding: EdgeInsets.zero,
                 onPressed: () {
                   GoRouter.of(context).pop();
                 },
-                icon: Icon(
+                icon: const Icon(
                   Icons.arrow_back_ios_new_outlined,
                   color: Colors.black,
                   size: 20,
@@ -48,14 +45,11 @@ class ProductDetailsIconSection extends StatelessWidget {
                     state is AddFavouriteProductSuccess ||
                     state is GetFavouriteProductByIdSuccess;
 
-                return Container(
-                  decoration: BoxDecoration(
-                    color: isFavourite
-                        ? Colors.grey.shade100
-                        : Colors.grey.shade200,
-                    shape: BoxShape.circle,
-                  ),
-                  child: IconButton(
+                return IconWithCircleStyle(
+                  backgroundColor: isFavourite
+                      ? Colors.grey.shade100
+                      : Colors.grey.shade200,
+                  widget: IconButton(
                     padding: const EdgeInsets.all(4),
                     onPressed: () {
                       if (isFavourite) {
