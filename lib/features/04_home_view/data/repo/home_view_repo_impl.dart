@@ -54,12 +54,14 @@ class HomeViewRepoImpl implements HomeViewRepo {
   }
 
   @override
-  Future<Either<Failure, List<ProductModel>>> getProductsByCategoryNumber(
+  Future<Either<Failure, List<ProductModel>>> getProductsByCategory(
     String category,
   ) async {
     try {
-      final Response response = await dio.get('$_baseUrl/products/category/');
-      final data = response.data;
+      final Response response = await dio.get(
+        '$_baseUrl/products/category/$category',
+      );
+      final data = response.data['products'];
       List<ProductModel> products = [];
       for (var item in data) {
         final model = ProductModel.fromJson(item);
@@ -67,6 +69,18 @@ class HomeViewRepoImpl implements HomeViewRepo {
         products.add(model);
       }
       return right(products);
+    } catch (e) {
+      return left(CatchErrorHandle.catchBack(failure: e));
+    }
+  }
+
+  @override
+  Future<Either<Failure, ProductModel>> getProductById(int productId) async {
+    try {
+      final response = await dio.get('$_baseUrl/products/$productId');
+      final data = response.data;
+      final model = ProductModel.fromJson(data);
+      return right(model);
     } catch (e) {
       return left(CatchErrorHandle.catchBack(failure: e));
     }
