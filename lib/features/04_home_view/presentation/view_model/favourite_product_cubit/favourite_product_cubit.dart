@@ -68,12 +68,10 @@ class FavouriteProductCubit extends Cubit<FavouriteProductState> {
     );
   }
 
-  Future<void> getFavouriteProductById({
-    required ProductModel productModel,
-  }) async {
+  Future<void> getFavouriteProductById({required int productId}) async {
     emit(GetFavouriteProductByIdLoading());
     final result = await favouriteCache.getFavouriteProductById(
-      productModel: productModel,
+      productId: productId,
     );
     result.fold(
       (error) {
