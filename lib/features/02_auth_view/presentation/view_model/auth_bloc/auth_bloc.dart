@@ -1,6 +1,10 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
 
+import '../../../../../core/cache/cart_cache.dart';
+import '../../../../../core/cache/favourite_cache.dart';
+import '../../../../../core/cache/user_info_cache.dart';
+import '../../../../../core/utilities/app_get.dart';
 import '../../../data/repo/auth_repo.dart';
 
 part 'auth_event.dart';
@@ -29,6 +33,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         return emit(SignInWithGoogleFailure(errorMessage: error.errorMessage!));
       },
       (success) async {
+        final user = success.user;
+        if (user != null) {
+          await initMethods(userId: user.uid);
+        }
         return emit(SignInWithGoogleSuccess());
       },
     );
@@ -48,10 +56,21 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         );
       },
       (success) async {
+        final userCredential = success;
+        if (userCredential != null) {
+          final user = userCredential.user;
+          if (user != null) {
+            await initMethods(userId: user.uid);
+          }
+        }
         return emit(SignInWithFacebookSuccess());
       },
     );
   }
+  //طيب في حال تسجيل الدخول احنا تحققنا اصلا من فكره هل المستخدم موجود ولا لأ لو موجود يعني
+  // عمل قبل كده sign up يبقى كده نفتح صناديقه
+  // علطول من خلال isNewUserCubit لكن غير كده
+  // هيروح لعمليه ال sign up ثم تتفتح بعدما ما يعمل تسجيل دخول كمستخدم جديد
 
   Future<void> _onSignInWithEmail(
     SignInWithEmailEvent event,
@@ -87,6 +106,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         return emit(SignUpWithEmailFailure(errorMessage: error.errorMessage!));
       },
       (success) async {
+        final user = success.user;
+        if (user != null) {
+          await initMethods(userId: user.uid);
+        }
         return emit(SignUpWithEmailSuccess());
       },
     );
@@ -104,4 +127,22 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       },
     );
   }
+}
+
+Future<void> initMethods({required String userId}) async {
+  // ← الخطوة الجديدة والمهمة
+  await UserInfoCache().initialization();
+  //cart cache implement
+
+  final cartCacheImplement = CartCacheImplement(userId: userId);
+  await cartCacheImplement.init();
+
+  //favourite cache implement
+  final favouriteCacheImplement = FavouriteCacheImplement(userId: userId);
+  await favouriteCacheImplement.init();
+
+  AppGet().setUp(
+    cartCacheImplement: cartCacheImplement,
+    favouriteCacheImplement: favouriteCacheImplement,
+  );
 }

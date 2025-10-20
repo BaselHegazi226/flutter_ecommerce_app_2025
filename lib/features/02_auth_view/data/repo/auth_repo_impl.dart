@@ -12,7 +12,6 @@ import '../../../../core/errors/catch_error_handle.dart';
 import '../model/user_model.dart';
 
 class AuthRepoImpl implements AuthRepo {
-  bool? _isNewUser;
   @override
   Future<Either<Failure, UserCredential>> signInWithEmail({
     required String email,
@@ -172,17 +171,19 @@ class AuthRepoImpl implements AuthRepo {
   }
 
   @override
-  bool isNewUser() {
-    final user = FirebaseAuth.instance.currentUser;
-    // لو مفيش يوزر حالياً (يعني سجل خروج)
-    if (user == null) {
-      _isNewUser = true;
-    } else {
-      _isNewUser = false;
+  Future<Either<Failure, String?>> isNewUser() async {
+    try {
+      final user = FirebaseAuth.instance.currentUser;
+
+      // لو مفيش يوزر حالياً (يعني سجل خروج)
+      if (user == null) {
+        return right(null);
+      } else {
+        return right(user.uid);
+      }
+    } catch (e) {
+      return left(CatchErrorHandle.catchBack(failure: e));
     }
-    debugPrint('new user = $_isNewUser');
-    // لو فيه يوزر، شوف حالة isNewUser اللي اتخزنت
-    return _isNewUser!;
   }
 
   @override
@@ -211,6 +212,6 @@ class AuthRepoImpl implements AuthRepo {
   }
 
   Future<void> deleteUser({required String userId}) async {
-    UserInfoCache().clearUser(id: userId);
+    UserInfoCache().deleteUser(id: userId);
   }
 }

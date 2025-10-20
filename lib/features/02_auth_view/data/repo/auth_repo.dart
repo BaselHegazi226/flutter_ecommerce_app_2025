@@ -16,7 +16,7 @@ abstract class AuthRepo {
   });
   Future<Either<Failure, void>> signOut();
 
-  bool isNewUser();
+  Future<Either<Failure, String?>> isNewUser();
   Future<Either<Failure, bool>> forgetPassword();
   Future<Either<Failure, bool>> updatePassword();
   Future<Either<Failure, bool>> verifyEmail();
