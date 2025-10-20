@@ -13,9 +13,9 @@ class SignInView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => AuthBloc(authRepo: AuthRepoImpl()),
-      child: Scaffold(
+      child: const Scaffold(
         backgroundColor: kScaffoldColor,
-        body: const CustomScrollView(
+        body: CustomScrollView(
           slivers: [SliverToBoxAdapter(child: SignInViewViewBody())],
         ),
       ),

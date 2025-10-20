@@ -13,12 +13,12 @@ class SignUpView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => AuthBloc(authRepo: AuthRepoImpl()),
-      child: Scaffold(
+      child: const Scaffold(
         backgroundColor: kScaffoldColor,
         body: CustomScrollView(
           slivers: [
             SliverToBoxAdapter(child: SizedBox(height: 80)),
-            SliverToBoxAdapter(child: const SignUpViewBody()),
+            SliverToBoxAdapter(child: SignUpViewBody()),
           ],
         ),
       ),

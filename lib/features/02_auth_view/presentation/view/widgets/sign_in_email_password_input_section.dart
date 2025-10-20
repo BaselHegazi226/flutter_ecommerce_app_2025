@@ -47,7 +47,7 @@ class _SignInEmailPasswordInputSectionState
               debugPrint('email : $email');
             },
             validator: (value) {
-              if (email.isEmpty) {
+              if (value == null || value.isEmpty) {
                 return 'email is required';
               }
               return null;
@@ -62,15 +62,15 @@ class _SignInEmailPasswordInputSectionState
               debugPrint('password : $password');
             },
             validator: (value) {
-              if (password.isEmpty) {
+              if (value == null || value.isEmpty) {
                 return 'password is required';
               }
               return null;
             },
             textEditingController: textEditingControllerPassword,
           ),
-          CustomText(
-            text: 'Forget password?',
+          const CustomText(
+            text: 'Forget Password?',
             fontSize: 14,
             alignment: Alignment.topRight,
           ),
@@ -88,9 +88,15 @@ class _SignInEmailPasswordInputSectionState
               } else if (state is SignInWithEmailFailure) {
                 ToastNotification.flatColoredToastNotificationService(
                   toastNotificationType: ToastificationType.error,
+                  title: "Sign in Failure",
+                  description: state.errorMessage,
                   onAutoCompleteCompleted: (value) {
                     debugPrint('value = $value');
                   },
+                );
+
+                debugPrint(
+                  'failure for sing in with email and password = ${state.errorMessage}',
                 );
               }
             },

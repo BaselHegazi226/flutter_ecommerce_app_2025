@@ -66,7 +66,7 @@ class _SignUpInputSectionState extends State<SignUpInputSection> {
               if (value == null || value.isEmpty) {
                 return 'email is required';
               } else if (!FieldsContranits.emailReg.hasMatch(value)) {
-                return 'enter valid email email@gmail.com';
+                return 'enter valid email (email@gmail.com)';
               }
               return null;
             },
@@ -97,7 +97,7 @@ class _SignUpInputSectionState extends State<SignUpInputSection> {
                 ToastNotification.flatColoredToastNotificationService(
                   toastNotificationType: ToastificationType.success,
                   onAutoCompleteCompleted: (value) {
-                    GoRouter.of(context).push(Routes.homeView);
+                    GoRouter.of(context).go(Routes.homeView);
                   },
                 );
               } else if (state is SignUpWithEmailFailure) {
