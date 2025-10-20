@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_e_commerce_app_2025/core/helper/const.dart';
 import 'package:flutter_e_commerce_app_2025/core/helper/routes.dart';
 import 'package:flutter_e_commerce_app_2025/core/utilities/custom_loading_indicator.dart';
+import 'package:flutter_e_commerce_app_2025/core/utilities/show_snack_bar.dart';
 import 'package:flutter_e_commerce_app_2025/features/02_auth_view/data/repo/auth_repo_impl.dart';
 import 'package:flutter_e_commerce_app_2025/features/02_auth_view/presentation/view_model/is_new_user_cubit/is_new_user_cubit.dart';
 import 'package:flutter_e_commerce_app_2025/features/02_auth_view/presentation/view_model/is_new_user_cubit/is_new_user_state.dart';
@@ -27,6 +28,8 @@ class SplashView extends StatelessWidget {
             } else if (state is IsOldUser) {
               debugPrint('i am in home');
               GoRouter.of(context).go(Routes.homeView);
+            } else if (state is IsNewUserFailure) {
+              showSafeSnackBar(context, state.errorMessage, kPrimaryWrongColor);
             }
           },
           child: Center(
@@ -35,18 +38,6 @@ class SplashView extends StatelessWidget {
               children: [
                 Image.asset(Assets.images.splash.ecommerce.path, height: 200),
                 const SizedBox(height: 20),
-                BlocBuilder<IsNewUserCubit, IsNewUserState>(
-                  builder: (context, state) {
-                    if (state is IsNewUserLoading) {
-                      debugPrint('i am in loading state now');
-                      return const CustomCircleIndicator(
-                        color: kPrimaryColor,
-                        width: 24,
-                      );
-                    }
-                    return const SizedBox.shrink();
-                  },
-                ),
                 BlocBuilder<IsNewUserCubit, IsNewUserState>(
                   builder: (context, state) {
                     if (state is IsNewUserLoading) {
