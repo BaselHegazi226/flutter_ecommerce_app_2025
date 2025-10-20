@@ -201,7 +201,10 @@ class FirebaseFailure extends Failure {
         );
       //Default Case
       default:
-        return FirebaseFailure(errorMessage: 'Invalid credentials.');
+        return FirebaseFailure(
+          errorMessage:
+              'email or password are incorrect try to press forget password?',
+        );
     }
   }
 }
