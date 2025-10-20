@@ -49,7 +49,7 @@ class CartViewItem extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               CustomText(
-                text: title,
+                text: title.split(" ").take(4).join(" "),
                 fontSize: 20,
                 alignment: Alignment.centerLeft,
               ),
