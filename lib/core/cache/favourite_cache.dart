@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_e_commerce_app_2025/core/errors/catch_error_handle.dart';
 import 'package:hive/hive.dart';
 
@@ -31,7 +32,8 @@ class FavouriteCacheImplement extends FavouriteCache {
     //register Adaptors
     FavouriteCacheAdaptorsClass.registerAllAdaptors();
     //open box
-    final boxName = 'favouriteProduct$userId';
+    final boxName = 'FavouriteProductBox$userId';
+    debugPrint('user id from favourite cache = $userId');
     hiveBoxFavouriteProductModel = Hive.isBoxOpen(boxName)
         ? Hive.box<ProductModel>(boxName)
         : await Hive.openBox<ProductModel>(boxName);
