@@ -50,7 +50,7 @@ class UserInfoCache {
     return UserModel.fromJson(jsonDecode(data));
   }
 
-  Future<void> clearUser({required String id}) async {
+  Future<void> deleteUser({required String id}) async {
     await _sharedPreferences!.remove(id);
   }
 }
