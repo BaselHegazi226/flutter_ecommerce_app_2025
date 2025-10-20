@@ -4,12 +4,11 @@ class IsNewUserInitial extends IsNewUserState {}
 
 class IsNewUserLoading extends IsNewUserState {}
 
-class IsNewUserSuccess extends IsNewUserState {
-  final bool isNewUser;
-  IsNewUserSuccess({required this.isNewUser});
+class IsNewUserSuccess extends IsNewUserState {}
+
+class IsNewUserFailure extends IsNewUserState {
+  final String errorMessage;
+  IsNewUserFailure({required this.errorMessage});
 }
 
-class IsOldUser extends IsNewUserState {
-  final bool isNewUser;
-  IsOldUser({required this.isNewUser});
-}
+class IsOldUser extends IsNewUserState {}
