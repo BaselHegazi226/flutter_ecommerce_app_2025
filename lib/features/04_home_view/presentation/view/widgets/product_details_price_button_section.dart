@@ -61,7 +61,7 @@ class ProductDetailsPriceButtonSection extends StatelessWidget {
               onAutoCompleteCompleted: (value) {},
             );
           } else {
-            print('loading add add adddddddd');
+            debugPrint('loading add add adddddddd');
           }
         },
       ),
