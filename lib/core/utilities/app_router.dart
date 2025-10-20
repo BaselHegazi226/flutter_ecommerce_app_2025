@@ -15,7 +15,7 @@ import '../helper/routes.dart';
 
 abstract class AppRouter {
   static final router = GoRouter(
-    initialLocation: Routes.homeView, // يبدأ من التاب الأول
+    initialLocation: Routes.splashView, // يبدأ من التاب الأول
     routes: [
       GoRoute(
         path: Routes.splashView,
