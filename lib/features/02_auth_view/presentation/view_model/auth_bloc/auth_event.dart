@@ -20,5 +20,3 @@ class SignUpWithEmailEvent extends AuthEvent {
     required this.password,
   });
 }
-
-class SignOutEvent extends AuthEvent {}

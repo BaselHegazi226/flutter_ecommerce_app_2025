@@ -1,10 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
 
-import '../../../../../core/cache/cart_cache.dart';
-import '../../../../../core/cache/favourite_cache.dart';
-import '../../../../../core/cache/user_info_cache.dart';
-import '../../../../../core/utilities/app_get.dart';
+import '../../../../../core/utilities/init_method.dart';
 import '../../../data/repo/auth_repo.dart';
 
 part 'auth_event.dart';
@@ -18,7 +15,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<SignInWithFacebookEvent>(_onSignInWithFacebookEvent);
     on<SignInWithEmailEvent>(_onSignInWithEmail);
     on<SignUpWithEmailEvent>(_onSignUpWithEmail);
-    on<SignOutEvent>(_onSignOut);
   }
 
   Future<void> _onSignInWithGoogleEvent(
@@ -27,7 +23,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   ) async {
     debugPrint('now in loading state');
     emit(SignInWithGoogleLoading());
-    var result = await authRepo.signInWithGoogle();
+    final result = await authRepo.signInWithGoogle();
     await result.fold(
       (error) async {
         return emit(SignInWithGoogleFailure(errorMessage: error.errorMessage!));
@@ -48,7 +44,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   ) async {
     debugPrint('now in loading state');
     emit(SignInWithFacebookLoading());
-    var result = await authRepo.signInWithFacebook();
+    final result = await authRepo.signInWithFacebook();
     await result.fold(
       (error) async {
         return emit(
@@ -114,35 +110,4 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       },
     );
   }
-
-  Future<void> _onSignOut(SignOutEvent event, Emitter<AuthState> emit) async {
-    emit(SignOutLoading());
-    final result = await authRepo.signOut();
-    await result.fold(
-      (error) async {
-        return emit(SignOutFailure(errorMessage: error.errorMessage!));
-      },
-      (success) async {
-        return emit(SignOutSuccess());
-      },
-    );
-  }
-}
-
-Future<void> initMethods({required String userId}) async {
-  // ← الخطوة الجديدة والمهمة
-  await UserInfoCache().initialization();
-  //cart cache implement
-
-  final cartCacheImplement = CartCacheImplement(userId: userId);
-  await cartCacheImplement.init();
-
-  //favourite cache implement
-  final favouriteCacheImplement = FavouriteCacheImplement(userId: userId);
-  await favouriteCacheImplement.init();
-
-  AppGet().setUp(
-    cartCacheImplement: cartCacheImplement,
-    favouriteCacheImplement: favouriteCacheImplement,
-  );
 }

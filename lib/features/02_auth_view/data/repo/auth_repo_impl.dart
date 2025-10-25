@@ -18,12 +18,31 @@ class AuthRepoImpl implements AuthRepo {
     required String password,
   }) async {
     try {
-      final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: email,
-        password: password,
+      final userCredential = await FirebaseAuth.instance
+          .signInWithEmailAndPassword(email: email, password: password);
+      final user = userCredential.user;
+      if (user != null && userCredential.credential != null) {
+        UserModel userModel = UserModel(
+          id: user.uid,
+          name: user.displayName ?? 'guest',
+          email: user.email ?? 'guest',
+          photoUrl: user.photoURL,
+          provider: 'google',
+        );
+        final String userToken = userCredential.credential!.token.toString();
+        await saveUser(userModel: userModel, userToken: userToken);
+      }
+      return right(userCredential);
+    } on FirebaseAuthException catch (exception) {
+      print(('auth exce code = ${exception.code}'));
+      return left(
+        FirebaseFailure.fromFirebaseAuthException(exception: exception),
       );
-      return right(credential);
+    } on FirebaseException catch (exception) {
+      print(('exce = $exception'));
+      return left(FirebaseFailure.fromFirebaseException(exception: exception));
     } catch (e) {
+      print(('eeee= ${e.toString()}'));
       return left(CatchErrorHandle.catchBack(failure: e));
     }
   }
@@ -134,6 +153,7 @@ class AuthRepoImpl implements AuthRepo {
           provider: 'email and password',
           photoUrl: user.photoURL,
         );
+        debugPrint('user id = ${userModel.id}');
         final String? userToken = await user.getIdToken(true);
         await saveUser(
           userModel: userModel,
@@ -186,21 +206,6 @@ class AuthRepoImpl implements AuthRepo {
     }
   }
 
-  @override
-  Future<Either<Failure, void>> signOut() async {
-    try {
-      final firebaseInstance = FirebaseAuth.instance;
-      final user = firebaseInstance.currentUser;
-      if (user != null) {
-        await firebaseInstance.signOut();
-        await deleteUser(userId: user.uid);
-      }
-      return right(null);
-    } catch (e) {
-      return left(CatchErrorHandle.catchBack(failure: e));
-    }
-  }
-
   Future<void> saveUser({
     required UserModel userModel,
     required String userToken,
@@ -209,9 +214,5 @@ class AuthRepoImpl implements AuthRepo {
     await UserInfoCache().saveUser(userModel: userModel);
     //save user data to firebase
     await UserFirebaseStore().addUserToFirebase(userModel);
-  }
-
-  Future<void> deleteUser({required String userId}) async {
-    UserInfoCache().deleteUser(id: userId);
   }
 }

@@ -52,15 +52,3 @@ final class SignUpWithEmailFailure extends AuthState {
 }
 
 final class SignUpWithEmailSuccess extends AuthState {}
-
-//sign out
-final class SignOutInitial extends AuthState {}
-
-final class SignOutLoading extends AuthState {}
-
-final class SignOutFailure extends AuthState {
-  final String errorMessage;
-  SignOutFailure({required this.errorMessage});
-}
-
-final class SignOutSuccess extends AuthState {}
