@@ -7,7 +7,7 @@ import 'package:flutter_e_commerce_app_2025/features/05_cart_view/presentation/v
 class CartViewItem extends StatelessWidget {
   const CartViewItem({
     super.key,
-    required this.screenSize,
+
     required this.imageUrl,
     required this.title,
     required this.productId,
@@ -15,7 +15,6 @@ class CartViewItem extends StatelessWidget {
     required this.price,
   });
 
-  final Size screenSize;
   final String imageUrl, title;
   final int productId, count;
   final double price;

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_e_commerce_app_2025/core/helper/const.dart';
 import 'package:flutter_e_commerce_app_2025/core/utilities/custom_text.dart';
 import 'package:flutter_e_commerce_app_2025/features/05_cart_view/presentation/view_model/cart_bloc/cart_bloc.dart';
 import 'package:flutter_e_commerce_app_2025/features/05_cart_view/presentation/view_model/cart_bloc/cart_state.dart';
@@ -64,24 +63,7 @@ class CartViewCountSection extends StatelessWidget {
               ),
             ),
             SizedBox(width: screenSize.width * .02),
-            Expanded(
-              child: TextField(
-                decoration: InputDecoration(
-                  contentPadding: const EdgeInsets.all(10),
-                  labelText: 'Count ',
-                  labelStyle: const TextStyle(fontSize: 12, color: kGreyColor),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: const BorderRadius.all(Radius.circular(4)),
-                    borderSide: BorderSide(color: Colors.grey.withAlpha(100)),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: const BorderRadius.all(Radius.circular(4)),
-                    borderSide: BorderSide(color: Colors.grey.withAlpha(100)),
-                  ),
-                ),
-                onSubmitted: (value) {},
-              ),
-            ),
+            const Expanded(flex: 1, child: SizedBox()),
           ],
         );
       },

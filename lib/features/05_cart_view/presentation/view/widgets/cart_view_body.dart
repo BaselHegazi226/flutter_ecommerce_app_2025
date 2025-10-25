@@ -4,8 +4,12 @@ import 'package:flutter_e_commerce_app_2025/core/helper/routes.dart';
 import 'package:flutter_e_commerce_app_2025/core/shimmer/cart_shimmer.dart';
 import 'package:flutter_e_commerce_app_2025/core/utilities/custom_text.dart';
 import 'package:flutter_e_commerce_app_2025/features/05_cart_view/presentation/view/widgets/cart_view_item.dart';
+import 'package:flutter_e_commerce_app_2025/features/05_cart_view/presentation/view_model/cart_bloc/cart_bloc.dart';
 import 'package:flutter_e_commerce_app_2025/features/05_cart_view/presentation/view_model/get_cart_cubit/get_cart_cubit.dart';
 import 'package:flutter_e_commerce_app_2025/features/05_cart_view/presentation/view_model/get_cart_cubit/get_cart_state.dart';
+import 'package:flutter_e_commerce_app_2025/generated/assets.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 
 import 'cart_view_total_checkout_section.dart';
@@ -21,16 +25,21 @@ class CartViewBody extends StatelessWidget {
         if (state is GetProductCartAndTotalSuccess) {
           final cartList = state.carts;
           if (cartList.isEmpty) {
-            return const Center(
-              child: FittedBox(
-                fit: BoxFit.scaleDown,
-                child: CustomText(
-                  text: 'No Product cart are added 🛒',
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SvgPicture.asset(
+                  Assets.cartEmptyCart,
+                  height: screenSize.height * .25,
+                ),
+                const SizedBox(height: 16),
+                const CustomText(
+                  text: 'No Product cart are added 🛒🛒',
                   fontSize: 20,
                   alignment: Alignment.center,
                   color: Colors.black,
                 ),
-              ),
+              ],
             );
           }
           return Column(
@@ -52,15 +61,52 @@ class CartViewBody extends StatelessWidget {
                           context,
                         ).push(Routes.productDetailsView, extra: item.id);
                       },
+
                       child: Padding(
                         padding: const EdgeInsets.all(16),
-                        child: CartViewItem(
-                          screenSize: screenSize,
-                          productId: item.id,
-                          title: item.title,
-                          imageUrl: item.imageUrl,
-                          price: item.price,
-                          count: item.productCount,
+                        child: Slidable(
+                          closeOnScroll: true,
+                          endActionPane: ActionPane(
+                            extentRatio: 1,
+                            motion: const ScrollMotion(),
+                            children: [
+                              const SizedBox(width: 16),
+                              Expanded(
+                                flex: 2,
+                                child: Container(
+                                  color: Colors.red,
+                                  alignment: Alignment.center,
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      IconButton(
+                                        onPressed: () {
+                                          context.read<CartBloc>().add(
+                                            DeleteProductEvent(
+                                              cartModel: cartList[index],
+                                            ),
+                                          );
+                                        },
+                                        icon: const Icon(
+                                          Icons.delete,
+                                          color: Colors.white,
+                                          size: 50,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              const Expanded(flex: 1, child: SizedBox()),
+                            ],
+                          ),
+                          child: CartViewItem(
+                            productId: item.id,
+                            title: item.title,
+                            imageUrl: item.imageUrl,
+                            price: item.price,
+                            count: item.productCount,
+                          ),
                         ),
                       ),
                     );

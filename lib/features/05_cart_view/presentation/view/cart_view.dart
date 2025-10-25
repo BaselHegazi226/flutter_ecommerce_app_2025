@@ -32,7 +32,8 @@ class CartView extends StatelessWidget {
       ],
       child: BlocListener<CartBloc, CartState>(
         listener: (context, state) {
-          if (state is UpdateProductCountSuccess) {
+          if (state is UpdateProductCountSuccess ||
+              state is DeleteProductSuccess) {
             context.read<GetCartCubit>().getCartProductsAndTotal();
           }
         },
