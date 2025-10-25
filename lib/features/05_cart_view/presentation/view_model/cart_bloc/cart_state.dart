@@ -1,4 +1,4 @@
-import 'package:flutter_e_commerce_app_2025/features/04_home_view/data/model/cart_model.dart';
+import '../../../data/model/cart_model.dart';
 
 abstract class CartState {}
 

@@ -3,8 +3,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_e_commerce_app_2025/core/errors/catch_error_handle.dart';
 import 'package:flutter_e_commerce_app_2025/core/errors/failure.dart';
 import 'package:flutter_e_commerce_app_2025/core/helper/adapter_identifiers.dart';
-import 'package:flutter_e_commerce_app_2025/features/04_home_view/data/model/cart_model.dart';
 import 'package:hive/hive.dart';
+
+import '../../features/05_cart_view/data/model/cart_model.dart';
 
 abstract class CartCache {
   Future<void> init();
@@ -102,16 +103,15 @@ class CartCacheImplement implements CartCache {
   @override
   Future<Either<Failure, List<CartModel>>> getCartList() async {
     try {
+      debugPrint('CartCache opened for userId = $userId');
+
       List<CartModel> cartList = hiveBoxProductModel.values.map((cart) {
-        //final independentCartProduct = CartModel.fromJson(cart.toJson());
-        return cart.copyWith(
-          // newCount: independentCartProduct.productCount,
-          // newTitle: independentCartProduct.title,
-          // newPrice: independentCartProduct.price,
-          // newImageUrl: independentCartProduct.imageUrl,
-          // newId: independentCartProduct.id,
-        );
+        return cart.copyWith();
       }).toList();
+
+      // ترتيب السلة حسب وقت الإضافة (الأحدث أولاً)
+      cartList.sort((a, b) => b.addAt.compareTo(a.addAt));
+
       return right(cartList);
     } catch (e) {
       debugPrint('error from get = $e');

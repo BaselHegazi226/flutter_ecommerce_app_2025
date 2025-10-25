@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:hive/hive.dart';
 
 part 'cart_model.g.dart';
@@ -14,12 +15,15 @@ class CartModel {
   final String title;
   @HiveField(4)
   final double price;
+  @HiveField(5)
+  final DateTime addAt;
   const CartModel({
     this.productCount = 1,
     required this.id,
     required this.imageUrl,
     required this.title,
     required this.price,
+    required this.addAt,
   });
 
   factory CartModel.fromJson(jsonData) {
@@ -29,6 +33,7 @@ class CartModel {
       title: jsonData['title'],
       price: jsonData['price'],
       productCount: jsonData['productCount'],
+      addAt: DateTime.now(),
     );
   }
 
@@ -45,6 +50,7 @@ class CartModel {
       price: newPrice ?? price,
       imageUrl: newImageUrl ?? imageUrl,
       productCount: newCount ?? productCount,
+      addAt: addAt,
     );
   }
 

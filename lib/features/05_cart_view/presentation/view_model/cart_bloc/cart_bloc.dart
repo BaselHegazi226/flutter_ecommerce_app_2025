@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter_e_commerce_app_2025/core/cache/cart_cache.dart';
-import 'package:flutter_e_commerce_app_2025/features/04_home_view/data/model/cart_model.dart';
 import 'package:meta/meta.dart';
 
+import '../../../data/model/cart_model.dart';
 import 'cart_state.dart';
 
 part 'cart_event.dart';
