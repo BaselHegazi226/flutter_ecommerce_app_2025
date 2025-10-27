@@ -38,7 +38,7 @@ class BestSellingProductItem extends StatelessWidget {
                   return homeProductImageShimmer(screenSize);
                 },
                 errorWidget: (context, url, error) {
-                  return Icon(Icons.image_not_supported_outlined);
+                  return const Icon(Icons.image_not_supported_outlined);
                 },
               ),
             ),
@@ -60,7 +60,7 @@ class BestSellingProductItem extends StatelessWidget {
                     ? description.split(" ").take(2).join(" ")
                     : description.split(" ").take(3).join(" "),
                 fontSize: 12,
-                color: Color(0xff929292),
+                color: const Color(0xff929292),
                 alignment: Alignment.topLeft,
               ),
               CustomText(
