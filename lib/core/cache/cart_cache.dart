@@ -123,6 +123,7 @@ class CartCacheImplement implements CartCache {
   Future<Either<Failure, void>> removeAllProductCart() async {
     try {
       await hiveBoxProductModel.clear();
+      _totalPrice = 0;
       return right(null);
     } catch (e) {
       return left(CatchErrorHandle.catchBack(failure: e));
