@@ -5,7 +5,7 @@ class SearchBarSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return const Padding(
       padding: EdgeInsets.symmetric(horizontal: 8),
       child: SearchBar(
         backgroundColor: WidgetStatePropertyAll(Color(0xffF6F6F6)),

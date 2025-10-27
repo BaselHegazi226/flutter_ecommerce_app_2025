@@ -1,4 +1,4 @@
-import '../../../../04_home_view/data/model/cart_model.dart';
+import '../../../data/model/cart_model.dart';
 
 abstract class GetCartState {}
 

@@ -63,8 +63,10 @@ class DefaultFirebaseOptions {
     messagingSenderId: '713639140056',
     projectId: 'ecommerce-project-2025',
     storageBucket: 'ecommerce-project-2025.firebasestorage.app',
-    androidClientId: '713639140056-udisevdgikp5r2tfp7pev3k65tp468uj.apps.googleusercontent.com',
-    iosClientId: '713639140056-denn29e0cbjm3tem9mo4p2ak6ekqq7hg.apps.googleusercontent.com',
+    androidClientId:
+        '713639140056-udisevdgikp5r2tfp7pev3k65tp468uj.apps.googleusercontent.com',
+    iosClientId:
+        '713639140056-denn29e0cbjm3tem9mo4p2ak6ekqq7hg.apps.googleusercontent.com',
     iosBundleId: 'com.example.flutterECommerceApp2025',
   );
 }

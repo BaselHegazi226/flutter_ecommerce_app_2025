@@ -25,20 +25,20 @@ class CategoriesListView extends StatelessWidget {
               physics: const BouncingScrollPhysics(),
               itemCount: categories.length,
               itemBuilder: (context, index) {
-                debugPrint(
-                  'success list = ${categories[index].name},${categories[index].image}',
-                );
                 return Center(
-                  child: CategoryItem(
-                    name: categories[index].name,
-                    slug: categories[index].slug,
-                    onTap: () {
-                      context.push(
-                        '${Routes.homeView}${Routes.categoryView}',
-                        extra: categories[index],
-                      );
-                    },
-                    screenSize: screenSize,
+                  child: Padding(
+                    padding: const EdgeInsets.only(right: 8),
+                    child: CategoryItem(
+                      name: categories[index].name,
+                      slug: categories[index].slug,
+                      onTap: () {
+                        context.push(
+                          '${Routes.homeView}${Routes.categoryView}',
+                          extra: categories[index],
+                        );
+                      },
+                      screenSize: screenSize,
+                    ),
                   ),
                 );
               },
@@ -80,11 +80,7 @@ class CategoryItem extends StatelessWidget {
         children: [
           CategoryIcon.fromSlug(context, slug),
           const SizedBox(height: 8),
-          CustomText(
-            text: name.split(" ").take(1).join(" "),
-            fontSize: 12,
-            alignment: Alignment.center,
-          ),
+          CustomText(text: name, fontSize: 12, alignment: Alignment.center),
         ],
       ),
     );
