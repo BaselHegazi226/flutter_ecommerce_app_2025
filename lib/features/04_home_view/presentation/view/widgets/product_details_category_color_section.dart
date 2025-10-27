@@ -25,12 +25,12 @@ class ProductDetailsCategoryColorSection extends StatelessWidget {
             decoration: BoxDecoration(
               color: Colors.transparent,
               borderRadius: const BorderRadius.all(Radius.circular(25)),
-              border: Border.all(color: Color(0xffEBEBEB)),
+              border: Border.all(color: const Color(0xffEBEBEB)),
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                CustomText(
+                const CustomText(
                   text: 'Category',
                   fontSize: 14,
                   alignment: Alignment.centerLeft,
@@ -51,12 +51,12 @@ class ProductDetailsCategoryColorSection extends StatelessWidget {
             decoration: BoxDecoration(
               color: Colors.transparent,
               borderRadius: const BorderRadius.all(Radius.circular(25)),
-              border: Border.all(color: Color(0xffEBEBEB)),
+              border: Border.all(color: const Color(0xffEBEBEB)),
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                CustomText(
+                const CustomText(
                   text: 'Rating',
                   fontSize: 14,
                   alignment: Alignment.centerLeft,

@@ -27,7 +27,7 @@ class ProductDetailsViewBody extends StatelessWidget {
                   return Container(color: Colors.grey);
                 },
                 errorWidget: (context, error, child) {
-                  return Icon(Icons.image);
+                  return const Icon(Icons.image);
                 },
                 fit: BoxFit.fill,
               ),

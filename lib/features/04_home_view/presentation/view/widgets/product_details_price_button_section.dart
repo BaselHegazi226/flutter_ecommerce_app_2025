@@ -3,11 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_e_commerce_app_2025/core/utilities/custom_button.dart';
 import 'package:flutter_e_commerce_app_2025/core/utilities/price_button_section.dart';
 import 'package:flutter_e_commerce_app_2025/core/utilities/toastnotification.dart';
-import 'package:flutter_e_commerce_app_2025/features/04_home_view/data/model/cart_model.dart';
 import 'package:flutter_e_commerce_app_2025/features/04_home_view/data/model/product_model.dart';
 import 'package:flutter_e_commerce_app_2025/features/05_cart_view/presentation/view_model/cart_bloc/cart_bloc.dart';
 import 'package:flutter_e_commerce_app_2025/features/05_cart_view/presentation/view_model/cart_bloc/cart_state.dart';
 import 'package:toastification/toastification.dart';
+
+import '../../../../05_cart_view/data/model/cart_model.dart';
 
 class ProductDetailsPriceButtonSection extends StatelessWidget {
   const ProductDetailsPriceButtonSection({
@@ -32,6 +33,7 @@ class ProductDetailsPriceButtonSection extends StatelessWidget {
                 price: productModel.price,
                 title: productModel.title,
                 imageUrl: productModel.images[0],
+                addAt: DateTime.now(),
               );
               context.read<CartBloc>().add(
                 AddToCartEvent(cartModel: cartModel),
