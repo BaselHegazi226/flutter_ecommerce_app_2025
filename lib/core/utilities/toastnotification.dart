@@ -31,7 +31,7 @@ class ToastNotification {
       description: RichText(
         text: TextSpan(
           text: description,
-          style: TextStyle(color: Colors.black, fontSize: 12),
+          style: const TextStyle(color: Colors.black, fontSize: 12),
         ),
       ),
       alignment: alignment,
@@ -109,7 +109,7 @@ class ToastNotification {
       description: RichText(
         text: TextSpan(
           text: description,
-          style: TextStyle(color: Colors.black),
+          style: const TextStyle(color: Colors.black),
         ),
       ),
       alignment: alignment,
@@ -174,8 +174,8 @@ class ToastNotification {
       type: toastNotificationType,
       style: ToastificationStyle.fillColored,
       autoCloseDuration: const Duration(seconds: 3),
-      title: Text(title, style: TextStyle(color: Colors.white)),
-      progressBarTheme: ProgressIndicatorThemeData(
+      title: Text(title, style: const TextStyle(color: Colors.white)),
+      progressBarTheme: const ProgressIndicatorThemeData(
         color: Colors.white,
         linearTrackColor: Colors.white30,
         linearMinHeight: 2,
@@ -184,7 +184,7 @@ class ToastNotification {
       description: RichText(
         text: TextSpan(
           text: description,
-          style: TextStyle(color: Colors.white),
+          style: const TextStyle(color: Colors.white),
         ),
       ),
       alignment: alignment,
@@ -261,7 +261,7 @@ class ToastNotification {
       description: RichText(
         text: TextSpan(
           text: description,
-          style: TextStyle(color: Colors.black),
+          style: const TextStyle(color: Colors.black),
         ),
       ),
       alignment: alignment,

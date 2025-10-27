@@ -1,5 +1,6 @@
 import 'package:flutter_e_commerce_app_2025/core/cache/cart_cache.dart';
 import 'package:flutter_e_commerce_app_2025/core/cache/favourite_cache.dart';
+import 'package:flutter_e_commerce_app_2025/core/cache/order_cache.dart';
 import 'package:flutter_e_commerce_app_2025/features/04_home_view/data/repo/home_view_repo_impl.dart';
 import 'package:flutter_e_commerce_app_2025/features/04_home_view/presentation/view_model/category_cubit/category_cubit.dart';
 import 'package:flutter_e_commerce_app_2025/features/04_home_view/presentation/view_model/product_cubit/product_cubit.dart';
@@ -9,27 +10,56 @@ import 'package:get_it/get_it.dart';
 
 class AppGet {
   final getIt = GetIt.instance;
+
   void setUp({
     required CartCacheImplement cartCacheImplement,
     required FavouriteCacheImplement favouriteCacheImplement,
+    required OrderCacheImplement orderCacheImplement,
   }) {
-    getIt.registerLazySingleton<HomeViewRepoImpl>(() => HomeViewRepoImpl());
+    // تسجيل HomeViewRepoImpl مرة واحدة فقط
+    if (!getIt.isRegistered<HomeViewRepoImpl>()) {
+      getIt.registerLazySingleton<HomeViewRepoImpl>(() => HomeViewRepoImpl());
+    }
 
-    getIt.registerSingleton<CartCacheImplement>(cartCacheImplement);
-    getIt.registerSingleton<FavouriteCacheImplement>(favouriteCacheImplement);
+    // تسجيل CartCacheImplement مرة واحدة فقط
+    if (!getIt.isRegistered<CartCacheImplement>()) {
+      getIt.registerSingleton<CartCacheImplement>(cartCacheImplement);
+    }
 
-    getIt.registerLazySingleton<CategoryCubit>(
-      () => CategoryCubit(homeViewRepo: getIt<HomeViewRepoImpl>()),
-    );
-    getIt.registerLazySingleton<ProductCubit>(
-      () => ProductCubit(homeViewRepo: getIt<HomeViewRepoImpl>()),
-    );
+    // تسجيل FavouriteCacheImplement مرة واحدة فقط
+    if (!getIt.isRegistered<FavouriteCacheImplement>()) {
+      getIt.registerSingleton<FavouriteCacheImplement>(favouriteCacheImplement);
+    }
+    if (!getIt.isRegistered<OrderCacheImplement>()) {
+      getIt.registerSingleton<OrderCacheImplement>(orderCacheImplement);
+    }
 
-    getIt.registerLazySingleton<CartBloc>(
-      () => CartBloc(cartCache: getIt<CartCacheImplement>()),
-    );
-    getIt.registerLazySingleton<GetCartCubit>(
-      () => GetCartCubit(cartCache: getIt<CartCacheImplement>()),
-    );
+    // تسجيل CategoryCubit مرة واحدة فقط
+    if (!getIt.isRegistered<CategoryCubit>()) {
+      getIt.registerLazySingleton<CategoryCubit>(
+        () => CategoryCubit(homeViewRepo: getIt<HomeViewRepoImpl>()),
+      );
+    }
+
+    // تسجيل ProductCubit مرة واحدة فقط
+    if (!getIt.isRegistered<ProductCubit>()) {
+      getIt.registerLazySingleton<ProductCubit>(
+        () => ProductCubit(homeViewRepo: getIt<HomeViewRepoImpl>()),
+      );
+    }
+
+    // تسجيل CartBloc مرة واحدة فقط
+    if (!getIt.isRegistered<CartBloc>()) {
+      getIt.registerLazySingleton<CartBloc>(
+        () => CartBloc(cartCache: getIt<CartCacheImplement>()),
+      );
+    }
+
+    // تسجيل GetCartCubit مرة واحدة فقط
+    if (!getIt.isRegistered<GetCartCubit>()) {
+      getIt.registerLazySingleton<GetCartCubit>(
+        () => GetCartCubit(cartCache: getIt<CartCacheImplement>()),
+      );
+    }
   }
 }

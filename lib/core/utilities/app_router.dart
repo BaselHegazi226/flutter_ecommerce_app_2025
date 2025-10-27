@@ -8,9 +8,10 @@ import 'package:flutter_e_commerce_app_2025/features/04_home_view/presentation/v
 import 'package:flutter_e_commerce_app_2025/features/04_home_view/presentation/view/home_view.dart';
 import 'package:flutter_e_commerce_app_2025/features/04_home_view/presentation/view/product_details_view.dart';
 import 'package:flutter_e_commerce_app_2025/features/05_cart_view/presentation/view/cart_view.dart';
-import 'package:flutter_e_commerce_app_2025/features/07_account_view/presentation/view/account_view.dart';
+import 'package:flutter_e_commerce_app_2025/features/07_profile_view/presentation/view/profile_view.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../features/05_cart_view/presentation/view/checkout_view.dart';
 import '../helper/routes.dart';
 
 abstract class AppRouter {
@@ -52,10 +53,17 @@ abstract class AppRouter {
           GoRoute(
             path: Routes.cartView,
             builder: (context, state) => const CartView(),
+            routes: [
+              GoRoute(
+                path: Routes.checkoutView,
+                builder: (context, state) => const CheckoutView(),
+              ),
+            ],
           ),
+
           GoRoute(
-            path: Routes.accountView,
-            builder: (context, state) => const AccountView(),
+            path: Routes.profileView,
+            builder: (context, state) => const ProfileView(),
           ),
         ],
       ),

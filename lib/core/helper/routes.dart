@@ -8,5 +8,5 @@ class Routes {
   static const String homeView = '/homeView';
   static const String cartView = '/cartView';
   static const String checkoutView = '/checkoutView';
-  static const String accountView = '/accountView';
+  static const String profileView = '/profileView';
 }

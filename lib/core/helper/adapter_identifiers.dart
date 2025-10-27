@@ -5,4 +5,8 @@ class AdaptorsIdentifiers {
   static const int dimensionModelAdapter = 3;
   static const int metaModelAdapter = 4;
   static const int reviewModelAdapter = 5;
+
+  static const int orderModelAdapter = 7;
+  static const int deliveryMethodModelAdapter = 8;
+  static const int locationModelAdapter = 9;
 }
