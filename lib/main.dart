@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/adapters.dart';
 
-import 'core/helper/firebase_options.dart';
 import 'core/utilities/app_bloc_observer.dart';
 import 'features/00_ecommerce_app/ecommerce_app.dart';
+import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

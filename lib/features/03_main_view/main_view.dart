@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_e_commerce_app_2025/core/helper/const.dart';
-import 'package:flutter_e_commerce_app_2025/core/utilities/custom_text.dart';
 import 'package:go_router/go_router.dart';
+import 'package:google_nav_bar/google_nav_bar.dart';
 
 import '../../core/helper/routes.dart';
 
@@ -15,7 +15,7 @@ class MainView extends StatefulWidget {
 class _MainViewState extends State<MainView> {
   ValueNotifier<int> valueNotifierSelectedItem = ValueNotifier(0);
 
-  final tabs = [Routes.homeView, Routes.cartView, Routes.accountView];
+  final tabs = [Routes.homeView, Routes.cartView, Routes.profileView];
 
   @override
   Widget build(BuildContext context) {
@@ -25,60 +25,63 @@ class _MainViewState extends State<MainView> {
         return Scaffold(
           backgroundColor: kScaffoldColor,
           body: widget.child,
-          bottomNavigationBar: BottomNavigationBar(
-            elevation: 4,
-            backgroundColor: kScaffoldColor,
-            type: BottomNavigationBarType.fixed,
-            currentIndex: valueNotifierSelectedItem.value,
-            onTap: (index) {
-              changeValueOfSelectedItem(index);
-              context.go(tabs[index]);
-              debugPrint(index.toString());
-            },
-            items: [
-              customBottomNavBarItem(
-                iconData: Icons.explore_outlined,
-                text: 'Explore',
-              ),
-              customBottomNavBarItem(
-                iconData: Icons.shopping_cart_outlined,
-                text: 'Shopping',
-              ),
-              customBottomNavBarItem(
-                iconData: Icons.person_2_outlined,
-                text: 'Profile',
-              ),
-            ],
-          ),
+          extendBody: true, // عشان الخلفية تبان تحت الـ NavBar
+          bottomNavigationBar: _buildBlurNavBar(context),
         );
       },
     );
   }
 
-  changeValueOfSelectedItem(int currentIndex) {
-    valueNotifierSelectedItem.value = currentIndex;
+  Widget _buildBlurNavBar(BuildContext context) {
+    return Container(
+      height: 75,
+      decoration: BoxDecoration(
+        color: Colors.white.withOpacity(0.15),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.1),
+            blurRadius: 20,
+            offset: const Offset(0, 6),
+          ),
+        ],
+      ),
+      child: GNav(
+        gap: 8,
+        duration: const Duration(milliseconds: 400),
+        curve: Curves.easeInOut,
+        color: Colors.green.shade100,
+        activeColor: Colors.white,
+        iconSize: 26,
+        padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 10),
+        tabBackgroundGradient: const LinearGradient(
+          colors: [Colors.white30, Colors.white54],
+        ),
+        backgroundColor: kPrimaryColor,
+        tabBorderRadius: 16,
+        haptic: true,
+        onTabChange: (index) {
+          changeValueOfSelectedItem(index);
+          context.go(tabs[index]);
+          debugPrint(index.toString());
+        },
+        tabs: const [
+          GButton(
+            margin: EdgeInsets.only(left: 8),
+            icon: Icons.home,
+            text: 'Home',
+          ),
+          GButton(icon: Icons.shopping_cart_outlined, text: 'Cart'),
+          GButton(
+            margin: EdgeInsets.only(right: 8),
+            icon: Icons.person_2_outlined,
+            text: 'Profile',
+          ),
+        ],
+      ),
+    );
   }
 
-  customBottomNavBarItem({required IconData iconData, required String text}) {
-    return BottomNavigationBarItem(
-      icon: Icon(iconData, color: Colors.black),
-      activeIcon: Padding(
-        padding: const EdgeInsets.only(top: 20),
-        child: Container(
-          decoration: BoxDecoration(
-            color: Colors.black.withAlpha(4),
-            borderRadius: const BorderRadius.all(Radius.circular(16)),
-          ),
-          padding: const EdgeInsets.all(8),
-          child: CustomText(
-            text: text,
-            fontSize: 14,
-            color: Colors.black,
-            alignment: Alignment.center,
-          ),
-        ),
-      ),
-      label: '',
-    );
+  changeValueOfSelectedItem(int currentIndex) {
+    valueNotifierSelectedItem.value = currentIndex;
   }
 }
