@@ -1,6 +1,9 @@
 import 'dart:convert';
 
+import 'package:dartz/dartz.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_e_commerce_app_2025/core/errors/catch_error_handle.dart';
+import 'package:flutter_e_commerce_app_2025/core/errors/failure.dart';
 import 'package:flutter_e_commerce_app_2025/core/helper/adapter_identifiers.dart';
 import 'package:hive/hive.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -16,42 +19,48 @@ class UserInfoCache {
   // 2. shared preference instance (nullable في البداية)
   SharedPreferences? _sharedPreferences;
 
-  //get userModel
-
   // 3. initialization مرة واحدة
   Future<void> init() async {
     _sharedPreferences ??= await SharedPreferences.getInstance();
   }
 
-  Future<void> initialization() async {
-    _instance.init();
-  }
-
-  Future<void> saveUser({required UserModel userModel}) async {
+  Future<Either<Failure, void>> saveUser({required UserModel userModel}) async {
     try {
+      //save user id
+      _sharedPreferences!.setString('current_user', userModel.id);
+      //save user model as string
       var userModelJsonToString = jsonEncode(userModel.toJson());
       await _sharedPreferences!.setString(
-        userModel.id.toString(),
+        'current_user${userModel.id}',
         userModelJsonToString,
       );
-      debugPrint('save local for user success');
-      debugPrint('id = ${userModel.id}');
+      return right(null);
     } catch (e) {
       debugPrint('error = $e');
+      return left(CatchErrorHandle.catchBack(failure: e));
     }
   }
 
-  Future<UserModel?> getUser({required String id}) async {
-    var data = _sharedPreferences!.getString(id);
+  Future<Either<Failure, UserModel?>> getUser() async {
+    try {
+      final id = _sharedPreferences!.getString('current_user');
+      if (id == null) return right(null);
 
-    if (data == null) {
-      return null;
+      final data = _sharedPreferences!.getString('current_user$id');
+      if (data == null) return right(null);
+      final userModel = UserModel.fromJson(jsonDecode(data));
+      return right(userModel);
+    } catch (e) {
+      return left(CatchErrorHandle.catchBack(failure: e));
     }
-    return UserModel.fromJson(jsonDecode(data));
   }
 
-  Future<void> deleteUser({required String id}) async {
-    await _sharedPreferences!.remove(id);
+  Future<void> deleteUser() async {
+    final id = _sharedPreferences!.getString('current_user');
+    if (id != null) {
+      await _sharedPreferences!.remove('current_user$id');
+      await _sharedPreferences!.remove('current_user');
+    }
   }
 }
 

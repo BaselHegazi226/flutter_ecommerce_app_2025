@@ -16,7 +16,7 @@ class SignInHeader extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            CustomText(
+            const CustomText(
               text: 'Welcome,',
               fontSize: 30,
               alignment: Alignment.topLeft,
@@ -32,7 +32,7 @@ class SignInHeader extends StatelessWidget {
             ),
           ],
         ),
-        CustomText(
+        const CustomText(
           text: 'Sign in to continue',
           fontSize: 16,
           alignment: Alignment.topLeft,

@@ -41,7 +41,7 @@ class _SignInEmailPasswordInputSectionState
         children: [
           CustomTextFormField(
             text: 'Email',
-            hintText: 'iamdavid@gmail.com',
+            hintText: 'newuser@gmail.com',
             onSaved: (value) {
               email = value!.trim();
               debugPrint('email : $email');
@@ -108,6 +108,7 @@ class _SignInEmailPasswordInputSectionState
                   return CustomButton(
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
+                        _formKey.currentState!.save();
                         context.read<AuthBloc>().add(
                           SignInWithEmailEvent(
                             email: email,

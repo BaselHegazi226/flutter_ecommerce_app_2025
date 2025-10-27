@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_e_commerce_app_2025/features/02_auth_view/presentation/view_model/auth_bloc/auth_bloc.dart';
 
+import '../../../../../core/utilities/init_method.dart';
 import '../../../data/repo/auth_repo.dart';
 import 'is_new_user_state.dart';
 
