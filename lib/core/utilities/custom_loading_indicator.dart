@@ -4,8 +4,8 @@ class CustomCircleIndicator extends StatelessWidget {
   const CustomCircleIndicator({
     super.key,
     this.color = Colors.white,
-    this.width = 8,
-    this.size = 16,
+    this.width = 3,
+    this.size = 20,
   });
   final Color color;
   final double width;

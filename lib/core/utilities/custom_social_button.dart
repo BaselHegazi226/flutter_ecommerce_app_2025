@@ -30,14 +30,14 @@ class CustomSocialButton extends StatelessWidget {
             padding: const EdgeInsets.all(16),
             elevation: 0,
             backgroundColor: Colors.transparent,
-            shape: RoundedRectangleBorder(
-              borderRadius: const BorderRadius.all(Radius.circular(8)),
-              side: const BorderSide(color: Color(0xffDDDDDD)),
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(8)),
+              side: BorderSide(color: Color(0xffDDDDDD)),
             ),
           ),
           onPressed: onPressed,
           child: value
-              ? CustomCircleIndicator(color: kPrimaryColor)
+              ? const CustomCircleIndicator(color: kPrimaryColor)
               : Stack(
                   alignment: Alignment.center,
                   children: [

@@ -32,15 +32,15 @@ class CustomTextFormField extends StatelessWidget {
           controller: textEditingController,
           decoration: InputDecoration(
             hintText: hintText,
-            hintStyle: TextStyle(
+            hintStyle: const TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.w400,
               color: kGreyColor,
             ),
-            enabledBorder: UnderlineInputBorder(
+            enabledBorder: const UnderlineInputBorder(
               borderSide: BorderSide(color: kGreyColor),
             ),
-            focusedBorder: UnderlineInputBorder(
+            focusedBorder: const UnderlineInputBorder(
               borderSide: BorderSide(color: kPrimaryColor),
             ),
           ),

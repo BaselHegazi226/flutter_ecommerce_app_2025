@@ -12,6 +12,7 @@ class CustomButton extends StatelessWidget {
     this.backgroundColor = kPrimaryColor,
     this.textColor = Colors.white,
     this.paddingValue = 12,
+    this.textSize = 20,
     this.isLoading = false,
   });
   final void Function()? onPressed;
@@ -19,6 +20,7 @@ class CustomButton extends StatelessWidget {
   final Color backgroundColor;
   final Color borderColor;
   final Color textColor;
+  final double textSize;
   final double paddingValue;
   final bool isLoading;
   @override
@@ -29,17 +31,17 @@ class CustomButton extends StatelessWidget {
         elevation: 0,
         backgroundColor: backgroundColor,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(12)),
+          borderRadius: const BorderRadius.all(Radius.circular(12)),
           side: BorderSide(color: borderColor),
         ),
       ),
       onPressed: onPressed,
       child: isLoading
-          ? CustomCircleIndicator()
+          ? const CustomCircleIndicator()
           : CustomText(
               text: text,
               color: textColor,
-              fontSize: 20,
+              fontSize: textSize,
               alignment: Alignment.center,
             ),
     );
