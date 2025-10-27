@@ -73,7 +73,7 @@ Widget homeProductImageShimmer(Size screenSize) {
     height: screenSize.height * .25,
     decoration: BoxDecoration(
       color: kGreyColor.withAlpha(50),
-      borderRadius: BorderRadius.all(Radius.circular(4)),
+      borderRadius: const BorderRadius.all(Radius.circular(4)),
     ),
   );
 }
