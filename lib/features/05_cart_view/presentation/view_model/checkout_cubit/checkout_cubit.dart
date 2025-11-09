@@ -1,9 +1,11 @@
 import 'package:bloc/bloc.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_e_commerce_app_2025/core/helper/generate_order_number.dart';
 import 'package:flutter_e_commerce_app_2025/features/05_cart_view/data/model/cart_model.dart';
 import 'package:flutter_e_commerce_app_2025/features/05_cart_view/data/model/order_model.dart';
+import 'package:flutter_e_commerce_app_2025/features/05_cart_view/presentation/view_model/cart_bloc/cart_bloc.dart';
+import 'package:flutter_e_commerce_app_2025/features/05_cart_view/presentation/view_model/get_cart_cubit/get_cart_cubit.dart';
 import 'package:flutter_e_commerce_app_2025/features/05_cart_view/presentation/view_model/order_cubit/order_cubit.dart';
-import 'package:meta/meta.dart';
 
 import '../../../data/model/delivery_method_model.dart';
 import '../../../data/model/location_model.dart';
@@ -11,8 +13,14 @@ import '../../../data/model/location_model.dart';
 part 'checkout_state.dart';
 
 class CheckoutCubit extends Cubit<CheckoutState> {
-  CheckoutCubit({required this.orderCubit}) : super(CheckoutInitial());
+  CheckoutCubit({
+    required this.orderCubit,
+    required this.cartBloc,
+    required this.getCartCubit,
+  }) : super(CheckoutInitial());
   final OrderCubit orderCubit;
+  final CartBloc cartBloc;
+  final GetCartCubit getCartCubit;
   int _currentStep = 0;
   DeliveryMethodModel? _deliveryMethodModel;
   LocationModel? _locationModel;
@@ -35,6 +43,7 @@ class CheckoutCubit extends Cubit<CheckoutState> {
     if (_currentStep < 4) {
       _currentStep++;
     }
+    debugPrint('current Step = $_currentStep');
     emit(ChangedStep(currentStep: _currentStep));
   }
 
@@ -42,7 +51,23 @@ class CheckoutCubit extends Cubit<CheckoutState> {
     if (_currentStep > 0) {
       _currentStep--;
     }
+    debugPrint('current Step = $_currentStep');
     emit(ChangedStep(currentStep: _currentStep));
+  }
+
+  void resetStep() {
+    _lastOrder = null;
+    _currentStep = 0;
+    _locationModel = null;
+    _deliveryMethodModel = const DeliveryMethodModel(
+      title: 'Next Day Delivery',
+      subtitle:
+          'Place your order before 6pm and your items will be delivered the next day',
+    );
+    _carts = [];
+    _totalPrice = 0;
+
+    emit(CheckoutInitial());
   }
 
   void setCartData({
@@ -53,28 +78,49 @@ class CheckoutCubit extends Cubit<CheckoutState> {
     _totalPrice = totalPrice;
   }
 
+  Future<void> orderReady() async {
+    emit(OrderReadyLoading());
+    if (_locationModel != null && _deliveryMethodModel != null) {
+      final orderModel = OrderModel(
+        orderId: generateOrderNumber(),
+        cartModelList: _carts,
+        deliveryMethodModel: _deliveryMethodModel!,
+        locationModel: _locationModel!,
+        totalPrice: _totalPrice,
+        checkoutDateAt: DateTime.now(),
+        orderStateEnum: OrderStateEnum.pending,
+      );
+      _lastOrder = orderModel;
+    }
+    if (_lastOrder != null) {
+      emit(OrderReadySuccess(order: _lastOrder!));
+    } else {
+      emit(OrderReadyFailure(errorMessage: 'Order Not Ready'));
+    }
+  }
+
   Future<void> confirmOrder() async {
     emit(ConfirmOrderLoading());
-    if (_deliveryMethodModel == null && _locationModel == null) {
+    if (_lastOrder == null) {
+      debugPrint('delivery model = ${_deliveryMethodModel?.toJson()}');
+      debugPrint('location model = ${_locationModel?.toJson()}');
+      debugPrint('order confirm failure===============================>');
       emit(ConfirmOrderFailure(errorMessage: 'Missing Order Data'));
-    }
-    final orderModel = OrderModel(
-      orderId: generateOrderNumber(),
-      cartModelList: _carts,
-      deliveryMethodModel: _deliveryMethodModel!,
-      locationModel: _locationModel!,
-      totalPrice: _totalPrice,
-      checkoutDateAt: DateTime.now(),
-      orderState: OrderState.pending,
-    );
-    await orderCubit.addOrder(orderModel: orderModel);
-    _lastOrder = orderModel;
+    } else {
+      debugPrint('delivery model = ${_deliveryMethodModel?.toJson()}');
+      debugPrint('location model = ${_locationModel?.toJson()}');
 
-    emit(ConfirmOrderSuccess(order: orderModel));
+      await orderCubit.addOrder(orderModel: _lastOrder!);
+      emit(ConfirmOrderSuccess());
+      debugPrint('order confirm success===============================>');
+      cartBloc.add(DeleteAllProductsEvent());
+      //tigger the cart
+      await getCartCubit.getCartProductsAndTotal();
+      debugPrint('cart is deleted success===============================>');
+    }
   }
 
   int get getCurrentStep {
-    print('current step = $_currentStep');
     return _currentStep;
   }
 

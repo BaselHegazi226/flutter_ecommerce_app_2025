@@ -23,6 +23,21 @@ final class ChangedStep extends CheckoutState {
 }
 
 //order states
+final class OrderReadyLoading extends CheckoutState {}
+
+final class OrderReadyFailure extends CheckoutState {
+  final String errorMessage;
+
+  OrderReadyFailure({required this.errorMessage});
+}
+
+final class OrderReadySuccess extends CheckoutState {
+  final OrderModel order;
+
+  OrderReadySuccess({required this.order});
+}
+
+//order states
 final class ConfirmOrderLoading extends CheckoutState {}
 
 final class ConfirmOrderFailure extends CheckoutState {
@@ -31,10 +46,6 @@ final class ConfirmOrderFailure extends CheckoutState {
   ConfirmOrderFailure({required this.errorMessage});
 }
 
-final class ConfirmOrderSuccess extends CheckoutState {
-  final OrderModel order;
-
-  ConfirmOrderSuccess({required this.order});
-}
+final class ConfirmOrderSuccess extends CheckoutState {}
 
 final class CancelOrder extends CheckoutState {}

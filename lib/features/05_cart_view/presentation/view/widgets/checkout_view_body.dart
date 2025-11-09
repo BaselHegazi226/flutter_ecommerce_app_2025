@@ -27,10 +27,7 @@ class CheckoutViewBody extends StatelessWidget {
           child: CustomScrollView(
             slivers: [
               SliverToBoxAdapter(
-                child: Container(
-                  color: Colors.white,
-                  child: buildEasyStepper(cubit),
-                ),
+                child: Container(child: buildEasyStepper(cubit, context)),
               ),
               const SliverToBoxAdapter(child: SizedBox(height: 24)),
               SliverFillRemaining(
@@ -44,13 +41,16 @@ class CheckoutViewBody extends StatelessWidget {
                       onBack: cubit.previousStep,
                     ),
                     SummarizeView(
-                      onNext: cubit.nextStep,
+                      onNext: () {
+                        cubit.orderReady();
+                        cubit.nextStep();
+                      },
                       onBack: cubit.previousStep,
                     ),
                     FinishView(
                       orderModel: cubit.getOrderModel,
                       onBack: cubit.previousStep,
-                      onNext: cubit.nextStep,
+                      onFinish: cubit.confirmOrder, // هنا المهم
                     ),
                   ],
                 ),
@@ -62,7 +62,7 @@ class CheckoutViewBody extends StatelessWidget {
     );
   }
 
-  EasyStepper buildEasyStepper(CheckoutCubit cubit) {
+  EasyStepper buildEasyStepper(CheckoutCubit cubit, BuildContext context) {
     return EasyStepper(
       activeStep: cubit.getCurrentStep,
       stepShape: StepShape.circle,
@@ -71,13 +71,21 @@ class CheckoutViewBody extends StatelessWidget {
       borderThickness: 2,
       finishedStepBorderColor: Colors.grey.shade900,
       finishedStepTextColor: Colors.grey.shade900,
-      finishedStepBackgroundColor: Colors.white,
+      finishedStepBackgroundColor:
+          Theme.of(context).brightness == Brightness.dark
+          ? Colors.grey.shade500.withAlpha(32)
+          : Colors.white,
       finishedStepIconColor: Colors.grey.shade900,
-      activeStepBackgroundColor: Colors.white,
+      activeStepBackgroundColor: Theme.of(context).brightness == Brightness.dark
+          ? Colors.grey.shade500.withAlpha(32)
+          : Colors.white,
       activeStepBorderColor: kPrimaryColor,
       activeStepTextColor: kPrimaryColor,
       activeStepIconColor: kPrimaryColor,
-      unreachedStepBackgroundColor: Colors.white,
+      unreachedStepBackgroundColor:
+          Theme.of(context).brightness == Brightness.dark
+          ? Colors.grey.shade500.withAlpha(32)
+          : Colors.white,
       unreachedStepTextColor: Colors.grey,
       unreachedStepIconColor: Colors.grey,
       unreachedStepBorderColor: Colors.grey,
