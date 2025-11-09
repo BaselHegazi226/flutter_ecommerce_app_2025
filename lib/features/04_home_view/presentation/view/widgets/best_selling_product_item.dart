@@ -28,7 +28,10 @@ class BestSellingProductItem extends StatelessWidget {
           Container(
             width: screenSize.width * .45,
             height: screenSize.height * .3,
-            decoration: const BoxDecoration(color: Colors.transparent),
+            decoration: BoxDecoration(
+              color: Colors.grey.shade500.withAlpha(32),
+              borderRadius: const BorderRadius.all(Radius.circular(8)),
+            ),
             child: ClipRRect(
               borderRadius: const BorderRadius.all(Radius.circular(4)),
               child: CachedNetworkImage(

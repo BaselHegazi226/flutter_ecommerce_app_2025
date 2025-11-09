@@ -19,7 +19,7 @@ class BestSellingListView extends StatelessWidget {
         if (state is GetProductSuccess) {
           final products = state.products;
           return SizedBox(
-            height: screenSize.height * .4,
+            height: screenSize.height * .45,
             child: ListView.separated(
               separatorBuilder: (context, index) {
                 return const SizedBox(width: 16);
