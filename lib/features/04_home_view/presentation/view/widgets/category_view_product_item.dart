@@ -28,7 +28,7 @@ class CategoryViewProductItem extends StatelessWidget {
           Expanded(
             child: Container(
               decoration: BoxDecoration(
-                color: Colors.grey.shade200,
+                color: Colors.grey.shade500.withAlpha(32),
                 borderRadius: const BorderRadius.all(Radius.circular(8)),
               ),
               child: CachedNetworkImage(
@@ -48,9 +48,8 @@ class CategoryViewProductItem extends StatelessWidget {
             spacing: 4,
             children: [
               CustomText(
-                text: title.split(" ").take(3).join(" ").length > 20
-                    ? title.split(" ").take(2).join(" ")
-                    : title.split(" ").take(3).join(" "),
+                text: title.split(" ").take(2).join(" "),
+
                 fontSize: 16,
                 alignment: Alignment.topLeft,
               ),

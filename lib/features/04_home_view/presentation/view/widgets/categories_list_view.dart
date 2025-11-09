@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_e_commerce_app_2025/core/helper/routes.dart';
 import 'package:flutter_e_commerce_app_2025/core/shimmer/home_category_shimmer.dart';
-import 'package:flutter_e_commerce_app_2025/core/utilities/custom_text.dart';
 import 'package:flutter_e_commerce_app_2025/core/utilities/icon_by_category_name.dart';
 import 'package:flutter_e_commerce_app_2025/features/04_home_view/presentation/view_model/category_cubit/category_cubit.dart';
 import 'package:go_router/go_router.dart';
@@ -19,26 +18,26 @@ class CategoriesListView extends StatelessWidget {
           final categories = state.categories;
           return SizedBox(
             height: 100,
-            child: ListView.builder(
+            child: ListView.separated(
               padding: EdgeInsets.zero,
               scrollDirection: Axis.horizontal,
               physics: const BouncingScrollPhysics(),
               itemCount: categories.length,
+              separatorBuilder: (context, index) {
+                return const SizedBox(width: 16);
+              },
               itemBuilder: (context, index) {
                 return Center(
-                  child: Padding(
-                    padding: const EdgeInsets.only(right: 8),
-                    child: CategoryItem(
-                      name: categories[index].name,
-                      slug: categories[index].slug,
-                      onTap: () {
-                        context.push(
-                          '${Routes.homeView}${Routes.categoryView}',
-                          extra: categories[index],
-                        );
-                      },
-                      screenSize: screenSize,
-                    ),
+                  child: CategoryItem(
+                    name: categories[index].name,
+                    slug: categories[index].slug,
+                    onTap: () {
+                      context.push(
+                        '${Routes.homeView}${Routes.categoryView}',
+                        extra: categories[index],
+                      );
+                    },
+                    screenSize: screenSize,
                   ),
                 );
               },
@@ -62,27 +61,21 @@ class CategoryItem extends StatelessWidget {
     required this.slug,
     required this.screenSize,
     required this.onTap,
+    this.textColor = Colors.black,
   });
 
   final String name;
   final String slug;
   final Size screenSize;
   final VoidCallback onTap;
-
+  final Color textColor;
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onTap,
       splashColor: Colors.grey.withAlpha(10),
       borderRadius: const BorderRadius.all(Radius.circular(32)),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          CategoryIcon.fromSlug(context, slug),
-          const SizedBox(height: 8),
-          CustomText(text: name, fontSize: 12, alignment: Alignment.center),
-        ],
-      ),
+      child: CategoryIcon.fromSlug(context, slug),
     );
   }
 }

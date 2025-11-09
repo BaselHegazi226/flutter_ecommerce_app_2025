@@ -36,7 +36,7 @@ class CategoryViewBody extends StatelessWidget {
             padding: const EdgeInsets.all(16),
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2, // خلي اتنين جنب بعض
-              crossAxisSpacing: 8, // مسافة أفقية بين العناصر
+              crossAxisSpacing: 16, // مسافة أفقية بين العناصر
               mainAxisSpacing: 12, // مسافة رأسية بين العناصر
               childAspectRatio: 0.55, // النسبة بين العرض والارتفاع
             ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_e_commerce_app_2025/core/utilities/custom_text.dart';
+
+import '../../../../../core/utilities/custom_text.dart';
 
 class CategoriesHeader extends StatelessWidget {
   const CategoriesHeader({super.key});
