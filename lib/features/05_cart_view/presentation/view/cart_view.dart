@@ -13,17 +13,12 @@ class CartView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    debugPrint('build cart view');
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) {
-            final cubit = GetCartCubit(
-              cartCache: AppGet().getIt<CartCacheImplement>(),
-            );
-            cubit.getCartProductsAndTotal();
-            return cubit;
-          },
+          create: (context) =>
+              GetCartCubit(cartCache: AppGet().getIt<CartCacheImplement>())
+                ..getCartProductsAndTotal(),
         ),
         BlocProvider(
           create: (context) =>
@@ -33,7 +28,8 @@ class CartView extends StatelessWidget {
       child: BlocListener<CartBloc, CartState>(
         listener: (context, state) {
           if (state is UpdateProductCountSuccess ||
-              state is DeleteProductSuccess) {
+              state is DeleteProductSuccess ||
+              state is DeleteAllProductSuccess) {
             context.read<GetCartCubit>().getCartProductsAndTotal();
           }
         },

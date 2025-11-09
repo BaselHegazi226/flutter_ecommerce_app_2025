@@ -5,6 +5,7 @@ import 'package:flutter_e_commerce_app_2025/core/helper/routes.dart';
 import 'package:flutter_e_commerce_app_2025/core/utilities/custom_button.dart';
 import 'package:flutter_e_commerce_app_2025/core/utilities/custom_loading_indicator.dart';
 import 'package:flutter_e_commerce_app_2025/core/utilities/price_button_section.dart';
+import 'package:flutter_e_commerce_app_2025/features/05_cart_view/presentation/view_model/cart_bloc/cart_bloc.dart';
 import 'package:flutter_e_commerce_app_2025/features/05_cart_view/presentation/view_model/get_cart_cubit/get_cart_cubit.dart';
 import 'package:flutter_e_commerce_app_2025/features/05_cart_view/presentation/view_model/get_cart_cubit/get_cart_state.dart';
 import 'package:go_router/go_router.dart';
@@ -23,9 +24,13 @@ class CartViewTotalCheckoutSection extends StatelessWidget {
             value: '\$ ${state.totalPrice.roundToDouble()}',
             widget: CustomButton(
               onPressed: () {
-                GoRouter.of(
-                  context,
-                ).push('${Routes.cartView}${Routes.checkoutView}');
+                GoRouter.of(context).push(
+                  '${Routes.cartView}${Routes.checkoutView}',
+                  extra: {
+                    'cart_bloc': context.read<CartBloc>(),
+                    'get_cart_cubit': context.read<GetCartCubit>(),
+                  },
+                );
               },
               text: 'CHECKOUT',
               backgroundColor: kPrimaryColor,

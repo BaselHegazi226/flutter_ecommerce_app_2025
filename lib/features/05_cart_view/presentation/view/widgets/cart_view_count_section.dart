@@ -23,7 +23,9 @@ class CartViewCountSection extends StatelessWidget {
               flex: 2,
               child: Container(
                 decoration: BoxDecoration(
-                  color: Colors.grey.shade200,
+                  color: Theme.of(context).brightness == Brightness.dark
+                      ? Colors.grey.shade500.withAlpha(32)
+                      : Colors.grey.shade200,
                   borderRadius: const BorderRadius.all(Radius.circular(4)),
                 ),
                 child: Row(

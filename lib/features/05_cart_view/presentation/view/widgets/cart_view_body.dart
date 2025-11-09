@@ -2,20 +2,30 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_e_commerce_app_2025/core/helper/routes.dart';
 import 'package:flutter_e_commerce_app_2025/core/shimmer/cart_shimmer.dart';
-import 'package:flutter_e_commerce_app_2025/core/utilities/custom_text.dart';
 import 'package:flutter_e_commerce_app_2025/features/05_cart_view/presentation/view/widgets/cart_view_item.dart';
 import 'package:flutter_e_commerce_app_2025/features/05_cart_view/presentation/view_model/cart_bloc/cart_bloc.dart';
 import 'package:flutter_e_commerce_app_2025/features/05_cart_view/presentation/view_model/get_cart_cubit/get_cart_cubit.dart';
 import 'package:flutter_e_commerce_app_2025/features/05_cart_view/presentation/view_model/get_cart_cubit/get_cart_state.dart';
 import 'package:flutter_e_commerce_app_2025/generated/assets.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../../core/utilities/not_item_found.dart';
 import 'cart_view_total_checkout_section.dart';
 
-class CartViewBody extends StatelessWidget {
+class CartViewBody extends StatefulWidget {
   const CartViewBody({super.key});
+
+  @override
+  State<CartViewBody> createState() => _CartViewBodyState();
+}
+
+class _CartViewBodyState extends State<CartViewBody> {
+  @override
+  void initState() {
+    super.initState();
+    context.read<GetCartCubit>().getCartProductsAndTotal();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,21 +35,9 @@ class CartViewBody extends StatelessWidget {
         if (state is GetProductCartAndTotalSuccess) {
           final cartList = state.carts;
           if (cartList.isEmpty) {
-            return Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SvgPicture.asset(
-                  Assets.cartEmptyCart,
-                  height: screenSize.height * .25,
-                ),
-                const SizedBox(height: 16),
-                const CustomText(
-                  text: 'No Product cart are added 🛒🛒',
-                  fontSize: 20,
-                  alignment: Alignment.center,
-                  color: Colors.black,
-                ),
-              ],
+            return const NoItemFound(
+              itemTitle: 'Try to Fill Cart 🛒🛒',
+              itemImage: Assets.cartEmptyCart,
             );
           }
           return Column(
@@ -56,12 +54,10 @@ class CartViewBody extends StatelessWidget {
                     final item = cartList[index];
                     return InkWell(
                       onTap: () {
-                        //push
                         GoRouter.of(
                           context,
                         ).push(Routes.productDetailsView, extra: item.id);
                       },
-
                       child: Padding(
                         padding: const EdgeInsets.all(16),
                         child: Slidable(
