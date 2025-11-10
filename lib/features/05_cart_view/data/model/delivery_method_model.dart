@@ -9,4 +9,14 @@ class DeliveryMethodModel {
   @HiveField(1)
   final String subtitle;
   const DeliveryMethodModel({required this.title, required this.subtitle});
+  factory DeliveryMethodModel.fromJson(json) {
+    return DeliveryMethodModel(
+      title: json['title'],
+      subtitle: json['subtitle'],
+    );
+  }
+
+  toJson() {
+    return {'title': title, 'subtitle': subtitle};
+  }
 }

@@ -5,6 +5,7 @@ import 'package:flutter_e_commerce_app_2025/core/utilities/custom_text.dart';
 import 'package:flutter_e_commerce_app_2025/core/utilities/show_snack_bar.dart';
 import 'package:flutter_e_commerce_app_2025/features/05_cart_view/presentation/view_model/checkout_cubit/checkout_cubit.dart';
 
+import '../../../../../core/helper/const.dart';
 import '../../../data/model/delivery_method_model.dart';
 
 class DeliveryView extends StatefulWidget {
@@ -17,18 +18,20 @@ class DeliveryView extends StatefulWidget {
 
 class _DeliveryViewState extends State<DeliveryView> {
   ValueNotifier<int> valueNotifier = ValueNotifier<int>(1);
-  late DeliveryMethodModel deliveryMethodModel;
+  DeliveryMethodModel deliveryMethodModel = const DeliveryMethodModel(
+    title: 'Next Day Delivery',
+    subtitle:
+        'Place your order before 12 hour and your items will be delivered the next day',
+  );
 
   @override
   void initState() {
     super.initState();
-    deliveryMethodModel = const DeliveryMethodModel(
-      title: 'Next Day Delivery',
-      subtitle:
-          'Place your order before 6pm and your items will be delivered the next day',
-    );
     context.read<CheckoutCubit>().chooseDeliveryMethod(
       deliveryMethodModel: deliveryMethodModel,
+    );
+    print(
+      '${deliveryMethodModel.toString()} =====================================>',
     );
   }
 
@@ -49,7 +52,11 @@ class _DeliveryViewState extends State<DeliveryView> {
                   groupValue: value,
                   onChanged: (index) {
                     changeValueNotifier(index!);
-                    setState(() {});
+                    deliveryMethodModel = const DeliveryMethodModel(
+                      title: 'Next Day Delivery',
+                      subtitle:
+                          'Place your order before 12 hour and your items will be delivered the next day',
+                    );
                     cubit.chooseDeliveryMethod(
                       deliveryMethodModel: deliveryMethodModel,
                     );
@@ -146,6 +153,13 @@ class _DeliveryViewState extends State<DeliveryView> {
                     }
                   },
                   text: 'Next',
+                  textColor: Theme.of(context).brightness == Brightness.dark
+                      ? Colors.grey.shade600
+                      : Colors.grey.shade200,
+                  backgroundColor:
+                      Theme.of(context).brightness == Brightness.dark
+                      ? Colors.grey.shade200
+                      : kPrimaryColor,
                 ),
               ),
             ],

@@ -8,7 +8,7 @@ class CustomCard extends StatelessWidget {
     return Card(
       elevation: 4,
       shadowColor: Colors.black.withAlpha(32),
-      color: Colors.white,
+      color: Theme.of(context).scaffoldBackgroundColor,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(4)),
       ),

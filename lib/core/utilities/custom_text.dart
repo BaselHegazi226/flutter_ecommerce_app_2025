@@ -7,7 +7,7 @@ class CustomText extends StatelessWidget {
     required this.fontSize,
     this.color = Colors.black,
     this.fontWeight = FontWeight.w400,
-    required this.alignment,
+    this.alignment,
     this.height = 1.5,
     this.maxLines = 10,
   });
@@ -16,25 +16,30 @@ class CustomText extends StatelessWidget {
   final int maxLines;
   final Color color;
   final FontWeight fontWeight;
-  final Alignment alignment;
+  final Alignment? alignment;
   final double height;
+
   @override
   Widget build(BuildContext context) {
-    return Align(
-      alignment: alignment,
-      child: Text(
-        text,
-        maxLines: maxLines,
-        overflow: TextOverflow.ellipsis,
-        style: TextStyle(
-          color: color,
-          fontSize: getResponsiveFontSize(context, fontSize: fontSize),
-          fontWeight: fontWeight,
-          height: height,
-        ),
-        softWrap: true,
+    final textWidget = Text(
+      text,
+      maxLines: maxLines,
+      overflow: TextOverflow.ellipsis,
+      style: TextStyle(
+        fontSize: getResponsiveFontSize(context, fontSize: fontSize),
+        fontWeight: fontWeight,
+        height: height,
+        color: color == Colors.black
+            ? Theme.of(context).textTheme.bodyMedium?.color
+            : color,
       ),
+      softWrap: true,
     );
+
+    // لو alignment مش متحدد، رجع النص عادي من غير Align
+    return alignment == null
+        ? textWidget
+        : Align(alignment: alignment!, child: textWidget);
   }
 }
 

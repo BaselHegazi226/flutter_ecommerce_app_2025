@@ -15,26 +15,33 @@ class CustomButton extends StatelessWidget {
     this.textSize = 20,
     this.isLoading = false,
   });
+
   final void Function()? onPressed;
   final String text;
-  final Color backgroundColor;
-  final Color borderColor;
+  final Color? backgroundColor;
+  final Color? borderColor;
   final Color textColor;
   final double textSize;
   final double paddingValue;
   final bool isLoading;
+
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
+
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-        padding: EdgeInsets.all(paddingValue),
-        elevation: 0,
-        backgroundColor: backgroundColor,
         shape: RoundedRectangleBorder(
-          borderRadius: const BorderRadius.all(Radius.circular(12)),
-          side: BorderSide(color: borderColor),
+          side: BorderSide(color: borderColor ?? Colors.transparent),
+          borderRadius: BorderRadius.circular(12),
         ),
+        padding: EdgeInsets.all(paddingValue),
+        elevation: 1,
+        backgroundColor:
+            backgroundColor ?? (isDark ? Colors.grey.shade400 : kScaffoldColor),
       ),
+
       onPressed: onPressed,
       child: isLoading
           ? const CustomCircleIndicator()
