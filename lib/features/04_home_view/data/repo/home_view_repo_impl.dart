@@ -61,6 +61,7 @@ class HomeViewRepoImpl implements HomeViewRepo {
       final Response response = await dio.get(
         '$_baseUrl/products/category/$category',
       );
+      debugPrint('category $category==================>');
       final data = response.data['products'];
       List<ProductModel> products = [];
       for (var item in data) {
@@ -68,6 +69,7 @@ class HomeViewRepoImpl implements HomeViewRepo {
         debugPrint('model = ${model.toJson()}');
         products.add(model);
       }
+      debugPrint('products ${products.toString()}==================>');
       return right(products);
     } catch (e) {
       return left(CatchErrorHandle.catchBack(failure: e));

@@ -10,7 +10,7 @@ Shimmer homeCategoryShimmerItem(Size screenSize) {
       children: [
         // صورة دائرية
         Container(
-          height: 60,
+          height: screenSize.height * .13, // أصغر من .18 بتاعت الـ ListView
           width: screenSize.width * .2,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
@@ -32,9 +32,9 @@ Shimmer homeCategoryShimmerItem(Size screenSize) {
   );
 }
 
-Widget homeViewCategoriesShimmerList() {
+Widget homeViewCategoriesShimmerList(Size screenSize) {
   return SizedBox(
-    height: 100,
+    height: screenSize.height * .18,
     child: ListView.separated(
       scrollDirection: Axis.horizontal,
       physics: const BouncingScrollPhysics(),

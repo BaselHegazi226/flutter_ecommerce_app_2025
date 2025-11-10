@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_e_commerce_app_2025/core/helper/const.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:iconify_flutter/icons/bi.dart';
 import 'package:iconify_flutter/icons/fa6_solid.dart';
 import 'package:iconify_flutter/icons/ion.dart';
 import 'package:iconify_flutter/icons/material_symbols.dart';
 import 'package:iconify_flutter/icons/mdi.dart';
+
+import 'custom_text.dart';
 
 enum CategoryIcon {
   beauty(Mdi.lipstick, Color(0xFFFF69B4)), // وردي جمالي
@@ -74,24 +77,54 @@ enum CategoryIcon {
       return Iconify(Mdi.tag, size: size, color: Colors.grey);
     }
     final screenSize = MediaQuery.sizeOf(context);
-    return Container(
-      height: 70,
-      width: screenSize.width * .22, // عرض ثابت لكل عنصر
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        color: category.color,
-        boxShadow: const [
-          BoxShadow(
-            color: Color(0xffF7F7F7),
-            blurRadius: 4,
-            spreadRadius: 4,
-            offset: Offset(0, 2),
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Container(
+          height: 70,
+          width: screenSize.width * .22, // عرض ثابت لكل عنصر
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            color: Theme.of(context).brightness == Brightness.dark
+                ? Colors.grey.shade300
+                : kScaffoldColor,
+            border: Border.all(
+              color: Theme.of(context).brightness == Brightness.dark
+                  ? Colors.grey.shade200
+                  : category.color,
+              width: 1.5,
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: Theme.of(context).brightness == Brightness.dark
+                    ? Colors.grey.shade600
+                    : const Color(0xffF7F7F7),
+                blurRadius: 4,
+                spreadRadius: 4,
+                offset: const Offset(0, 2),
+              ),
+            ],
           ),
-        ],
-      ),
-      child: Center(
-        child: Iconify(category.iconName, size: size, color: Colors.white),
-      ),
+          child: Center(
+            child: Iconify(
+              category.iconName,
+              size: size,
+              color: Theme.of(context).brightness == Brightness.dark
+                  ? Colors.grey.shade500
+                  : category.color,
+            ),
+          ),
+        ),
+        SizedBox(height: screenSize.height * .02),
+        CustomText(
+          text: slug.toUpperCase(),
+          fontSize: 12,
+          alignment: Alignment.center,
+          color: Theme.of(context).brightness == Brightness.dark
+              ? Theme.of(context).textTheme.bodyMedium!.color!
+              : category.color,
+        ),
+      ],
     );
   }
 }
