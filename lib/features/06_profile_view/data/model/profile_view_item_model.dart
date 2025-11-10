@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
 class ProfileViewItemModel {
-  final int id;
+  final String? route;
   final IconData iconData;
   final String title;
 
   const ProfileViewItemModel({
-    required this.id,
+    this.route,
     required this.iconData,
     required this.title,
   });

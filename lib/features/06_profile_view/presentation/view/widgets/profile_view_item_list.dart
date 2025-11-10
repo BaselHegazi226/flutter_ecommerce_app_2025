@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_e_commerce_app_2025/core/helper/routes.dart';
 import 'package:flutter_e_commerce_app_2025/core/utilities/custom_dialog_state.dart';
-import 'package:flutter_e_commerce_app_2025/features/07_profile_view/presentation/view/widgets/profile_view_item.dart';
-import 'package:flutter_e_commerce_app_2025/features/07_profile_view/presentation/view_model/user_info_cubit/user_info_cubit.dart';
+import 'package:flutter_e_commerce_app_2025/features/06_profile_view/presentation/view/widgets/profile_view_item.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../../core/helper/const.dart';
 import '../../../data/model/profile_view_item_model.dart';
+import '../../view_model/user_info_cubit/user_info_cubit.dart';
 
 class ProfileViewItemList extends StatelessWidget {
   const ProfileViewItemList({super.key});
@@ -17,12 +18,17 @@ class ProfileViewItemList extends StatelessWidget {
       children: List.generate(
         list.length,
         (index) => Padding(
-          padding: const EdgeInsets.symmetric(vertical: 20),
+          padding: const EdgeInsets.symmetric(vertical: 10),
           child: ProfileViewItem(
             iconData: list[index].iconData,
             title: list[index].title,
+            primaryColor: list[index].route == null
+                ? Colors.red
+                : Theme.of(context).brightness == Brightness.dark
+                ? const Color(0xffEDFBF4)
+                : kPrimaryColor,
             onTap: () {
-              if (list[index].id == 6) {
+              if (list[index].route == null) {
                 warningAwesomeDialog(
                   context,
                   title: 'Sign Out',
@@ -35,7 +41,7 @@ class ProfileViewItemList extends StatelessWidget {
                   },
                 );
               } else {
-                handleProfileItemTap(context, id: list[index].id);
+                handleProfileItemTap(context, route: list[index].route!);
               }
             },
           ),
@@ -44,52 +50,36 @@ class ProfileViewItemList extends StatelessWidget {
     );
   }
 
-  void handleProfileItemTap(BuildContext context, {required int id}) {
-    switch (id) {
-      case 1:
-        debugPrint('Edit profile');
-        break;
-      case 2:
-        debugPrint('Shipping Address');
-        break;
-      case 3:
-        debugPrint('Order History');
-        break;
-      case 4:
-        debugPrint('Cards');
-        break;
-      case 5:
-        debugPrint('Notifications');
-        break;
-    }
+  void handleProfileItemTap(BuildContext context, {required String route}) {
+    GoRouter.of(context).push('${Routes.profileView}$route');
   }
 
   static const List<ProfileViewItemModel> list = [
-    ProfileViewItemModel(id: 1, iconData: Icons.edit, title: 'Edit Profile'),
     ProfileViewItemModel(
-      id: 2,
+      route: Routes.editProfileView,
+      iconData: Icons.edit,
+      title: 'Edit Profile',
+    ),
+    ProfileViewItemModel(
+      route: Routes.shippingAddressView,
       iconData: Icons.location_on_outlined,
       title: 'Shipping Address',
     ),
     ProfileViewItemModel(
-      id: 3,
+      route: Routes.orderHistoryView,
       iconData: Icons.history,
       title: 'Order History',
     ),
     ProfileViewItemModel(
-      id: 4,
-      iconData: Icons.credit_card_outlined,
-      title: 'Cards',
+      route: Routes.favoriteView,
+      iconData: Icons.favorite_outline,
+      title: 'Favourite',
     ),
     ProfileViewItemModel(
-      id: 5,
-      iconData: Icons.notifications_active_outlined,
-      title: 'Notifications',
+      route: Routes.settingsView,
+      iconData: Icons.settings,
+      title: 'Settings',
     ),
-    ProfileViewItemModel(
-      id: 6,
-      iconData: Icons.logout_outlined,
-      title: 'Logout',
-    ),
+    ProfileViewItemModel(iconData: Icons.logout_outlined, title: 'Logout'),
   ];
 }

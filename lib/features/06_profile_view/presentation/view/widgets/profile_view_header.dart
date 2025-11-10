@@ -62,6 +62,9 @@ class ProfileViewHeader extends StatelessWidget {
                       maxLines: 2,
                       fontSize: 20,
                       alignment: Alignment.center,
+                      color: Theme.of(context).brightness == Brightness.dark
+                          ? Colors.grey.shade200
+                          : kPrimaryColor,
                     ),
                   ),
                   FittedBox(
@@ -70,6 +73,9 @@ class ProfileViewHeader extends StatelessWidget {
                       text: userModel.email,
                       fontSize: 14,
                       alignment: Alignment.center,
+                      color: Theme.of(context).brightness == Brightness.dark
+                          ? Colors.grey.shade200
+                          : kPrimaryColor.withAlpha(125),
                     ),
                   ),
                 ],
