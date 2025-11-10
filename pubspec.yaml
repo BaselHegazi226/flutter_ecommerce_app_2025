@@ -67,6 +67,9 @@ dependencies:
   flutter_slidable: ^4.0.3
   easy_stepper: ^0.9.1
   uuid: ^4.5.1
+  auto_size_text: ^3.0.0
+  toggle_switch: ^2.3.0
+  flutter_advanced_switch: ^3.1.0
 
 dev_dependencies:
   build_runner: any
@@ -123,3 +126,5 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
+flutter_intl:
+  enabled: true
