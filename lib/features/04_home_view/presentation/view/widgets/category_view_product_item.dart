@@ -49,7 +49,6 @@ class CategoryViewProductItem extends StatelessWidget {
             children: [
               CustomText(
                 text: title.split(" ").take(2).join(" "),
-
                 fontSize: 16,
                 alignment: Alignment.topLeft,
               ),

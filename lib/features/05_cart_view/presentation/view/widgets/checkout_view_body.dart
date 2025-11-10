@@ -79,9 +79,15 @@ class CheckoutViewBody extends StatelessWidget {
       activeStepBackgroundColor: Theme.of(context).brightness == Brightness.dark
           ? Colors.grey.shade500.withAlpha(32)
           : Colors.white,
-      activeStepBorderColor: kPrimaryColor,
-      activeStepTextColor: kPrimaryColor,
-      activeStepIconColor: kPrimaryColor,
+      activeStepBorderColor: Theme.of(context).brightness == Brightness.dark
+          ? Colors.grey.shade200
+          : kPrimaryColor,
+      activeStepTextColor: Theme.of(context).brightness == Brightness.dark
+          ? Colors.grey.shade200
+          : kPrimaryColor,
+      activeStepIconColor: Theme.of(context).brightness == Brightness.dark
+          ? Colors.grey.shade200
+          : kPrimaryColor,
       unreachedStepBackgroundColor:
           Theme.of(context).brightness == Brightness.dark
           ? Colors.grey.shade500.withAlpha(32)

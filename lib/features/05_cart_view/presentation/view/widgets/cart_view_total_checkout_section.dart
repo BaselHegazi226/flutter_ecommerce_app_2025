@@ -33,7 +33,12 @@ class CartViewTotalCheckoutSection extends StatelessWidget {
                 );
               },
               text: 'CHECKOUT',
-              backgroundColor: kPrimaryColor,
+              textColor: Theme.of(context).brightness == Brightness.dark
+                  ? Colors.grey.shade600
+                  : Colors.grey.shade200,
+              backgroundColor: Theme.of(context).brightness == Brightness.dark
+                  ? Colors.grey.shade200
+                  : kPrimaryColor,
             ),
           );
         } else if (state is GetProductCartAndTotalFailure) {

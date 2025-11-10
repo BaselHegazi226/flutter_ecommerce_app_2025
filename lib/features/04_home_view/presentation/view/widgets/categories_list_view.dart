@@ -12,12 +12,13 @@ class CategoriesListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Size screenSize = MediaQuery.sizeOf(context);
+    debugPrint('perperrrrrrrr = ${140 / screenSize.height}');
     return BlocBuilder<CategoryCubit, CategoryState>(
       builder: (context, state) {
         if (state is GetCategorySuccess) {
           final categories = state.categories;
           return SizedBox(
-            height: 100,
+            height: screenSize.height * .18,
             child: ListView.separated(
               padding: EdgeInsets.zero,
               scrollDirection: Axis.horizontal,
@@ -27,18 +28,16 @@ class CategoriesListView extends StatelessWidget {
                 return const SizedBox(width: 16);
               },
               itemBuilder: (context, index) {
-                return Center(
-                  child: CategoryItem(
-                    name: categories[index].name,
-                    slug: categories[index].slug,
-                    onTap: () {
-                      context.push(
-                        '${Routes.homeView}${Routes.categoryView}',
-                        extra: categories[index],
-                      );
-                    },
-                    screenSize: screenSize,
-                  ),
+                return CategoryItem(
+                  name: categories[index].name,
+                  slug: categories[index].slug,
+                  onTap: () {
+                    context.push(
+                      '${Routes.homeView}${Routes.categoryView}',
+                      extra: categories[index],
+                    );
+                  },
+                  screenSize: screenSize,
                 );
               },
             ),
@@ -47,7 +46,7 @@ class CategoriesListView extends StatelessWidget {
           debugPrint('error = ${state.errorMessage}');
           return const Center(child: Text('Not Categories available now!'));
         } else {
-          return homeViewCategoriesShimmerList();
+          return homeViewCategoriesShimmerList(screenSize);
         }
       },
     );

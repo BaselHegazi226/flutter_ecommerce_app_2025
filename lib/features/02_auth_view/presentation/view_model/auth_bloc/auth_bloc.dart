@@ -82,6 +82,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         return emit(SignInWithEmailFailure(errorMessage: error.errorMessage!));
       },
       (success) async {
+        final user = success.user;
+        if (user != null) {
+          await initMethods(userId: user.uid);
+        }
         return emit(SignInWithEmailSuccess());
       },
     );
