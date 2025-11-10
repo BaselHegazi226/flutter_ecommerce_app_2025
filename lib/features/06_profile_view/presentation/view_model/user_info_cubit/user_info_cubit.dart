@@ -1,9 +1,10 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter_e_commerce_app_2025/core/cache/user_info_cache.dart';
 import 'package:flutter_e_commerce_app_2025/core/services/user_firebaseStore.dart';
-import 'package:flutter_e_commerce_app_2025/features/07_profile_view/data/repo/profile_repo.dart';
-import 'package:flutter_e_commerce_app_2025/features/07_profile_view/data/repo/profile_repo_impl.dart';
-import 'package:flutter_e_commerce_app_2025/features/07_profile_view/presentation/view_model/user_info_cubit/user_info_state.dart';
+import 'package:flutter_e_commerce_app_2025/features/06_profile_view/presentation/view_model/user_info_cubit/user_info_state.dart';
+
+import '../../../data/repo/profile_repo.dart';
+import '../../../data/repo/profile_repo_impl.dart';
 
 class UserInfoCubit extends Cubit<UserInfoState> {
   UserInfoCache userInfoCache = UserInfoCache();
