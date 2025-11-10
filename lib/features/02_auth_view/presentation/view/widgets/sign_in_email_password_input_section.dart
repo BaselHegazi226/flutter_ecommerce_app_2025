@@ -7,6 +7,7 @@ import 'package:flutter_e_commerce_app_2025/features/02_auth_view/presentation/v
 import 'package:go_router/go_router.dart';
 import 'package:toastification/toastification.dart';
 
+import '../../../../../core/helper/const.dart';
 import '../../../../../core/utilities/custom_button.dart';
 import '../../../../../core/utilities/custom_text_form_field.dart';
 
@@ -121,6 +122,13 @@ class _SignInEmailPasswordInputSectionState
                     },
                     text: 'Sign In',
                     isLoading: value,
+                    textColor: Theme.of(context).brightness == Brightness.dark
+                        ? Colors.grey.shade600
+                        : Colors.grey.shade200,
+                    backgroundColor:
+                        Theme.of(context).brightness == Brightness.dark
+                        ? Colors.grey.shade200
+                        : kPrimaryColor,
                   );
                 },
               );

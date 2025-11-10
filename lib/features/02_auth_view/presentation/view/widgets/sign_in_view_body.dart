@@ -11,26 +11,28 @@ class SignInViewViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
-      children: [
-        SizedBox(height: 82),
-        CustomCard(
-          child: Column(
-            children: [
-              SignInHeader(),
-              SizedBox(height: 50),
-              SignInEmailPasswordInputSection(),
-            ],
+    return const Padding(
+      padding: EdgeInsets.symmetric(horizontal: 8),
+      child: Column(
+        children: [
+          SizedBox(height: 48),
+          CustomCard(
+            child: Column(
+              children: [
+                SignInHeader(),
+                SizedBox(height: 50),
+                SignInEmailPasswordInputSection(),
+              ],
+            ),
           ),
-        ),
-        SizedBox(height: 24),
-        CustomText(text: '_OR_', fontSize: 18, alignment: Alignment.center),
-        SizedBox(height: 48),
-        Padding(
-          padding: EdgeInsets.all(16),
-          child: SignInCustomSocialButtons(),
-        ),
-      ],
+          SizedBox(height: 4),
+          CustomText(text: '_OR_', fontSize: 18, alignment: Alignment.center),
+          Padding(
+            padding: EdgeInsets.all(16),
+            child: SignInCustomSocialButtons(),
+          ),
+        ],
+      ),
     );
   }
 }

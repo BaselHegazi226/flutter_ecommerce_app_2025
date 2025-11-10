@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:toastification/toastification.dart';
 
+import '../../../../../core/helper/const.dart';
 import '../../../../../core/helper/fields_contranits.dart';
 import '../../../../../core/helper/routes.dart';
 import '../../../../../core/utilities/custom_button.dart';
@@ -115,6 +116,13 @@ class _SignUpInputSectionState extends State<SignUpInputSection> {
                 valueListenable: isLoadingValueNotifier,
                 builder: (context, value, child) {
                   return CustomButton(
+                    textColor: Theme.of(context).brightness == Brightness.dark
+                        ? Colors.grey.shade600
+                        : Colors.grey.shade200,
+                    backgroundColor:
+                        Theme.of(context).brightness == Brightness.dark
+                        ? Colors.grey.shade200
+                        : kPrimaryColor,
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
                         _formKey.currentState!.save();

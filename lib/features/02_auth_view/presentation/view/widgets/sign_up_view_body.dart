@@ -9,19 +9,21 @@ class SignUpViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
-      children: [
-        SizedBox(height: 82),
-        CustomCard(
-          child: Column(
-            children: [
-              SignUpHeader(),
-              SizedBox(height: 50),
-              SignUpInputSection(),
-            ],
+    return const Padding(
+      padding: EdgeInsets.symmetric(horizontal: 16),
+      child: Column(
+        children: [
+          CustomCard(
+            child: Column(
+              children: [
+                SignUpHeader(),
+                SizedBox(height: 50),
+                SignUpInputSection(),
+              ],
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

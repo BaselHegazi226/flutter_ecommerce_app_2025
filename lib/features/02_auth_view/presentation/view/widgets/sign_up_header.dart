@@ -22,13 +22,17 @@ class SignUpHeader extends StatelessWidget {
               alignment: Alignment.topLeft,
             ),
             CustomButton(
+              paddingValue: 8,
+              text: 'Sign in',
+              textColor: Theme.of(context).brightness == Brightness.dark
+                  ? Colors.grey.shade600
+                  : Colors.grey.shade200,
+              backgroundColor: Theme.of(context).brightness == Brightness.dark
+                  ? Colors.grey.shade200
+                  : kPrimaryColor,
               onPressed: () {
                 GoRouter.of(context).pop();
               },
-              paddingValue: 8,
-              text: 'Sign in',
-              textColor: kPrimaryColor,
-              backgroundColor: Colors.white,
             ),
           ],
         ),
