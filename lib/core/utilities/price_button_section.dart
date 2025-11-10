@@ -16,10 +16,10 @@ class PriceButtonSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: MediaQuery.sizeOf(context).width,
-      height: MediaQuery.sizeOf(context).height * .1,
+      height: MediaQuery.sizeOf(context).height * .12,
       padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 30),
       decoration: BoxDecoration(
-        color: kScaffoldColor,
+        color: Theme.of(context).scaffoldBackgroundColor,
         boxShadow: [
           BoxShadow(
             color: Colors.black.withAlpha(16),
@@ -52,7 +52,9 @@ class PriceButtonSection extends StatelessWidget {
                     text: value,
                     fontSize: 18,
                     alignment: Alignment.centerLeft,
-                    color: kPrimaryColor,
+                    color: Theme.of(context).brightness == Brightness.dark
+                        ? Colors.grey.shade200
+                        : kPrimaryColor,
                   ),
                 ),
               ],

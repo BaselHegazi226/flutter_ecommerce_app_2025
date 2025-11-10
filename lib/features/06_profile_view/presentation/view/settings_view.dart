@@ -25,7 +25,6 @@ class SettingsView extends StatelessWidget {
           padding: const EdgeInsets.all(16),
           child: BlocBuilder<AppSettingCubit, AppSettingStates>(
             builder: (context, state) {
-              final appSettingCubit = AppSettingCubit.get(context);
               final themeMode = AppSettingCubit.get(context).getTheme();
               final isDark = themeMode == ThemeMode.dark;
               return CustomScrollView(

@@ -33,13 +33,12 @@ class ProductDetailsView extends StatelessWidget {
           )..getFavouriteProductById(productId: productId),
         ),
       ],
-      child: SafeArea(
-        child: BlocBuilder<ProductCubit, ProductState>(
-          builder: (context, state) {
-            if (state is GetProductByIdSuccess) {
-              final productModel = state.productModel;
-              return Scaffold(
-                backgroundColor: kScaffoldColor,
+      child: BlocBuilder<ProductCubit, ProductState>(
+        builder: (context, state) {
+          if (state is GetProductByIdSuccess) {
+            final productModel = state.productModel;
+            return SafeArea(
+              child: Scaffold(
                 body: CustomScrollView(
                   slivers: [
                     SliverToBoxAdapter(
@@ -50,20 +49,20 @@ class ProductDetailsView extends StatelessWidget {
                 bottomNavigationBar: ProductDetailsPriceButtonSection(
                   productModel: productModel,
                 ),
-              );
-            } else if (state is GetProductByIdFailure) {
-              return Center(
-                child: CustomText(
-                  text: state.errorMessage,
-                  fontSize: 20,
-                  alignment: Alignment.center,
-                ),
-              );
-            } else {
-              return const CustomCircleIndicator(color: kPrimaryColor);
-            }
-          },
-        ),
+              ),
+            );
+          } else if (state is GetProductByIdFailure) {
+            return Center(
+              child: CustomText(
+                text: state.errorMessage,
+                fontSize: 20,
+                alignment: Alignment.center,
+              ),
+            );
+          } else {
+            return const CustomCircleIndicator(color: kPrimaryColor);
+          }
+        },
       ),
     );
   }

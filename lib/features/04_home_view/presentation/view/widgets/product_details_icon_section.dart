@@ -32,14 +32,23 @@ class ProductDetailsIconSection extends StatelessWidget {
                 onPressed: () {
                   GoRouter.of(context).pop();
                 },
-                icon: const Icon(
-                  Icons.arrow_back_ios_new_outlined,
-                  color: Colors.black,
-                  size: 20,
-                ),
+                icon: const Icon(Icons.arrow_back_ios_new_outlined, size: 20),
               ),
             ),
-            BlocBuilder<FavouriteProductCubit, FavouriteProductState>(
+            BlocConsumer<FavouriteProductCubit, FavouriteProductState>(
+              listener: (context, state) {
+                if (state is AddFavouriteProductSuccess ||
+                    state is GetFavouriteProductByIdSuccess) {
+                  debugPrint(
+                    'success add product to favourite list ==========================>',
+                  );
+                } else if (state is AddFavouriteProductFailure ||
+                    state is GetFavouriteProductByIdFailure) {
+                  debugPrint(
+                    'Failure add product to favourite list ==========================>',
+                  );
+                }
+              },
               builder: (context, state) {
                 final isFavourite =
                     state is AddFavouriteProductSuccess ||
@@ -47,26 +56,36 @@ class ProductDetailsIconSection extends StatelessWidget {
 
                 return IconWithCircleStyle(
                   backgroundColor: isFavourite
-                      ? Colors.grey.shade100
-                      : Colors.grey.shade200,
+                      ? Theme.of(context).brightness == Brightness.dark
+                            ? Colors.grey.shade500
+                            : Colors.grey.shade200
+                      : Theme.of(context).brightness == Brightness.dark
+                      ? Colors.grey.shade400
+                      : Colors.grey.shade100,
                   widget: IconButton(
                     padding: const EdgeInsets.all(4),
                     onPressed: () {
-                      if (isFavourite) {
-                        context
-                            .read<FavouriteProductCubit>()
-                            .deleteFavoriteProduct(productModel: productModel);
-                      } else {
+                      if (!isFavourite) {
                         context
                             .read<FavouriteProductCubit>()
                             .addFavoriteProduct(productModel: productModel);
+                      } else {
+                        context
+                            .read<FavouriteProductCubit>()
+                            .deleteFavoriteProduct(productModel: productModel);
                       }
                     },
                     icon: Icon(
                       isFavourite
                           ? Icons.favorite_outlined
                           : Icons.favorite_border_outlined,
-                      color: isFavourite ? Colors.red.shade500 : Colors.black,
+                      color: isFavourite
+                          ? Theme.of(context).brightness == Brightness.dark
+                                ? Colors.white
+                                : Colors.red.shade500
+                          : Theme.of(context).brightness == Brightness.dark
+                          ? Colors.white
+                          : Colors.black,
                       size: 20,
                     ),
                   ),

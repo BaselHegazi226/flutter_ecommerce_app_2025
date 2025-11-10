@@ -9,4 +9,9 @@ class Routes {
   static const String cartView = '/cartView';
   static const String checkoutView = '/checkoutView';
   static const String profileView = '/profileView';
+  static const String editProfileView = '/editProfileView';
+  static const String shippingAddressView = '/shippingAddressView';
+  static const String orderHistoryView = '/orderHistoryView';
+  static const String settingsView = '/settingsView';
+  static const String favoriteView = '/favoriteView';
 }
