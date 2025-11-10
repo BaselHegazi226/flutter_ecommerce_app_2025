@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_e_commerce_app_2025/features/04_home_view/data/model/product_model.dart';
-import 'package:meta/meta.dart';
 
 import '../../../../../core/cache/favourite_cache.dart';
 
@@ -63,6 +63,9 @@ class FavouriteProductCubit extends Cubit<FavouriteProductState> {
         );
       },
       (success) {
+        debugPrint(
+          'success get favourite products =======================================>',
+        );
         emit(GetFavouriteProductsSuccess(favouriteList: success));
       },
     );

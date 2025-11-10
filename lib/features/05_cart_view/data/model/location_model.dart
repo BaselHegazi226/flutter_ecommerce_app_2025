@@ -14,7 +14,7 @@ class LocationModel {
   final String state;
   @HiveField(4)
   final String country;
-
+  @HiveField(5)
   const LocationModel({
     required this.street1,
     required this.street2,
@@ -22,4 +22,23 @@ class LocationModel {
     required this.state,
     required this.country,
   });
+
+  factory LocationModel.fromJson(json) {
+    return LocationModel(
+      street1: json['street1'],
+      street2: json['street2'],
+      city: json['city'],
+      state: json['state'],
+      country: json['country'],
+    );
+  }
+  toJson() {
+    return {
+      'street1': street1,
+      'street2': street2,
+      'city': city,
+      'state': state,
+      'country': country,
+    };
+  }
 }
