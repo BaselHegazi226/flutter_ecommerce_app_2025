@@ -9,18 +9,25 @@ part 'order_model.g.dart';
 class OrderModel {
   @HiveField(0)
   final String orderId;
+
   @HiveField(1)
   final List<CartModel> cartModelList;
+
   @HiveField(2)
   final DeliveryMethodModel deliveryMethodModel;
+
   @HiveField(3)
   final LocationModel locationModel;
+
   @HiveField(4)
   final double totalPrice;
+
   @HiveField(5)
   final DateTime checkoutDateAt;
+
   @HiveField(6)
-  final OrderState orderState;
+  final OrderStateEnum orderStateEnum;
+
   OrderModel({
     required this.orderId,
     required this.cartModelList,
@@ -28,26 +35,47 @@ class OrderModel {
     required this.locationModel,
     required this.totalPrice,
     required this.checkoutDateAt,
-    required this.orderState,
+    required this.orderStateEnum,
   });
-  factory OrderModel.fromJson(json) {
+
+  factory OrderModel.fromJson(Map<String, dynamic> json) {
     return OrderModel(
-      orderId: json['orderId'],
-      cartModelList: json['cartModel'],
-      deliveryMethodModel: json['deliveryMethodModel'],
-      locationModel: json['locationModel'],
-      totalPrice: json['totalPrice'],
-      checkoutDateAt: json['checkoutDateAt'],
-      orderState: json['orderState'],
+      orderId: json['orderId'] ?? '',
+      cartModelList: (json['cartModel'] as List<dynamic>)
+          .map((e) => CartModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      deliveryMethodModel: DeliveryMethodModel.fromJson(
+        json['deliveryMethodModel'],
+      ),
+      locationModel: LocationModel.fromJson(json['locationModel']),
+      totalPrice: (json['totalPrice'] as num).toDouble(),
+      checkoutDateAt: DateTime.parse(json['checkoutDateAt']),
+      orderStateEnum: OrderStateEnum.values.firstWhere(
+        (e) => e.name == json['orderStateEnum'],
+        orElse: () => OrderStateEnum.pending,
+      ),
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'orderId': orderId,
+      'cartModel': cartModelList.map((e) => e.toJson()).toList(),
+      'deliveryMethodModel': deliveryMethodModel.toJson(),
+      'locationModel': locationModel.toJson(),
+      'totalPrice': totalPrice,
+      'checkoutDateAt': checkoutDateAt.toIso8601String(),
+      'orderStateEnum': orderStateEnum.name,
+    };
+  }
+
   OrderModel copyWith({
     List<CartModel>? newCartList,
     DeliveryMethodModel? newDeliveryMethodModel,
     LocationModel? newLocationModel,
     double? newTotalPrice,
     DateTime? newCheckoutDateAt,
-    OrderState? newOrderState,
+    OrderStateEnum? newOrderStateEnum,
   }) {
     return OrderModel(
       orderId: orderId,
@@ -56,21 +84,19 @@ class OrderModel {
       locationModel: newLocationModel ?? locationModel,
       totalPrice: newTotalPrice ?? totalPrice,
       checkoutDateAt: newCheckoutDateAt ?? checkoutDateAt,
-      orderState: newOrderState ?? orderState,
+      orderStateEnum: newOrderStateEnum ?? orderStateEnum,
     );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'orderId': orderId,
-      'cartModel': cartModelList,
-      'deliverMethodModel': deliveryMethodModel,
-      'locationModel': locationModel,
-      'totalPrice': totalPrice,
-      'checkoutDateAt': checkoutDateAt,
-      'orderState': orderState,
-    };
   }
 }
 
-enum OrderState { pending, cancel, delivered, transmit }
+@HiveType(typeId: 10)
+enum OrderStateEnum {
+  @HiveField(0)
+  pending,
+  @HiveField(1)
+  cancel,
+  @HiveField(2)
+  delivered,
+  @HiveField(3)
+  transmit,
+}

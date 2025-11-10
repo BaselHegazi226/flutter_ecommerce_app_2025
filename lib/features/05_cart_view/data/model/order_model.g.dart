@@ -23,7 +23,7 @@ class OrderModelAdapter extends TypeAdapter<OrderModel> {
       locationModel: fields[3] as LocationModel,
       totalPrice: fields[4] as double,
       checkoutDateAt: fields[5] as DateTime,
-      orderState: fields[6] as OrderState,
+      orderStateEnum: fields[6] as OrderStateEnum,
     );
   }
 
@@ -44,7 +44,7 @@ class OrderModelAdapter extends TypeAdapter<OrderModel> {
       ..writeByte(5)
       ..write(obj.checkoutDateAt)
       ..writeByte(6)
-      ..write(obj.orderState);
+      ..write(obj.orderStateEnum);
   }
 
   @override
@@ -54,6 +54,55 @@ class OrderModelAdapter extends TypeAdapter<OrderModel> {
   bool operator ==(Object other) =>
       identical(this, other) ||
       other is OrderModelAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
+}
+
+class OrderStateEnumAdapter extends TypeAdapter<OrderStateEnum> {
+  @override
+  final int typeId = 10;
+
+  @override
+  OrderStateEnum read(BinaryReader reader) {
+    switch (reader.readByte()) {
+      case 0:
+        return OrderStateEnum.pending;
+      case 1:
+        return OrderStateEnum.cancel;
+      case 2:
+        return OrderStateEnum.delivered;
+      case 3:
+        return OrderStateEnum.transmit;
+      default:
+        return OrderStateEnum.pending;
+    }
+  }
+
+  @override
+  void write(BinaryWriter writer, OrderStateEnum obj) {
+    switch (obj) {
+      case OrderStateEnum.pending:
+        writer.writeByte(0);
+        break;
+      case OrderStateEnum.cancel:
+        writer.writeByte(1);
+        break;
+      case OrderStateEnum.delivered:
+        writer.writeByte(2);
+        break;
+      case OrderStateEnum.transmit:
+        writer.writeByte(3);
+        break;
+    }
+  }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is OrderStateEnumAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }
