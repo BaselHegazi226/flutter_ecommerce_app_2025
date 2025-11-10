@@ -7,27 +7,24 @@ class SummarizeProductsOrderList extends StatelessWidget {
   final List<CartModel> carts;
   @override
   Widget build(BuildContext context) {
-    final screenSize = MediaQuery.sizeOf(context);
     if (carts.isNotEmpty) {
       return SizedBox(
-        height: screenSize.height * .25,
-        child: Center(
-          child: ListView.separated(
-            itemCount: carts.length,
-            scrollDirection: Axis.horizontal,
-            separatorBuilder: (context, state) {
-              return const SizedBox(width: 16);
-            },
-            itemBuilder: (context, index) {
-              final item = carts[0];
-              return SummarizeProductOrderItem(
-                imageUrl: item.imageUrl,
-                title: item.title,
-                price: item.price,
-                count: item.productCount,
-              );
-            },
-          ),
+        height: 230,
+        child: ListView.separated(
+          itemCount: carts.length,
+          scrollDirection: Axis.horizontal,
+          separatorBuilder: (context, state) {
+            return const SizedBox(width: 16);
+          },
+          itemBuilder: (context, index) {
+            final item = carts[index];
+            return SummarizeProductOrderItem(
+              imageUrl: item.imageUrl,
+              title: item.title,
+              price: item.price,
+              count: item.productCount,
+            );
+          },
         ),
       );
     } else {

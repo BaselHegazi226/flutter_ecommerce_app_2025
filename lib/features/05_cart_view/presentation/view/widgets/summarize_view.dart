@@ -37,13 +37,13 @@ class _SummarizeViewState extends State<SummarizeView> {
           return Column(
             children: [
               SummarizeProductsOrderList(carts: carts),
-              const SizedBox(height: 24),
               Container(height: 1, color: kGreyColor),
               const SizedBox(height: 16),
               CustomText(
                 text: cubit.getDeliveryMethodModel!.title,
                 fontSize: 18,
                 alignment: Alignment.centerLeft,
+                color: Colors.grey.shade900,
               ),
               const SizedBox(height: 16),
               Row(
@@ -53,30 +53,39 @@ class _SummarizeViewState extends State<SummarizeView> {
                     child: Text(
                       'Street1: ${cubit.getLocationModel?.street1}\nStreet2: ${cubit.getLocationModel?.street2}\nCity: ${cubit.getLocationModel?.city}\nState: ${cubit.getLocationModel?.state}\nCountry: ${cubit.getLocationModel?.country}',
                       softWrap: true,
-                      style: const TextStyle(fontSize: 16, color: Colors.black),
+                      style: const TextStyle(fontSize: 16),
                     ),
                   ),
-                  const Icon(Icons.check_circle, color: kPrimaryColor),
+                  Icon(
+                    Icons.check_circle,
+                    color: Theme.of(context).brightness == Brightness.dark
+                        ? Colors.grey.shade200
+                        : kPrimaryColor,
+                  ),
                 ],
               ),
               const SizedBox(height: 16),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const CustomText(
+                  CustomText(
                     text: 'Total price',
                     fontSize: 18,
                     alignment: Alignment.centerLeft,
+                    color: Colors.grey.shade900,
                   ),
                   CustomText(
-                    text: '\$ $totalPrice',
+                    text: '\$ ${totalPrice.toStringAsFixed(2)}',
                     fontSize: 16,
                     alignment: Alignment.centerLeft,
-                    color: kPrimaryColor,
+                    color: Theme.of(context).brightness == Brightness.dark
+                        ? Colors.grey.shade200
+                        : kPrimaryColor,
                   ),
                 ],
               ),
               const SizedBox(height: 16),
+              const Expanded(child: SizedBox()),
               Align(
                 alignment: Alignment.bottomCenter,
                 child: Row(
@@ -84,30 +93,43 @@ class _SummarizeViewState extends State<SummarizeView> {
                   children: [
                     Expanded(
                       child: CustomButton(
-                        backgroundColor: Colors.white,
-                        textColor: kPrimaryColor,
-                        borderColor: kPrimaryColor,
+                        backgroundColor:
+                            Theme.of(context).brightness == Brightness.dark
+                            ? Colors.grey.shade700
+                            : kScaffoldColor,
+                        borderColor:
+                            Theme.of(context).brightness == Brightness.dark
+                            ? Colors.white
+                            : kPrimaryColor,
                         onPressed: widget.onBack,
                         text: 'Back',
                       ),
                     ),
                     Expanded(
-                      child: BlocBuilder<CheckoutCubit, CheckoutState>(
-                        builder: (context, state) {
-                          if (state is ConfirmOrderSuccess) {
-                            cubit.nextStep();
+                      child: CustomButton(
+                        onPressed: () {
+                          if (cubit.getLocationModel == null ||
+                              cubit.getDeliveryMethodModel == null) {
+                            return;
                           }
-                          return CustomButton(
-                            onPressed: () {
-                              if (cubit.getLocationModel == null &&
-                                  cubit.getLocationModel == null) {
-                                return;
-                              }
-                              cubit.confirmOrder();
-                            },
-                            text: 'Deliver',
+
+                          widget.onNext();
+                          debugPrint(
+                            'location model = ${cubit.getLocationModel?.toJson()} from summarize view=============================>',
+                          );
+                          debugPrint(
+                            'location model = ${cubit.getDeliveryMethodModel?.toJson()} from summarize view=============================>',
                           );
                         },
+                        text: 'Deliver',
+                        textColor:
+                            Theme.of(context).brightness == Brightness.dark
+                            ? Colors.grey.shade600
+                            : Colors.grey.shade200,
+                        backgroundColor:
+                            Theme.of(context).brightness == Brightness.dark
+                            ? Colors.grey.shade200
+                            : kPrimaryColor,
                       ),
                     ),
                   ],
@@ -120,87 +142,6 @@ class _SummarizeViewState extends State<SummarizeView> {
           return const CustomCircleIndicator(color: kPrimaryColor);
         }
       },
-    );
-  }
-}
-
-class LocationSection extends StatelessWidget {
-  const LocationSection({super.key, required this.cubit});
-  final CheckoutCubit cubit;
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      spacing: 8,
-      children: [
-        LocationItem(
-          location: 'Street1',
-          value: cubit.getLocationModel?.street1,
-        ),
-        LocationItem(
-          location: 'Street2',
-          value: cubit.getLocationModel?.street2,
-        ),
-        LocationItem(location: 'City', value: cubit.getLocationModel?.city),
-        LocationItem(
-          location: 'Country',
-          value: cubit.getLocationModel?.country,
-        ),
-        LocationItem(location: 'State', value: cubit.getLocationModel?.state),
-      ],
-    );
-  }
-}
-
-class LocationItem extends StatelessWidget {
-  const LocationItem({super.key, required this.location, required this.value});
-  final String location;
-  final String? value;
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: const BorderRadius.all(Radius.circular(8)),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.shade100,
-            blurRadius: 4,
-            spreadRadius: 2,
-            offset: const Offset(0, 2),
-          ),
-        ],
-      ),
-      child: Flexible(
-        child: Row(
-          children: [
-            Flexible(
-              child: Row(
-                children: [
-                  const Icon(
-                    Icons.location_on_outlined,
-                    size: 24,
-                    color: kPrimaryColor,
-                  ),
-                  const SizedBox(width: 4),
-                  CustomText(
-                    text: '$location : ',
-                    fontSize: 16,
-                    alignment: Alignment.center,
-                  ),
-                ],
-              ),
-            ),
-            Flexible(
-              child: CustomText(
-                text: value ?? 'Address not found',
-                fontSize: 14,
-                alignment: Alignment.centerLeft,
-              ),
-            ),
-          ],
-        ),
-      ),
     );
   }
 }

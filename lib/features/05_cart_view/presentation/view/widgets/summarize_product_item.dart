@@ -23,7 +23,9 @@ class SummarizeProductOrderItem extends StatelessWidget {
           height: 150,
           width: 150,
           decoration: BoxDecoration(
-            color: Colors.grey.shade200,
+            color: Theme.of(context).brightness == Brightness.dark
+                ? Colors.grey.shade500.withAlpha(32)
+                : Colors.grey.shade200,
             borderRadius: const BorderRadius.all(Radius.circular(8)),
           ),
           child: CachedNetworkImage(
