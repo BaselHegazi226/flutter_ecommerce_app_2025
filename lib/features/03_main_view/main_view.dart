@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_e_commerce_app_2025/core/helper/const.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
@@ -23,7 +22,7 @@ class _MainViewState extends State<MainView> {
       valueListenable: valueNotifierSelectedItem,
       builder: (context, index, child) {
         return Scaffold(
-          backgroundColor: kScaffoldColor,
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           body: widget.child,
           extendBody: true, // عشان الخلفية تبان تحت الـ NavBar
           bottomNavigationBar: _buildBlurNavBar(context),
@@ -49,14 +48,18 @@ class _MainViewState extends State<MainView> {
         gap: 8,
         duration: const Duration(milliseconds: 400),
         curve: Curves.easeInOut,
-        color: Colors.green.shade100,
+        color: Theme.of(context).brightness == Brightness.dark
+            ? Colors.grey.shade200
+            : Colors.green.shade100,
         activeColor: Colors.white,
         iconSize: 26,
         padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 10),
         tabBackgroundGradient: const LinearGradient(
           colors: [Colors.white30, Colors.white54],
         ),
-        backgroundColor: kPrimaryColor,
+        backgroundColor: Theme.of(context).brightness == Brightness.dark
+            ? Theme.of(context).scaffoldBackgroundColor
+            : Theme.of(context).primaryColor,
         tabBorderRadius: 16,
         haptic: true,
         onTabChange: (index) {
