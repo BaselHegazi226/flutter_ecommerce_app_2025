@@ -8,6 +8,7 @@ import 'package:flutter_e_commerce_app_2025/features/05_cart_view/presentation/v
 import 'package:flutter_e_commerce_app_2025/features/05_cart_view/presentation/view_model/cart_bloc/cart_state.dart';
 import 'package:toastification/toastification.dart';
 
+import '../../../../../generated/l10n.dart';
 import '../../../../05_cart_view/data/model/cart_model.dart';
 
 class ProductDetailsPriceButtonSection extends StatelessWidget {
@@ -22,7 +23,7 @@ class ProductDetailsPriceButtonSection extends StatelessWidget {
   Widget build(BuildContext context) {
     debugPrint('product model = ${productModel.toJson()}');
     return PriceButtonSection(
-      title: 'Price',
+      title: S.of(context).Price,
       value: '\$ ${productModel.price}',
       widget: BlocConsumer<CartBloc, CartState>(
         builder: (context, state) {
@@ -39,7 +40,7 @@ class ProductDetailsPriceButtonSection extends StatelessWidget {
                 AddToCartEvent(cartModel: cartModel),
               );
             },
-            text: 'Add To Cart',
+            text: S.of(context).AddToCart,
           );
         },
         listener: (context, state) {

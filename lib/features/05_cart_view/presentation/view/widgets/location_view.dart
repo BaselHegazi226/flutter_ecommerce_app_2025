@@ -8,6 +8,7 @@ import 'package:flutter_e_commerce_app_2025/features/05_cart_view/presentation/v
 import 'package:flutter_e_commerce_app_2025/features/05_cart_view/presentation/view_model/order_cubit/order_cubit.dart';
 import 'package:flutter_e_commerce_app_2025/features/05_cart_view/presentation/view_model/order_cubit/order_state.dart';
 
+import '../../../../../generated/l10n.dart';
 import '../../../data/model/location_model.dart';
 import '../../view_model/checkout_cubit/checkout_cubit.dart';
 
@@ -56,12 +57,12 @@ class _LocationViewState extends State<LocationView> {
           key: _formKey,
           child: Column(
             children: [
-              const Row(
+              Row(
                 spacing: 8,
                 children: [
-                  Icon(Icons.check_circle, color: kPrimaryColor),
+                  const Icon(Icons.check_circle, color: kPrimaryColor),
                   CustomText(
-                    text: 'Billing address is the same as delivery address',
+                    text: S.of(context).BillingAddress,
                     fontSize: 14,
                     alignment: Alignment.centerLeft,
                   ),
@@ -72,42 +73,42 @@ class _LocationViewState extends State<LocationView> {
                 spacing: 16,
                 children: [
                   CustomTextFormField(
-                    text: 'Street 1',
-                    hintText: 'Enter street 1',
+                    text: S.of(context).Street1,
+                    hintText: S.of(context).enterStreet1,
                     onSaved: (value) {
                       street1 = value!.trim();
                     },
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'street 1 is required';
+                        return S.of(context).street1IsRequired;
                       }
                       return null;
                     },
                     textEditingController: textEditingControllerStreet1,
                   ),
                   CustomTextFormField(
-                    text: 'Street 2',
-                    hintText: 'Enter street 2',
+                    text: S.of(context).Street2,
+                    hintText: S.of(context).enterStreet2,
                     onSaved: (value) {
                       street2 = value!.trim();
                     },
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'street 2 is required';
+                        return S.of(context).street2IsRequired;
                       }
                       return null;
                     },
                     textEditingController: textEditingControllerStreet2,
                   ),
                   CustomTextFormField(
-                    text: 'City',
-                    hintText: 'Enter city',
+                    text: S.of(context).City,
+                    hintText: S.of(context).enterCity,
                     onSaved: (value) {
                       city = value!.trim();
                     },
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'city is required';
+                        return S.of(context).cityIsRequired;
                       }
                       return null;
                     },
@@ -117,14 +118,14 @@ class _LocationViewState extends State<LocationView> {
                     children: [
                       Expanded(
                         child: CustomTextFormField(
-                          text: 'State',
-                          hintText: 'Enter State',
+                          text: S.of(context).State,
+                          hintText: S.of(context).enterState,
                           onSaved: (value) {
                             stateEnum = value!.trim();
                           },
                           validator: (value) {
                             if (value == null || value.isEmpty) {
-                              return 'state is required';
+                              return S.of(context).stateIsRequired;
                             }
                             return null;
                           },
@@ -134,14 +135,14 @@ class _LocationViewState extends State<LocationView> {
                       const SizedBox(width: 24),
                       Expanded(
                         child: CustomTextFormField(
-                          text: 'Country',
-                          hintText: 'Enter country',
+                          text: S.of(context).Country,
+                          hintText: S.of(context).enterCountry,
                           onSaved: (value) {
                             country = value!.trim();
                           },
                           validator: (value) {
                             if (value == null || value.isEmpty) {
-                              return 'country is required';
+                              return S.of(context).countryIsRequired;
                             }
                             return null;
                           },
@@ -174,7 +175,7 @@ class _LocationViewState extends State<LocationView> {
                             ? Colors.grey.shade200
                             : kPrimaryColor,
                         onPressed: widget.onBack,
-                        text: 'Back',
+                        text: S.of(context).Back,
                       ),
                     ),
                     Expanded(
@@ -204,7 +205,7 @@ class _LocationViewState extends State<LocationView> {
                                 AutovalidateMode.onUserInteraction;
                           }
                         },
-                        text: 'Next',
+                        text: S.of(context).Next,
                         textColor:
                             Theme.of(context).brightness == Brightness.dark
                             ? Colors.grey.shade600

@@ -14,6 +14,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../core/helper/const.dart';
 import '../../../../generated/assets.dart';
+import '../../../../generated/l10n.dart';
 
 class ShippingAddressView extends StatelessWidget {
   const ShippingAddressView({super.key});
@@ -26,7 +27,7 @@ class ShippingAddressView extends StatelessWidget {
             ..getUserLocation(),
       child: SafeArea(
         child: Scaffold(
-          appBar: customAppBar(context, 'Shipping Address', () {
+          appBar: customAppBar(context, S.of(context).ShippingAddress, () {
             GoRouter.of(context).pushReplacement(Routes.profileView);
           }),
           body: const Padding(
@@ -63,12 +64,12 @@ class ShippingAddressViewBody extends StatelessWidget {
           }
           return Column(
             children: [
-              const Row(
+              Row(
                 children: [
-                  Icon(Icons.location_on_outlined),
-                  SizedBox(width: 8),
+                  const Icon(Icons.location_on_outlined),
+                  const SizedBox(width: 8),
                   CustomText(
-                    text: 'Location',
+                    text: S.of(context).Location,
                     fontSize: 18,
                     alignment: Alignment.centerLeft,
                   ),
@@ -79,8 +80,8 @@ class ShippingAddressViewBody extends StatelessWidget {
             ],
           );
         } else if (state is GetUserLocationFailure) {
-          return const NoItemFound(
-            itemTitle: 'No Location Found try make order!',
+          return NoItemFound(
+            itemTitle: S.of(context).NoLocation,
             itemImage: Assets.profileNoLocation,
           );
         } else {

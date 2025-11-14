@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_e_commerce_app_2025/core/utilities/custom_text.dart';
 import 'package:flutter_e_commerce_app_2025/features/05_cart_view/data/model/location_model.dart';
 
+import '../../../../../generated/l10n.dart';
+
 class LocationSection extends StatelessWidget {
   const LocationSection({super.key, required this.locationModel});
   final LocationModel locationModel;
@@ -10,11 +12,20 @@ class LocationSection extends StatelessWidget {
     return Column(
       spacing: 12,
       children: [
-        LocationItem(location: 'Street1', value: locationModel.street1),
-        LocationItem(location: 'Street2', value: locationModel.street2),
-        LocationItem(location: 'City', value: locationModel.city),
-        LocationItem(location: 'Country', value: locationModel.country),
-        LocationItem(location: 'State', value: locationModel.state),
+        LocationItem(
+          location: S.of(context).Street1,
+          value: locationModel.street1,
+        ),
+        LocationItem(
+          location: S.of(context).Street2,
+          value: locationModel.street2,
+        ),
+        LocationItem(location: S.of(context).City, value: locationModel.city),
+        LocationItem(
+          location: S.of(context).Country,
+          value: locationModel.country,
+        ),
+        LocationItem(location: S.of(context).State, value: locationModel.state),
       ],
     );
   }

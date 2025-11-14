@@ -6,6 +6,7 @@ import 'package:flutter_e_commerce_app_2025/core/utilities/show_snack_bar.dart';
 import 'package:flutter_e_commerce_app_2025/features/05_cart_view/presentation/view_model/checkout_cubit/checkout_cubit.dart';
 
 import '../../../../../core/helper/const.dart';
+import '../../../../../generated/l10n.dart';
 import '../../../data/model/delivery_method_model.dart';
 
 class DeliveryView extends StatefulWidget {
@@ -45,6 +46,7 @@ class _DeliveryViewState extends State<DeliveryView> {
           valueListenable: valueNotifier,
           builder: (context, value, child) {
             return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 RadioListTile(
                   value: 1,
@@ -61,16 +63,13 @@ class _DeliveryViewState extends State<DeliveryView> {
                       deliveryMethodModel: deliveryMethodModel,
                     );
                   },
-                  title: const CustomText(
-                    text: 'Next Day Delivery',
+                  title: CustomText(
+                    text: S.of(context).NextDayDelivery,
                     fontSize: 18,
-                    alignment: Alignment.centerLeft,
                   ),
-                  subtitle: const CustomText(
-                    text:
-                        'Place your order before 6pm and your items will be delivered the next day',
+                  subtitle: CustomText(
+                    text: S.of(context).PlaceYourOrder,
                     fontSize: 14,
-                    alignment: Alignment.centerLeft,
                   ),
                 ),
                 const SizedBox(height: 40),
@@ -89,16 +88,13 @@ class _DeliveryViewState extends State<DeliveryView> {
                       deliveryMethodModel: deliveryMethodModel,
                     );
                   },
-                  title: const CustomText(
-                    text: 'Nominated Delivery',
+                  title: CustomText(
+                    text: S.of(context).NominatedDelivery,
                     fontSize: 18,
-                    alignment: Alignment.centerLeft,
                   ),
-                  subtitle: const CustomText(
-                    text:
-                        'Pick a particular date from the calendar and order will be delivered on selected date',
+                  subtitle: CustomText(
+                    text: S.of(context).PickAParticular,
                     fontSize: 14,
-                    alignment: Alignment.centerLeft,
                   ),
                 ),
                 const SizedBox(height: 40),
@@ -117,15 +113,13 @@ class _DeliveryViewState extends State<DeliveryView> {
                       deliveryMethodModel: deliveryMethodModel,
                     );
                   },
-                  title: const CustomText(
-                    text: 'Standard Delivery',
+                  title: CustomText(
+                    text: S.of(context).StandardDelivery,
                     fontSize: 18,
-                    alignment: Alignment.centerLeft,
                   ),
-                  subtitle: const CustomText(
-                    text: 'Order will be delivered between 3 - 5 business days',
+                  subtitle: CustomText(
+                    text: S.of(context).OrderWillBe,
                     fontSize: 14,
-                    alignment: Alignment.centerLeft,
                   ),
                 ),
               ],
@@ -152,7 +146,7 @@ class _DeliveryViewState extends State<DeliveryView> {
                       );
                     }
                   },
-                  text: 'Next',
+                  text: S.of(context).Next,
                   textColor: Theme.of(context).brightness == Brightness.dark
                       ? Colors.grey.shade600
                       : Colors.grey.shade200,

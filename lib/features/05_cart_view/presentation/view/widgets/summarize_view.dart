@@ -9,6 +9,7 @@ import 'package:flutter_e_commerce_app_2025/features/05_cart_view/presentation/v
 import 'package:flutter_e_commerce_app_2025/features/05_cart_view/presentation/view_model/get_cart_cubit/get_cart_state.dart';
 
 import '../../../../../core/utilities/custom_button.dart';
+import '../../../../../generated/l10n.dart';
 
 class SummarizeView extends StatefulWidget {
   const SummarizeView({super.key, required this.onNext, required this.onBack});
@@ -35,14 +36,16 @@ class _SummarizeViewState extends State<SummarizeView> {
           final totalPrice = state.totalPrice;
           cubit.setCartData(totalPrice: totalPrice, cartList: carts);
           return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SummarizeProductsOrderList(carts: carts),
               Container(height: 1, color: kGreyColor),
               const SizedBox(height: 16),
               CustomText(
-                text: cubit.getDeliveryMethodModel!.title,
+                text: getDeliveryMethodTitleWithAnyLanguage(
+                  cubit.getDeliveryMethodModel!.title,
+                ),
                 fontSize: 18,
-                alignment: Alignment.centerLeft,
                 color: Colors.grey.shade900,
               ),
               const SizedBox(height: 16),
@@ -51,7 +54,7 @@ class _SummarizeViewState extends State<SummarizeView> {
                 children: [
                   Flexible(
                     child: Text(
-                      'Street1: ${cubit.getLocationModel?.street1}\nStreet2: ${cubit.getLocationModel?.street2}\nCity: ${cubit.getLocationModel?.city}\nState: ${cubit.getLocationModel?.state}\nCountry: ${cubit.getLocationModel?.country}',
+                      '${S.of(context).Street1}: ${cubit.getLocationModel?.street1}\n${S.of(context).Street2}: ${cubit.getLocationModel?.street2}\n${S.of(context).City}: ${cubit.getLocationModel?.city}\n${S.of(context).State}: ${cubit.getLocationModel?.state}\n${S.of(context).Country}: ${cubit.getLocationModel?.country}',
                       softWrap: true,
                       style: const TextStyle(fontSize: 16),
                     ),
@@ -69,7 +72,7 @@ class _SummarizeViewState extends State<SummarizeView> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   CustomText(
-                    text: 'Total price',
+                    text: S.of(context).TotalPrice,
                     fontSize: 18,
                     alignment: Alignment.centerLeft,
                     color: Colors.grey.shade900,
@@ -102,7 +105,7 @@ class _SummarizeViewState extends State<SummarizeView> {
                             ? Colors.white
                             : kPrimaryColor,
                         onPressed: widget.onBack,
-                        text: 'Back',
+                        text: S.of(context).Back,
                       ),
                     ),
                     Expanded(
@@ -121,7 +124,7 @@ class _SummarizeViewState extends State<SummarizeView> {
                             'location model = ${cubit.getDeliveryMethodModel?.toJson()} from summarize view=============================>',
                           );
                         },
-                        text: 'Deliver',
+                        text: S.of(context).Deliver,
                         textColor:
                             Theme.of(context).brightness == Brightness.dark
                             ? Colors.grey.shade600
@@ -143,5 +146,16 @@ class _SummarizeViewState extends State<SummarizeView> {
         }
       },
     );
+  }
+
+  getDeliveryMethodTitleWithAnyLanguage(String deliveryMethodTitle) {
+    final titleWithoutSpaces = deliveryMethodTitle.trim();
+    if (titleWithoutSpaces.contains('Next')) {
+      return S.of(context).NextDayDelivery;
+    } else if (titleWithoutSpaces.contains('Nominated')) {
+      return S.of(context).NominatedDelivery;
+    } else {
+      return S.of(context).StandardDelivery;
+    }
   }
 }

@@ -5,18 +5,19 @@ import 'package:flutter_e_commerce_app_2025/features/02_auth_view/presentation/v
 import 'package:flutter_e_commerce_app_2025/features/02_auth_view/presentation/view/widgets/sign_in_header.dart';
 
 import '../../../../../core/utilities/custom_card.dart';
+import '../../../../../generated/l10n.dart';
 
 class SignInViewViewBody extends StatelessWidget {
   const SignInViewViewBody({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.symmetric(horizontal: 8),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8),
       child: Column(
         children: [
-          SizedBox(height: 48),
-          CustomCard(
+          const SizedBox(height: 48),
+          const CustomCard(
             child: Column(
               children: [
                 SignInHeader(),
@@ -25,9 +26,13 @@ class SignInViewViewBody extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(height: 4),
-          CustomText(text: '_OR_', fontSize: 18, alignment: Alignment.center),
-          Padding(
+          const SizedBox(height: 4),
+          CustomText(
+            text: S.of(context).Or,
+            fontSize: 18,
+            alignment: Alignment.center,
+          ),
+          const Padding(
             padding: EdgeInsets.all(16),
             child: SignInCustomSocialButtons(),
           ),

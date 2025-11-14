@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_e_commerce_app_2025/core/helper/const.dart';
 
 import '../../../../../core/utilities/custom_text.dart';
+import '../../../../../generated/l10n.dart';
 
-class ProductDetailsCategoryColorSection extends StatelessWidget {
-  const ProductDetailsCategoryColorSection({
+class ProductDetailsCategoryRatingSection extends StatelessWidget {
+  const ProductDetailsCategoryRatingSection({
     super.key,
     required this.category,
     required this.rating,
@@ -30,8 +31,8 @@ class ProductDetailsCategoryColorSection extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const CustomText(
-                  text: 'Category',
+                CustomText(
+                  text: S.of(context).Category,
                   fontSize: 14,
                   alignment: Alignment.centerLeft,
                 ),
@@ -56,8 +57,8 @@ class ProductDetailsCategoryColorSection extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const CustomText(
-                  text: 'Rating',
+                CustomText(
+                  text: S.of(context).Rating,
                   fontSize: 14,
                   alignment: Alignment.centerLeft,
                 ),

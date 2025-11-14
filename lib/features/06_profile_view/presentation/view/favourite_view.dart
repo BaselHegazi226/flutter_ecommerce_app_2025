@@ -16,6 +16,7 @@ import 'package:flutter_e_commerce_app_2025/generated/assets.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../core/utilities/custom_dialog_state.dart';
+import '../../../../generated/l10n.dart';
 
 class FavouriteView extends StatelessWidget {
   const FavouriteView({super.key});
@@ -28,7 +29,7 @@ class FavouriteView extends StatelessWidget {
       )..getFavouriteProducts(),
       child: SafeArea(
         child: Scaffold(
-          appBar: customAppBar(context, 'Favourite', () {
+          appBar: customAppBar(context, S.of(context).Favourite, () {
             GoRouter.of(context).pushReplacement(Routes.profileView);
           }),
           body: const FavouriteViewBody(),
@@ -53,9 +54,9 @@ class FavouriteViewBody extends StatelessWidget {
         if (state is GetFavouriteProductsSuccess) {
           final favourites = state.favouriteList;
           if (favourites.isEmpty) {
-            return const Center(
+            return Center(
               child: NoItemFound(
-                itemTitle: 'No Favourite Item Found',
+                itemTitle: S.of(context).NoFavouriteItemFound,
                 itemImage: Assets.profileUnFavouriteHeart,
               ),
             );
@@ -110,9 +111,14 @@ class FavouriteViewItem extends StatelessWidget {
       padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
         borderRadius: const BorderRadius.all(Radius.circular(4)),
+        color: Theme.of(context).brightness == Brightness.dark
+            ? Colors.grey.shade500
+            : Colors.grey.shade100,
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.shade100,
+            color: Theme.of(context).brightness == Brightness.dark
+                ? Colors.grey.shade400
+                : Colors.grey.shade50,
             blurRadius: 2,
             spreadRadius: 0,
             offset: const Offset(0, 4),
@@ -187,9 +193,7 @@ class FavouriteViewItem extends StatelessWidget {
                 debugPrint('isFavourite = $isFavourite');
                 return Flexible(
                   child: IconWithCircleStyle(
-                    backgroundColor: isFavourite
-                        ? Colors.grey.shade100
-                        : Colors.grey.shade200,
+                    backgroundColor: Colors.grey.shade400.withAlpha(32),
                     widget: IconButton(
                       padding: const EdgeInsets.all(4),
                       onPressed: () {
@@ -222,18 +226,11 @@ class FavouriteViewItem extends StatelessWidget {
             ),
           ],
         ),
-        CustomText(
-          text: productModel.description,
-          fontSize: 14,
-          alignment: Alignment.centerLeft,
-          maxLines: 4,
-          color: Colors.grey,
-        ),
+        CustomText(text: productModel.description, fontSize: 14, maxLines: 4),
         const SizedBox(height: 8),
         CustomText(
           text: '\$ ${productModel.price}',
           fontSize: 14,
-          alignment: Alignment.centerLeft,
           color: kPrimaryColor,
         ),
       ],

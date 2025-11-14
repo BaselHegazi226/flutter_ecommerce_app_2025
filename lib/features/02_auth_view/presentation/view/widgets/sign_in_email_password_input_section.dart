@@ -10,6 +10,7 @@ import 'package:toastification/toastification.dart';
 import '../../../../../core/helper/const.dart';
 import '../../../../../core/utilities/custom_button.dart';
 import '../../../../../core/utilities/custom_text_form_field.dart';
+import '../../../../../generated/l10n.dart';
 
 class SignInEmailPasswordInputSection extends StatefulWidget {
   const SignInEmailPasswordInputSection({super.key});
@@ -39,9 +40,10 @@ class _SignInEmailPasswordInputSectionState
       key: _formKey,
       child: Column(
         spacing: 20,
+        crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           CustomTextFormField(
-            text: 'Email',
+            text: S.of(context).Email,
             hintText: 'newuser@gmail.com',
             onSaved: (value) {
               email = value!.trim();
@@ -49,14 +51,14 @@ class _SignInEmailPasswordInputSectionState
             },
             validator: (value) {
               if (value == null || value.isEmpty) {
-                return 'email is required';
+                return S.of(context).emailIsRequired;
               }
               return null;
             },
             textEditingController: textEditingControllerEmail,
           ),
           CustomTextFormField(
-            text: 'Password',
+            text: S.of(context).Password,
             hintText: '**********',
             onSaved: (value) {
               password = value!.trim();
@@ -64,17 +66,13 @@ class _SignInEmailPasswordInputSectionState
             },
             validator: (value) {
               if (value == null || value.isEmpty) {
-                return 'password is required';
+                return S.of(context).passwordIsRequired;
               }
               return null;
             },
             textEditingController: textEditingControllerPassword,
           ),
-          const CustomText(
-            text: 'Forget Password?',
-            fontSize: 14,
-            alignment: Alignment.topRight,
-          ),
+          CustomText(text: S.of(context).ForgetPassword, fontSize: 14),
           const SizedBox(height: 8),
           BlocConsumer<AuthBloc, AuthState>(
             listener: (context, state) {
@@ -120,7 +118,7 @@ class _SignInEmailPasswordInputSectionState
                         autoValidateMode = AutovalidateMode.onUserInteraction;
                       }
                     },
-                    text: 'Sign In',
+                    text: S.of(context).SignIn,
                     isLoading: value,
                     textColor: Theme.of(context).brightness == Brightness.dark
                         ? Colors.grey.shade600

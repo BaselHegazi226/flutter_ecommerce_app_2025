@@ -10,6 +10,8 @@ import 'package:flutter_e_commerce_app_2025/features/05_cart_view/presentation/v
 import 'package:flutter_e_commerce_app_2025/features/05_cart_view/presentation/view_model/get_cart_cubit/get_cart_state.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../../generated/l10n.dart';
+
 class CartViewTotalCheckoutSection extends StatelessWidget {
   const CartViewTotalCheckoutSection({super.key});
 
@@ -20,7 +22,7 @@ class CartViewTotalCheckoutSection extends StatelessWidget {
         if (state is GetProductCartAndTotalSuccess) {
           debugPrint('success totallllllllllllllll');
           return PriceButtonSection(
-            title: 'Total',
+            title: S.of(context).Total,
             value: '\$ ${state.totalPrice.roundToDouble()}',
             widget: CustomButton(
               onPressed: () {
@@ -32,7 +34,7 @@ class CartViewTotalCheckoutSection extends StatelessWidget {
                   },
                 );
               },
-              text: 'CHECKOUT',
+              text: S.of(context).Checkout,
               textColor: Theme.of(context).brightness == Brightness.dark
                   ? Colors.grey.shade600
                   : Colors.grey.shade200,
@@ -44,11 +46,11 @@ class CartViewTotalCheckoutSection extends StatelessWidget {
         } else if (state is GetProductCartAndTotalFailure) {
           debugPrint('failure totallllllllllllllll = ${state.errorMessage}');
           return PriceButtonSection(
-            title: 'Total',
+            title: S.of(context).Total,
             value: state.errorMessage,
-            widget: const CustomButton(
+            widget: CustomButton(
               onPressed: null,
-              text: 'CHECKOUT',
+              text: S.of(context).Checkout,
               backgroundColor: kPrimaryColor,
             ),
           );

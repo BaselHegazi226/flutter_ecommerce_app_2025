@@ -23,7 +23,6 @@ class HomeViewBody extends StatelessWidget {
               const CategoriesHeader(),
               SizedBox(height: screenSize.height * .02),
               const CategoriesListView(),
-              SizedBox(height: screenSize.height * .03),
               const BestSellingHeader(),
               SizedBox(height: screenSize.height * .03),
               const BestSellingListView(),

@@ -11,6 +11,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../../core/utilities/not_item_found.dart';
+import '../../../../../generated/l10n.dart';
 import 'cart_view_total_checkout_section.dart';
 
 class CartViewBody extends StatefulWidget {
@@ -35,8 +36,8 @@ class _CartViewBodyState extends State<CartViewBody> {
         if (state is GetProductCartAndTotalSuccess) {
           final cartList = state.carts;
           if (cartList.isEmpty) {
-            return const NoItemFound(
-              itemTitle: 'Try to Fill Cart 🛒🛒',
+            return NoItemFound(
+              itemTitle: S.of(context).TryToFillCart,
               itemImage: Assets.cartEmptyCart,
             );
           }

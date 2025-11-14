@@ -6,6 +6,7 @@ import 'package:iconify_flutter/icons/fa6_brands.dart';
 import 'package:toastification/toastification.dart';
 
 import '../../../../../core/utilities/custom_social_button.dart';
+import '../../../../../generated/l10n.dart';
 import '../../view_model/auth_bloc/auth_bloc.dart';
 
 class SignInCustomSocialButtons extends StatefulWidget {
@@ -47,7 +48,7 @@ class _SignInCustomSocialButtonsState extends State<SignInCustomSocialButtons> {
                   context.read<AuthBloc>().add(SignInWithGoogleEvent());
                 },
                 valueNotifierLoading: valueNotifierLoadingGoogle,
-                text: 'Sign In with Google',
+                text: S.of(context).SignInWithGoogle,
                 iconifyData: Logos.google_icon,
               ),
               CustomSocialButton(
@@ -55,7 +56,7 @@ class _SignInCustomSocialButtonsState extends State<SignInCustomSocialButtons> {
                   context.read<AuthBloc>().add(SignInWithFacebookEvent());
                 },
                 valueNotifierLoading: valueNotifierLoadingFacebook,
-                text: 'Sign In with Facebook',
+                text: S.of(context).SignInWithFacebook,
                 iconifyColor: const Color(0xff475993),
                 iconifyData: Fa6Brands.square_facebook,
               ),

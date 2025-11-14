@@ -1,3 +1,4 @@
+import 'package:colorful_iconify_flutter/icons/twemoji.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced_switch/flutter_advanced_switch.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -7,7 +8,9 @@ import 'package:flutter_e_commerce_app_2025/core/utilities/custom_app_bar.dart';
 import 'package:flutter_e_commerce_app_2025/core/utilities/custom_text.dart';
 import 'package:flutter_e_commerce_app_2025/core/utilities/icon_with_circle_style.dart';
 import 'package:go_router/go_router.dart';
+import 'package:iconify_flutter/iconify_flutter.dart';
 
+import '../../../../generated/l10n.dart';
 import '../view_model/settings_cubit/settings_cubit.dart';
 import '../view_model/settings_cubit/settings_state.dart';
 
@@ -18,92 +21,23 @@ class SettingsView extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: customAppBar(context, 'Settings', () {
+        appBar: customAppBar(context, S.of(context).Settings, () {
           GoRouter.of(context).pushReplacement(Routes.profileView);
         }),
         body: Padding(
           padding: const EdgeInsets.all(16),
           child: BlocBuilder<AppSettingCubit, AppSettingStates>(
             builder: (context, state) {
-              final themeMode = AppSettingCubit.get(context).getTheme();
-              final isDark = themeMode == ThemeMode.dark;
-              return CustomScrollView(
-                physics: const BouncingScrollPhysics(),
+              return const CustomScrollView(
+                physics: BouncingScrollPhysics(),
                 slivers: [
                   SliverToBoxAdapter(
                     child: Column(
                       spacing: 16,
                       children: [
-                        const SettingViewItem(
-                          title: 'Notifications',
-                          iconData: Icons.notifications_active,
-                        ),
-                        Column(
-                          spacing: 16,
-                          children: [
-                            CustomIconTitle(
-                              iconData: isDark
-                                  ? Icons.dark_mode_outlined
-                                  : Icons.light_mode_outlined,
-                              title: "Mode",
-                            ),
-                            CustomSettingsContainer(
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 16,
-                                ),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    CustomText(
-                                      text: isDark ? 'Dark' : 'Light',
-                                      fontSize: 16,
-                                      alignment: Alignment.center,
-                                      color: Colors.grey.shade900,
-                                    ),
-                                    IconWithCircleStyle(
-                                      backgroundColor: isDark
-                                          ? Colors.grey.shade200
-                                          : Colors.grey.shade400,
-                                      widget: IconButton(
-                                        padding: const EdgeInsets.all(4),
-                                        onPressed: () {
-                                          if (isDark) {
-                                            AppSettingCubit.get(
-                                              context,
-                                            ).selectedTheme(
-                                              theme: ThemeMode.light,
-                                            );
-                                          } else {
-                                            AppSettingCubit.get(
-                                              context,
-                                            ).selectedTheme(
-                                              theme: ThemeMode.dark,
-                                            );
-                                          }
-                                        },
-                                        icon: Icon(
-                                          isDark
-                                              ? Icons.dark_mode_outlined
-                                              : Icons.light_mode_outlined,
-                                          color: isDark
-                                              ? Colors.grey.shade400
-                                              : Colors.grey.shade100,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        const SettingViewItem(
-                          title: 'Language',
-                          iconData: Icons.language,
-                          subtitle: 'En / عربي',
-                        ),
+                        NotificationSection(),
+                        ModeSection(),
+                        LanguageSection(),
                       ],
                     ),
                   ),
@@ -275,6 +209,156 @@ class _CustomAdvancedSwitchState extends State<CustomAdvancedSwitch> {
           shape: BoxShape.circle,
         ),
       ),
+    );
+  }
+}
+
+class NotificationSection extends StatelessWidget {
+  const NotificationSection({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return SettingViewItem(
+      title: S.of(context).Notifications,
+      iconData: Icons.notifications_active,
+      subtitle: S.of(context).OnOff,
+    );
+  }
+}
+
+class ModeSection extends StatelessWidget {
+  const ModeSection({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final appSettingCubit = AppSettingCubit.get(context);
+    bool isDark = appSettingCubit.isDarkModeEnabled();
+    debugPrint('isDark  = $isDark');
+    return BlocConsumer<AppSettingCubit, AppSettingStates>(
+      listener: (context, state) {
+        if (state is SelectedThemeSuccess) {
+          isDark = appSettingCubit.isDarkModeEnabled();
+        }
+      },
+      builder: (context, state) {
+        return Column(
+          spacing: 16,
+          children: [
+            CustomIconTitle(
+              iconData: isDark
+                  ? Icons.dark_mode_outlined
+                  : Icons.light_mode_outlined,
+              title: S.of(context).Mode,
+            ),
+            CustomSettingsContainer(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    CustomText(
+                      text: isDark ? S.of(context).Dark : S.of(context).Light,
+                      fontSize: 16,
+                      alignment: Alignment.center,
+                      color: Colors.grey.shade900,
+                    ),
+                    IconWithCircleStyle(
+                      backgroundColor: isDark
+                          ? Colors.grey.shade200
+                          : Colors.grey.shade400,
+                      widget: IconButton(
+                        padding: const EdgeInsets.all(4),
+                        onPressed: () {
+                          appSettingCubit.selectedTheme(
+                            theme: isDark ? ThemeMode.light : ThemeMode.dark,
+                          );
+                        },
+                        icon: Icon(
+                          isDark
+                              ? Icons.dark_mode_outlined
+                              : Icons.light_mode_outlined,
+                          color: isDark
+                              ? Colors.grey.shade400
+                              : Colors.grey.shade100,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+}
+
+class LanguageSection extends StatelessWidget {
+  const LanguageSection({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final appSettingCubit = AppSettingCubit.get(context);
+    final currentLanguage = AppSettingCubit.currentLanguage;
+
+    String dropdownValue = currentLanguage == LanguageEnum.arabic
+        ? 'العربية'
+        : currentLanguage == LanguageEnum.english
+        ? 'English'
+        : 'English';
+
+    return Column(
+      spacing: 16,
+      children: [
+        CustomIconTitle(
+          iconData: Icons.language_outlined,
+          title: S.of(context).Language,
+        ),
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          decoration: BoxDecoration(
+            color: Theme.of(context).brightness == Brightness.dark
+                ? Colors.grey[850]
+                : Colors.grey[200],
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: DropdownButton<String>(
+            underline: const SizedBox(),
+            value: dropdownValue,
+            isExpanded: true,
+            icon: Icon(
+              Icons.keyboard_arrow_down,
+              color: Theme.of(context).iconTheme.color,
+            ),
+            onChanged: (String? value) {
+              if (value != null) {
+                final language = value == 'العربية'
+                    ? LanguageEnum.arabic
+                    : LanguageEnum.english;
+                appSettingCubit.selectedLanguage(language: language);
+              }
+            },
+            items: ['العربية', 'English'].map((String value) {
+              return DropdownMenuItem<String>(
+                value: value,
+                child: Row(
+                  children: [
+                    value == 'العربية'
+                        ? const Iconify(Twemoji.flag_for_flag_egypt, size: 20)
+                        : const Iconify(
+                            Twemoji.flag_for_flag_united_states,
+                            size: 20,
+                          ),
+                    const SizedBox(width: 8),
+                    Text(value),
+                  ],
+                ),
+              );
+            }).toList(),
+          ),
+        ),
+      ],
     );
   }
 }

@@ -8,6 +8,8 @@ import 'package:flutter_e_commerce_app_2025/features/05_cart_view/presentation/v
 import 'package:flutter_e_commerce_app_2025/features/06_profile_view/presentation/view/widgets/order_history_view_body.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../generated/l10n.dart';
+
 class OrderHistoryView extends StatelessWidget {
   const OrderHistoryView({super.key});
 
@@ -19,7 +21,7 @@ class OrderHistoryView extends StatelessWidget {
             ..getOrderList(),
       child: SafeArea(
         child: Scaffold(
-          appBar: customAppBar(context, 'Order History', () {
+          appBar: customAppBar(context, S.of(context).OrderHistory, () {
             GoRouter.of(context).pushReplacement(Routes.profileView);
           }),
           body: const OrderHistoryViewBody(),

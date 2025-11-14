@@ -6,6 +6,7 @@ import 'package:flutter_e_commerce_app_2025/core/utilities/custom_button.dart';
 import 'package:flutter_e_commerce_app_2025/core/utilities/custom_text.dart';
 import 'package:intl/intl.dart';
 
+import '../../../../../generated/l10n.dart';
 import '../../../data/model/order_model.dart';
 import '../../view_model/checkout_cubit/checkout_cubit.dart';
 
@@ -48,7 +49,7 @@ class FinishView extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 CustomText(
-                  text: 'Order is Ready To Make',
+                  text: S.of(context).OrderIsReady,
                   fontSize: 18,
                   alignment: Alignment.center,
                   color: Colors.grey.shade900,
@@ -77,11 +78,13 @@ class FinishView extends StatelessWidget {
                     ),
                     Container(
                       color: orderStateData(
+                        context,
                         updatedOrder.orderStateEnum,
                       )['color'],
                       padding: const EdgeInsets.all(8),
                       child: CustomText(
                         text: orderStateData(
+                          context,
                           updatedOrder.orderStateEnum,
                         )['state'],
                         fontSize: 14,
@@ -103,7 +106,7 @@ class FinishView extends StatelessWidget {
                   Expanded(
                     child: CustomButton(
                       onPressed: onFinish,
-                      text: 'Finish',
+                      text: S.of(context).Finish,
                       textColor: Theme.of(context).brightness == Brightness.dark
                           ? Colors.grey.shade600
                           : Colors.grey.shade200,
@@ -156,31 +159,29 @@ class FinishView extends StatelessWidget {
                 CustomText(
                   text: 'OD-${order.orderId.split('-').take(2).join('-')}-N',
                   fontSize: 16,
-                  alignment: Alignment.centerLeft,
                 ),
                 const SizedBox(height: 16),
                 CustomText(
                   text: '\$ ${order.totalPrice.toStringAsFixed(2)}',
                   fontSize: 18,
                   color: kPrimaryColor,
-                  alignment: Alignment.centerLeft,
                 ),
                 const SizedBox(height: 24),
                 TextButton(
                   onPressed: onBack,
-                  child: const Row(
+                  child: Row(
                     children: [
-                      Icon(
-                        Icons.arrow_back_outlined,
-                        color: Colors.red,
-                        size: 20,
-                      ),
-                      SizedBox(width: 8),
                       CustomText(
-                        text: 'Cancel Order',
+                        text: S.of(context).CancelOrder,
                         fontSize: 16,
                         alignment: Alignment.centerLeft,
                         color: kPrimaryWrongColor,
+                      ),
+                      const SizedBox(width: 8),
+                      const Icon(
+                        Icons.arrow_forward_rounded,
+                        color: Colors.red,
+                        size: 20,
                       ),
                     ],
                   ),
@@ -242,13 +243,16 @@ class FinishView extends StatelessWidget {
   }
 }
 
-Map<String, dynamic> orderStateData(OrderStateEnum orderState) {
+Map<String, dynamic> orderStateData(
+  BuildContext context,
+  OrderStateEnum orderState,
+) {
   switch (orderState) {
     case OrderStateEnum.delivered:
-      return {'color': kPrimaryColor, 'state': 'delivered'};
+      return {'color': kPrimaryColor, 'state': S.of(context).Delivered};
     case OrderStateEnum.transmit:
-      return {'color': Colors.yellow.shade700, 'state': 'transmit'};
+      return {'color': Colors.yellow.shade700, 'state': S.of(context).Transmit};
     default:
-      return {'color': kGreyColor, 'state': 'pending'};
+      return {'color': kGreyColor, 'state': S.of(context).Pending};
   }
 }

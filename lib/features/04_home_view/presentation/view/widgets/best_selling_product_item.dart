@@ -36,7 +36,7 @@ class BestSellingProductItem extends StatelessWidget {
               borderRadius: const BorderRadius.all(Radius.circular(4)),
               child: CachedNetworkImage(
                 imageUrl: image,
-                fit: BoxFit.cover,
+                fit: BoxFit.contain,
                 placeholder: (context, url) {
                   return homeProductImageShimmer(screenSize);
                 },

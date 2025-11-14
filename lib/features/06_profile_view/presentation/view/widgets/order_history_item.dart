@@ -24,20 +24,20 @@ class OrderHistoryItem extends StatelessWidget {
           ),
         ],
       ),
-      child: Row(children: [detailsSection(), imageSection()]),
+      child: Row(children: [detailsSection(context), imageSection()]),
     );
   }
 
-  Expanded detailsSection() {
+  Expanded detailsSection(BuildContext context) {
     return Expanded(
       flex: 2,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           CustomText(
             text: 'OD-${orderModel.orderId.split('-').take(2).join('-')}-N',
             fontSize: 16,
-            alignment: Alignment.centerLeft,
             color: Colors.grey.shade900,
           ),
           const SizedBox(height: 16),
@@ -45,23 +45,22 @@ class OrderHistoryItem extends StatelessWidget {
             text: '\$ ${orderModel.totalPrice.toStringAsFixed(2)}',
             fontSize: 18,
             color: kPrimaryColor,
-            alignment: Alignment.centerLeft,
           ),
           const SizedBox(height: 32),
-          Align(
-            alignment: Alignment.centerLeft,
-            child: Container(
-              width: 100,
-              padding: const EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                color: orderStateData(orderModel.orderStateEnum)['color'],
-                borderRadius: BorderRadius.circular(4),
-              ),
-              child: CustomText(
-                text: orderStateData(orderModel.orderStateEnum)['state'],
-                fontSize: 14,
-                alignment: Alignment.center,
-              ),
+          Container(
+            width: 100,
+            padding: const EdgeInsets.all(8),
+            decoration: BoxDecoration(
+              color: orderStateData(
+                context,
+                orderModel.orderStateEnum,
+              )['color'],
+              borderRadius: BorderRadius.circular(4),
+            ),
+            child: CustomText(
+              text: orderStateData(context, orderModel.orderStateEnum)['state'],
+              fontSize: 14,
+              alignment: Alignment.center,
             ),
           ),
         ],

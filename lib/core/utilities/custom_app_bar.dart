@@ -10,7 +10,7 @@ customAppBar(BuildContext context, String title, VoidCallback onPressed) {
       fontSize: 20,
       height: 1,
       maxLines: 1,
-      fontWeight: FontWeight.w900,
+      fontWeight: FontWeight.w700,
     ),
     centerTitle: true,
     backgroundColor: Colors.transparent,

@@ -9,6 +9,7 @@ import '../../../../../core/helper/routes.dart';
 import '../../../../../core/utilities/custom_button.dart';
 import '../../../../../core/utilities/custom_text_form_field.dart';
 import '../../../../../core/utilities/toastnotification.dart';
+import '../../../../../generated/l10n.dart';
 import '../../view_model/auth_bloc/auth_bloc.dart';
 
 class SignUpInputSection extends StatefulWidget {
@@ -40,7 +41,7 @@ class _SignUpInputSectionState extends State<SignUpInputSection> {
         spacing: 20,
         children: [
           CustomTextFormField(
-            text: 'Name',
+            text: S.of(context).Name,
             hintText: 'name',
             onSaved: (value) {
               name = value!.trim();
@@ -48,16 +49,16 @@ class _SignUpInputSectionState extends State<SignUpInputSection> {
             },
             validator: (value) {
               if (value == null || value.isEmpty) {
-                return 'name is required';
+                return S.of(context).nameIsRequired;
               } else if (!FieldsContranits.nameReg.hasMatch(value)) {
-                return 'enter valid name';
+                return S.of(context).enterValidName;
               }
               return null;
             },
             textEditingController: textEditingControllerName,
           ),
           CustomTextFormField(
-            text: 'Email',
+            text: S.of(context).Email,
             hintText: 'iamdavid@gmail.com',
             onSaved: (value) {
               email = value!.trim();
@@ -65,16 +66,16 @@ class _SignUpInputSectionState extends State<SignUpInputSection> {
             },
             validator: (value) {
               if (value == null || value.isEmpty) {
-                return 'email is required';
+                return S.of(context).emailIsRequired;
               } else if (!FieldsContranits.emailReg.hasMatch(value)) {
-                return 'enter valid email (email@gmail.com)';
+                return S.of(context).enterValidEmail;
               }
               return null;
             },
             textEditingController: textEditingControllerEmail,
           ),
           CustomTextFormField(
-            text: 'Password',
+            text: S.of(context).Password,
             hintText: '**********',
             onSaved: (value) {
               password = value!.trim();
@@ -82,9 +83,9 @@ class _SignUpInputSectionState extends State<SignUpInputSection> {
             },
             validator: (value) {
               if (value == null || value.isEmpty) {
-                return 'password is required';
+                return S.of(context).passwordIsRequired;
               } else if (!FieldsContranits.passwordReg.hasMatch(value)) {
-                return 'enter strong password';
+                return S.of(context).enterStrongPassword;
               }
               return null;
             },
@@ -137,7 +138,7 @@ class _SignUpInputSectionState extends State<SignUpInputSection> {
                         autoValidateMode = AutovalidateMode.always;
                       }
                     },
-                    text: 'Sign Up',
+                    text: S.of(context).SignUp,
                     isLoading: value,
                   );
                 },

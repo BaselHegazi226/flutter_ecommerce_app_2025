@@ -48,6 +48,7 @@ class CartViewItem extends StatelessWidget {
           flex: 2,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               CustomText(
                 text: title.split(" ").take(4).join(" "),
@@ -55,12 +56,7 @@ class CartViewItem extends StatelessWidget {
                 alignment: Alignment.centerLeft,
               ),
               const SizedBox(height: 4),
-              CustomText(
-                text: '\$ $price',
-                fontSize: 20,
-                color: kPrimaryColor,
-                alignment: Alignment.centerLeft,
-              ),
+              CustomText(text: '\$ $price', fontSize: 20, color: kPrimaryColor),
               const SizedBox(height: 16),
               CartViewCountSection(count: count, id: productId),
             ],

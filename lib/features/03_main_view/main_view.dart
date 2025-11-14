@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
 import '../../core/helper/routes.dart';
+import '../../generated/l10n.dart';
 
 class MainView extends StatefulWidget {
   const MainView({super.key, required this.child});
@@ -67,17 +68,17 @@ class _MainViewState extends State<MainView> {
           context.go(tabs[index]);
           debugPrint(index.toString());
         },
-        tabs: const [
+        tabs: [
           GButton(
-            margin: EdgeInsets.only(left: 8),
+            margin: const EdgeInsets.only(left: 8),
             icon: Icons.home,
-            text: 'Home',
+            text: S.of(context).Home,
           ),
-          GButton(icon: Icons.shopping_cart_outlined, text: 'Cart'),
+          GButton(icon: Icons.shopping_cart_outlined, text: S.of(context).Cart),
           GButton(
-            margin: EdgeInsets.only(right: 8),
+            margin: const EdgeInsets.only(right: 8),
             icon: Icons.person_2_outlined,
-            text: 'Profile',
+            text: S.of(context).Profile,
           ),
         ],
       ),

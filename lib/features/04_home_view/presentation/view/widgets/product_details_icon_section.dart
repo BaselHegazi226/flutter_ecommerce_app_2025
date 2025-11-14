@@ -27,6 +27,7 @@ class ProductDetailsIconSection extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             IconWithCircleStyle(
+              backgroundColor: Colors.grey.shade500.withAlpha(32),
               widget: IconButton(
                 padding: EdgeInsets.zero,
                 onPressed: () {
@@ -56,12 +57,9 @@ class ProductDetailsIconSection extends StatelessWidget {
 
                 return IconWithCircleStyle(
                   backgroundColor: isFavourite
-                      ? Theme.of(context).brightness == Brightness.dark
-                            ? Colors.grey.shade500
-                            : Colors.grey.shade200
-                      : Theme.of(context).brightness == Brightness.dark
-                      ? Colors.grey.shade400
-                      : Colors.grey.shade100,
+                      ? Colors.grey.shade500.withAlpha(64)
+                      : Colors.grey.shade500.withAlpha(32),
+
                   widget: IconButton(
                     padding: const EdgeInsets.all(4),
                     onPressed: () {

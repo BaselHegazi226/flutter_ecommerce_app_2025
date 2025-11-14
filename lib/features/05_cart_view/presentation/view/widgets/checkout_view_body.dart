@@ -7,6 +7,7 @@ import 'package:flutter_e_commerce_app_2025/features/05_cart_view/presentation/v
 import 'package:flutter_e_commerce_app_2025/features/05_cart_view/presentation/view/widgets/summarize_view.dart';
 import 'package:flutter_e_commerce_app_2025/features/05_cart_view/presentation/view_model/checkout_cubit/checkout_cubit.dart';
 
+import '../../../../../generated/l10n.dart';
 import 'finish_view.dart';
 
 class CheckoutViewBody extends StatelessWidget {
@@ -96,11 +97,23 @@ class CheckoutViewBody extends StatelessWidget {
       unreachedStepIconColor: Colors.grey,
       unreachedStepBorderColor: Colors.grey,
       showLoadingAnimation: false,
-      steps: const [
-        EasyStep(icon: Icon(Icons.delivery_dining), title: 'Delivery'),
-        EasyStep(icon: Icon(Icons.location_on_outlined), title: 'Location'),
-        EasyStep(icon: Icon(Icons.note_alt_outlined), title: 'Summarize'),
-        EasyStep(icon: Icon(Icons.check_circle), title: 'Finish'),
+      steps: [
+        EasyStep(
+          icon: const Icon(Icons.delivery_dining),
+          title: S.of(context).Delivery,
+        ),
+        EasyStep(
+          icon: const Icon(Icons.location_on_outlined),
+          title: S.of(context).Location,
+        ),
+        EasyStep(
+          icon: const Icon(Icons.note_alt_outlined),
+          title: S.of(context).Summarize,
+        ),
+        EasyStep(
+          icon: const Icon(Icons.check_circle),
+          title: S.of(context).Finish,
+        ),
       ],
       // onStepReached: (index) {
       //   setState(() => activeStep = index);
