@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:dartz/dartz.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_e_commerce_app_2025/core/errors/catch_error_handle.dart';
 import 'package:flutter_e_commerce_app_2025/core/errors/failure.dart';
 import 'package:flutter_e_commerce_app_2025/core/helper/adapter_identifiers.dart';
@@ -11,32 +10,25 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../features/02_auth_view/data/model/user_model.dart';
 
 class UserInfoCache {
-  // 1. Singleton pattern
   static final UserInfoCache _instance = UserInfoCache._internal();
   factory UserInfoCache() => _instance;
   UserInfoCache._internal();
 
-  // 2. shared preference instance (nullable في البداية)
   SharedPreferences? _sharedPreferences;
 
-  // 3. initialization مرة واحدة
   Future<void> init() async {
     _sharedPreferences ??= await SharedPreferences.getInstance();
   }
 
   Future<Either<Failure, void>> saveUser({required UserModel userModel}) async {
     try {
-      //save user id
-      _sharedPreferences!.setString('current_user', userModel.id);
-      //save user model as string
-      var userModelJsonToString = jsonEncode(userModel.toJson());
+      await _sharedPreferences!.setString('current_user', userModel.id);
       await _sharedPreferences!.setString(
-        'current_user${userModel.id}',
-        userModelJsonToString,
+        'current_user_${userModel.id}',
+        jsonEncode(userModel.toJson()),
       );
       return right(null);
     } catch (e) {
-      debugPrint('error = $e');
       return left(CatchErrorHandle.catchBack(failure: e));
     }
   }
@@ -46,8 +38,9 @@ class UserInfoCache {
       final id = _sharedPreferences!.getString('current_user');
       if (id == null) return right(null);
 
-      final data = _sharedPreferences!.getString('current_user$id');
+      final data = _sharedPreferences!.getString('current_user_$id');
       if (data == null) return right(null);
+
       final userModel = UserModel.fromJson(jsonDecode(data));
       return right(userModel);
     } catch (e) {
@@ -58,7 +51,7 @@ class UserInfoCache {
   Future<void> deleteUser() async {
     final id = _sharedPreferences!.getString('current_user');
     if (id != null) {
-      await _sharedPreferences!.remove('current_user$id');
+      await _sharedPreferences!.remove('current_user_$id');
       await _sharedPreferences!.remove('current_user');
     }
   }

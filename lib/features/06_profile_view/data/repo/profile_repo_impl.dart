@@ -10,19 +10,17 @@ class ProfileRepoImpl extends ProfileRepo {
   @override
   Future<Either<Failure, void>> signOut() async {
     try {
-      final firebaseInstance = FirebaseAuth.instance;
-      final user = firebaseInstance.currentUser;
-      if (user != null) {
-        await firebaseInstance.signOut();
-        await deleteUser();
-      }
+      final firebase = FirebaseAuth.instance;
+
+      // 1) تسجيل الخروج من Firebase
+      await firebase.signOut();
+
+      // 2) حذف بيانات المستخدم من الكاش المحلي
+      await UserInfoCache().deleteUser();
+
       return right(null);
     } catch (e) {
       return left(CatchErrorHandle.catchBack(failure: e));
     }
-  }
-
-  Future<void> deleteUser() async {
-    UserInfoCache().deleteUser();
   }
 }

@@ -195,12 +195,9 @@ class AuthRepoImpl implements AuthRepo {
     try {
       final user = FirebaseAuth.instance.currentUser;
 
-      // لو مفيش يوزر حالياً (يعني سجل خروج)
-      if (user == null) {
-        return right(null);
-      } else {
-        return right(user.uid);
-      }
+      if (user == null) return right(null);
+
+      return right(user.uid);
     } catch (e) {
       return left(CatchErrorHandle.catchBack(failure: e));
     }
