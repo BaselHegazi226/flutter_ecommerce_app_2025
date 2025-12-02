@@ -1,3 +1,4 @@
+import 'package:cloudinary_url_gen/cloudinary.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,6 +12,7 @@ import 'firebase_options.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  Cloudinary.fromCloudName(cloudName: 'flutter_ecommerce_app_demo');
   await Hive.initFlutter();
   await CacheHelper().init();
   final savedTheme = await CacheHelper().getData(

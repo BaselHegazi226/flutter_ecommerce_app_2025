@@ -112,23 +112,14 @@ class FavouriteViewItem extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: const BorderRadius.all(Radius.circular(4)),
         color: Theme.of(context).brightness == Brightness.dark
-            ? Colors.grey.shade500
-            : Colors.grey.shade100,
-        boxShadow: [
-          BoxShadow(
-            color: Theme.of(context).brightness == Brightness.dark
-                ? Colors.grey.shade400
-                : Colors.grey.shade50,
-            blurRadius: 2,
-            spreadRadius: 0,
-            offset: const Offset(0, 4),
-          ),
-        ],
+            ? Colors.grey.shade500.withAlpha(32)
+            : Colors.grey.shade100.withAlpha(32),
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Expanded(child: _customImage(productModel.images[0])),
+          Expanded(child: _customImage(context, productModel.images[0])),
           const SizedBox(width: 16),
           Expanded(flex: 2, child: _detailsSection()),
         ],
@@ -136,11 +127,13 @@ class FavouriteViewItem extends StatelessWidget {
     );
   }
 
-  Widget _customImage(String imageUrl) {
+  Widget _customImage(BuildContext context, String imageUrl) {
     return Container(
       padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
-        color: Colors.grey.shade200,
+        color: Theme.of(context).brightness == Brightness.dark
+            ? Colors.grey.shade500.withAlpha(32)
+            : Colors.grey.shade200.withAlpha(32),
         borderRadius: const BorderRadius.all(Radius.circular(8)),
       ),
       child: AspectRatio(
@@ -216,7 +209,13 @@ class FavouriteViewItem extends StatelessWidget {
                         isFavourite
                             ? Icons.favorite_outlined
                             : Icons.favorite_border_outlined,
-                        color: isFavourite ? Colors.red.shade500 : Colors.black,
+                        color: isFavourite
+                            ? Theme.of(context).brightness == Brightness.dark
+                                  ? Colors.white
+                                  : Colors.red.shade500
+                            : Theme.of(context).brightness == Brightness.dark
+                            ? Colors.white
+                            : Colors.black,
                         size: 20,
                       ),
                     ),

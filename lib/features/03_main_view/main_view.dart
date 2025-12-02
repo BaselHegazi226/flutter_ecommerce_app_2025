@@ -15,7 +15,12 @@ class MainView extends StatefulWidget {
 class _MainViewState extends State<MainView> {
   ValueNotifier<int> valueNotifierSelectedItem = ValueNotifier(0);
 
-  final tabs = [Routes.homeView, Routes.cartView, Routes.profileView];
+  final tabs = [
+    Routes.homeView,
+    Routes.searchView,
+    Routes.cartView,
+    Routes.profileView,
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -37,6 +42,10 @@ class _MainViewState extends State<MainView> {
       height: 75,
       decoration: BoxDecoration(
         color: Colors.white.withOpacity(0.15),
+        borderRadius: const BorderRadius.only(
+          topLeft: Radius.circular(16),
+          topRight: Radius.circular(16),
+        ),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.1),
@@ -62,6 +71,7 @@ class _MainViewState extends State<MainView> {
             ? Theme.of(context).scaffoldBackgroundColor
             : Theme.of(context).primaryColor,
         tabBorderRadius: 16,
+        style: GnavStyle.google,
         haptic: true,
         onTabChange: (index) {
           changeValueOfSelectedItem(index);
@@ -73,6 +83,11 @@ class _MainViewState extends State<MainView> {
             margin: const EdgeInsets.only(left: 8),
             icon: Icons.home,
             text: S.of(context).Home,
+          ),
+          GButton(
+            margin: const EdgeInsets.only(left: 8),
+            icon: Icons.search_outlined,
+            text: S.of(context).Search,
           ),
           GButton(icon: Icons.shopping_cart_outlined, text: S.of(context).Cart),
           GButton(
