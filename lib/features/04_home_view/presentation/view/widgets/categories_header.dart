@@ -14,7 +14,7 @@ class CategoriesHeader extends StatelessWidget {
         CustomText(
           text: S.of(context).Categories,
           fontSize: 18,
-          alignment: Alignment.topLeft,
+          fontWeight: FontWeight.bold,
         ),
       ],
     );

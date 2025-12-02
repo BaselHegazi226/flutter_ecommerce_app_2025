@@ -5,8 +5,8 @@ import '../helper/const.dart';
 
 categoryViewProductShimmerItem() {
   return Shimmer.fromColors(
-    baseColor: Colors.grey.shade300,
-    highlightColor: Colors.grey.shade100,
+    baseColor: Colors.grey.shade500.withAlpha(32),
+    highlightColor: Colors.grey.shade400.withAlpha(32),
     child: Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -44,7 +44,6 @@ categoryViewProductShimmerItem() {
 
 categoryViewProductShimmerList() {
   return GridView.builder(
-    padding: const EdgeInsets.all(16),
     itemCount: 6, // عدد العناصر الوهمية
     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
       crossAxisCount: 2,

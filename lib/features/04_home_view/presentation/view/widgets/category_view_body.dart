@@ -33,7 +33,6 @@ class CategoryViewBody extends StatelessWidget {
           }
           return GridView.builder(
             itemCount: products.length,
-            padding: const EdgeInsets.all(16),
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2, // خلي اتنين جنب بعض
               crossAxisSpacing: 16, // مسافة أفقية بين العناصر

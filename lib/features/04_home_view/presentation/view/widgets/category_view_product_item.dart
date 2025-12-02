@@ -24,6 +24,7 @@ class CategoryViewProductItem extends StatelessWidget {
       onTap: onTap,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(
             child: Container(
@@ -46,11 +47,11 @@ class CategoryViewProductItem extends StatelessWidget {
           const SizedBox(height: 8),
           Column(
             spacing: 4,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               CustomText(
                 text: title.split(" ").take(2).join(" "),
                 fontSize: 16,
-                alignment: Alignment.topLeft,
               ),
               CustomText(
                 text: description.split(" ").take(3).join(" ").length > 20
@@ -58,14 +59,8 @@ class CategoryViewProductItem extends StatelessWidget {
                     : description.split(" ").take(3).join(" "),
                 fontSize: 12,
                 color: const Color(0xff929292),
-                alignment: Alignment.topLeft,
               ),
-              CustomText(
-                text: '\$$price',
-                fontSize: 16,
-                color: kPrimaryColor,
-                alignment: Alignment.topLeft,
-              ),
+              CustomText(text: '\$$price', fontSize: 16, color: kPrimaryColor),
             ],
           ),
         ],

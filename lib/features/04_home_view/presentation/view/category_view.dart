@@ -23,7 +23,10 @@ class CategoryView extends StatelessWidget {
           appBar: customAppBar(context, categoryModel.name, () {
             GoRouter.of(context).pop();
           }),
-          body: CategoryViewBody(screenSize: screenSize),
+          body: Padding(
+            padding: const EdgeInsets.all(16),
+            child: CategoryViewBody(screenSize: screenSize),
+          ),
         ),
       ),
     );
