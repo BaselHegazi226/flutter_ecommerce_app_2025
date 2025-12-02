@@ -111,7 +111,7 @@ class CheckoutViewBody extends StatelessWidget {
           title: S.of(context).Summarize,
         ),
         EasyStep(
-          icon: const Icon(Icons.check_circle),
+          icon: const Icon(Icons.check_circle_outline),
           title: S.of(context).Finish,
         ),
       ],

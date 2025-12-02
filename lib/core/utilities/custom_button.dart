@@ -54,3 +54,68 @@ class CustomButton extends StatelessWidget {
     );
   }
 }
+
+class CustomTextIconButton extends StatelessWidget {
+  const CustomTextIconButton({
+    super.key,
+    required this.onPressed,
+    required this.text,
+    required this.iconData,
+    this.borderColor = Colors.transparent,
+    this.backgroundColor = kPrimaryColor,
+    this.textColor = Colors.white,
+    this.paddingValue = 8,
+    this.textSize = 18,
+    this.isLoading = false,
+  });
+
+  final void Function()? onPressed;
+  final String text;
+  final Color? backgroundColor;
+  final Color? borderColor;
+  final Color textColor;
+  final double textSize;
+  final double paddingValue;
+  final bool isLoading;
+  final IconData iconData;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
+
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        shape: RoundedRectangleBorder(
+          side: BorderSide(color: borderColor ?? Colors.transparent),
+          borderRadius: BorderRadius.circular(12),
+        ),
+        padding: EdgeInsets.symmetric(horizontal: paddingValue),
+        elevation: 1,
+        backgroundColor:
+            backgroundColor ?? (isDark ? Colors.grey.shade400 : kScaffoldColor),
+      ),
+
+      onPressed: onPressed,
+      child: isLoading
+          ? const CustomCircleIndicator()
+          : Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                CustomText(
+                  text: text,
+                  color: textColor,
+                  fontSize: textSize,
+                  alignment: Alignment.center,
+                ),
+                SizedBox(width: 8),
+                Icon(
+                  iconData,
+                  size: 24,
+                  color: isDark ? Colors.grey.shade900 : Colors.grey.shade50,
+                ),
+              ],
+            ),
+    );
+  }
+}

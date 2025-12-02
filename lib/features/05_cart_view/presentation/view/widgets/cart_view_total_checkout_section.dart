@@ -24,7 +24,7 @@ class CartViewTotalCheckoutSection extends StatelessWidget {
           return PriceButtonSection(
             title: S.of(context).Total,
             value: '\$ ${state.totalPrice.roundToDouble()}',
-            widget: CustomButton(
+            widget: CustomTextIconButton(
               onPressed: () {
                 GoRouter.of(context).push(
                   '${Routes.cartView}${Routes.checkoutView}',
@@ -41,6 +41,7 @@ class CartViewTotalCheckoutSection extends StatelessWidget {
               backgroundColor: Theme.of(context).brightness == Brightness.dark
                   ? Colors.grey.shade200
                   : kPrimaryColor,
+              iconData: Icons.payment_outlined,
             ),
           );
         } else if (state is GetProductCartAndTotalFailure) {

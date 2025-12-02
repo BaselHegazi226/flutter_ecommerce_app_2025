@@ -6,6 +6,8 @@ import 'package:flutter_e_commerce_app_2025/features/05_cart_view/presentation/v
 import 'package:flutter_e_commerce_app_2025/features/05_cart_view/presentation/view_model/cart_bloc/cart_bloc.dart';
 import 'package:flutter_e_commerce_app_2025/features/05_cart_view/presentation/view_model/get_cart_cubit/get_cart_cubit.dart';
 
+import '../../../../core/utilities/custom_text.dart';
+import '../../../../generated/l10n.dart';
 import '../view_model/cart_bloc/cart_state.dart';
 
 class CartView extends StatelessWidget {
@@ -33,7 +35,16 @@ class CartView extends StatelessWidget {
             context.read<GetCartCubit>().getCartProductsAndTotal();
           }
         },
-        child: const SafeArea(child: Scaffold(body: CartViewBody())),
+        child: SafeArea(
+          child: Scaffold(
+            appBar: AppBar(
+              backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+              title: CustomText(text: S.of(context).Cart, fontSize: 20),
+              centerTitle: true,
+            ),
+            body: const CartViewBody(),
+          ),
+        ),
       ),
     );
   }
