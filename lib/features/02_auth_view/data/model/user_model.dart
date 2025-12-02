@@ -39,4 +39,14 @@ class UserModel {
       'photoUrl': photoUrl,
     };
   }
+
+  UserModel copyWith({String? newName, String? newEmail, String? newPhotoUrl}) {
+    return UserModel(
+      id: id,
+      name: newName ?? name,
+      email: newEmail ?? email,
+      photoUrl: newPhotoUrl ?? photoUrl,
+      provider: provider,
+    );
+  }
 }

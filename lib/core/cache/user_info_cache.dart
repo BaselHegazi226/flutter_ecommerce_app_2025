@@ -9,17 +9,28 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../features/02_auth_view/data/model/user_model.dart';
 
-class UserInfoCache {
-  static final UserInfoCache _instance = UserInfoCache._internal();
-  factory UserInfoCache() => _instance;
-  UserInfoCache._internal();
+abstract class UserInfoCache {
+  Future<void> init();
+  Future<void> deleteUser();
+  Future<Either<Failure, void>> saveUser({required UserModel userModel});
+  Future<Either<Failure, void>> updateUser({required UserModel newUserModel});
+  Future<Either<Failure, UserModel?>> getUser();
+}
+
+class UserInfoCacheImplement implements UserInfoCache {
+  static final UserInfoCacheImplement _instance =
+      UserInfoCacheImplement._internal();
+  factory UserInfoCacheImplement() => _instance;
+  UserInfoCacheImplement._internal();
 
   SharedPreferences? _sharedPreferences;
 
+  @override
   Future<void> init() async {
     _sharedPreferences ??= await SharedPreferences.getInstance();
   }
 
+  @override
   Future<Either<Failure, void>> saveUser({required UserModel userModel}) async {
     try {
       await _sharedPreferences!.setString('current_user', userModel.id);
@@ -33,6 +44,7 @@ class UserInfoCache {
     }
   }
 
+  @override
   Future<Either<Failure, UserModel?>> getUser() async {
     try {
       final id = _sharedPreferences!.getString('current_user');
@@ -48,11 +60,33 @@ class UserInfoCache {
     }
   }
 
+  @override
   Future<void> deleteUser() async {
     final id = _sharedPreferences!.getString('current_user');
     if (id != null) {
       await _sharedPreferences!.remove('current_user_$id');
       await _sharedPreferences!.remove('current_user');
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> updateUser({
+    required UserModel newUserModel,
+  }) async {
+    try {
+      final id = _sharedPreferences!.getString('current_user');
+      final data = _sharedPreferences!.getString('current_user_$id');
+      if (data != null) {
+        _sharedPreferences!.setString(
+          'current_user_$id',
+          jsonEncode(newUserModel.toJson()),
+        );
+        return right(null);
+      } else {
+        return left(CatchErrorHandle.catchBack(failure: 'user not found'));
+      }
+    } catch (e) {
+      return left(CatchErrorHandle.catchBack(failure: e));
     }
   }
 }
