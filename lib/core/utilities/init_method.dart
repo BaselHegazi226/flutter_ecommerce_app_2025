@@ -10,26 +10,43 @@ import '../../../../../core/cache/user_info_cache.dart';
 import '../../../../../core/utilities/app_get.dart';
 
 Future<void> initMethods({required String userId}) async {
-  await UserInfoCache().init();
+  // ← الخطوة الجديدة والمهمة
+  await UserInfoCacheImplement().init();
+  //cart cache implement
 
-  final getIt = AppGet().getIt;
-
-  // مسح كل الكاشات القديمة عند تغيير المستخدم
-  getIt.resetLazySingleton<CartCacheImplement>();
-  getIt.resetLazySingleton<FavouriteCacheImplement>();
-  getIt.resetLazySingleton<OrderCacheImplement>();
-  getIt.resetLazySingleton<ProductCubit>();
-  getIt.resetLazySingleton<CartBloc>();
-  getIt.resetLazySingleton<GetCartCubit>();
-  getIt.resetLazySingleton<CategoryCubit>();
-
-  // إنشاء الكاش الجديد الخاص بالمستخدم
+  final AppGet appGet = AppGet();
+  final getIt = appGet.getIt;
+  //if user sign up in one phone more than time
+  // i should unregister the singleton
+  if (getIt.isRegistered<CartCacheImplement>()) {
+    getIt.unregister<CartCacheImplement>();
+  }
+  if (getIt.isRegistered<FavouriteCacheImplement>()) {
+    getIt.unregister<FavouriteCacheImplement>();
+  }
+  if (getIt.isRegistered<OrderCacheImplement>()) {
+    getIt.unregister<OrderCacheImplement>();
+  }
+  if (getIt.isRegistered<ProductCubit>()) {
+    getIt.unregister<ProductCubit>();
+  }
+  if (getIt.isRegistered<CartBloc>()) {
+    getIt.unregister<CartBloc>();
+  }
+  if (getIt.isRegistered<GetCartCubit>()) {
+    getIt.unregister<GetCartCubit>();
+  }
+  if (getIt.isRegistered<CategoryCubit>()) {
+    getIt.unregister<CategoryCubit>();
+  }
+  //cart cache implement
   final cartCacheImplement = CartCacheImplement(userId: userId);
   await cartCacheImplement.init();
 
+  //favourite cache implement
   final favouriteCacheImplement = FavouriteCacheImplement(userId: userId);
   await favouriteCacheImplement.init();
-
+  //order cache implement
   final orderCacheImplement = OrderCacheImplement(userId: userId);
   await orderCacheImplement.init();
 
