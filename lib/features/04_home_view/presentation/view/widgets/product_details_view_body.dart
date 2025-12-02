@@ -21,7 +21,7 @@ class ProductDetailsViewBody extends StatelessWidget {
           children: [
             SizedBox(
               width: screenSize.width,
-              height: screenSize.height * .4,
+              height: screenSize.height * .35,
               child: CachedNetworkImage(
                 imageUrl: productModel.images[0],
                 placeholder: (context, value) {
@@ -30,7 +30,6 @@ class ProductDetailsViewBody extends StatelessWidget {
                 errorWidget: (context, error, child) {
                   return const Icon(Icons.image);
                 },
-                fit: BoxFit.fill,
               ),
             ),
             ProductDetailsIconSection(

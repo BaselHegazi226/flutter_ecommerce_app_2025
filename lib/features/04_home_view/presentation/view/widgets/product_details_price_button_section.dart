@@ -8,6 +8,7 @@ import 'package:flutter_e_commerce_app_2025/features/05_cart_view/presentation/v
 import 'package:flutter_e_commerce_app_2025/features/05_cart_view/presentation/view_model/cart_bloc/cart_state.dart';
 import 'package:toastification/toastification.dart';
 
+import '../../../../../core/helper/const.dart';
 import '../../../../../generated/l10n.dart';
 import '../../../../05_cart_view/data/model/cart_model.dart';
 
@@ -27,7 +28,7 @@ class ProductDetailsPriceButtonSection extends StatelessWidget {
       value: '\$ ${productModel.price}',
       widget: BlocConsumer<CartBloc, CartState>(
         builder: (context, state) {
-          return CustomButton(
+          return CustomTextIconButton(
             onPressed: () {
               final CartModel cartModel = CartModel(
                 id: productModel.id,
@@ -41,6 +42,13 @@ class ProductDetailsPriceButtonSection extends StatelessWidget {
               );
             },
             text: S.of(context).AddToCart,
+            textColor: Theme.of(context).brightness == Brightness.dark
+                ? Colors.grey.shade600
+                : Colors.grey.shade200,
+            backgroundColor: Theme.of(context).brightness == Brightness.dark
+                ? Colors.grey.shade200
+                : kPrimaryColor,
+            iconData: Icons.shopping_cart,
           );
         },
         listener: (context, state) {
