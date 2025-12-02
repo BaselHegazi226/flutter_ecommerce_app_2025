@@ -23,6 +23,7 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "AddToCart": MessageLookupByLibrary.simpleMessage("Add To Cart"),
+    "AllProducts": MessageLookupByLibrary.simpleMessage("All Products"),
     "Back": MessageLookupByLibrary.simpleMessage("Back"),
     "BestSelling": MessageLookupByLibrary.simpleMessage("Best Selling"),
     "BillingAddress": MessageLookupByLibrary.simpleMessage(
@@ -86,9 +87,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "Price": MessageLookupByLibrary.simpleMessage("Price"),
     "Profile": MessageLookupByLibrary.simpleMessage("Profile"),
     "Rating": MessageLookupByLibrary.simpleMessage("Rating"),
-    "SellAll": MessageLookupByLibrary.simpleMessage("Sell All"),
+    "Search": MessageLookupByLibrary.simpleMessage("Search"),
     "Settings": MessageLookupByLibrary.simpleMessage("Settings"),
     "ShippingAddress": MessageLookupByLibrary.simpleMessage("Shipping Address"),
+    "ShowAll": MessageLookupByLibrary.simpleMessage("Show All"),
     "SignIn": MessageLookupByLibrary.simpleMessage("Sign In"),
     "SignInWithFacebook": MessageLookupByLibrary.simpleMessage(
       "Sign In with Facebook",
@@ -114,6 +116,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "TotalPrice": MessageLookupByLibrary.simpleMessage("Total Price"),
     "Transmit": MessageLookupByLibrary.simpleMessage("Transmit"),
     "TryToFillCart": MessageLookupByLibrary.simpleMessage("Try To Fill Cart"),
+    "UserEmail": MessageLookupByLibrary.simpleMessage("User Email"),
+    "UserName": MessageLookupByLibrary.simpleMessage("User Name"),
     "Welcome": MessageLookupByLibrary.simpleMessage("Welcome"),
     "cityIsRequired": MessageLookupByLibrary.simpleMessage("city is required"),
     "countryIsRequired": MessageLookupByLibrary.simpleMessage(

@@ -1,5 +1,6 @@
 {
   "Home": "Home",
+  "Search": "Search",
   "Cart": "Cart",
   "Profile": "Profile",
   "Welcome": "Welcome",
@@ -25,7 +26,8 @@
   "Categories": "Categories",
   "BestSelling": "Best Selling",
   "BillingAddress": "Billing address is the same as delivery address",
-  "SellAll": "Sell All",
+  "ShowAll": "Show All",
+  "AllProducts":"All Products",
   "Category": "Category",
   "Rating": "Rating",
   "Details": "Details",
@@ -82,5 +84,7 @@
   "NoLocation": "'No Location Found try make order!",
   "OnOff":"On / Off",
   "Dark": "Dark",
-  "Light": "Light"
+  "Light": "Light",
+  "UserName": "User Name",
+  "UserEmail": "User Email"
 }

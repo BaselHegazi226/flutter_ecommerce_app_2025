@@ -23,6 +23,7 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "AddToCart": MessageLookupByLibrary.simpleMessage("أضف إلى السلة"),
+    "AllProducts": MessageLookupByLibrary.simpleMessage("كل المنتجات"),
     "Back": MessageLookupByLibrary.simpleMessage("السابق"),
     "BestSelling": MessageLookupByLibrary.simpleMessage("الأكثر مبيعاً"),
     "BillingAddress": MessageLookupByLibrary.simpleMessage(
@@ -86,9 +87,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "Price": MessageLookupByLibrary.simpleMessage("السعر"),
     "Profile": MessageLookupByLibrary.simpleMessage("الملف الشخصي"),
     "Rating": MessageLookupByLibrary.simpleMessage("التقييم"),
-    "SellAll": MessageLookupByLibrary.simpleMessage("عرض الكل"),
+    "Search": MessageLookupByLibrary.simpleMessage("بحث"),
     "Settings": MessageLookupByLibrary.simpleMessage("الإعدادات"),
     "ShippingAddress": MessageLookupByLibrary.simpleMessage("عنوان الشحن"),
+    "ShowAll": MessageLookupByLibrary.simpleMessage("عرض الكل"),
     "SignIn": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
     "SignInWithFacebook": MessageLookupByLibrary.simpleMessage(
       "تسجيل الدخول باستخدام فيسبوك",
@@ -114,6 +116,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "TryToFillCart": MessageLookupByLibrary.simpleMessage(
       "حاول ملء السلة بالمنتجات",
     ),
+    "UserEmail": MessageLookupByLibrary.simpleMessage(
+      "البريد الألكتروني للمستخدم",
+    ),
+    "UserName": MessageLookupByLibrary.simpleMessage("اسم المستخدم"),
     "Welcome": MessageLookupByLibrary.simpleMessage("مرحبا بك "),
     "cityIsRequired": MessageLookupByLibrary.simpleMessage("المدينة مطلوبة"),
     "countryIsRequired": MessageLookupByLibrary.simpleMessage("الدولة مطلوبة"),
