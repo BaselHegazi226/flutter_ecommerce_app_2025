@@ -87,4 +87,22 @@ class HomeViewRepoImpl implements HomeViewRepo {
       return left(CatchErrorHandle.catchBack(failure: e));
     }
   }
+
+  @override
+  Future<Either<Failure, List<ProductModel>>> showAllProducts() async {
+    try {
+      final Response response = await dio.get('$_baseUrl/products');
+      final data = response.data['products'];
+      debugPrint('data data data data data = $data');
+      List<ProductModel> products = [];
+      for (var item in data) {
+        final model = ProductModel.fromJson(item);
+        debugPrint('model best selling = ${model.toJson()}');
+        products.add(model);
+      }
+      return right(products);
+    } catch (e) {
+      return left(CatchErrorHandle.catchBack(failure: e));
+    }
+  }
 }

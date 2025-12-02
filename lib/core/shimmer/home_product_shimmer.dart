@@ -4,8 +4,8 @@ import 'package:shimmer/shimmer.dart';
 
 Shimmer homeProductShimmerItem(Size screenSize) {
   return Shimmer.fromColors(
-    baseColor: Colors.grey.shade300,
-    highlightColor: Colors.grey.shade100,
+    baseColor: Colors.grey.shade500.withAlpha(32),
+    highlightColor: Colors.grey.shade400.withAlpha(32),
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
