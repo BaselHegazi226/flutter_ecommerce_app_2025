@@ -59,6 +59,11 @@ class S {
     return Intl.message('Home', name: 'Home', desc: '', args: []);
   }
 
+  /// `Search`
+  String get Search {
+    return Intl.message('Search', name: 'Search', desc: '', args: []);
+  }
+
   /// `Cart`
   String get Cart {
     return Intl.message('Cart', name: 'Cart', desc: '', args: []);
@@ -249,9 +254,19 @@ class S {
     );
   }
 
-  /// `Sell All`
-  String get SellAll {
-    return Intl.message('Sell All', name: 'SellAll', desc: '', args: []);
+  /// `Show All`
+  String get ShowAll {
+    return Intl.message('Show All', name: 'ShowAll', desc: '', args: []);
+  }
+
+  /// `All Products`
+  String get AllProducts {
+    return Intl.message(
+      'All Products',
+      name: 'AllProducts',
+      desc: '',
+      args: [],
+    );
   }
 
   /// `Category`
@@ -647,6 +662,16 @@ class S {
   /// `Light`
   String get Light {
     return Intl.message('Light', name: 'Light', desc: '', args: []);
+  }
+
+  /// `User Name`
+  String get UserName {
+    return Intl.message('User Name', name: 'UserName', desc: '', args: []);
+  }
+
+  /// `User Email`
+  String get UserEmail {
+    return Intl.message('User Email', name: 'UserEmail', desc: '', args: []);
   }
 }
 
