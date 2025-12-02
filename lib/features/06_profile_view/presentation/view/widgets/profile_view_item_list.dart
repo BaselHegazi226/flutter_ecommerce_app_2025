@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_e_commerce_app_2025/core/helper/const.dart';
 import 'package:flutter_e_commerce_app_2025/core/helper/routes.dart';
 import 'package:flutter_e_commerce_app_2025/core/utilities/custom_dialog_state.dart';
 import 'package:flutter_e_commerce_app_2025/features/06_profile_view/presentation/view/widgets/profile_view_item.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../../../core/helper/const.dart';
 import '../../../../../generated/l10n.dart';
 import '../../../data/model/profile_view_item_model.dart';
 import '../../view_model/user_info_cubit/user_info_cubit.dart';
@@ -24,10 +24,11 @@ class ProfileViewItemList extends StatelessWidget {
             iconData: profileListFun(context)[index].iconData,
             title: profileListFun(context)[index].title,
             primaryColor: profileListFun(context)[index].route == null
-                ? Colors.red
+                ? Colors.red.withAlpha(240)
                 : Theme.of(context).brightness == Brightness.dark
-                ? const Color(0xffEDFBF4)
-                : kPrimaryColor,
+                ? Colors.grey.shade500.withAlpha(32)
+                : itemsBackgroundColor[index],
+            iconColor: Colors.white,
             onTap: () {
               if (profileListFun(context)[index].route == null) {
                 warningAwesomeDialog(
@@ -55,7 +56,30 @@ class ProfileViewItemList extends StatelessWidget {
   }
 
   void handleProfileItemTap(BuildContext context, {required String route}) {
-    GoRouter.of(context).push('${Routes.profileView}$route');
+    if (route == Routes.editProfileView) {
+      // جلب بيانات المستخدم من الـ Cubit الحالي
+      //final state = context.read<UserInfoCubit>().state;
+      // UserModel? currentUser;
+      // if (state is GetUserInfoLocalSuccess) {
+      //   currentUser = state.userModel;
+      // } else if (state is GetUserInfoFromFirestoreSuccess) {
+      //   currentUser = state.userModel;
+      // }
+      //
+      // if (currentUser != null) {
+      //   GoRouter.of(context).push(
+      //     '${Routes.profileView}$route',
+      //     extra: cubit, // ← تمرير UserModel هنا
+      //   );
+      // }
+      final cubit = context.read<UserInfoCubit>();
+      GoRouter.of(context).push(
+        '${Routes.profileView}$route',
+        extra: cubit, // ← تمرير UserModel هنا
+      );
+    } else {
+      GoRouter.of(context).push('${Routes.profileView}$route');
+    }
   }
 
   List<ProfileViewItemModel> profileListFun(BuildContext context) {
@@ -91,4 +115,13 @@ class ProfileViewItemList extends StatelessWidget {
       ),
     ];
   }
+
+  static List<Color> itemsBackgroundColor = [
+    kPrimaryColor.withAlpha(135),
+    Colors.grey.withAlpha(135),
+    Colors.orange.withAlpha(135),
+    Colors.red.withAlpha(135),
+    Colors.black.withAlpha(135),
+    Colors.red.withAlpha(240),
+  ];
 }

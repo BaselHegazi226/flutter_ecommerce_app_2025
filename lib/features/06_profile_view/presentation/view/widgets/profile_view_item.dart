@@ -10,11 +10,17 @@ class ProfileViewItem extends StatelessWidget {
     required this.title,
     required this.onTap,
     required this.primaryColor,
+    this.iconColor = Colors.black,
+    this.textColor = Colors.black,
+    this.arrowColor = Colors.black,
   });
   final IconData iconData;
   final String title;
   final VoidCallback onTap;
   final Color primaryColor;
+  final Color iconColor;
+  final Color textColor;
+  final Color arrowColor;
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -24,20 +30,15 @@ class ProfileViewItem extends StatelessWidget {
         leading: Container(
           padding: const EdgeInsets.all(8),
           decoration: BoxDecoration(
-            color: Colors.transparent,
-            border: Border.all(color: primaryColor),
+            color: primaryColor,
             borderRadius: const BorderRadius.all(Radius.circular(4)),
           ),
-          child: Icon(iconData, size: 24, color: primaryColor),
+          child: Icon(iconData, size: 24, color: iconColor),
         ),
-        title: CustomText(text: title, fontSize: 18, color: primaryColor),
+        title: CustomText(text: title, fontSize: 18, color: textColor),
         trailing: title == S.of(context).Logout
             ? null
-            : Icon(
-                Icons.arrow_forward_ios_outlined,
-                size: 20,
-                color: primaryColor,
-              ),
+            : const Icon(Icons.arrow_forward_ios_outlined, size: 20),
       ),
     );
   }

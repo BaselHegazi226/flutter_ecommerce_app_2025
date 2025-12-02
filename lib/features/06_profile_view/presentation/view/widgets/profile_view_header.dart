@@ -1,10 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_e_commerce_app_2025/core/helper/const.dart';
 import 'package:flutter_e_commerce_app_2025/core/shimmer/profile_header_shimmer.dart';
 import 'package:flutter_e_commerce_app_2025/core/utilities/custom_text.dart';
-import 'package:gradient_borders/gradient_borders.dart';
+import 'package:flutter_e_commerce_app_2025/features/06_profile_view/presentation/view/widgets/profile_view_custom_image.dart';
 
 import '../../../../../generated/assets.dart';
 import '../../view_model/user_info_cubit/user_info_cubit.dart';
@@ -27,20 +26,11 @@ class ProfileViewHeader extends StatelessWidget {
 
           final photoUrl = userModel.photoUrl;
 
-          return Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+          return Row(
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Container(
-                height: size.height * .1,
-                decoration: BoxDecoration(
-                  color: Colors.grey.shade200,
-                  border: GradientBoxBorder(
-                    gradient: LinearGradient(
-                      colors: [kPrimaryColor, Colors.blue.shade500],
-                    ),
-                  ),
-                  shape: BoxShape.circle,
-                ),
+              CustomImage(
+                imageWidth: size.width * .2,
                 child: photoUrl != null && photoUrl.startsWith('http')
                     ? CachedNetworkImage(
                         imageUrl: photoUrl,
@@ -51,7 +41,7 @@ class ProfileViewHeader extends StatelessWidget {
                       )
                     : Image.asset(Assets.profileDefulatProfileImage),
               ),
-              const SizedBox(height: 24),
+              const SizedBox(width: 24),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
@@ -64,7 +54,7 @@ class ProfileViewHeader extends StatelessWidget {
                       alignment: Alignment.center,
                       color: Theme.of(context).brightness == Brightness.dark
                           ? Colors.grey.shade200
-                          : kPrimaryColor,
+                          : Colors.black,
                     ),
                   ),
                   FittedBox(
@@ -75,7 +65,7 @@ class ProfileViewHeader extends StatelessWidget {
                       alignment: Alignment.center,
                       color: Theme.of(context).brightness == Brightness.dark
                           ? Colors.grey.shade200
-                          : kPrimaryColor.withAlpha(125),
+                          : Colors.black.withAlpha(180),
                     ),
                   ),
                 ],
