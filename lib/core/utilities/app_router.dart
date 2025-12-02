@@ -7,6 +7,7 @@ import 'package:flutter_e_commerce_app_2025/features/04_home_view/data/model/cat
 import 'package:flutter_e_commerce_app_2025/features/04_home_view/presentation/view/category_view.dart';
 import 'package:flutter_e_commerce_app_2025/features/04_home_view/presentation/view/home_view.dart';
 import 'package:flutter_e_commerce_app_2025/features/04_home_view/presentation/view/product_details_view.dart';
+import 'package:flutter_e_commerce_app_2025/features/04_home_view/presentation/view/show_all_view.dart';
 import 'package:flutter_e_commerce_app_2025/features/05_cart_view/presentation/view/cart_view.dart';
 import 'package:flutter_e_commerce_app_2025/features/05_cart_view/presentation/view_model/cart_bloc/cart_bloc.dart';
 import 'package:flutter_e_commerce_app_2025/features/05_cart_view/presentation/view_model/get_cart_cubit/get_cart_cubit.dart';
@@ -15,6 +16,8 @@ import 'package:flutter_e_commerce_app_2025/features/06_profile_view/presentatio
 import 'package:flutter_e_commerce_app_2025/features/06_profile_view/presentation/view/order_history_view.dart';
 import 'package:flutter_e_commerce_app_2025/features/06_profile_view/presentation/view/settings_view.dart';
 import 'package:flutter_e_commerce_app_2025/features/06_profile_view/presentation/view/shipping_address_view.dart';
+import 'package:flutter_e_commerce_app_2025/features/06_profile_view/presentation/view_model/user_info_cubit/user_info_cubit.dart';
+import 'package:flutter_e_commerce_app_2025/features/07_search_view/presentation/view/search_view.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../features/05_cart_view/presentation/view/checkout_view.dart';
@@ -55,7 +58,17 @@ abstract class AppRouter {
                   return CategoryView(categoryModel: model);
                 },
               ),
+              GoRoute(
+                path: Routes.showAllView,
+                builder: (context, state) {
+                  return const ShowAllView();
+                },
+              ),
             ],
+          ),
+          GoRoute(
+            path: Routes.searchView,
+            builder: (context, state) => const SearchView(),
           ),
           GoRoute(
             path: Routes.cartView,
@@ -80,7 +93,10 @@ abstract class AppRouter {
             routes: [
               GoRoute(
                 path: Routes.editProfileView,
-                builder: (context, state) => const EditProfileView(),
+                builder: (context, state) {
+                  final userInfoCubit = state.extra as UserInfoCubit;
+                  return EditProfileView(userInfoCubit: userInfoCubit);
+                },
               ),
               GoRoute(
                 path: Routes.orderHistoryView,

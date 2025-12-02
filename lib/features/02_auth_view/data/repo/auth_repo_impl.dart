@@ -2,7 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_e_commerce_app_2025/core/errors/failure.dart';
-import 'package:flutter_e_commerce_app_2025/core/services/user_firebaseStore.dart';
+import 'package:flutter_e_commerce_app_2025/core/services/user_services.dart';
 import 'package:flutter_e_commerce_app_2025/features/02_auth_view/data/repo/auth_repo.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -208,8 +208,8 @@ class AuthRepoImpl implements AuthRepo {
     required String userToken,
   }) async {
     //save user data to shared preference
-    await UserInfoCache().saveUser(userModel: userModel);
+    await UserInfoCacheImplement().saveUser(userModel: userModel);
     //save user data to firebase
-    await UserFirebaseStore().addUserToFirebase(userModel);
+    await UserServices().addUserToFirebase(userModel);
   }
 }
