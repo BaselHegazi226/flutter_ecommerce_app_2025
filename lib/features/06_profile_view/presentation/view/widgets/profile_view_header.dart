@@ -27,7 +27,6 @@ class ProfileViewHeader extends StatelessWidget {
           final photoUrl = userModel.photoUrl;
 
           return Row(
-            mainAxisAlignment: MainAxisAlignment.start,
             children: [
               CustomImage(
                 imageWidth: size.width * .2,
@@ -43,7 +42,7 @@ class ProfileViewHeader extends StatelessWidget {
               ),
               const SizedBox(width: 24),
               Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   FittedBox(
                     fit: BoxFit.scaleDown,
@@ -89,7 +88,7 @@ class ProfileViewHeader extends StatelessWidget {
         }
 
         // حالة التحميل
-        return const ProfileHeaderShimmer();
+        return profileHeaderShimmer(size);
       },
     );
   }

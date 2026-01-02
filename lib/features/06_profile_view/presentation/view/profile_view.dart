@@ -18,7 +18,8 @@ class ProfileView extends StatelessWidget {
         child: Scaffold(
           appBar: AppBar(
             backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-            title: CustomText(text: S.of(context).Profile, fontSize: 20),
+            surfaceTintColor: Theme.of(context).scaffoldBackgroundColor,
+            title: CustomText(text: S.of(context).profile, fontSize: 20),
             centerTitle: true,
           ),
           body: const ProfileViewBody(),
