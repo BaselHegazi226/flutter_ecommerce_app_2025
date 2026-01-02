@@ -10,63 +10,53 @@ class CartViewCountSection extends StatelessWidget {
     required this.count,
     required this.id,
   });
+
   final int id, count;
 
   @override
   Widget build(BuildContext context) {
-    final screenSize = MediaQuery.sizeOf(context);
     return BlocBuilder<CartBloc, CartState>(
       builder: (context, state) {
-        return Row(
-          children: [
-            Expanded(
-              flex: 2,
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Theme.of(context).brightness == Brightness.dark
-                      ? Colors.grey.shade500.withAlpha(32)
-                      : Colors.grey.shade200,
-                  borderRadius: const BorderRadius.all(Radius.circular(4)),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    IconButton(
-                      onPressed: () {
-                        context.read<CartBloc>().add(
-                          UpdateProductCountEvent(
-                            newCount: count + 1,
-                            productId: id,
-                          ),
-                        );
-                      },
-                      icon: const Icon(Icons.add),
-                    ),
-                    CustomText(
-                      text: '$count',
-                      fontSize: 20,
-                      alignment: Alignment.center,
-                    ),
-                    IconButton(
-                      onPressed: () {
-                        if (count > 1) {
-                          context.read<CartBloc>().add(
-                            UpdateProductCountEvent(
-                              newCount: count - 1,
-                              productId: id,
-                            ),
-                          );
-                        }
-                      },
-                      icon: const Icon(Icons.remove),
-                    ),
-                  ],
-                ),
+        return Container(
+          decoration: BoxDecoration(
+            color: Theme.of(context).brightness == Brightness.dark
+                ? Colors.grey.shade500.withAlpha(32)
+                : Colors.grey.shade200,
+            borderRadius: const BorderRadius.all(Radius.circular(4)),
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              IconButton(
+                onPressed: () {
+                  context.read<CartBloc>().add(
+                    UpdateProductCountEvent(newCount: count + 1, productId: id),
+                  );
+                },
+                icon: const Icon(Icons.add),
               ),
-            ),
-            SizedBox(width: screenSize.width * .02),
-            const Expanded(flex: 1, child: SizedBox()),
-          ],
+              CustomText(
+                text: '$count',
+                fontSize: 20,
+                alignment: Alignment.center,
+              ),
+              IconButton(
+                onPressed: () {
+                  if (count > 1) {
+                    context.read<CartBloc>().add(
+                      UpdateProductCountEvent(
+                        newCount: count - 1,
+                        productId: id,
+                      ),
+                    );
+                    debugPrint('product id = $id');
+                    debugPrint('product count = $count');
+                  }
+                },
+                icon: const Icon(Icons.remove),
+              ),
+            ],
+          ),
         );
       },
     );

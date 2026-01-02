@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_e_commerce_app_2025/core/helper/const.dart';
+import 'package:flutter_e_commerce_app_2025/core/helper/extensions_of_s_localization.dart';
 import 'package:flutter_e_commerce_app_2025/core/helper/routes.dart';
 import 'package:flutter_e_commerce_app_2025/core/utilities/custom_button.dart';
 import 'package:flutter_e_commerce_app_2025/core/utilities/custom_loading_indicator.dart';
@@ -20,10 +21,9 @@ class CartViewTotalCheckoutSection extends StatelessWidget {
     return BlocBuilder<GetCartCubit, GetCartState>(
       builder: (context, state) {
         if (state is GetProductCartAndTotalSuccess) {
-          debugPrint('success totallllllllllllllll');
           return PriceButtonSection(
-            title: S.of(context).Total,
-            value: '\$ ${state.totalPrice.roundToDouble()}',
+            title: S.of(context).cartTotal,
+            value: '${priceShowed(state.totalPrice)} ${S.of(context).EP}',
             widget: CustomTextIconButton(
               onPressed: () {
                 GoRouter.of(context).push(
@@ -34,7 +34,7 @@ class CartViewTotalCheckoutSection extends StatelessWidget {
                   },
                 );
               },
-              text: S.of(context).Checkout,
+              text: S.of(context).cartCheckout,
               textColor: Theme.of(context).brightness == Brightness.dark
                   ? Colors.grey.shade600
                   : Colors.grey.shade200,
@@ -45,18 +45,16 @@ class CartViewTotalCheckoutSection extends StatelessWidget {
             ),
           );
         } else if (state is GetProductCartAndTotalFailure) {
-          debugPrint('failure totallllllllllllllll = ${state.errorMessage}');
           return PriceButtonSection(
-            title: S.of(context).Total,
+            title: S.of(context).cartTotal,
             value: state.errorMessage,
             widget: CustomButton(
               onPressed: null,
-              text: S.of(context).Checkout,
+              text: S.of(context).cartCheckout,
               backgroundColor: kPrimaryColor,
             ),
           );
         } else {
-          debugPrint('loading totallllllllllllllll');
           return const Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [

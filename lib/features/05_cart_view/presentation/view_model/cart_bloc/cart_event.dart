@@ -9,8 +9,8 @@ final class AddToCartEvent extends CartEvent {
 }
 
 final class DeleteProductEvent extends CartEvent {
-  final CartModel cartModel;
-  DeleteProductEvent({required this.cartModel});
+  final int id;
+  DeleteProductEvent({required this.id});
 }
 
 final class DeleteAllProductsEvent extends CartEvent {}

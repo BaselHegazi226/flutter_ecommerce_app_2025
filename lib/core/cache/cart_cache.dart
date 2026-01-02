@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_e_commerce_app_2025/core/errors/catch_error_handle.dart';
@@ -9,21 +10,33 @@ import '../../features/05_cart_view/data/model/cart_model.dart';
 
 abstract class CartCache {
   Future<void> init();
-  Future<Either<Failure, AddToCartEnum>> addProductCart({
+
+  Future<Either<Failure, Map<String, dynamic>>> addProductCart({
     required CartModel cartModel,
   });
-  Future<Either<Failure, List<CartModel>>> updateProductCount({
+
+  Future<Either<Failure, Map<String, dynamic>>> updateProductCount({
     required int productId,
     required int newCount,
   });
+
   Future<Either<Failure, List<CartModel>>> getCartList();
+
+  Future<Either<Failure, void>> addAllCartListAndTotalPrice({
+    required Map<String, dynamic> allCartListAsMap,
+    required double totalPrice,
+  });
+
   Future<Either<Failure, void>> setCartTotalPrice({
     required List<CartModel> cartList,
   });
+
   Future<Either<Failure, double>> getCartTotalPrice();
+
   Future<Either<Failure, void>> removeAllProductCart();
-  Future<Either<Failure, void>> removeProductCart({
-    required CartModel cartModel,
+
+  Future<Either<Failure, Map<String, dynamic>>> removeProductCart({
+    required int id,
   });
 }
 
@@ -33,6 +46,7 @@ class CartCacheImplement implements CartCache {
   late double _totalPrice;
 
   CartCacheImplement({required this.userId});
+
   @override
   Future<void> init() async {
     //register all model adaptors
@@ -48,7 +62,7 @@ class CartCacheImplement implements CartCache {
   }
 
   @override
-  Future<Either<Failure, AddToCartEnum>> addProductCart({
+  Future<Either<Failure, Map<String, dynamic>>> addProductCart({
     required CartModel cartModel,
   }) async {
     try {
@@ -61,17 +75,41 @@ class CartCacheImplement implements CartCache {
           newTitle: cartModelIndependent.title,
         );
         await hiveBoxProductModel.put(newCartModel.id, newCartModel);
-        return right(AddToCartEnum.added);
+
+        List<CartModel> cartList = hiveBoxProductModel.values.map((cart) {
+          return cart.copyWith();
+        }).toList();
+
+        // ترتيب السلة حسب وقت الإضافة (الأحدث أولاً)
+        cartList.sort((a, b) => b.addAt.compareTo(a.addAt));
+
+        return right({
+          'cartList': cartList,
+          'totalPrice': _totalPrice,
+          'AddOrDone': AddToCartEnum.added,
+        });
       } else {
-        return right(AddToCartEnum.isAddedAlready);
+        List<CartModel> cartList = hiveBoxProductModel.values.map((cart) {
+          return cart.copyWith();
+        }).toList();
+
+        // ترتيب السلة حسب وقت الإضافة (الأحدث أولاً)
+        cartList.sort((a, b) => b.addAt.compareTo(a.addAt));
+
+        return right({
+          'cartList': cartList,
+          'totalPrice': _totalPrice,
+          'AddOrDone': AddToCartEnum.isAddedAlready,
+        });
       }
     } catch (e) {
+      debugPrint('exceptionnnnnnnnn : $e=============.');
       return left(CatchErrorHandle.catchBack(failure: e));
     }
   }
 
   @override
-  Future<Either<Failure, List<CartModel>>> updateProductCount({
+  Future<Either<Failure, Map<String, dynamic>>> updateProductCount({
     required int productId,
     required int newCount,
   }) async {
@@ -85,17 +123,19 @@ class CartCacheImplement implements CartCache {
         );
         await hiveBoxProductModel.put(productId, updateCartModel);
 
-        //get cart list after update
         List<CartModel> cartList = hiveBoxProductModel.values.map((cart) {
-          final independentCartProduct = CartModel.fromJson(cart.toJson());
-          return cart.copyWith(newCount: independentCartProduct.productCount);
+          return cart.copyWith();
         }).toList();
 
-        return right(cartList);
+        // ترتيب السلة حسب وقت الإضافة (الأحدث أولاً)
+        cartList.sort((a, b) => b.addAt.compareTo(a.addAt));
+
+        return right({'cartList': cartList, 'totalPrice': _totalPrice});
       } else {
         return left(CatchErrorHandle.catchBack(failure: 'product not found'));
       }
     } catch (e) {
+      debugPrint('exceptionnnnnnnnn : $e=============.');
       return left(CatchErrorHandle.catchBack(failure: e));
     }
   }
@@ -114,7 +154,7 @@ class CartCacheImplement implements CartCache {
 
       return right(cartList);
     } catch (e) {
-      debugPrint('error from get = $e');
+      debugPrint('exceptionnnnnnnnn : $e=============.');
       return left(CatchErrorHandle.catchBack(failure: e));
     }
   }
@@ -126,20 +166,29 @@ class CartCacheImplement implements CartCache {
       _totalPrice = 0;
       return right(null);
     } catch (e) {
+      debugPrint('exceptionnnnnnnnn : $e=============.');
       return left(CatchErrorHandle.catchBack(failure: e));
     }
   }
 
   @override
-  Future<Either<Failure, void>> removeProductCart({
-    required CartModel cartModel,
+  Future<Either<Failure, Map<String, dynamic>>> removeProductCart({
+    required int id,
   }) async {
     try {
-      if (hiveBoxProductModel.get(cartModel.id) != null) {
-        await hiveBoxProductModel.delete(cartModel.id);
+      if (hiveBoxProductModel.get(id) != null) {
+        List<CartModel> cartList = hiveBoxProductModel.values.map((cart) {
+          return cart.copyWith();
+        }).toList();
+
+        // ترتيب السلة حسب وقت الإضافة (الأحدث أولاً)
+        cartList.sort((a, b) => b.addAt.compareTo(a.addAt));
+
+        return right({'cartList': cartList, 'totalPrice': _totalPrice});
       }
-      return right(null);
+      return left(CatchErrorHandle.catchBack(failure: 'can\'t remove item'));
     } catch (e) {
+      debugPrint('exceptionnnnnnnnn : $e=============.');
       return left(CatchErrorHandle.catchBack(failure: e));
     }
   }
@@ -148,7 +197,11 @@ class CartCacheImplement implements CartCache {
   Future<Either<Failure, double>> getCartTotalPrice() async {
     try {
       return right(_totalPrice);
+    } on FirebaseException catch (e) {
+      debugPrint('firebase exception : $e=============.');
+      return left(FirebaseFailure.fromFirebaseException(exception: e));
     } catch (e) {
+      debugPrint('exceptionnnnnnnnn : $e=============.');
       return left(CatchErrorHandle.catchBack(failure: e));
     }
   }
@@ -160,10 +213,40 @@ class CartCacheImplement implements CartCache {
     try {
       _totalPrice = 0;
       cartList.map((item) {
-        _totalPrice += item.productCount * item.price;
+        _totalPrice += (item.productCount * item.price);
       }).toList();
       return right(null);
     } catch (e) {
+      debugPrint('exceptionnnnnnnnn : $e=============.');
+      return left(CatchErrorHandle.catchBack(failure: e));
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> addAllCartListAndTotalPrice({
+    required Map<String, dynamic> allCartListAsMap,
+    required double totalPrice,
+  }) async {
+    List<CartModel> allCartList = (allCartListAsMap as List)
+        .map((cart) => CartModel.fromJson(cart))
+        .toList();
+    try {
+      debugPrint('CartCache opened for userId = $userId');
+      for (var cart in allCartList) {
+        final cartModelIndependent = CartModel.fromJson(cart.toJson());
+        final newCartModel = cart.copyWith(
+          newId: cartModelIndependent.id,
+          newImageUrl: cartModelIndependent.imageUrl,
+          newPrice: cartModelIndependent.price,
+          newTitle: cartModelIndependent.title,
+        );
+        await hiveBoxProductModel.put(newCartModel.id, newCartModel);
+      }
+      _totalPrice = totalPrice;
+
+      return right(null);
+    } catch (e) {
+      debugPrint('exceptionnnnnnnnn : $e=============.');
       return left(CatchErrorHandle.catchBack(failure: e));
     }
   }

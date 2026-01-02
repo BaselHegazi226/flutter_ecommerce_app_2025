@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:hive/hive.dart';
 
 part 'cart_model.g.dart';
@@ -16,6 +17,7 @@ class CartModel {
   final double price;
   @HiveField(5)
   final DateTime addAt;
+
   const CartModel({
     this.productCount = 1,
     required this.id,
@@ -25,14 +27,25 @@ class CartModel {
     required this.addAt,
   });
 
-  factory CartModel.fromJson(jsonData) {
+  factory CartModel.fromJson(Map<String, dynamic> jsonData) {
+    final addAtRaw = jsonData['addAt'];
+
+    DateTime parsedAddAt;
+    if (addAtRaw is Timestamp) {
+      parsedAddAt = addAtRaw.toDate();
+    } else if (addAtRaw is DateTime) {
+      parsedAddAt = addAtRaw;
+    } else {
+      parsedAddAt = DateTime.now(); // fallback
+    }
+
     return CartModel(
       id: jsonData['id'],
       imageUrl: jsonData['imageUrl'],
       title: jsonData['title'],
-      price: jsonData['price'],
+      price: (jsonData['price'] as num).toDouble(),
       productCount: jsonData['productCount'],
-      addAt: DateTime.now(),
+      addAt: parsedAddAt,
     );
   }
 
@@ -60,6 +73,7 @@ class CartModel {
       'title': title,
       'price': price,
       'productCount': productCount,
+      'addAt': addAt,
     };
   }
 }
