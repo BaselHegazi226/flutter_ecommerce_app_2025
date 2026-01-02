@@ -36,11 +36,11 @@ class EditProfileCubit extends Cubit<EditProfileState> {
     result.fold(
       (error) {
         debugPrint(
-          'image piked from device failure : ${error.errorMessage} ======================>',
+          'image piked from device failure : ${error.errorKey} ======================>',
         );
         emit(
           EditProfileUpdatingFailure(
-            errorMessage: error.errorMessage ?? 'unknown error',
+            errorMessage: error.errorKey ?? 'unknown error',
           ),
         );
       },
@@ -51,11 +51,11 @@ class EditProfileCubit extends Cubit<EditProfileState> {
         result.fold(
           (error) {
             debugPrint(
-              'updated info failure : ${error.errorMessage} ======================>>',
+              'updated info failure : ${error.errorKey} ======================>>',
             );
             emit(
               EditProfileUpdatingFailure(
-                errorMessage: error.errorMessage ?? 'unknown error',
+                errorMessage: error.errorKey ?? 'unknown error',
               ),
             );
           },
@@ -94,11 +94,11 @@ class EditProfileCubit extends Cubit<EditProfileState> {
     result.fold(
       (error) {
         debugPrint(
-          'updated info failure : ${error.errorMessage} ======================>',
+          'updated info failure : ${error.errorKey} ======================>',
         );
         emit(
           EditProfileUpdatingFailure(
-            errorMessage: error.errorMessage ?? 'No user found',
+            errorMessage: error.errorKey ?? 'No user found',
           ),
         );
       },
