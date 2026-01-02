@@ -20,7 +20,7 @@ class FavouriteProductCubit extends Cubit<FavouriteProductState> {
       (error) {
         emit(
           AddFavouriteProductFailure(
-            errorMessage: error.errorMessage ?? 'unknown error',
+            errorMessage: error.errorKey ?? 'unknown error',
           ),
         );
       },
@@ -41,7 +41,7 @@ class FavouriteProductCubit extends Cubit<FavouriteProductState> {
       (error) {
         emit(
           DeleteFavouriteProductFailure(
-            errorMessage: error.errorMessage ?? 'unknown error',
+            errorMessage: error.errorKey ?? 'unknown error',
           ),
         );
       },
@@ -58,7 +58,7 @@ class FavouriteProductCubit extends Cubit<FavouriteProductState> {
       (error) {
         emit(
           GetFavouriteProductsFailure(
-            errorMessage: error.errorMessage ?? 'unknown error',
+            errorMessage: error.errorKey ?? 'unknown error',
           ),
         );
       },
@@ -80,7 +80,7 @@ class FavouriteProductCubit extends Cubit<FavouriteProductState> {
       (error) {
         emit(
           GetFavouriteProductByIdFailure(
-            errorMessage: error.errorMessage ?? 'unknown error',
+            errorMessage: error.errorKey ?? 'unknown error',
           ),
         );
       },
