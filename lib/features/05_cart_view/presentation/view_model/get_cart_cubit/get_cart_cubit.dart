@@ -1,42 +1,32 @@
 import 'package:bloc/bloc.dart';
 
-import '../../../../../core/cache/cart_cache.dart';
+import '../../../domain/use_cases/cart_use_cases.dart';
 import 'get_cart_state.dart';
 
 class GetCartCubit extends Cubit<GetCartState> {
-  final CartCache cartCache;
-  GetCartCubit({required this.cartCache}) : super(GetCartInitial());
+  final GetCartUseCase getCartUseCase;
+
+  GetCartCubit({required this.getCartUseCase}) : super(GetCartInitial());
 
   Future<void> getCartProductsAndTotal() async {
     emit(GetProductCartAndTotalLoading());
-    var result = await cartCache.getCartList();
+
+    final result = await getCartUseCase();
+
     result.fold(
-      (error) {
+      (failure) {
         emit(
           GetProductCartAndTotalFailure(
-            errorMessage: error.errorMessage ?? 'unknown error',
+            errorMessage: failure.errorKey ?? 'unknown error',
           ),
         );
       },
-      (cartListSuccess) async {
-        cartCache.setCartTotalPrice(cartList: cartListSuccess);
-        final totalResult = await cartCache.getCartTotalPrice();
-        totalResult.fold(
-          (error) {
-            emit(
-              GetProductCartAndTotalFailure(
-                errorMessage: error.errorMessage ?? 'unknown error',
-              ),
-            );
-          },
-          (totalPrice) {
-            emit(
-              GetProductCartAndTotalSuccess(
-                carts: cartListSuccess,
-                totalPrice: totalPrice,
-              ),
-            );
-          },
+      (data) {
+        emit(
+          GetProductCartAndTotalSuccess(
+            carts: data.carts,
+            totalPrice: data.totalPrice,
+          ),
         );
       },
     );

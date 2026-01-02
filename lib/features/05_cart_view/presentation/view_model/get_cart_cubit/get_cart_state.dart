@@ -6,16 +6,36 @@ final class GetCartInitial extends GetCartState {}
 
 final class GetProductCartAndTotalInitial extends GetCartState {}
 
+final class GetProductCartAndTotalLoadingOnline extends GetCartState {}
+
+final class GetProductCartAndTotalFailureOnline extends GetCartState {
+  final String errorMessage;
+
+  GetProductCartAndTotalFailureOnline({required this.errorMessage});
+}
+
+final class GetProductCartAndTotalSuccessOnline extends GetCartState {
+  final List<CartModel> carts;
+  final double totalPrice;
+
+  GetProductCartAndTotalSuccessOnline({
+    required this.carts,
+    required this.totalPrice,
+  });
+}
+
 final class GetProductCartAndTotalLoading extends GetCartState {}
 
 final class GetProductCartAndTotalFailure extends GetCartState {
   final String errorMessage;
+
   GetProductCartAndTotalFailure({required this.errorMessage});
 }
 
 final class GetProductCartAndTotalSuccess extends GetCartState {
   final List<CartModel> carts;
   final double totalPrice;
+
   GetProductCartAndTotalSuccess({
     required this.carts,
     required this.totalPrice,
