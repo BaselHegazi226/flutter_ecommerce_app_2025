@@ -41,7 +41,6 @@ class SectionPaymentTrackItemMobile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.sizeOf(context);
     return GridView.builder(
       itemCount: orderModel!.cartModelList.length,
       shrinkWrap: true,
@@ -93,7 +92,6 @@ class SectionPaymentTrackItemTablet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.sizeOf(context);
     return GridView.builder(
       itemCount: orderModel!.cartModelList.length,
       shrinkWrap: true,

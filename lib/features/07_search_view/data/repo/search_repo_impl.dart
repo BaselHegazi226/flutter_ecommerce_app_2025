@@ -6,6 +6,8 @@ import 'package:flutter_e_commerce_app_2025/core/errors/failure.dart';
 import 'package:flutter_e_commerce_app_2025/features/04_home_view/data/model/product_model.dart';
 import 'package:flutter_e_commerce_app_2025/features/07_search_view/data/repo/search_repo.dart';
 
+import '../../../../core/helper/const.dart';
+
 class SearchRepoImpl implements SearchRepo {
   final baseUrl = 'https://dummyjson.com';
   Dio dio = Dio();
@@ -15,7 +17,8 @@ class SearchRepoImpl implements SearchRepo {
     required String category,
   }) async {
     try {
-      final response = await dio.get('$baseUrl/products/category/$category');
+      final slug = searchFilter(category);
+      final response = await dio.get('$baseUrl/products/category/$slug');
       final data = response.data['products'];
       List<ProductModel> products = [];
       for (var item in data) {
