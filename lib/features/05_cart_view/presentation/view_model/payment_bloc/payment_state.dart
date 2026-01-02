@@ -15,4 +15,20 @@ final class ImplementPaymentWithPayMobFailure extends PaymentState {
   ImplementPaymentWithPayMobFailure({required this.errorMessage});
 }
 
-final class ImplementPaymentWithPayMobSuccess extends PaymentState {}
+final class ImplementPaymentWithPayMobSuccess extends PaymentState {
+  final String successUrl;
+
+  ImplementPaymentWithPayMobSuccess({required this.successUrl});
+}
+
+final class GetPaMobPaymentStateInitial extends PaymentState {}
+
+final class GetPaMobPaymentStateLoading extends PaymentState {}
+
+final class GetPaMobPaymentStateFailure extends PaymentState {
+  final String errorMessage;
+
+  GetPaMobPaymentStateFailure({required this.errorMessage});
+}
+
+final class GetPaMobPaymentStateSuccess extends PaymentState {}

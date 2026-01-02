@@ -4,10 +4,13 @@ part of 'payment_bloc.dart';
 sealed class PaymentEvent {}
 
 class ImplementPaymentWithPayMobEvent extends PaymentEvent {
-  final PaymentModel paymentModel;
-  final bool isDark;
-  ImplementPaymentWithPayMobEvent({
-    required this.paymentModel,
-    required this.isDark,
-  });
+  final OrderModel orderModel;
+
+  ImplementPaymentWithPayMobEvent({required this.orderModel});
+}
+
+class GetPaymentStateEvent extends PaymentEvent {
+  final bool paymentState;
+
+  GetPaymentStateEvent({required this.paymentState});
 }
