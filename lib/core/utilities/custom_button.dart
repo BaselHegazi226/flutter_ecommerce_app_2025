@@ -108,7 +108,7 @@ class CustomTextIconButton extends StatelessWidget {
                   fontSize: textSize,
                   alignment: Alignment.center,
                 ),
-                SizedBox(width: 8),
+                const SizedBox(width: 8),
                 Icon(
                   iconData,
                   size: 24,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
-searchViewProductShimmerItem(Size screenSize) {
+customSliverGridShimmerItem(Size screenSize) {
   return Shimmer.fromColors(
     baseColor: Colors.grey.shade500.withAlpha(32),
     highlightColor: Colors.grey.shade400.withAlpha(32),
@@ -41,20 +41,35 @@ searchViewProductShimmerItem(Size screenSize) {
   );
 }
 
-SliverPadding searchViewProductShimmerGrid(Size screenSize) {
-  return SliverPadding(
-    padding: const EdgeInsets.all(16),
-    sliver: SliverGrid(
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        crossAxisSpacing: 16,
-        mainAxisSpacing: 12,
-        childAspectRatio: 0.55,
-      ),
-      delegate: SliverChildBuilderDelegate(
-        (context, index) => searchViewProductShimmerItem(screenSize),
-        childCount: 6, // عدد العناصر الوهمية
-      ),
+SliverGrid customSliverGridListShimmer({
+  required Size size,
+  int itemsInLine = 2,
+}) {
+  return SliverGrid(
+    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+      crossAxisCount: itemsInLine,
+      crossAxisSpacing: 16,
+      mainAxisSpacing: 16,
+      childAspectRatio: 0.55,
     ),
+    delegate: SliverChildBuilderDelegate(
+      (context, index) => customSliverGridShimmerItem(size),
+      childCount: itemsInLine > 2 ? 16 : 8, // عدد العناصر الوهمية
+    ),
+  );
+}
+
+GridView customGridViewListShimmer({required Size size, int itemsInLine = 2}) {
+  return GridView.builder(
+    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+      crossAxisCount: itemsInLine,
+      crossAxisSpacing: 16,
+      mainAxisSpacing: 16,
+      childAspectRatio: 0.55,
+    ),
+    itemCount: itemsInLine > 2 ? 16 : 8,
+    itemBuilder: (context, index) {
+      return customSliverGridShimmerItem(size);
+    },
   );
 }

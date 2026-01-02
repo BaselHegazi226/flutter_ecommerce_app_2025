@@ -6,6 +6,7 @@ import 'package:toastification/toastification.dart';
 import '../../core/utilities/app_router.dart';
 import '../../core/utilities/theme_app.dart';
 import '../../generated/l10n.dart';
+import '../05_cart_view/presentation/view_model/payment_bloc/payment_bloc.dart';
 import '../06_profile_view/presentation/view_model/settings_cubit/settings_cubit.dart';
 import '../06_profile_view/presentation/view_model/settings_cubit/settings_state.dart';
 
@@ -18,11 +19,16 @@ class EcommerceApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ToastificationWrapper(
-      child: BlocProvider(
-        create: (context) => AppSettingCubit(
-          savedTheme: savedTheme,
-          savedLanguage: savedLanguage,
-        ),
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (context) => AppSettingCubit(
+              savedTheme: savedTheme,
+              savedLanguage: savedLanguage,
+            ),
+          ),
+          BlocProvider(create: (context) => PaymentBloc()),
+        ],
         child: BlocBuilder<AppSettingCubit, AppSettingStates>(
           builder: (context, state) {
             final appSettingCubit = AppSettingCubit.get(context);
