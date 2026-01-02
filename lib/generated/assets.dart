@@ -14,4 +14,5 @@ class Assets {
   static const String profileUnFavouriteHeart =
       'assets/images/profile/un_favourite_heart.svg';
   static const String splashEcommerce = 'assets/images/splash/ecommerce.png';
+  static const String splashAppLogo = 'assets/images/splash/app_logo.png';
 }

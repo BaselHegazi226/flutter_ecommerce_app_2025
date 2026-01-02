@@ -6,7 +6,7 @@ import '../helper/const.dart';
 class AppTheme {
   // ألوان عامة يمكن استخدامها في أي مكان
 
-  static const Color lightBackground = Colors.white;
+  static const Color lightBackground = kScaffoldColor;
   //  static const Color darkBackground = ;
 
   static const Color lightTextColor = Colors.black87;
@@ -18,8 +18,9 @@ class AppTheme {
     primaryColor: kPrimaryColor,
     scaffoldBackgroundColor: lightBackground,
     appBarTheme: AppBarTheme(
-      backgroundColor: Colors.white,
-      foregroundColor: Colors.white,
+      backgroundColor: kScaffoldColor,
+      surfaceTintColor: kScaffoldColor,
+      foregroundColor: Colors.red,
       elevation: 0,
       titleTextStyle: GoogleFonts.inter(
         fontSize: 22,

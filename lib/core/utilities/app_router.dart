@@ -1,16 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_e_commerce_app_2025/features/01_splash_view/presentation/view/splash_view.dart';
-import 'package:flutter_e_commerce_app_2025/features/02_auth_view/presentation/view/sign_in_view.dart';
-import 'package:flutter_e_commerce_app_2025/features/02_auth_view/presentation/view/sign_up_view.dart';
+import 'package:flutter_e_commerce_app_2025/features/02_auth_view/presentation/view/login_view.dart';
+import 'package:flutter_e_commerce_app_2025/features/02_auth_view/presentation/view/register_view.dart';
 import 'package:flutter_e_commerce_app_2025/features/03_main_view/main_view.dart';
-import 'package:flutter_e_commerce_app_2025/features/04_home_view/data/model/category_model.dart';
-import 'package:flutter_e_commerce_app_2025/features/04_home_view/presentation/view/category_view.dart';
 import 'package:flutter_e_commerce_app_2025/features/04_home_view/presentation/view/home_view.dart';
 import 'package:flutter_e_commerce_app_2025/features/04_home_view/presentation/view/product_details_view.dart';
 import 'package:flutter_e_commerce_app_2025/features/04_home_view/presentation/view/show_all_view.dart';
 import 'package:flutter_e_commerce_app_2025/features/05_cart_view/presentation/view/cart_view.dart';
 import 'package:flutter_e_commerce_app_2025/features/05_cart_view/presentation/view_model/cart_bloc/cart_bloc.dart';
 import 'package:flutter_e_commerce_app_2025/features/05_cart_view/presentation/view_model/get_cart_cubit/get_cart_cubit.dart';
+import 'package:flutter_e_commerce_app_2025/features/06_profile_view/presentation/view/about_us_view.dart';
 import 'package:flutter_e_commerce_app_2025/features/06_profile_view/presentation/view/edit_profile_view.dart';
 import 'package:flutter_e_commerce_app_2025/features/06_profile_view/presentation/view/favourite_view.dart';
 import 'package:flutter_e_commerce_app_2025/features/06_profile_view/presentation/view/order_history_view.dart';
@@ -34,11 +33,11 @@ abstract class AppRouter {
       ),
       GoRoute(
         path: Routes.loginView,
-        builder: (context, state) => const SignInView(),
+        builder: (context, state) => const LoginView(),
       ),
       GoRoute(
         path: Routes.registerView,
-        builder: (context, state) => const SignUpView(),
+        builder: (context, state) => const RegisterView(),
       ),
 
       /// 🔹 ShellRoute يحتوي الـ MainView + BottomNavBar
@@ -51,13 +50,6 @@ abstract class AppRouter {
             path: Routes.homeView,
             builder: (context, state) => const HomeView(),
             routes: [
-              GoRoute(
-                path: Routes.categoryView,
-                builder: (context, state) {
-                  final model = state.extra as CategoryModel;
-                  return CategoryView(categoryModel: model);
-                },
-              ),
               GoRoute(
                 path: Routes.showAllView,
                 builder: (context, state) {
@@ -105,6 +97,10 @@ abstract class AppRouter {
               GoRoute(
                 path: Routes.settingsView,
                 builder: (context, state) => const SettingsView(),
+              ),
+              GoRoute(
+                path: Routes.aboutUsView,
+                builder: (context, state) => const AboutUsView(),
               ),
               GoRoute(
                 path: Routes.shippingAddressView,
