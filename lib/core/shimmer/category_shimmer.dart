@@ -47,9 +47,9 @@ categoryViewProductShimmerList() {
     itemCount: 6, // عدد العناصر الوهمية
     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
       crossAxisCount: 2,
-      crossAxisSpacing: 8,
+      crossAxisSpacing: 16,
       mainAxisSpacing: 12,
-      childAspectRatio: 0.65,
+      childAspectRatio: 0.55,
     ),
     itemBuilder: (context, index) {
       return categoryViewProductShimmerItem();
@@ -57,14 +57,11 @@ categoryViewProductShimmerList() {
   );
 }
 
-Widget categoryImageShimmer(Size screenSize) {
-  return Container(
-    width: screenSize.width * .4,
-    height: screenSize.height * .25,
-    padding: const EdgeInsets.all(16),
-    decoration: const BoxDecoration(
+Widget categoryImageShimmer() {
+  return const DecoratedBox(
+    decoration: BoxDecoration(
       color: kGreyColor,
-      borderRadius: BorderRadius.all(Radius.circular(4)),
+      borderRadius: BorderRadius.all(Radius.circular(8)),
     ),
   );
 }

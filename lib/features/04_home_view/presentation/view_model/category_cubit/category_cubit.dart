@@ -17,9 +17,7 @@ class CategoryCubit extends Cubit<CategoryState> {
       (error) {
         debugPrint('now in error category:: $error');
         emit(
-          GetCategoryFailure(
-            errorMessage: error.errorMessage ?? 'unknown error',
-          ),
+          GetCategoryFailure(errorMessage: error.errorKey ?? 'unknown error'),
         );
       },
       (successCategories) {
