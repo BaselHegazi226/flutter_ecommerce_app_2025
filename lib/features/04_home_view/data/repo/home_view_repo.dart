@@ -5,10 +5,16 @@ import 'package:flutter_e_commerce_app_2025/features/04_home_view/data/model/pro
 
 abstract class HomeViewRepo {
   Future<Either<Failure, List<CategoryModel>>> getCategories();
-  Future<Either<Failure, List<ProductModel>>> getBestSellingProducts();
+
+  Future<Either<Failure, List<ProductModel>>> getAppProducts({
+    required String? category,
+  });
+
   Future<Either<Failure, List<ProductModel>>> showAllProducts();
+
   Future<Either<Failure, List<ProductModel>>> getProductsByCategory(
     String category,
   );
+
   Future<Either<Failure, ProductModel>> getProductById(final int productId);
 }

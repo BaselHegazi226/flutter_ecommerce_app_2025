@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_e_commerce_app_2025/core/helper/const.dart';
+import 'package:flutter_e_commerce_app_2025/core/shimmer/custom_sliver_grid_shimmer.dart';
 import 'package:shimmer/shimmer.dart';
 
 Shimmer homeProductShimmerItem(Size screenSize) {
@@ -55,14 +56,22 @@ Shimmer homeProductShimmerItem(Size screenSize) {
 
 /// 🔹 قائمة كاملة (Shimmer List)
 Widget homeProductShimmerList(Size screenSize) {
-  return SizedBox(
-    height: screenSize.height * .4,
-    child: ListView.separated(
-      scrollDirection: Axis.horizontal,
-      physics: const BouncingScrollPhysics(),
-      itemCount: 6, // 🔹 كفاية 6 لعناصر shimmer عشان الأداء
-      separatorBuilder: (_, __) => const SizedBox(width: 16),
-      itemBuilder: (_, __) => homeProductShimmerItem(screenSize),
+  return SliverPadding(
+    padding: const EdgeInsets.all(16),
+    sliver: SliverGrid(
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        crossAxisSpacing: 16,
+        mainAxisSpacing: 12,
+        childAspectRatio: 0.55,
+      ),
+      delegate: SliverChildBuilderDelegate(
+        (context, index) => Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8),
+          child: customSliverGridShimmerItem(screenSize),
+        ),
+        childCount: 6, // عدد العناصر الوهمية
+      ),
     ),
   );
 }

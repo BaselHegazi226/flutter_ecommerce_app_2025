@@ -10,10 +10,15 @@ import 'package:flutter_e_commerce_app_2025/features/04_home_view/data/repo/home
 class HomeViewRepoImpl implements HomeViewRepo {
   static const _baseUrl = 'https://dummyjson.com';
   Dio dio = Dio();
+
   @override
-  Future<Either<Failure, List<ProductModel>>> getBestSellingProducts() async {
+  Future<Either<Failure, List<ProductModel>>> getAppProducts({
+    String? category = 'SmartPhones',
+  }) async {
     try {
-      final Response response = await dio.get('$_baseUrl/products');
+      final Response response = await dio.get(
+        '$_baseUrl/products/category/$category',
+      );
       final data = response.data['products'];
       debugPrint('data data data data data = $data');
       List<ProductModel> products = [];
