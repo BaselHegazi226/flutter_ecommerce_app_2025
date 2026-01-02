@@ -2,13 +2,14 @@ import 'package:easy_stepper/easy_stepper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_e_commerce_app_2025/core/helper/const.dart';
-import 'package:flutter_e_commerce_app_2025/features/05_cart_view/presentation/view/widgets/delivery_view.dart';
-import 'package:flutter_e_commerce_app_2025/features/05_cart_view/presentation/view/widgets/location_view.dart';
-import 'package:flutter_e_commerce_app_2025/features/05_cart_view/presentation/view/widgets/summarize_view.dart';
+import 'package:flutter_e_commerce_app_2025/core/helper/extensions_of_s_localization.dart';
+import 'package:flutter_e_commerce_app_2025/features/05_cart_view/presentation/view/widgets/section_delivery.dart';
+import 'package:flutter_e_commerce_app_2025/features/05_cart_view/presentation/view/widgets/section_location.dart';
+import 'package:flutter_e_commerce_app_2025/features/05_cart_view/presentation/view/widgets/section_summarize.dart';
 import 'package:flutter_e_commerce_app_2025/features/05_cart_view/presentation/view_model/checkout_cubit/checkout_cubit.dart';
 
 import '../../../../../generated/l10n.dart';
-import 'finish_view.dart';
+import 'section_payment.dart';
 
 class CheckoutViewBody extends StatelessWidget {
   const CheckoutViewBody({super.key});
@@ -19,12 +20,7 @@ class CheckoutViewBody extends StatelessWidget {
       builder: (context, state) {
         final cubit = context.read<CheckoutCubit>();
         return Padding(
-          padding: const EdgeInsets.only(
-            bottom: 8,
-            top: 24,
-            right: 16,
-            left: 16,
-          ),
+          padding: const EdgeInsets.only(bottom: 8, top: 24),
           child: CustomScrollView(
             slivers: [
               SliverToBoxAdapter(
@@ -32,7 +28,7 @@ class CheckoutViewBody extends StatelessWidget {
               ),
               const SliverToBoxAdapter(child: SizedBox(height: 24)),
               SliverFillRemaining(
-                hasScrollBody: false,
+                hasScrollBody: true,
                 child: IndexedStack(
                   index: cubit.getCurrentStep,
                   children: [
@@ -48,7 +44,7 @@ class CheckoutViewBody extends StatelessWidget {
                       },
                       onBack: cubit.previousStep,
                     ),
-                    FinishView(
+                    SectionPayment(
                       orderModel: cubit.getOrderModel,
                       onBack: cubit.previousStep,
                       onFinish: cubit.confirmOrder, // هنا المهم
@@ -100,19 +96,19 @@ class CheckoutViewBody extends StatelessWidget {
       steps: [
         EasyStep(
           icon: const Icon(Icons.delivery_dining),
-          title: S.of(context).Delivery,
+          title: S.of(context).cartDelivery,
         ),
         EasyStep(
           icon: const Icon(Icons.location_on_outlined),
-          title: S.of(context).Location,
+          title: S.of(context).cartLocation,
         ),
         EasyStep(
           icon: const Icon(Icons.note_alt_outlined),
-          title: S.of(context).Summarize,
+          title: S.of(context).cartSummarize,
         ),
         EasyStep(
-          icon: const Icon(Icons.check_circle_outline),
-          title: S.of(context).Finish,
+          icon: const Icon(Icons.credit_card),
+          title: S.of(context).cartFinish,
         ),
       ],
       // onStepReached: (index) {

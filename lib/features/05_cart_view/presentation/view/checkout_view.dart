@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_e_commerce_app_2025/core/cache/order_cache.dart';
+import 'package:flutter_e_commerce_app_2025/core/helper/extensions_of_s_localization.dart';
 import 'package:flutter_e_commerce_app_2025/features/05_cart_view/presentation/view/widgets/checkout_view_body.dart';
 import 'package:flutter_e_commerce_app_2025/features/05_cart_view/presentation/view_model/checkout_cubit/checkout_cubit.dart';
 import 'package:flutter_e_commerce_app_2025/features/05_cart_view/presentation/view_model/order_cubit/order_cubit.dart';
+import 'package:flutter_e_commerce_app_2025/features/05_cart_view/presentation/view_model/payment_bloc/payment_bloc.dart';
+import 'package:flutter_e_commerce_app_2025/generated/l10n.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../core/utilities/app_get.dart';
@@ -43,20 +46,23 @@ class _CheckoutViewState extends State<CheckoutView> {
             cartBloc: widget.cartBloc,
           ),
         ),
+        BlocProvider(create: (context) => PaymentBloc()),
       ],
       child: BlocListener<CheckoutCubit, CheckoutState>(
         listener: (context, state) {
           if (state is ConfirmOrderSuccess) {
             ToastNotification.flatColoredToastNotificationService(
               onAutoCompleteCompleted: (value) {},
-              title: 'Success Make Order',
+              title: S.of(context).success_add_order_title,
+              description: S.of(context).success_add_order_desc,
             );
-            debugPrint('we will delete cart');
-            GoRouter.of(context).pop();
+            if (GoRouter.of(context).canPop()) {
+              GoRouter.of(context).pop();
+            }
           } else if (state is ConfirmOrderFailure) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
-                content: Text(state.errorMessage),
+                content: Text(S.of(context).error(state.errorMessage)),
                 backgroundColor: Colors.red,
               ),
             );

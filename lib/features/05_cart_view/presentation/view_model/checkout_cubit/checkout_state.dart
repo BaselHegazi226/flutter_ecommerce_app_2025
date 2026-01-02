@@ -48,4 +48,15 @@ final class ConfirmOrderFailure extends CheckoutState {
 
 final class ConfirmOrderSuccess extends CheckoutState {}
 
+//order states with payment
+final class ConfirmOrderWithPaymentWithPaymentLoading extends CheckoutState {}
+
+final class ConfirmOrderWithPaymentWithPaymentFailure extends CheckoutState {
+  final String errorMessage;
+
+  ConfirmOrderWithPaymentWithPaymentFailure({required this.errorMessage});
+}
+
+final class ConfirmOrderWithPaymentWithPaymentSuccess extends CheckoutState {}
+
 final class CancelOrder extends CheckoutState {}

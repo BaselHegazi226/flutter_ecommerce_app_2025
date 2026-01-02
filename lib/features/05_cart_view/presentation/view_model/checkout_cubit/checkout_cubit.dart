@@ -6,6 +6,7 @@ import 'package:flutter_e_commerce_app_2025/features/05_cart_view/data/model/ord
 import 'package:flutter_e_commerce_app_2025/features/05_cart_view/presentation/view_model/cart_bloc/cart_bloc.dart';
 import 'package:flutter_e_commerce_app_2025/features/05_cart_view/presentation/view_model/get_cart_cubit/get_cart_cubit.dart';
 import 'package:flutter_e_commerce_app_2025/features/05_cart_view/presentation/view_model/order_cubit/order_cubit.dart';
+import 'package:flutter_e_commerce_app_2025/features/05_cart_view/presentation/view_model/payment_bloc/payment_bloc.dart';
 
 import '../../../data/model/delivery_method_model.dart';
 import '../../../data/model/location_model.dart';
@@ -27,6 +28,7 @@ class CheckoutCubit extends Cubit<CheckoutState> {
   OrderModel? _lastOrder;
   List<CartModel> _carts = [];
   double _totalPrice = 0;
+
   void chooseDeliveryMethod({
     required DeliveryMethodModel deliveryMethodModel,
   }) {
@@ -40,7 +42,7 @@ class CheckoutCubit extends Cubit<CheckoutState> {
   }
 
   void nextStep() {
-    if (_currentStep < 4) {
+    if (_currentStep < 5) {
       _currentStep++;
     }
     debugPrint('current Step = $_currentStep');
@@ -120,11 +122,15 @@ class CheckoutCubit extends Cubit<CheckoutState> {
     }
   }
 
+  Future<void> confirmOrderWithPayment(PaymentState state) async {}
+
   int get getCurrentStep {
     return _currentStep;
   }
 
   DeliveryMethodModel? get getDeliveryMethodModel => _deliveryMethodModel;
+
   LocationModel? get getLocationModel => _locationModel;
+
   OrderModel? get getOrderModel => _lastOrder;
 }
