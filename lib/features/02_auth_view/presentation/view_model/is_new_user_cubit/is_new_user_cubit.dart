@@ -15,9 +15,7 @@ class IsNewUserCubit extends Cubit<IsNewUserState> {
     result.fold(
       (failure) {
         emit(
-          IsNewUserFailure(
-            errorMessage: failure.errorMessage ?? 'unknown error',
-          ),
+          IsNewUserFailure(errorMessage: failure.errorKey ?? 'unknown error'),
         );
       },
       (userIdSuccess) async {

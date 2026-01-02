@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_e_commerce_app_2025/core/helper/extensions_of_s_localization.dart';
 import 'package:flutter_e_commerce_app_2025/core/helper/routes.dart';
 import 'package:flutter_e_commerce_app_2025/core/utilities/custom_text.dart';
 import 'package:flutter_e_commerce_app_2025/core/utilities/toastnotification.dart';
@@ -12,16 +13,16 @@ import '../../../../../core/utilities/custom_button.dart';
 import '../../../../../core/utilities/custom_text_form_field.dart';
 import '../../../../../generated/l10n.dart';
 
-class SignInEmailPasswordInputSection extends StatefulWidget {
-  const SignInEmailPasswordInputSection({super.key});
+class LoginEmailPasswordInputSection extends StatefulWidget {
+  const LoginEmailPasswordInputSection({super.key});
 
   @override
-  State<SignInEmailPasswordInputSection> createState() =>
-      _SignInEmailPasswordInputSectionState();
+  State<LoginEmailPasswordInputSection> createState() =>
+      _LoginEmailPasswordInputSectionState();
 }
 
-class _SignInEmailPasswordInputSectionState
-    extends State<SignInEmailPasswordInputSection> {
+class _LoginEmailPasswordInputSectionState
+    extends State<LoginEmailPasswordInputSection> {
   TextEditingController textEditingControllerEmail = TextEditingController();
   TextEditingController textEditingControllerPassword = TextEditingController();
   String email = '', password = '';
@@ -43,7 +44,7 @@ class _SignInEmailPasswordInputSectionState
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           CustomTextFormField(
-            text: S.of(context).Email,
+            text: S.of(context).authEmail,
             hintText: 'newuser@gmail.com',
             onSaved: (value) {
               email = value!.trim();
@@ -51,14 +52,14 @@ class _SignInEmailPasswordInputSectionState
             },
             validator: (value) {
               if (value == null || value.isEmpty) {
-                return S.of(context).emailIsRequired;
+                return S.of(context).authEmailRequired;
               }
               return null;
             },
             textEditingController: textEditingControllerEmail,
           ),
           CustomTextFormField(
-            text: S.of(context).Password,
+            text: S.of(context).authPassword,
             hintText: '**********',
             onSaved: (value) {
               password = value!.trim();
@@ -66,29 +67,31 @@ class _SignInEmailPasswordInputSectionState
             },
             validator: (value) {
               if (value == null || value.isEmpty) {
-                return S.of(context).passwordIsRequired;
+                return S.of(context).authPasswordRequired;
               }
               return null;
             },
             textEditingController: textEditingControllerPassword,
           ),
-          CustomText(text: S.of(context).ForgetPassword, fontSize: 14),
+          CustomText(text: S.of(context).authForgetPassword, fontSize: 14),
           const SizedBox(height: 8),
           BlocConsumer<AuthBloc, AuthState>(
             listener: (context, state) {
               if (state is SignInWithEmailSuccess) {
                 ToastNotification.flatColoredToastNotificationService(
                   toastNotificationType: ToastificationType.success,
+                  title: S.of(context).loginSuccessTitle,
+                  description: S.of(context).loginSuccessDesc,
                   onAutoCompleteCompleted: (value) {
-                    debugPrint('value = $value');
                     GoRouter.of(context).push(Routes.homeView);
                   },
                 );
               } else if (state is SignInWithEmailFailure) {
+                final errorMessage = state.errorMessage;
                 ToastNotification.flatColoredToastNotificationService(
                   toastNotificationType: ToastificationType.error,
-                  title: "Sign in Failure",
-                  description: state.errorMessage,
+                  title: S.of(context).loginFailureTitle,
+                  description: S.of(context).error(errorMessage),
                   onAutoCompleteCompleted: (value) {
                     debugPrint('value = $value');
                   },
@@ -118,7 +121,7 @@ class _SignInEmailPasswordInputSectionState
                         autoValidateMode = AutovalidateMode.onUserInteraction;
                       }
                     },
-                    text: S.of(context).SignIn,
+                    text: S.of(context).authSignIn,
                     isLoading: value,
                     textColor: Theme.of(context).brightness == Brightness.dark
                         ? Colors.grey.shade600

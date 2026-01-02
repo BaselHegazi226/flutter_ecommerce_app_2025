@@ -1,6 +1,7 @@
 import 'package:colorful_iconify_flutter/icons/logos.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_e_commerce_app_2025/core/helper/extensions_of_s_localization.dart';
 import 'package:flutter_e_commerce_app_2025/core/utilities/toastnotification.dart';
 import 'package:iconify_flutter/icons/fa6_brands.dart';
 import 'package:toastification/toastification.dart';
@@ -48,7 +49,7 @@ class _SignInCustomSocialButtonsState extends State<SignInCustomSocialButtons> {
                   context.read<AuthBloc>().add(SignInWithGoogleEvent());
                 },
                 valueNotifierLoading: valueNotifierLoadingGoogle,
-                text: S.of(context).SignInWithGoogle,
+                text: S.of(context).authSignInWithGoogle,
                 iconifyData: Logos.google_icon,
               ),
               CustomSocialButton(
@@ -56,7 +57,7 @@ class _SignInCustomSocialButtonsState extends State<SignInCustomSocialButtons> {
                   context.read<AuthBloc>().add(SignInWithFacebookEvent());
                 },
                 valueNotifierLoading: valueNotifierLoadingFacebook,
-                text: S.of(context).SignInWithFacebook,
+                text: S.of(context).authSignInWithFacebook,
                 iconifyColor: const Color(0xff475993),
                 iconifyData: Fa6Brands.square_facebook,
               ),
