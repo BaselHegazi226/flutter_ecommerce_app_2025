@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_e_commerce_app_2025/core/helper/extensions_of_s_localization.dart';
 import 'package:go_router/go_router.dart';
 import 'package:toastification/toastification.dart';
 
@@ -12,14 +13,14 @@ import '../../../../../core/utilities/toastnotification.dart';
 import '../../../../../generated/l10n.dart';
 import '../../view_model/auth_bloc/auth_bloc.dart';
 
-class SignUpInputSection extends StatefulWidget {
-  const SignUpInputSection({super.key});
+class RegisterInputSection extends StatefulWidget {
+  const RegisterInputSection({super.key});
 
   @override
-  State<SignUpInputSection> createState() => _SignUpInputSectionState();
+  State<RegisterInputSection> createState() => _RegisterInputSectionState();
 }
 
-class _SignUpInputSectionState extends State<SignUpInputSection> {
+class _RegisterInputSectionState extends State<RegisterInputSection> {
   TextEditingController textEditingControllerEmail = TextEditingController();
   TextEditingController textEditingControllerPassword = TextEditingController();
   TextEditingController textEditingControllerName = TextEditingController();
@@ -41,7 +42,7 @@ class _SignUpInputSectionState extends State<SignUpInputSection> {
         spacing: 20,
         children: [
           CustomTextFormField(
-            text: S.of(context).Name,
+            text: S.of(context).authName,
             hintText: 'name',
             onSaved: (value) {
               name = value!.trim();
@@ -49,16 +50,16 @@ class _SignUpInputSectionState extends State<SignUpInputSection> {
             },
             validator: (value) {
               if (value == null || value.isEmpty) {
-                return S.of(context).nameIsRequired;
+                return S.of(context).authNameRequired;
               } else if (!FieldsContranits.nameReg.hasMatch(value)) {
-                return S.of(context).enterValidName;
+                return S.of(context).authEnterValidName;
               }
               return null;
             },
             textEditingController: textEditingControllerName,
           ),
           CustomTextFormField(
-            text: S.of(context).Email,
+            text: S.of(context).authEmail,
             hintText: 'iamdavid@gmail.com',
             onSaved: (value) {
               email = value!.trim();
@@ -66,16 +67,16 @@ class _SignUpInputSectionState extends State<SignUpInputSection> {
             },
             validator: (value) {
               if (value == null || value.isEmpty) {
-                return S.of(context).emailIsRequired;
+                return S.of(context).authEmailRequired;
               } else if (!FieldsContranits.emailReg.hasMatch(value)) {
-                return S.of(context).enterValidEmail;
+                return S.of(context).auth_enterValidEmail;
               }
               return null;
             },
             textEditingController: textEditingControllerEmail,
           ),
           CustomTextFormField(
-            text: S.of(context).Password,
+            text: S.of(context).authPassword,
             hintText: '**********',
             onSaved: (value) {
               password = value!.trim();
@@ -83,9 +84,9 @@ class _SignUpInputSectionState extends State<SignUpInputSection> {
             },
             validator: (value) {
               if (value == null || value.isEmpty) {
-                return S.of(context).passwordIsRequired;
+                return S.of(context).authPasswordRequired;
               } else if (!FieldsContranits.passwordReg.hasMatch(value)) {
-                return S.of(context).enterStrongPassword;
+                return S.of(context).authEnterStrongPassword;
               }
               return null;
             },
@@ -97,16 +98,19 @@ class _SignUpInputSectionState extends State<SignUpInputSection> {
               if (state is SignUpWithEmailSuccess) {
                 debugPrint('sign up success');
                 ToastNotification.flatColoredToastNotificationService(
+                  title: S.of(context).registerSuccessTitle,
+                  description: S.of(context).registerSuccessDesc,
                   toastNotificationType: ToastificationType.success,
                   onAutoCompleteCompleted: (value) {
                     GoRouter.of(context).go(Routes.homeView);
                   },
                 );
               } else if (state is SignUpWithEmailFailure) {
-                debugPrint('error = ${state.errorMessage}');
+                final errorMessage = state.errorMessage;
                 ToastNotification.flatColoredToastNotificationService(
                   toastNotificationType: ToastificationType.error,
-                  title: state.errorMessage,
+                  title: S.of(context).registerFailureTitle,
+                  description: S.of(context).error(errorMessage),
                   onAutoCompleteCompleted: (value) {},
                 );
               }
@@ -138,7 +142,7 @@ class _SignUpInputSectionState extends State<SignUpInputSection> {
                         autoValidateMode = AutovalidateMode.always;
                       }
                     },
-                    text: S.of(context).SignUp,
+                    text: S.of(context).authSignUp,
                     isLoading: value,
                   );
                 },
