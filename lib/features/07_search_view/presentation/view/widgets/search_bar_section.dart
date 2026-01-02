@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_e_commerce_app_2025/core/helper/extensions_of_s_localization.dart';
 import 'package:flutter_e_commerce_app_2025/features/07_search_view/presentation/view_model/search_result_cubit/search_result_cubit.dart';
 import 'package:flutter_e_commerce_app_2025/generated/l10n.dart';
 
@@ -22,7 +23,7 @@ class SearchBarSection extends StatelessWidget {
           ),
         ),
         shadowColor: const WidgetStatePropertyAll(Colors.transparent),
-        hintText: S.of(context).Search,
+        hintText: S.of(context).navSearch,
         textStyle: WidgetStatePropertyAll(
           TextStyle(
             color: Theme.of(context).brightness == Brightness.dark

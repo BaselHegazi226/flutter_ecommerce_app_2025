@@ -20,7 +20,7 @@ class SearchResultCubit extends Cubit<SearchResultState> {
       (error) {
         emit(
           GetSearchResultFailure(
-            errorMessage: error.errorMessage ?? 'unknown error',
+            errorMessage: error.errorKey ?? 'unknown error',
           ),
         );
       },
