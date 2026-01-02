@@ -44,6 +44,7 @@ enum CategoryIcon {
     BuildContext context,
     String slug, {
     double size = 24,
+    required VoidCallback onTap,
   }) {
     final map = {
       'beauty': CategoryIcon.beauty,
@@ -77,54 +78,36 @@ enum CategoryIcon {
       return Iconify(Mdi.tag, size: size, color: Colors.grey);
     }
     final screenSize = MediaQuery.sizeOf(context);
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Container(
-          height: 70,
-          width: screenSize.width * .22, // عرض ثابت لكل عنصر
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            color: Theme.of(context).brightness == Brightness.dark
-                ? Colors.grey.shade300
-                : kScaffoldColor,
-            border: Border.all(
+    return InkWell(
+      onTap: () {},
+      child: Container(
+        height: 35,
+        width: screenSize.width * .18, // عرض ثابت لكل عنصر
+        decoration: BoxDecoration(
+          color: Theme.of(context).brightness == Brightness.dark
+              ? Colors.grey.shade50
+              : kPrimaryColor,
+          borderRadius: const BorderRadius.all(Radius.circular(8)),
+          boxShadow: [
+            BoxShadow(
               color: Theme.of(context).brightness == Brightness.dark
-                  ? Colors.grey.shade200
-                  : category.color,
-              width: 1.5,
+                  ? Colors.grey.shade600
+                  : const Color(0xffF7F7F7),
+              blurRadius: 4,
+              spreadRadius: 2,
+              offset: const Offset(0, 0),
             ),
-            boxShadow: [
-              BoxShadow(
-                color: Theme.of(context).brightness == Brightness.dark
-                    ? Colors.grey.shade600
-                    : const Color(0xffF7F7F7),
-                blurRadius: 4,
-                spreadRadius: 4,
-                offset: const Offset(0, 2),
-              ),
-            ],
-          ),
-          child: Center(
-            child: Iconify(
-              category.iconName,
-              size: size,
-              color: Theme.of(context).brightness == Brightness.dark
-                  ? Colors.grey.shade500
-                  : category.color,
-            ),
-          ),
+          ],
         ),
-        SizedBox(height: screenSize.height * .02),
-        CustomText(
+        child: CustomText(
           text: slug.toUpperCase(),
-          fontSize: 12,
+          fontSize: 14,
           alignment: Alignment.center,
           color: Theme.of(context).brightness == Brightness.dark
-              ? Theme.of(context).textTheme.bodyMedium!.color!
-              : category.color,
+              ? Colors.grey.shade300
+              : Colors.grey.shade50,
         ),
-      ],
+      ),
     );
   }
 }

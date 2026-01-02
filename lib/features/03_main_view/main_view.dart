@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
+import '../../core/helper/extensions_of_s_localization.dart';
 import '../../core/helper/routes.dart';
 import '../../generated/l10n.dart';
 
@@ -62,8 +63,8 @@ class _MainViewState extends State<MainView> {
             ? Colors.grey.shade200
             : Colors.green.shade100,
         activeColor: Colors.white,
-        iconSize: 26,
-        padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 10),
+        iconSize: 22,
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
         tabBackgroundGradient: const LinearGradient(
           colors: [Colors.white30, Colors.white54],
         ),
@@ -79,21 +80,15 @@ class _MainViewState extends State<MainView> {
           debugPrint(index.toString());
         },
         tabs: [
+          GButton(icon: Icons.home, text: S.of(context).navHome),
+          GButton(icon: Icons.search_outlined, text: S.of(context).navSearch),
           GButton(
-            margin: const EdgeInsets.only(left: 8),
-            icon: Icons.home,
-            text: S.of(context).Home,
+            icon: Icons.shopping_cart_outlined,
+            text: S.of(context).navCart,
           ),
           GButton(
-            margin: const EdgeInsets.only(left: 8),
-            icon: Icons.search_outlined,
-            text: S.of(context).Search,
-          ),
-          GButton(icon: Icons.shopping_cart_outlined, text: S.of(context).Cart),
-          GButton(
-            margin: const EdgeInsets.only(right: 8),
             icon: Icons.person_2_outlined,
-            text: S.of(context).Profile,
+            text: S.of(context).navProfile,
           ),
         ],
       ),

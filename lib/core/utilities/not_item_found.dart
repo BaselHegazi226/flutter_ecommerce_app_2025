@@ -28,3 +28,31 @@ class NoItemFound extends StatelessWidget {
     );
   }
 }
+
+class NoItemFoundByIcon extends StatelessWidget {
+  const NoItemFoundByIcon({
+    super.key,
+    required this.itemTitle,
+    required this.iconData,
+  });
+  final String itemTitle;
+  final IconData iconData;
+
+  @override
+  Widget build(BuildContext context) {
+    final Size screenSize = MediaQuery.sizeOf(context);
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Icon(iconData, size: screenSize.height * .25),
+        const SizedBox(height: 16),
+        CustomText(
+          text: itemTitle,
+          fontSize: 20,
+          alignment: Alignment.center,
+          color: Colors.black,
+        ),
+      ],
+    );
+  }
+}
