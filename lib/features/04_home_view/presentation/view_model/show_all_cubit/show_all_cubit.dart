@@ -14,9 +14,7 @@ class ShowAllCubit extends Cubit<ShowAllState> {
     final result = await homeViewRepo.showAllProducts();
     result.fold(
       (error) {
-        emit(
-          ShowAllFailure(errorMessage: error.errorMessage ?? 'unknown error'),
-        );
+        emit(ShowAllFailure(errorMessage: error.errorKey ?? 'unknown error'));
       },
       (showAllProductSuccess) {
         emit(ShowAllSuccess(products: showAllProductSuccess));
