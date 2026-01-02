@@ -22,132 +22,449 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
-    "AddToCart": MessageLookupByLibrary.simpleMessage("أضف إلى السلة"),
-    "AllProducts": MessageLookupByLibrary.simpleMessage("كل المنتجات"),
-    "Back": MessageLookupByLibrary.simpleMessage("السابق"),
-    "BestSelling": MessageLookupByLibrary.simpleMessage("الأكثر مبيعاً"),
-    "BillingAddress": MessageLookupByLibrary.simpleMessage(
-      "عنوان الفاتورة هو نفس عنوان التسليم",
+    "EP": MessageLookupByLibrary.simpleMessage("جنيه مصري"),
+    "about_me_app_admin": MessageLookupByLibrary.simpleMessage(
+      "لوحات تحكم (Admin Panels)",
     ),
-    "CancelOrder": MessageLookupByLibrary.simpleMessage("الغي الطلب"),
-    "Cart": MessageLookupByLibrary.simpleMessage("السلة"),
-    "Categories": MessageLookupByLibrary.simpleMessage("الفئات"),
-    "Category": MessageLookupByLibrary.simpleMessage("الفئة"),
-    "Checkout": MessageLookupByLibrary.simpleMessage("الدفع"),
-    "City": MessageLookupByLibrary.simpleMessage("المدينة"),
-    "Country": MessageLookupByLibrary.simpleMessage("الدولة"),
-    "Dark": MessageLookupByLibrary.simpleMessage("مظلم"),
-    "Deliver": MessageLookupByLibrary.simpleMessage("تأكيد التوصيل"),
-    "Delivered": MessageLookupByLibrary.simpleMessage("تم التسليم"),
-    "Delivery": MessageLookupByLibrary.simpleMessage("التوصيل"),
-    "Details": MessageLookupByLibrary.simpleMessage("التفاصيل"),
-    "EditProfile": MessageLookupByLibrary.simpleMessage("تعديل الملف الشخصي"),
-    "Email": MessageLookupByLibrary.simpleMessage("البريد الإلكتروني"),
-    "Favourite": MessageLookupByLibrary.simpleMessage("المفضلة"),
-    "Finish": MessageLookupByLibrary.simpleMessage("إتمام الشراء"),
-    "ForgetPassword": MessageLookupByLibrary.simpleMessage(
-      "هل نسيت كلمة المرور؟",
+    "about_me_app_api": MessageLookupByLibrary.simpleMessage(
+      "تطبيقات تعتمد على APIs خارجية",
     ),
-    "Home": MessageLookupByLibrary.simpleMessage("الرئيسية"),
-    "Language": MessageLookupByLibrary.simpleMessage("اللغة"),
-    "Light": MessageLookupByLibrary.simpleMessage("مضيئ"),
-    "Location": MessageLookupByLibrary.simpleMessage("الموقع"),
-    "Logout": MessageLookupByLibrary.simpleMessage("تسجيل الخروج"),
-    "Mode": MessageLookupByLibrary.simpleMessage("الوضع"),
-    "Name": MessageLookupByLibrary.simpleMessage("الاسم"),
-    "Next": MessageLookupByLibrary.simpleMessage("التالي"),
-    "NextDayDelivery": MessageLookupByLibrary.simpleMessage(
-      "توصيل في اليوم التالي",
+    "about_me_app_chat": MessageLookupByLibrary.simpleMessage(
+      "تطبيقات الدردشة والمراسلة",
     ),
-    "NoFavouriteItemFound": MessageLookupByLibrary.simpleMessage(
-      "لا توجد عناصر مفضلة",
+    "about_me_app_content": MessageLookupByLibrary.simpleMessage(
+      "تطبيقات عرض المحتوى (أخبار – مدونات – منتجات)",
     ),
-    "NoLocation": MessageLookupByLibrary.simpleMessage(
-      "لم تدخل عنوان شحن حاول صناعه طلب!",
+    "about_me_app_ecommerce": MessageLookupByLibrary.simpleMessage(
+      "تطبيقات التجارة الإلكترونية",
     ),
-    "NominatedDelivery": MessageLookupByLibrary.simpleMessage(
-      "توصيل في موعد محدد",
+    "about_me_app_firebase": MessageLookupByLibrary.simpleMessage(
+      "تطبيقات CRUD مرتبطة بـ فاير بيز",
     ),
-    "Notifications": MessageLookupByLibrary.simpleMessage("الإشعارات"),
-    "OnOff": MessageLookupByLibrary.simpleMessage("تشغيل/ ايقاف"),
-    "Or": MessageLookupByLibrary.simpleMessage("أو"),
-    "OrderHistory": MessageLookupByLibrary.simpleMessage("سجل الطلبات"),
-    "OrderIsReady": MessageLookupByLibrary.simpleMessage("الطلب جاهز للتنفيذ"),
-    "OrderWillBe": MessageLookupByLibrary.simpleMessage(
-      "سيتم التوصيل خلال ٣ إلى ٥ أيام عمل",
+    "about_me_app_management": MessageLookupByLibrary.simpleMessage(
+      "تطبيقات إدارة المستخدمين والموظفين",
     ),
-    "Password": MessageLookupByLibrary.simpleMessage("كلمة المرور"),
-    "Pending": MessageLookupByLibrary.simpleMessage("قيد الانتظار"),
-    "PickAParticular": MessageLookupByLibrary.simpleMessage(
-      "اختر تاريخاً محدداً من التقويم ليتم التوصيل في ذلك اليوم",
+    "about_me_apps_development": MessageLookupByLibrary.simpleMessage(
+      "أنواع التطبيقات التي أستطيع تطويرها",
     ),
-    "PlaceYourOrder": MessageLookupByLibrary.simpleMessage(
-      "قم بطلبك قبل الساعة السادسة مساءً ليتم التوصيل في اليوم التالي",
+    "about_me_desc": MessageLookupByLibrary.simpleMessage(
+      "أنا مطور تطبيقات موبايل متخصص في Flutter، أعمل على بناء تطبيقات عالية الأداء تعمل على Android و iOS من كود واحد، مع التركيز على Clean Architecture، تجربة مستخدم سلسة، وكود قابل للتوسع والصيانة.\n\nلدي خبرة قوية في التعامل مع Firebase، REST APIs، وإدارة الحالة باستخدام Bloc/Cubit، مع اهتمام كبير بالتفاصيل وتحويل التصاميم إلى واجهات احترافية ومتجاوبة.",
     ),
-    "Price": MessageLookupByLibrary.simpleMessage("السعر"),
-    "Profile": MessageLookupByLibrary.simpleMessage("الملف الشخصي"),
-    "Rating": MessageLookupByLibrary.simpleMessage("التقييم"),
-    "Search": MessageLookupByLibrary.simpleMessage("بحث"),
-    "Settings": MessageLookupByLibrary.simpleMessage("الإعدادات"),
-    "ShippingAddress": MessageLookupByLibrary.simpleMessage("عنوان الشحن"),
-    "ShowAll": MessageLookupByLibrary.simpleMessage("عرض الكل"),
-    "SignIn": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
-    "SignInWithFacebook": MessageLookupByLibrary.simpleMessage(
-      "تسجيل الدخول باستخدام فيسبوك",
+    "about_me_skill_architecture": MessageLookupByLibrary.simpleMessage(
+      "Clean Architecture و MVVM",
     ),
-    "SignInWithGoogle": MessageLookupByLibrary.simpleMessage(
-      "تسجيل الدخول باستخدام جوجل",
+    "about_me_skill_custom_ui": MessageLookupByLibrary.simpleMessage(
+      "إنشاء واجهات مخصصة وتحسين الأداء",
     ),
-    "SignIntoContinue": MessageLookupByLibrary.simpleMessage(
-      "سجّل الدخول للمتابعة",
+    "about_me_skill_firebase": MessageLookupByLibrary.simpleMessage(
+      "Firebase (Authentication – Firestore – Storage)",
     ),
-    "SignUp": MessageLookupByLibrary.simpleMessage("إنشاء حساب"),
-    "SignUpToContinue": MessageLookupByLibrary.simpleMessage(
-      "أنشئ حساباً للمتابعة",
+    "about_me_skill_flutter": MessageLookupByLibrary.simpleMessage(
+      "Flutter & Dart",
     ),
-    "StandardDelivery": MessageLookupByLibrary.simpleMessage("توصيل عادي"),
-    "State": MessageLookupByLibrary.simpleMessage("المنطقة"),
-    "Street1": MessageLookupByLibrary.simpleMessage("الشارع ١"),
-    "Street2": MessageLookupByLibrary.simpleMessage("الشارع ٢"),
-    "Summarize": MessageLookupByLibrary.simpleMessage("المُلخّص"),
-    "Total": MessageLookupByLibrary.simpleMessage("الإجمالي"),
-    "TotalPrice": MessageLookupByLibrary.simpleMessage("السعر الإجمالي"),
-    "Transmit": MessageLookupByLibrary.simpleMessage("قيد الإرسال"),
-    "TryToFillCart": MessageLookupByLibrary.simpleMessage(
-      "حاول ملء السلة بالمنتجات",
+    "about_me_skill_git": MessageLookupByLibrary.simpleMessage("Git و GitHub"),
+    "about_me_skill_localization": MessageLookupByLibrary.simpleMessage(
+      "دعم اللغتين العربية والإنجليزية",
     ),
-    "UserEmail": MessageLookupByLibrary.simpleMessage(
-      "البريد الألكتروني للمستخدم",
+    "about_me_skill_responsive_ui": MessageLookupByLibrary.simpleMessage(
+      "تصميم واجهات متجاوبة",
     ),
-    "UserName": MessageLookupByLibrary.simpleMessage("اسم المستخدم"),
-    "Welcome": MessageLookupByLibrary.simpleMessage("مرحبا بك "),
-    "cityIsRequired": MessageLookupByLibrary.simpleMessage("المدينة مطلوبة"),
-    "countryIsRequired": MessageLookupByLibrary.simpleMessage("الدولة مطلوبة"),
-    "email": MessageLookupByLibrary.simpleMessage("البريد الإلكتروني"),
-    "emailIsRequired": MessageLookupByLibrary.simpleMessage(
-      "حساب المستخدم مطلوب",
+    "about_me_skill_rest_api": MessageLookupByLibrary.simpleMessage(
+      "التعامل مع REST APIs و Dio",
     ),
-    "enterCity": MessageLookupByLibrary.simpleMessage("أدخل المدينة"),
-    "enterCountry": MessageLookupByLibrary.simpleMessage("أدخل الدولة"),
-    "enterState": MessageLookupByLibrary.simpleMessage("أدخل المنطقة"),
-    "enterStreet1": MessageLookupByLibrary.simpleMessage("أدخل الشارع ١"),
-    "enterStreet2": MessageLookupByLibrary.simpleMessage("أدخل الشارع ٢"),
-    "enterStrongPassword": MessageLookupByLibrary.simpleMessage(
+    "about_me_skill_state_management": MessageLookupByLibrary.simpleMessage(
+      "إدارة الحالة (Bloc / Cubit)",
+    ),
+    "about_me_summary": MessageLookupByLibrary.simpleMessage("ملخص لما اقدمه"),
+    "about_me_technical_skills": MessageLookupByLibrary.simpleMessage(
+      "مهاراتي التقنية",
+    ),
+    "about_me_title": MessageLookupByLibrary.simpleMessage("نبذه عني"),
+    "auth_confirmPassword": MessageLookupByLibrary.simpleMessage(
+      "تأكيد كلمة المرور",
+    ),
+    "auth_email": MessageLookupByLibrary.simpleMessage("البريد الإلكتروني"),
+    "auth_emailRequired": MessageLookupByLibrary.simpleMessage(
+      "البريد الإلكتروني مطلوب",
+    ),
+    "auth_enterStrongPassword": MessageLookupByLibrary.simpleMessage(
       "أدخل كلمة مرور قوية",
     ),
-    "enterValidEmail": MessageLookupByLibrary.simpleMessage(
-      "أدخل بريداً صحيحاً (email@gmail.com)",
+    "auth_enterValidEmail": MessageLookupByLibrary.simpleMessage(
+      "أدخل بريدًا إلكترونيًا صحيحًا",
     ),
-    "enterValidName": MessageLookupByLibrary.simpleMessage("أدخل اسماً صحيحاً"),
-    "name": MessageLookupByLibrary.simpleMessage("الاسم"),
-    "nameIsRequired": MessageLookupByLibrary.simpleMessage(
-      "أسم المستخدم مطلوب",
+    "auth_enterValidName": MessageLookupByLibrary.simpleMessage(
+      "أدخل اسمًا صحيحًا",
     ),
-    "passwordIsRequired": MessageLookupByLibrary.simpleMessage(
+    "auth_forgetPassword": MessageLookupByLibrary.simpleMessage(
+      "هل نسيت كلمة المرور؟",
+    ),
+    "auth_name": MessageLookupByLibrary.simpleMessage("الاسم"),
+    "auth_nameRequired": MessageLookupByLibrary.simpleMessage("الاسم مطلوب"),
+    "auth_or": MessageLookupByLibrary.simpleMessage("أو"),
+    "auth_password": MessageLookupByLibrary.simpleMessage("كلمة المرور"),
+    "auth_passwordNotMatch": MessageLookupByLibrary.simpleMessage(
+      "كلمتا المرور غير متطابقتين",
+    ),
+    "auth_passwordRequired": MessageLookupByLibrary.simpleMessage(
       "كلمة المرور مطلوبة",
     ),
-    "stateIsRequired": MessageLookupByLibrary.simpleMessage("المنطقة مطلوبة"),
-    "street1IsRequired": MessageLookupByLibrary.simpleMessage("الشارع ١ مطلوب"),
-    "street2IsRequired": MessageLookupByLibrary.simpleMessage("الشارع ٢ مطلوب"),
+    "auth_signIn": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
+    "auth_signInToContinue": MessageLookupByLibrary.simpleMessage(
+      "سجّل الدخول للمتابعة",
+    ),
+    "auth_signInWithFacebook": MessageLookupByLibrary.simpleMessage(
+      "الدخول باستخدام فيسبوك",
+    ),
+    "auth_signInWithGoogle": MessageLookupByLibrary.simpleMessage(
+      "الدخول باستخدام جوجل",
+    ),
+    "auth_signUp": MessageLookupByLibrary.simpleMessage("إنشاء حساب"),
+    "auth_signUpToContinue": MessageLookupByLibrary.simpleMessage(
+      "أنشئ حسابًا للمتابعة",
+    ),
+    "cart_alreadyInCart": MessageLookupByLibrary.simpleMessage(
+      "هذا المنتج مضاف بالفعل إلى السلة",
+    ),
+    "cart_back": MessageLookupByLibrary.simpleMessage("السابق"),
+    "cart_billing_address": MessageLookupByLibrary.simpleMessage(
+      "عنوان الفاتوره",
+    ),
+    "cart_checkout": MessageLookupByLibrary.simpleMessage("إتمام الشراء"),
+    "cart_delete_product_desc": MessageLookupByLibrary.simpleMessage(
+      "هل انت متأكد من حذف هذا المنتج؟",
+    ),
+    "cart_delete_product_title": MessageLookupByLibrary.simpleMessage(
+      "حذف المنتج",
+    ),
+    "cart_delivery": MessageLookupByLibrary.simpleMessage("التوصيل"),
+    "cart_finish": MessageLookupByLibrary.simpleMessage("إنهاء"),
+    "cart_location": MessageLookupByLibrary.simpleMessage("الموقع"),
+    "cart_next": MessageLookupByLibrary.simpleMessage("التالي"),
+    "cart_nextDayDelivery": MessageLookupByLibrary.simpleMessage(
+      "توصيل في اليوم التالي",
+    ),
+    "cart_nominatedDelivery": MessageLookupByLibrary.simpleMessage(
+      "توصيل في موعد محدد",
+    ),
+    "cart_orderWillBe": MessageLookupByLibrary.simpleMessage(
+      "سيتم التوصيل خلال 3 إلى 5 أيام عمل",
+    ),
+    "cart_payment": MessageLookupByLibrary.simpleMessage("الدفع"),
+    "cart_pickAParticular": MessageLookupByLibrary.simpleMessage(
+      "اختر تاريخًا من التقويم ليتم التوصيل في هذا اليوم",
+    ),
+    "cart_placeYourOrder": MessageLookupByLibrary.simpleMessage(
+      "قم بطلبك قبل الساعة 6 مساءً ليتم التوصيل في اليوم التالي",
+    ),
+    "cart_standardDelivery": MessageLookupByLibrary.simpleMessage("توصيل عادي"),
+    "cart_summarize": MessageLookupByLibrary.simpleMessage("الملخص"),
+    "cart_total": MessageLookupByLibrary.simpleMessage("الإجمالي"),
+    "cart_tryToFill": MessageLookupByLibrary.simpleMessage(
+      "حاول إضافة منتجات إلى السلة",
+    ),
+    "category_beauty": MessageLookupByLibrary.simpleMessage("الجمال"),
+    "category_fragrances": MessageLookupByLibrary.simpleMessage("العطور"),
+    "category_furniture": MessageLookupByLibrary.simpleMessage("الأثاث"),
+    "category_groceries": MessageLookupByLibrary.simpleMessage("البقالة"),
+    "category_home_decoration": MessageLookupByLibrary.simpleMessage(
+      "ديكور المنزل",
+    ),
+    "category_kitchen_accessories": MessageLookupByLibrary.simpleMessage(
+      "مستلزمات المطبخ",
+    ),
+    "category_laptops": MessageLookupByLibrary.simpleMessage("أجهزة لابتوب"),
+    "category_mens_shirts": MessageLookupByLibrary.simpleMessage("قمصان رجالي"),
+    "category_mens_shoes": MessageLookupByLibrary.simpleMessage("أحذية رجالي"),
+    "category_mens_watches": MessageLookupByLibrary.simpleMessage(
+      "ساعات رجالي",
+    ),
+    "category_mobile_accessories": MessageLookupByLibrary.simpleMessage(
+      "إكسسوارات الموبايل",
+    ),
+    "category_motorcycle": MessageLookupByLibrary.simpleMessage("دراجات نارية"),
+    "category_skin_care": MessageLookupByLibrary.simpleMessage(
+      "العناية بالبشرة",
+    ),
+    "category_smartphones": MessageLookupByLibrary.simpleMessage("هواتف ذكية"),
+    "category_sports_accessories": MessageLookupByLibrary.simpleMessage(
+      "مستلزمات رياضية",
+    ),
+    "category_sunglasses": MessageLookupByLibrary.simpleMessage("نظارات شمس"),
+    "category_tablets": MessageLookupByLibrary.simpleMessage("أجهزة لوحية"),
+    "category_tops": MessageLookupByLibrary.simpleMessage("ملابس علوية"),
+    "category_vehicle": MessageLookupByLibrary.simpleMessage("مركبات"),
+    "category_womens_bags": MessageLookupByLibrary.simpleMessage(
+      "حقائب نسائية",
+    ),
+    "category_womens_dresses": MessageLookupByLibrary.simpleMessage(
+      "فساتين نسائية",
+    ),
+    "category_womens_jewellery": MessageLookupByLibrary.simpleMessage(
+      "مجوهرات نسائية",
+    ),
+    "category_womens_shoes": MessageLookupByLibrary.simpleMessage(
+      "أحذية نسائية",
+    ),
+    "category_womens_watches": MessageLookupByLibrary.simpleMessage(
+      "ساعات نسائية",
+    ),
+    "delete_order_description": MessageLookupByLibrary.simpleMessage(
+      "هل انت متأكد من حذف تاريخ المنتجات بأكمله؟",
+    ),
+    "delete_order_history_title": MessageLookupByLibrary.simpleMessage(
+      "حذف تاريخ الطلبات",
+    ),
+    "error_badRequest": MessageLookupByLibrary.simpleMessage("طلب غير صالح"),
+    "error_conflict": MessageLookupByLibrary.simpleMessage("حدث تعارض"),
+    "error_connection": MessageLookupByLibrary.simpleMessage(
+      "خطأ في الاتصال بالإنترنت",
+    ),
+    "error_connectionTimeout": MessageLookupByLibrary.simpleMessage(
+      "انتهت مهلة الاتصال",
+    ),
+    "error_emailAlreadyInUse": MessageLookupByLibrary.simpleMessage(
+      "البريد مستخدم بالفعل",
+    ),
+    "error_forbidden": MessageLookupByLibrary.simpleMessage("ليس لديك صلاحية"),
+    "error_internalServer": MessageLookupByLibrary.simpleMessage(
+      "خطأ في الخادم",
+    ),
+    "error_invalidEmail": MessageLookupByLibrary.simpleMessage("بريد غير صالح"),
+    "error_invalidVerificationCode": MessageLookupByLibrary.simpleMessage(
+      "رمز التحقق غير صحيح",
+    ),
+    "error_invalidVerificationId": MessageLookupByLibrary.simpleMessage(
+      "معرف التحقق غير صالح",
+    ),
+    "error_networkRequestFailed": MessageLookupByLibrary.simpleMessage(
+      "خطأ في الشبكة",
+    ),
+    "error_notFound": MessageLookupByLibrary.simpleMessage("العنصر غير موجود"),
+    "error_operationNotAllowed": MessageLookupByLibrary.simpleMessage(
+      "العملية غير مسموحة",
+    ),
+    "error_receiveTimeout": MessageLookupByLibrary.simpleMessage(
+      "انتهت مهلة الاستقبال",
+    ),
+    "error_requiresRecentLogin": MessageLookupByLibrary.simpleMessage(
+      "يرجى تسجيل الدخول مرة أخرى",
+    ),
+    "error_sendTimeout": MessageLookupByLibrary.simpleMessage(
+      "انتهت مهلة الإرسال",
+    ),
+    "error_tooManyRequests": MessageLookupByLibrary.simpleMessage(
+      "طلبات كثيرة جدًا",
+    ),
+    "error_unauthorized": MessageLookupByLibrary.simpleMessage(
+      "غير مصرح، يرجى تسجيل الدخول",
+    ),
+    "error_unexpected": MessageLookupByLibrary.simpleMessage(
+      "حدث خطأ غير متوقع",
+    ),
+    "error_unknownFirebase": MessageLookupByLibrary.simpleMessage(
+      "حدث خطأ غير معروف",
+    ),
+    "error_unknownServer": MessageLookupByLibrary.simpleMessage(
+      "خطأ غير معروف في الخادم",
+    ),
+    "error_userDisabled": MessageLookupByLibrary.simpleMessage(
+      "تم تعطيل الحساب",
+    ),
+    "error_userNotFound": MessageLookupByLibrary.simpleMessage(
+      "المستخدم غير موجود",
+    ),
+    "error_weakPassword": MessageLookupByLibrary.simpleMessage(
+      "كلمة المرور ضعيفة",
+    ),
+    "error_wrongPassword": MessageLookupByLibrary.simpleMessage(
+      "كلمة المرور غير صحيحة",
+    ),
+    "failure_addOrder_title": MessageLookupByLibrary.simpleMessage(
+      "فشل إنشاء الطلب",
+    ),
+    "failure_addToCart_title": MessageLookupByLibrary.simpleMessage(
+      "فشل إضافة المنتج",
+    ),
+    "failure_login_title": MessageLookupByLibrary.simpleMessage(
+      "فشل تسجيل الدخول",
+    ),
+    "failure_payment_title": MessageLookupByLibrary.simpleMessage("فشل الدفع"),
+    "failure_register_title": MessageLookupByLibrary.simpleMessage(
+      "فشل إنشاء الحساب",
+    ),
+    "failure_updateProfile_title": MessageLookupByLibrary.simpleMessage(
+      "فشل تحديث البيانات",
+    ),
+    "form_city": MessageLookupByLibrary.simpleMessage("المدينة"),
+    "form_cityRequired": MessageLookupByLibrary.simpleMessage("المدينة مطلوبة"),
+    "form_country": MessageLookupByLibrary.simpleMessage("الدولة"),
+    "form_countryRequired": MessageLookupByLibrary.simpleMessage(
+      "الدولة مطلوبة",
+    ),
+    "form_enterCity": MessageLookupByLibrary.simpleMessage("أدخل المدينة"),
+    "form_enterCountry": MessageLookupByLibrary.simpleMessage("أدخل الدولة"),
+    "form_enterState": MessageLookupByLibrary.simpleMessage("أدخل المحافظة"),
+    "form_enterStreet1": MessageLookupByLibrary.simpleMessage("أدخل الشارع 1"),
+    "form_enterStreet2": MessageLookupByLibrary.simpleMessage("أدخل الشارع 2"),
+    "form_state": MessageLookupByLibrary.simpleMessage("المحافظة"),
+    "form_stateRequired": MessageLookupByLibrary.simpleMessage(
+      "المحافظة مطلوبة",
+    ),
+    "form_street1": MessageLookupByLibrary.simpleMessage("الشارع 1"),
+    "form_street1Required": MessageLookupByLibrary.simpleMessage(
+      "الشارع 1 مطلوب",
+    ),
+    "form_street2": MessageLookupByLibrary.simpleMessage("الشارع 2"),
+    "form_street2Required": MessageLookupByLibrary.simpleMessage(
+      "الشارع 2 مطلوب",
+    ),
+    "from": MessageLookupByLibrary.simpleMessage("من"),
+    "home_addToCart": MessageLookupByLibrary.simpleMessage("أضف إلى السلة"),
+    "home_allProducts": MessageLookupByLibrary.simpleMessage("كل المنتجات"),
+    "home_app_products": MessageLookupByLibrary.simpleMessage("منتجات التطبيق"),
+    "home_categories": MessageLookupByLibrary.simpleMessage("الفئات"),
+    "home_category": MessageLookupByLibrary.simpleMessage("الفئة"),
+    "home_details": MessageLookupByLibrary.simpleMessage("التفاصيل"),
+    "home_no_products_now": MessageLookupByLibrary.simpleMessage(
+      "لا يوجد منتجات من هذا الصنف الآن",
+    ),
+    "home_not_categories_available_now": MessageLookupByLibrary.simpleMessage(
+      "لا توجد فئات متوفره الآن",
+    ),
+    "home_price": MessageLookupByLibrary.simpleMessage("السعر"),
+    "home_rating": MessageLookupByLibrary.simpleMessage("التقييم"),
+    "home_showAll": MessageLookupByLibrary.simpleMessage("عرض الكل"),
+    "home_welcome": MessageLookupByLibrary.simpleMessage("مرحبًا بك"),
+    "items": MessageLookupByLibrary.simpleMessage("العناصر"),
+    "nav_cart": MessageLookupByLibrary.simpleMessage("السلة"),
+    "nav_home": MessageLookupByLibrary.simpleMessage("الرئيسية"),
+    "nav_profile": MessageLookupByLibrary.simpleMessage("الملف الشخصي"),
+    "nav_search": MessageLookupByLibrary.simpleMessage("بحث"),
+    "order_added_done": MessageLookupByLibrary.simpleMessage(
+      "تمت اضافه المنتج من قبل",
+    ),
+    "order_cancel": MessageLookupByLibrary.simpleMessage("إلغاء الطلب"),
+    "order_delete": MessageLookupByLibrary.simpleMessage("حذف"),
+    "order_delivered": MessageLookupByLibrary.simpleMessage("تم التسليم"),
+    "order_history": MessageLookupByLibrary.simpleMessage("سجل الطلبات"),
+    "order_history_no_found_orders": MessageLookupByLibrary.simpleMessage(
+      "لا يوجد سجل للطلبات حتى الآن",
+    ),
+    "order_noLocation": MessageLookupByLibrary.simpleMessage(
+      "لم يتم العثور على عنوان، حاول إنشاء طلب",
+    ),
+    "order_order_id": MessageLookupByLibrary.simpleMessage("رقم الطلب"),
+    "order_pending": MessageLookupByLibrary.simpleMessage("قيد الانتظار"),
+    "order_ready": MessageLookupByLibrary.simpleMessage("الطلب جاهز للتنفيذ"),
+    "order_selected_all": MessageLookupByLibrary.simpleMessage("تحديد الكل"),
+    "order_total_price": MessageLookupByLibrary.simpleMessage("السعر الإجمالي"),
+    "order_transmit": MessageLookupByLibrary.simpleMessage("قيد الإرسال"),
+    "order_unselected_all": MessageLookupByLibrary.simpleMessage(
+      "إلغاء تحديد الكل",
+    ),
+    "profile": MessageLookupByLibrary.simpleMessage("الملف الشخصي"),
+    "profile_delete_favourite_Item_desc": MessageLookupByLibrary.simpleMessage(
+      "هل تريد بالفعل حذف العنصر من المفضله",
+    ),
+    "profile_delete_favourite_Item_title": MessageLookupByLibrary.simpleMessage(
+      "حذف العنصر",
+    ),
+    "profile_edit": MessageLookupByLibrary.simpleMessage("تعديل الملف الشخصي"),
+    "profile_favourite": MessageLookupByLibrary.simpleMessage("المفضلة"),
+    "profile_noFavourite": MessageLookupByLibrary.simpleMessage(
+      "لا توجد عناصر مفضلة",
+    ),
+    "profile_shippingAddress": MessageLookupByLibrary.simpleMessage(
+      "عنوان الشحن",
+    ),
+    "profile_userEmail": MessageLookupByLibrary.simpleMessage(
+      "البريد الإلكتروني",
+    ),
+    "profile_userName": MessageLookupByLibrary.simpleMessage("اسم المستخدم"),
+    "settings_dark": MessageLookupByLibrary.simpleMessage("داكن"),
+    "settings_language": MessageLookupByLibrary.simpleMessage("اللغة"),
+    "settings_light": MessageLookupByLibrary.simpleMessage("فاتح"),
+    "settings_logout": MessageLookupByLibrary.simpleMessage("تسجيل الخروج"),
+    "settings_mode": MessageLookupByLibrary.simpleMessage("الوضع"),
+    "settings_notifications": MessageLookupByLibrary.simpleMessage("الإشعارات"),
+    "settings_onOff": MessageLookupByLibrary.simpleMessage("تشغيل / إيقاف"),
+    "settings_title": MessageLookupByLibrary.simpleMessage("الإعدادات"),
+    "success_addToCart_desc": MessageLookupByLibrary.simpleMessage(
+      "تمت إضافة المنتج إلى السلة بنجاح.",
+    ),
+    "success_addToCart_title": MessageLookupByLibrary.simpleMessage(
+      "تمت الإضافة",
+    ),
+    "success_add_order_desc": MessageLookupByLibrary.simpleMessage(
+      "تم عمل الطلب بنجاح",
+    ),
+    "success_add_order_title": MessageLookupByLibrary.simpleMessage(
+      "نجح الطلب",
+    ),
+    "success_cancelOrder_desc": MessageLookupByLibrary.simpleMessage(
+      "تم إلغاء الطلب بنجاح.",
+    ),
+    "success_cancelOrder_title": MessageLookupByLibrary.simpleMessage(
+      "تم إلغاء الطلب",
+    ),
+    "success_clearFavorites_desc": MessageLookupByLibrary.simpleMessage(
+      "تمت إزالة جميع المنتجات من المفضلة.",
+    ),
+    "success_clearFavorites_title": MessageLookupByLibrary.simpleMessage(
+      "تم مسح المفضلة",
+    ),
+    "success_login_desc": MessageLookupByLibrary.simpleMessage(
+      "تم تسجيل الدخول بنجاح، نتمنى لك تجربة ممتعة.",
+    ),
+    "success_login_title": MessageLookupByLibrary.simpleMessage(
+      "مرحبًا بعودتك",
+    ),
+    "success_logout_desc": MessageLookupByLibrary.simpleMessage(
+      "تم تسجيل الخروج بنجاح، نراك قريبًا.",
+    ),
+    "success_logout_title": MessageLookupByLibrary.simpleMessage(
+      "تم تسجيل الخروج",
+    ),
+    "success_payment_desc": MessageLookupByLibrary.simpleMessage(
+      "اكتملت عملية الدفع بنجاح، شكرًا لك.",
+    ),
+    "success_payment_title": MessageLookupByLibrary.simpleMessage(
+      "تم الدفع بنجاح",
+    ),
+    "success_register_desc": MessageLookupByLibrary.simpleMessage(
+      "تم إنشاء حسابك بنجاح، يمكنك البدء الآن.",
+    ),
+    "success_register_title": MessageLookupByLibrary.simpleMessage(
+      "تم إنشاء الحساب",
+    ),
+    "success_removeFavorite_desc": MessageLookupByLibrary.simpleMessage(
+      "تمت إزالة المنتج من المفضلة بنجاح.",
+    ),
+    "success_removeFavorite_title": MessageLookupByLibrary.simpleMessage(
+      "تمت الإزالة من المفضلة",
+    ),
+    "success_removeFromCart_desc": MessageLookupByLibrary.simpleMessage(
+      "تمت إزالة المنتج من السلة بنجاح.",
+    ),
+    "success_removeFromCart_title": MessageLookupByLibrary.simpleMessage(
+      "تمت الإزالة",
+    ),
+    "success_removeOrder_desc": MessageLookupByLibrary.simpleMessage(
+      "تم حذف الطلب بنجاح.",
+    ),
+    "success_removeOrder_title": MessageLookupByLibrary.simpleMessage(
+      "تم حذف الطلب",
+    ),
+    "success_updateProfile_desc": MessageLookupByLibrary.simpleMessage(
+      "تم تحديث بيانات حسابك بنجاح.",
+    ),
+    "success_updateProfile_title": MessageLookupByLibrary.simpleMessage(
+      "تم تحديث البيانات",
+    ),
+    "warning_button_title_Cancel": MessageLookupByLibrary.simpleMessage(
+      "تراجع",
+    ),
+    "warning_button_title_ok": MessageLookupByLibrary.simpleMessage("موافق"),
   };
 }
