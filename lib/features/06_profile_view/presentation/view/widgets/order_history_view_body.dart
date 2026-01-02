@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_e_commerce_app_2025/core/helper/const.dart';
+import 'package:flutter_e_commerce_app_2025/core/helper/extensions_of_s_localization.dart';
 import 'package:flutter_e_commerce_app_2025/core/utilities/custom_loading_indicator.dart';
 import 'package:flutter_e_commerce_app_2025/core/utilities/custom_text.dart';
 import 'package:flutter_e_commerce_app_2025/core/utilities/not_item_found.dart';
@@ -8,6 +9,7 @@ import 'package:flutter_e_commerce_app_2025/features/05_cart_view/presentation/v
 import 'package:flutter_e_commerce_app_2025/features/05_cart_view/presentation/view_model/order_cubit/order_state.dart';
 import 'package:flutter_e_commerce_app_2025/features/06_profile_view/presentation/view/widgets/order_history_selection_class.dart';
 import 'package:flutter_e_commerce_app_2025/generated/assets.dart';
+import 'package:flutter_e_commerce_app_2025/generated/l10n.dart';
 
 class OrderHistoryViewBody extends StatefulWidget {
   const OrderHistoryViewBody({super.key});
@@ -30,8 +32,8 @@ class _OrderHistoryViewBodyState extends State<OrderHistoryViewBody> {
         if (state is GetOrderListSuccess) {
           final orders = state.orders;
           if (orders.isEmpty) {
-            return const NoItemFound(
-              itemTitle: 'No History found try make order!',
+            return NoItemFound(
+              itemTitle: S.of(context).orderHistoryNoOrdersFound,
               itemImage: Assets.profileNoHistoryOrder,
             );
           }

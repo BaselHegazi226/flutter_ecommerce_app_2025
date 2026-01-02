@@ -3,12 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_e_commerce_app_2025/core/helper/const.dart';
 import 'package:flutter_e_commerce_app_2025/core/utilities/custom_text.dart';
 import 'package:flutter_e_commerce_app_2025/features/05_cart_view/data/model/order_model.dart';
-
-import '../../../../05_cart_view/presentation/view/widgets/finish_view.dart';
+import 'package:flutter_e_commerce_app_2025/generated/l10n.dart';
 
 class OrderHistoryItem extends StatelessWidget {
   const OrderHistoryItem({super.key, required this.orderModel});
+
   final OrderModel orderModel;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -42,7 +43,7 @@ class OrderHistoryItem extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           CustomText(
-            text: '\$ ${orderModel.totalPrice.toStringAsFixed(2)}',
+            text: '${priceShowed(orderModel.totalPrice)} ${S.of(context).EP}',
             fontSize: 18,
             color: kPrimaryColor,
           ),

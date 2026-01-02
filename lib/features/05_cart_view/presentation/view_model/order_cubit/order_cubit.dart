@@ -16,9 +16,7 @@ class OrderCubit extends Cubit<OrderState> {
     final result = await orderCache.addOrder(orderModel: orderModel);
     result.fold(
       (error) {
-        emit(
-          AddOrderFailure(errorMessage: error.errorMessage ?? 'unknown error'),
-        );
+        emit(AddOrderFailure(errorMessage: error.errorKey ?? 'unknown error'));
       },
       (success) {
         emit(AddOrderSuccess());
@@ -32,9 +30,7 @@ class OrderCubit extends Cubit<OrderState> {
     result.fold(
       (error) {
         emit(
-          DeleteOrderFailure(
-            errorMessage: error.errorMessage ?? 'unknown error',
-          ),
+          DeleteOrderFailure(errorMessage: error.errorKey ?? 'unknown error'),
         );
       },
       (success) {
@@ -50,7 +46,7 @@ class OrderCubit extends Cubit<OrderState> {
       (error) {
         emit(
           DeleteAllOrdersFailure(
-            errorMessage: error.errorMessage ?? 'unknown error',
+            errorMessage: error.errorKey ?? 'unknown error',
           ),
         );
       },
@@ -81,9 +77,7 @@ class OrderCubit extends Cubit<OrderState> {
     result.fold(
       (error) {
         emit(
-          UpdateOrderFailure(
-            errorMessage: error.errorMessage ?? 'unknown error',
-          ),
+          UpdateOrderFailure(errorMessage: error.errorKey ?? 'unknown error'),
         );
       },
       (orderUpdated) {
@@ -98,9 +92,7 @@ class OrderCubit extends Cubit<OrderState> {
     result.fold(
       (error) {
         emit(
-          GetOrderListFailure(
-            errorMessage: error.errorMessage ?? 'unknown error',
-          ),
+          GetOrderListFailure(errorMessage: error.errorKey ?? 'unknown error'),
         );
       },
       (successOrders) async {
@@ -136,9 +128,7 @@ class OrderCubit extends Cubit<OrderState> {
     result.fold(
       (error) {
         emit(
-          SaveUserLocationFailure(
-            errorMessage: error.errorMessage ?? 'unknown',
-          ),
+          SaveUserLocationFailure(errorMessage: error.errorKey ?? 'unknown'),
         );
       },
       (success) {
@@ -152,9 +142,7 @@ class OrderCubit extends Cubit<OrderState> {
     final result = await orderCache.getUserLocation();
     result.fold(
       (error) {
-        emit(
-          GetUserLocationFailure(errorMessage: error.errorMessage ?? 'unknown'),
-        );
+        emit(GetUserLocationFailure(errorMessage: error.errorKey ?? 'unknown'));
       },
       (success) {
         if (success != null) {
@@ -173,7 +161,7 @@ class OrderCubit extends Cubit<OrderState> {
       (error) {
         emit(
           DeleteMultipleOrdersFailure(
-            errorMessage: error.errorMessage ?? 'unknown',
+            errorMessage: error.errorKey ?? 'unknown',
           ),
         );
       },

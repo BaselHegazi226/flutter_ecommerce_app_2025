@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_e_commerce_app_2025/features/05_cart_view/data/model/cart_model.dart';
 import 'package:flutter_e_commerce_app_2025/features/05_cart_view/data/model/delivery_method_model.dart';
 import 'package:flutter_e_commerce_app_2025/features/05_cart_view/data/model/location_model.dart';
@@ -38,20 +39,30 @@ class OrderModel {
     required this.orderStateEnum,
   });
 
-  factory OrderModel.fromJson(Map<String, dynamic> json) {
+  factory OrderModel.fromJson(Map<String, dynamic> jsonData) {
+    final addAtRaw = jsonData['checkoutDateAt'];
+
+    DateTime parsedAddAt;
+    if (addAtRaw is Timestamp) {
+      parsedAddAt = addAtRaw.toDate();
+    } else if (addAtRaw is DateTime) {
+      parsedAddAt = addAtRaw;
+    } else {
+      parsedAddAt = DateTime.now(); // fallback
+    }
     return OrderModel(
-      orderId: json['orderId'] ?? '',
-      cartModelList: (json['cartModel'] as List<dynamic>)
+      orderId: jsonData['orderId'] ?? '',
+      cartModelList: (jsonData['cartModel'] as List<dynamic>)
           .map((e) => CartModel.fromJson(e as Map<String, dynamic>))
           .toList(),
       deliveryMethodModel: DeliveryMethodModel.fromJson(
-        json['deliveryMethodModel'],
+        jsonData['deliveryMethodModel'],
       ),
-      locationModel: LocationModel.fromJson(json['locationModel']),
-      totalPrice: (json['totalPrice'] as num).toDouble(),
-      checkoutDateAt: DateTime.parse(json['checkoutDateAt']),
+      locationModel: LocationModel.fromJson(jsonData['locationModel']),
+      totalPrice: (jsonData['totalPrice'] as num).toDouble(),
+      checkoutDateAt: parsedAddAt,
       orderStateEnum: OrderStateEnum.values.firstWhere(
-        (e) => e.name == json['orderStateEnum'],
+        (e) => e.name == jsonData['orderStateEnum'],
         orElse: () => OrderStateEnum.pending,
       ),
     );

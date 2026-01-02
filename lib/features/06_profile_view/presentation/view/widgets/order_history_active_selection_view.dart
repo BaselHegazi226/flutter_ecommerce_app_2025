@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_e_commerce_app_2025/core/helper/const.dart';
+import 'package:flutter_e_commerce_app_2025/core/helper/extensions_of_s_localization.dart';
 import 'package:flutter_e_commerce_app_2025/core/utilities/custom_dialog_state.dart';
 import 'package:flutter_e_commerce_app_2025/core/utilities/custom_text.dart';
 import 'package:flutter_e_commerce_app_2025/core/utilities/icon_with_circle_style.dart';
@@ -8,6 +9,7 @@ import 'package:flutter_e_commerce_app_2025/features/05_cart_view/data/model/ord
 import 'package:flutter_e_commerce_app_2025/features/05_cart_view/presentation/view_model/order_cubit/order_cubit.dart';
 import 'package:flutter_e_commerce_app_2025/features/05_cart_view/presentation/view_model/order_cubit/order_state.dart';
 import 'package:flutter_e_commerce_app_2025/features/06_profile_view/presentation/view/widgets/order_history_item.dart';
+import 'package:flutter_e_commerce_app_2025/generated/l10n.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:iconify_flutter/icons/carbon.dart';
 import 'package:intl/intl.dart';
@@ -60,8 +62,11 @@ class _OrderHistoryActiveSelectionViewState
           child: ValueListenableBuilder<Map<String, bool>>(
             valueListenable: activeItems,
             builder: (context, selectedMap, _) {
-              return ListView.builder(
+              return ListView.separated(
                 itemCount: widget.orders.length,
+                separatorBuilder: (context, index) {
+                  return const SizedBox(height: 12);
+                },
                 itemBuilder: (context, index) {
                   final order = widget.orders[index];
                   final id = order.orderId;
@@ -129,9 +134,11 @@ class _OrderHistoryActiveSelectionViewState
                 children: [
                   IconButton(
                     onPressed: _undoSelected,
-                    icon: const Iconify(
+                    icon: Iconify(
                       Carbon.undo,
-                      color: Colors.black,
+                      color: Theme.of(context).brightness == Brightness.dark
+                          ? Colors.grey.shade100
+                          : Colors.black,
                       size: 24,
                     ),
                   ),
@@ -149,7 +156,12 @@ class _OrderHistoryActiveSelectionViewState
                   const SizedBox(width: 12),
                   CustomText(
                     text: isAnySelected
-                        ? 'Delete ${widget.selectedOrders.length} items'
+                        ? S
+                              .of(context)
+                              .deleteNumOfItems(
+                                context,
+                                widget.selectedOrders.length,
+                              )
                         : '',
                     fontSize: 14,
                     alignment: Alignment.center,
@@ -159,7 +171,9 @@ class _OrderHistoryActiveSelectionViewState
               Row(
                 children: [
                   CustomText(
-                    text: isAllSelected ? 'Unselect All' : 'Select All',
+                    text: isAllSelected
+                        ? S.of(context).orderUnselected
+                        : S.of(context).orderSelected,
                     fontSize: 14,
                     color: isAllSelected ? kPrimaryColor : kGreyColor,
                     alignment: Alignment.center,
@@ -235,11 +249,12 @@ class _OrderHistoryActiveSelectionViewState
     if (widget.selectedOrders.isEmpty) return;
     warningAwesomeDialog(
       context,
-      title: 'Delete Order History',
-      description:
-          'Are you sure you want to delete ${widget.selectedOrders.length} items?',
-      buttonAcceptText: 'Delete',
-      buttonCancelText: 'Cancel',
+      title: S.of(context).orderDeleteHistory,
+      description: S
+          .of(context)
+          .areYouSureToDeleteItems(context, widget.selectedOrders.length),
+      buttonAcceptText: S.of(context).warning_button_title_ok,
+      buttonCancelText: S.of(context).warning_button_title_Cancel,
       onPressed: () {
         context.read<OrderCubit>().deleteMultipleOrders(
           orders: widget.selectedOrders,
