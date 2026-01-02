@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_e_commerce_app_2025/core/helper/const.dart';
+import 'package:flutter_e_commerce_app_2025/core/helper/extensions_of_s_localization.dart';
 
 import '../../../../../core/utilities/custom_text.dart';
 import '../../../../../generated/l10n.dart';
+import 'custom_title_value.dart';
 
 class ProductDetailsCategoryRatingSection extends StatelessWidget {
   const ProductDetailsCategoryRatingSection({
@@ -14,82 +16,27 @@ class ProductDetailsCategoryRatingSection extends StatelessWidget {
 
   final String category;
   final double rating;
+
   //final int id;
   @override
   Widget build(BuildContext context) {
-    return Row(
-      spacing: 24,
+    return Wrap(
+      runSpacing: 8,
+      runAlignment: WrapAlignment.start,
       children: [
-        Expanded(
-          child: Container(
-            padding: const EdgeInsets.all(12),
-            decoration: BoxDecoration(
-              color: Colors.transparent,
-              borderRadius: const BorderRadius.all(Radius.circular(25)),
-              border: Border.all(color: const Color(0xffEBEBEB)),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                CustomText(
-                  text: S.of(context).Category,
-                  fontSize: 14,
-                  alignment: Alignment.centerLeft,
-                ),
-                CustomText(
-                  text: category,
-                  fontSize: 14,
-                  alignment: Alignment.centerRight,
-                  color: kGreyColor,
-                ),
-              ],
-            ),
+        CustomTitleValueItem(
+          title: S.of(context).homeCategory,
+          value: CustomText(
+            text: category,
+            fontSize: 14,
+            alignment: Alignment.centerRight,
+            color: kGreyColor,
           ),
         ),
-        Expanded(
-          child: Container(
-            padding: const EdgeInsets.all(12),
-            decoration: BoxDecoration(
-              color: Colors.transparent,
-              borderRadius: const BorderRadius.all(Radius.circular(25)),
-              border: Border.all(color: const Color(0xffEBEBEB)),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                CustomText(
-                  text: S.of(context).Rating,
-                  fontSize: 14,
-                  alignment: Alignment.centerLeft,
-                ),
-                Row(
-                  spacing: 4,
-                  children: [
-                    CustomText(
-                      text: rating.toString(),
-                      fontSize: 14,
-                      alignment: Alignment.centerRight,
-                    ),
-                    Icon(Icons.star, color: Colors.yellow.shade700, size: 20),
-                  ],
-                ),
-
-                // CustomText(
-                //   text: 'Color',
-                //   fontSize: 14,
-                //   alignment: Alignment.centerLeft,
-                // ),
-                //   Container(
-                //     width: 22,
-                //     height: 22,
-                //     decoration: BoxDecoration(
-                //       color: id < 3 ? Colors.blue : Colors.green,
-                //       borderRadius: const BorderRadius.all(Radius.circular(8)),
-                //     ),
-                //   ),
-              ],
-            ),
-          ),
+        const SizedBox(width: 20),
+        CustomTitleValueItem(
+          title: S.of(context).homeRating,
+          value: starFunctionLikeGooglePlay(context, rating: rating),
         ),
       ],
     );

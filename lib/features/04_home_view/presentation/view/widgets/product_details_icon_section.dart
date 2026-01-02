@@ -6,93 +6,80 @@ import 'package:flutter_e_commerce_app_2025/features/04_home_view/presentation/v
 import 'package:go_router/go_router.dart';
 
 class ProductDetailsIconSection extends StatelessWidget {
-  const ProductDetailsIconSection({
-    super.key,
-    required this.screenSize,
-    required this.productModel,
-  });
-  final Size screenSize;
+  const ProductDetailsIconSection({super.key, required this.productModel});
+
   final ProductModel productModel;
+
   @override
   Widget build(BuildContext context) {
-    return Positioned(
-      left: 0,
-      right: 0,
-      child: Padding(
-        padding: EdgeInsets.symmetric(
-          horizontal: 8,
-          vertical: screenSize.height * .04,
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        IconWithCircleStyle(
+          backgroundColor: Colors.grey.shade500.withAlpha(32),
+          widget: IconButton(
+            padding: EdgeInsets.zero,
+            onPressed: () {
+              GoRouter.of(context).pop();
+            },
+            icon: const Icon(Icons.arrow_back_ios_new_outlined, size: 20),
+          ),
         ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            IconWithCircleStyle(
-              backgroundColor: Colors.grey.shade500.withAlpha(32),
+        BlocConsumer<FavouriteProductCubit, FavouriteProductState>(
+          listener: (context, state) {
+            if (state is AddFavouriteProductSuccess ||
+                state is GetFavouriteProductByIdSuccess) {
+              debugPrint(
+                'success add product to favourite list ==========================>',
+              );
+            } else if (state is AddFavouriteProductFailure ||
+                state is GetFavouriteProductByIdFailure) {
+              debugPrint(
+                'Failure add product to favourite list ==========================>',
+              );
+            }
+          },
+          builder: (context, state) {
+            final isFavourite =
+                state is AddFavouriteProductSuccess ||
+                state is GetFavouriteProductByIdSuccess;
+
+            return IconWithCircleStyle(
+              backgroundColor: isFavourite
+                  ? Colors.grey.shade500.withAlpha(64)
+                  : Colors.grey.shade500.withAlpha(32),
+
               widget: IconButton(
-                padding: EdgeInsets.zero,
+                padding: const EdgeInsets.all(4),
                 onPressed: () {
-                  GoRouter.of(context).pop();
+                  if (!isFavourite) {
+                    context.read<FavouriteProductCubit>().addFavoriteProduct(
+                      productModel: productModel,
+                    );
+                  } else {
+                    context.read<FavouriteProductCubit>().deleteFavoriteProduct(
+                      productModel: productModel,
+                    );
+                  }
                 },
-                icon: const Icon(Icons.arrow_back_ios_new_outlined, size: 20),
+                icon: Icon(
+                  isFavourite
+                      ? Icons.favorite_outlined
+                      : Icons.favorite_border_outlined,
+                  color: isFavourite
+                      ? Theme.of(context).brightness == Brightness.dark
+                            ? Colors.white
+                            : Colors.red.shade500
+                      : Theme.of(context).brightness == Brightness.dark
+                      ? Colors.white
+                      : Colors.black,
+                  size: 20,
+                ),
               ),
-            ),
-            BlocConsumer<FavouriteProductCubit, FavouriteProductState>(
-              listener: (context, state) {
-                if (state is AddFavouriteProductSuccess ||
-                    state is GetFavouriteProductByIdSuccess) {
-                  debugPrint(
-                    'success add product to favourite list ==========================>',
-                  );
-                } else if (state is AddFavouriteProductFailure ||
-                    state is GetFavouriteProductByIdFailure) {
-                  debugPrint(
-                    'Failure add product to favourite list ==========================>',
-                  );
-                }
-              },
-              builder: (context, state) {
-                final isFavourite =
-                    state is AddFavouriteProductSuccess ||
-                    state is GetFavouriteProductByIdSuccess;
-
-                return IconWithCircleStyle(
-                  backgroundColor: isFavourite
-                      ? Colors.grey.shade500.withAlpha(64)
-                      : Colors.grey.shade500.withAlpha(32),
-
-                  widget: IconButton(
-                    padding: const EdgeInsets.all(4),
-                    onPressed: () {
-                      if (!isFavourite) {
-                        context
-                            .read<FavouriteProductCubit>()
-                            .addFavoriteProduct(productModel: productModel);
-                      } else {
-                        context
-                            .read<FavouriteProductCubit>()
-                            .deleteFavoriteProduct(productModel: productModel);
-                      }
-                    },
-                    icon: Icon(
-                      isFavourite
-                          ? Icons.favorite_outlined
-                          : Icons.favorite_border_outlined,
-                      color: isFavourite
-                          ? Theme.of(context).brightness == Brightness.dark
-                                ? Colors.white
-                                : Colors.red.shade500
-                          : Theme.of(context).brightness == Brightness.dark
-                          ? Colors.white
-                          : Colors.black,
-                      size: 20,
-                    ),
-                  ),
-                );
-              },
-            ),
-          ],
+            );
+          },
         ),
-      ),
+      ],
     );
   }
 }

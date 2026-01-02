@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter_e_commerce_app_2025/features/04_home_view/data/repo/home_view_repo.dart';
+import 'package:flutter_e_commerce_app_2025/features/04_home_view/data/repo/home_view_repo_impl.dart';
 import 'package:meta/meta.dart';
 
 import '../../../data/model/product_model.dart';
@@ -7,17 +8,17 @@ import '../../../data/model/product_model.dart';
 part 'product_state.dart';
 
 class ProductCubit extends Cubit<ProductState> {
-  final HomeViewRepo homeViewRepo;
-  ProductCubit({required this.homeViewRepo}) : super(GetProductInitial());
-  Future<void> getBestSellingProducts() async {
+  final HomeViewRepo _homeViewRepo = HomeViewRepoImpl();
+
+  ProductCubit() : super(GetProductInitial());
+
+  Future<void> getAppProducts({String? category}) async {
     emit(GetProductLoading());
-    final result = await homeViewRepo.getBestSellingProducts();
+    final result = await _homeViewRepo.getAppProducts(category: category);
     result.fold(
       (error) {
         emit(
-          GetProductFailure(
-            errorMessage: error.errorMessage ?? 'unknown error',
-          ),
+          GetProductFailure(errorMessage: error.errorKey ?? 'unknown error'),
         );
       },
       (successProducts) {
@@ -28,12 +29,12 @@ class ProductCubit extends Cubit<ProductState> {
 
   Future<void> getProductsByCategory({required String category}) async {
     emit(GetProductByCategoryLoading());
-    final result = await homeViewRepo.getProductsByCategory(category);
+    final result = await _homeViewRepo.getProductsByCategory(category);
     result.fold(
       (error) {
         emit(
           GetProductByCategoryFailure(
-            errorMessage: error.errorMessage ?? 'unknown error',
+            errorMessage: error.errorKey ?? 'unknown error',
           ),
         );
       },
@@ -45,12 +46,12 @@ class ProductCubit extends Cubit<ProductState> {
 
   Future<void> getProductById({required int productId}) async {
     emit(GetProductByIdLoading());
-    final result = await homeViewRepo.getProductById(productId);
+    final result = await _homeViewRepo.getProductById(productId);
     result.fold(
       (error) {
         emit(
           GetProductByIdFailure(
-            errorMessage: error.errorMessage ?? 'unknown error',
+            errorMessage: error.errorKey ?? 'unknown error',
           ),
         );
       },

@@ -1,12 +1,13 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_e_commerce_app_2025/core/helper/const.dart';
+import 'package:flutter_e_commerce_app_2025/generated/l10n.dart';
 
-import '../../../../../core/helper/const.dart';
 import '../../../../../core/shimmer/category_shimmer.dart';
 import '../../../../../core/utilities/custom_text.dart';
 
-class CategoryViewProductItem extends StatelessWidget {
-  const CategoryViewProductItem({
+class ProductAppItem extends StatelessWidget {
+  const ProductAppItem({
     super.key,
     required this.screenSize,
     required this.image,
@@ -15,9 +16,12 @@ class CategoryViewProductItem extends StatelessWidget {
     required this.price,
     required this.onTap,
   });
+
   final Size screenSize;
-  final String image, title, description, price;
+  final String image, title, description;
+  final double price;
   final VoidCallback onTap;
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -39,7 +43,7 @@ class CategoryViewProductItem extends StatelessWidget {
                   return const Icon(Icons.image);
                 },
                 placeholder: (context, url) {
-                  return categoryImageShimmer(screenSize);
+                  return categoryImageShimmer();
                 },
               ),
             ),
@@ -60,7 +64,11 @@ class CategoryViewProductItem extends StatelessWidget {
                 fontSize: 12,
                 color: const Color(0xff929292),
               ),
-              CustomText(text: '\$$price', fontSize: 16, color: kPrimaryColor),
+              CustomText(
+                text: '${priceShowed(price)} ${S.of(context).EP}',
+                fontSize: 16,
+                color: kPrimaryColor,
+              ),
             ],
           ),
         ],

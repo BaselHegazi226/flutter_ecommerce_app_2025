@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_e_commerce_app_2025/core/helper/extensions_of_s_localization.dart';
 import 'package:flutter_e_commerce_app_2025/core/helper/routes.dart';
 import 'package:flutter_e_commerce_app_2025/core/utilities/custom_text.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../../generated/l10n.dart';
 
-class BestSellingHeader extends StatelessWidget {
-  const BestSellingHeader({super.key});
+class ProductAppHeader extends StatelessWidget {
+  const ProductAppHeader({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +15,7 @@ class BestSellingHeader extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         CustomText(
-          text: S.of(context).BestSelling,
+          text: S.of(context).homeAppProducts,
           fontSize: 18,
           fontWeight: FontWeight.bold,
         ),
@@ -26,9 +27,10 @@ class BestSellingHeader extends StatelessWidget {
           },
           borderRadius: const BorderRadius.all(Radius.circular(16)),
           child: CustomText(
-            text: S.of(context).ShowAll,
-            fontSize: 18,
+            text: S.of(context).homeShowAll,
+            fontSize: 16,
             fontWeight: FontWeight.w500,
+            color: Theme.of(context).primaryColor.withAlpha(200),
           ),
         ),
       ],
