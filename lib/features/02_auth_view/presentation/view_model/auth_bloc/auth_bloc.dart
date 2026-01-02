@@ -26,7 +26,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     final result = await authRepo.signInWithGoogle();
     await result.fold(
       (error) async {
-        return emit(SignInWithGoogleFailure(errorMessage: error.errorMessage!));
+        return emit(SignInWithGoogleFailure(errorMessage: error.errorKey!));
       },
       (success) async {
         final user = success.user;
@@ -47,9 +47,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     final result = await authRepo.signInWithFacebook();
     await result.fold(
       (error) async {
-        return emit(
-          SignInWithFacebookFailure(errorMessage: error.errorMessage!),
-        );
+        return emit(SignInWithFacebookFailure(errorMessage: error.errorKey!));
       },
       (success) async {
         final userCredential = success;
@@ -79,7 +77,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     );
     await result.fold(
       (error) async {
-        return emit(SignInWithEmailFailure(errorMessage: error.errorMessage!));
+        return emit(SignInWithEmailFailure(errorMessage: error.errorKey!));
       },
       (success) async {
         final user = success.user;
@@ -103,7 +101,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     );
     await result.fold(
       (error) async {
-        return emit(SignUpWithEmailFailure(errorMessage: error.errorMessage!));
+        return emit(SignUpWithEmailFailure(errorMessage: error.errorKey!));
       },
       (success) async {
         final user = success.user;

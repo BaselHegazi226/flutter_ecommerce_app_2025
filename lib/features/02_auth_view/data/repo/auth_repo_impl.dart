@@ -35,9 +35,7 @@ class AuthRepoImpl implements AuthRepo {
       return right(userCredential);
     } on FirebaseAuthException catch (exception) {
       debugPrint(('auth exce code = ${exception.code}'));
-      return left(
-        FirebaseFailure.fromFirebaseAuthException(exception: exception),
-      );
+      return left(FirebaseFailure.fromFirebaseException(exception: exception));
     } on FirebaseException catch (exception) {
       debugPrint(('exce = $exception'));
       return left(FirebaseFailure.fromFirebaseException(exception: exception));
