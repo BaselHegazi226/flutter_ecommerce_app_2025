@@ -42,16 +42,15 @@ class ModeSection extends StatelessWidget {
                   children: [
                     CustomText(
                       text: isDark
-                          ? S.of(context).settingsDark
-                          : S.of(context).settingsLight,
+                          ? S.of(context).settingsLight
+                          : S.of(context).settingsDark,
                       fontSize: 16,
                       alignment: Alignment.center,
-                      color: Colors.grey.shade900,
                     ),
                     IconWithCircleStyle(
                       backgroundColor: isDark
-                          ? Colors.grey.shade200
-                          : Colors.grey.shade400,
+                          ? Colors.grey.shade50.withAlpha(32)
+                          : Colors.grey.shade300.withAlpha(32),
                       widget: IconButton(
                         padding: const EdgeInsets.all(4),
                         onPressed: () {
@@ -61,11 +60,11 @@ class ModeSection extends StatelessWidget {
                         },
                         icon: Icon(
                           isDark
-                              ? Icons.dark_mode_outlined
-                              : Icons.light_mode_outlined,
+                              ? Icons.light_mode_outlined
+                              : Icons.dark_mode_outlined,
                           color: isDark
-                              ? Colors.grey.shade400
-                              : Colors.grey.shade100,
+                              ? Colors.grey.shade100
+                              : Colors.grey.shade400,
                         ),
                       ),
                     ),

@@ -31,9 +31,11 @@ class LanguageSection extends StatelessWidget {
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           decoration: BoxDecoration(
-            color: Theme.of(context).brightness == Brightness.dark
-                ? Colors.grey[850]
-                : Colors.grey[200],
+            border: Border.all(
+              color: Theme.of(context).brightness == Brightness.dark
+                  ? Colors.grey.shade200
+                  : Colors.grey.shade500,
+            ),
             borderRadius: BorderRadius.circular(8),
           ),
           child: DropdownButton<String>(

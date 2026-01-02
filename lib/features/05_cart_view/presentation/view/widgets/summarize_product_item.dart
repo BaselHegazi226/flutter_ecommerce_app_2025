@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_e_commerce_app_2025/core/helper/const.dart';
 import 'package:flutter_e_commerce_app_2025/core/utilities/custom_text.dart';
+import 'package:flutter_e_commerce_app_2025/generated/l10n.dart';
 
 class SummarizeProductOrderItem extends StatelessWidget {
   const SummarizeProductOrderItem({
@@ -42,7 +43,7 @@ class SummarizeProductOrderItem extends StatelessWidget {
           alignment: Alignment.centerLeft,
         ),
         CustomText(
-          text: '\$ $price',
+          text: '${priceShowed(price)} ${S.of(context).EP}',
           fontSize: 16,
           alignment: Alignment.centerLeft,
           color: kPrimaryColor,

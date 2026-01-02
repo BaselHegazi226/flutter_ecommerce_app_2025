@@ -25,16 +25,16 @@ class UserInfoCubit extends Cubit<UserInfoState> {
       (error) async {
         emit(
           GetUserInfoLocalFailure(
-            errorMessage: error.errorMessage ?? 'unknown error',
+            errorMessage: error.errorKey ?? 'unknown error',
           ),
         );
       },
-      (localUser) async {
-        if (localUser != null) {
+      (localUserSuccess) async {
+        if (localUserSuccess != null) {
           // 2) إذا الكاش يحتوي بيانات، نعرضها فوراً
-          emit(GetUserInfoLocalSuccess(userModel: localUser));
-          debugPrint('user info local = ${localUser.toJson()}');
-          return (localUser);
+          emit(GetUserInfoLocalSuccess(userModel: localUserSuccess));
+          debugPrint('user info local = ${localUserSuccess.toJson()}');
+          return (localUserSuccess);
         } else {
           // 3) نجيب اليوزر الحالي من FirebaseAuth
           final currentUser = FirebaseAuth.instance.currentUser;
@@ -57,7 +57,7 @@ class UserInfoCubit extends Cubit<UserInfoState> {
             (error) {
               emit(
                 GetUserInfoFromFirestoreFailure(
-                  errorMessage: error.errorMessage ?? 'unknown error',
+                  errorMessage: error.errorKey ?? 'unknown error',
                 ),
               );
             },
@@ -90,9 +90,7 @@ class UserInfoCubit extends Cubit<UserInfoState> {
 
     result.fold(
       (error) {
-        emit(
-          SignOutFailure(errorMessage: error.errorMessage ?? 'sign out error'),
-        );
+        emit(SignOutFailure(errorMessage: error.errorKey ?? 'sign out error'));
       },
       (_) {
         emit(SignOutSuccess());

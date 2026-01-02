@@ -9,7 +9,7 @@ class SummarizeProductsOrderList extends StatelessWidget {
   Widget build(BuildContext context) {
     if (carts.isNotEmpty) {
       return SizedBox(
-        height: 230,
+        height: 235,
         child: ListView.separated(
           itemCount: carts.length,
           scrollDirection: Axis.horizontal,

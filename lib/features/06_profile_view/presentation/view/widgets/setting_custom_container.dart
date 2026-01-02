@@ -9,9 +9,13 @@ class CustomSettingsContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: MediaQuery.sizeOf(context).width,
-      height: 48,
+      height: 54,
       decoration: BoxDecoration(
-        color: Colors.grey.shade300,
+        border: Border.all(
+          color: Theme.of(context).brightness == Brightness.dark
+              ? Colors.grey.shade200
+              : Colors.grey.shade500,
+        ),
         borderRadius: BorderRadius.circular(16),
       ),
       child: child,
