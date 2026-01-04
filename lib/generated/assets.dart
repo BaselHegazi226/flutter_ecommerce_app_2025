@@ -15,4 +15,6 @@ class Assets {
       'assets/images/profile/un_favourite_heart.svg';
   static const String splashEcommerce = 'assets/images/splash/ecommerce.png';
   static const String splashAppLogo = 'assets/images/splash/app_logo.png';
+  static const String splashAppLogoLight = 'assets/images/splash/app_logo.png';
+  static const String splashAppLogoDark = 'assets/images/splash/app_logo.png';
 }
