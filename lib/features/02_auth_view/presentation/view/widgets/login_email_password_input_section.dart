@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_e_commerce_app_2025/core/helper/extensions_of_s_localization.dart';
 import 'package:flutter_e_commerce_app_2025/core/helper/routes.dart';
-import 'package:flutter_e_commerce_app_2025/core/utilities/custom_text.dart';
 import 'package:flutter_e_commerce_app_2025/core/utilities/toastnotification.dart';
 import 'package:flutter_e_commerce_app_2025/features/02_auth_view/presentation/view_model/auth_bloc/auth_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -73,7 +72,6 @@ class _LoginEmailPasswordInputSectionState
             },
             textEditingController: textEditingControllerPassword,
           ),
-          CustomText(text: S.of(context).authForgetPassword, fontSize: 14),
           const SizedBox(height: 8),
           BlocConsumer<AuthBloc, AuthState>(
             listener: (context, state) {
