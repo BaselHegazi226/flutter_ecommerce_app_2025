@@ -63,7 +63,7 @@ class ProductAppListViewTablet extends StatelessWidget {
     final Size screenSize = MediaQuery.sizeOf(context);
     return BlocBuilder<ProductCubit, ProductState>(
       builder: (context, state) {
-        if (state is GetProductSuccess) {
+        if (state is GetProductByCategorySuccess) {
           final products = state.products;
           if (products.isEmpty) {
             return SliverToBoxAdapter(
@@ -73,8 +73,13 @@ class ProductAppListViewTablet extends StatelessWidget {
               ),
             );
           }
-          return CustomSliverGridListView(items: products, itemsInLine: 4);
-        } else if (state is GetProductFailure) {
+          return CustomSliverGridListView(
+            items: products,
+            itemsInLine: 3,
+            crossAxisSpacing: 28,
+            childAspectRatio: .65,
+          );
+        } else if (state is GetProductByCategoryFailure) {
           return SliverToBoxAdapter(
             child: CustomText(
               text: state.errorMessage,
@@ -83,7 +88,12 @@ class ProductAppListViewTablet extends StatelessWidget {
             ),
           );
         }
-        return customSliverGridListShimmer(size: screenSize, itemsInLine: 3);
+        return customSliverGridListShimmer(
+          size: screenSize,
+          itemsInLine: 3,
+          crossAxisSpacing: 28,
+          childAspectRatio: .65,
+        );
       },
     );
   }
