@@ -36,7 +36,9 @@ class SplashView extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Image.asset(Assets.splashAppLogo, height: 250),
+                Theme.of(context).brightness == Brightness.dark
+                    ? Image.asset(Assets.splashAppLogoDark, height: 250)
+                    : Image.asset(Assets.splashAppLogoLight, height: 250),
                 const SizedBox(height: 20),
                 BlocBuilder<IsNewUserCubit, IsNewUserState>(
                   builder: (context, state) {
