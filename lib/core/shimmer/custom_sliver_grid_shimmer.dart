@@ -44,13 +44,16 @@ customSliverGridShimmerItem(Size screenSize) {
 SliverGrid customSliverGridListShimmer({
   required Size size,
   int itemsInLine = 2,
+  double crossAxisSpacing = 16,
+  double mainAxisSpacing = 16,
+  double childAspectRatio = .55,
 }) {
   return SliverGrid(
     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
       crossAxisCount: itemsInLine,
-      crossAxisSpacing: 16,
-      mainAxisSpacing: 16,
-      childAspectRatio: 0.55,
+      crossAxisSpacing: crossAxisSpacing,
+      mainAxisSpacing: mainAxisSpacing,
+      childAspectRatio: childAspectRatio,
     ),
     delegate: SliverChildBuilderDelegate(
       (context, index) => customSliverGridShimmerItem(size),
@@ -59,13 +62,19 @@ SliverGrid customSliverGridListShimmer({
   );
 }
 
-GridView customGridViewListShimmer({required Size size, int itemsInLine = 2}) {
+GridView customGridViewListShimmer({
+  required Size size,
+  int itemsInLine = 2,
+  double crossAxisSpacing = 16,
+  double mainAxisSpacing = 16,
+  double childAspectRatio = .55,
+}) {
   return GridView.builder(
     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
       crossAxisCount: itemsInLine,
-      crossAxisSpacing: 16,
-      mainAxisSpacing: 16,
-      childAspectRatio: 0.55,
+      crossAxisSpacing: crossAxisSpacing,
+      mainAxisSpacing: mainAxisSpacing,
+      childAspectRatio: childAspectRatio,
     ),
     itemCount: itemsInLine > 2 ? 16 : 8,
     itemBuilder: (context, index) {

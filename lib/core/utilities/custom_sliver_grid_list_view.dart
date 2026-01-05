@@ -12,12 +12,15 @@ class CustomSliverGridListView extends StatelessWidget {
   final double childAspectRatio;
   final List<dynamic> items;
   final int itemsInLine;
+  final double crossAxisSpacing, mainAxisSpacing;
 
   const CustomSliverGridListView({
     super.key,
     this.childAspectRatio = .55,
     required this.items,
     this.itemsInLine = 2,
+    this.crossAxisSpacing = 16,
+    this.mainAxisSpacing = 16,
   });
 
   @override
@@ -26,8 +29,8 @@ class CustomSliverGridListView extends StatelessWidget {
     return SliverGrid(
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: itemsInLine,
-        crossAxisSpacing: 16,
-        mainAxisSpacing: 16,
+        crossAxisSpacing: crossAxisSpacing,
+        mainAxisSpacing: mainAxisSpacing,
         childAspectRatio: childAspectRatio,
       ),
       delegate: SliverChildBuilderDelegate((context, index) {
@@ -89,10 +92,8 @@ class CustomSliverGridItem extends StatelessWidget {
           borderRadius: const BorderRadius.all(Radius.circular(8)),
         ),
         child: CachedNetworkImage(
-          height: 100,
-          width: 200,
           imageUrl: image,
-          //fit: BoxFit.contain,
+          fit: BoxFit.contain,
           // مهم عشان تملى المساحة كويس
           errorWidget: (error, url, child) {
             return const Icon(Icons.image);
@@ -124,6 +125,51 @@ class CustomSliverGridItem extends StatelessWidget {
           color: kPrimaryColor,
         ),
       ],
+    );
+  }
+}
+
+class CustomGridListView extends StatelessWidget {
+  const CustomGridListView({
+    super.key,
+    this.childAspectRatio = .55,
+    required this.items,
+    this.itemsInLine = 2,
+    this.crossAxisSpacing = 16,
+    this.mainAxisSpacing = 16,
+  });
+
+  final double childAspectRatio;
+  final List<dynamic> items;
+  final int itemsInLine;
+  final double crossAxisSpacing, mainAxisSpacing;
+
+  @override
+  Widget build(BuildContext context) {
+    final size = MediaQuery.sizeOf(context);
+    return GridView.builder(
+      itemCount: items.length,
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: itemsInLine,
+        crossAxisSpacing: crossAxisSpacing,
+        mainAxisSpacing: mainAxisSpacing,
+        childAspectRatio: childAspectRatio,
+      ),
+      itemBuilder: (context, index) {
+        final product = items[index];
+        return CustomSliverGridItem(
+          screenSize: size,
+          image: product.images[0],
+          title: product.title,
+          description: product.description,
+          price: product.price,
+          onTap: () {
+            GoRouter.of(
+              context,
+            ).push(Routes.productDetailsView, extra: product.id);
+          },
+        );
+      },
     );
   }
 }
