@@ -108,7 +108,7 @@ class AppGet {
     }
 
     if (!getIt.isRegistered<GetCartCubit>()) {
-      getIt.registerLazySingleton<GetCartCubit>(
+      getIt.registerFactory<GetCartCubit>(
         () => GetCartCubit(getCartUseCase: getIt()),
       );
     }
