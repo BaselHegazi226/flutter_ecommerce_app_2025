@@ -59,6 +59,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_e_commerce_app_2025/core/helper/extensions_of_s_localization.dart';
 import 'package:flutter_e_commerce_app_2025/core/utilities/app_get.dart';
+import 'package:flutter_e_commerce_app_2025/core/utilities/custom_text.dart';
 import 'package:flutter_e_commerce_app_2025/features/05_cart_view/presentation/view/widgets/cart_view_body.dart';
 import 'package:flutter_e_commerce_app_2025/features/05_cart_view/presentation/view_model/cart_bloc/cart_bloc.dart';
 import 'package:flutter_e_commerce_app_2025/features/05_cart_view/presentation/view_model/get_cart_cubit/get_cart_cubit.dart';
@@ -92,7 +93,7 @@ class CartView extends StatelessWidget {
             appBar: AppBar(
               backgroundColor: Theme.of(context).scaffoldBackgroundColor,
               surfaceTintColor: Theme.of(context).scaffoldBackgroundColor,
-              title: Text(S.of(context).navCart),
+              title: CustomText(text: S.of(context).navCart, fontSize: 20),
               centerTitle: true,
             ),
             body: const CartViewBody(),
