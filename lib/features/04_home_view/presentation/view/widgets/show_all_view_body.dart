@@ -66,7 +66,6 @@ class ShowAllViewBody extends StatelessWidget {
           );
         }
         return customGridViewListShimmer(size: screenSize);
-        ;
       },
     );
   }
