@@ -16,14 +16,12 @@ class ProductDetailsIconSection extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         IconWithCircleStyle(
+          paddingValue: 0,
           backgroundColor: Colors.grey.shade500.withAlpha(32),
-          widget: IconButton(
-            padding: EdgeInsets.zero,
-            onPressed: () {
-              GoRouter.of(context).pop();
-            },
-            icon: const Icon(Icons.arrow_back_ios_new_outlined, size: 20),
-          ),
+          onPressed: () {
+            GoRouter.of(context).pop();
+          },
+          icon: const Icon(Icons.arrow_back_ios_new_outlined, size: 20),
         ),
         BlocConsumer<FavouriteProductCubit, FavouriteProductState>(
           listener: (context, state) {
@@ -48,34 +46,30 @@ class ProductDetailsIconSection extends StatelessWidget {
               backgroundColor: isFavourite
                   ? Colors.grey.shade500.withAlpha(64)
                   : Colors.grey.shade500.withAlpha(32),
-
-              widget: IconButton(
-                padding: const EdgeInsets.all(4),
-                onPressed: () {
-                  if (!isFavourite) {
-                    context.read<FavouriteProductCubit>().addFavoriteProduct(
-                      productModel: productModel,
-                    );
-                  } else {
-                    context.read<FavouriteProductCubit>().deleteFavoriteProduct(
-                      productModel: productModel,
-                    );
-                  }
-                },
-                icon: Icon(
-                  isFavourite
-                      ? Icons.favorite_outlined
-                      : Icons.favorite_border_outlined,
-                  color: isFavourite
-                      ? Theme.of(context).brightness == Brightness.dark
-                            ? Colors.white
-                            : Colors.red.shade500
-                      : Theme.of(context).brightness == Brightness.dark
-                      ? Colors.white
-                      : Colors.black,
-                  size: 20,
-                ),
+              icon: Icon(
+                isFavourite
+                    ? Icons.favorite_outlined
+                    : Icons.favorite_border_outlined,
+                color: isFavourite
+                    ? Theme.of(context).brightness == Brightness.dark
+                          ? Colors.white
+                          : Colors.red.shade500
+                    : Theme.of(context).brightness == Brightness.dark
+                    ? Colors.white
+                    : Colors.black,
+                size: 20,
               ),
+              onPressed: () {
+                if (!isFavourite) {
+                  context.read<FavouriteProductCubit>().addFavoriteProduct(
+                    productModel: productModel,
+                  );
+                } else {
+                  context.read<FavouriteProductCubit>().deleteFavoriteProduct(
+                    productModel: productModel,
+                  );
+                }
+              },
             );
           },
         ),

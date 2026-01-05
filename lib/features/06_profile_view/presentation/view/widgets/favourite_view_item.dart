@@ -74,7 +74,6 @@ class FavouriteViewItem extends StatelessWidget {
                 text: productModel.title,
                 maxLines: 1,
                 fontSize: 16,
-                alignment: Alignment.center,
                 color: Colors.grey.shade900,
               ),
             ),
@@ -90,42 +89,37 @@ class FavouriteViewItem extends StatelessWidget {
                 return Flexible(
                   child: IconWithCircleStyle(
                     backgroundColor: Colors.grey.shade400.withAlpha(32),
-                    widget: IconButton(
-                      padding: const EdgeInsets.all(4),
-                      onPressed: () {
-                        warningAwesomeDialog(
-                          context,
-                          title: S.of(context).profileDeleteItemTitle,
-                          description: S.of(context).profileDeleteItemDesc,
-                          buttonAcceptText: S
-                              .of(context)
-                              .warning_button_title_ok,
-                          buttonCancelText: S
-                              .of(context)
-                              .warning_button_title_Cancel,
-                          onPressed: () {
-                            context
-                                .read<FavouriteProductCubit>()
-                                .deleteFavoriteProduct(
-                                  productModel: productModel,
-                                );
-                          },
-                        );
-                      },
-                      icon: Icon(
-                        isFavourite
-                            ? Icons.favorite_outlined
-                            : Icons.favorite_border_outlined,
-                        color: isFavourite
-                            ? Theme.of(context).brightness == Brightness.dark
-                                  ? Colors.white
-                                  : Colors.red.shade500
-                            : Theme.of(context).brightness == Brightness.dark
-                            ? Colors.white
-                            : Colors.black,
-                        size: 20,
-                      ),
+                    icon: Icon(
+                      isFavourite
+                          ? Icons.favorite_outlined
+                          : Icons.favorite_border_outlined,
+                      color: isFavourite
+                          ? Theme.of(context).brightness == Brightness.dark
+                                ? Colors.white
+                                : Colors.red.shade500
+                          : Theme.of(context).brightness == Brightness.dark
+                          ? Colors.white
+                          : Colors.black,
+                      size: 20,
                     ),
+                    onPressed: () {
+                      warningAwesomeDialog(
+                        context,
+                        title: S.of(context).profileDeleteItemTitle,
+                        description: S.of(context).profileDeleteItemDesc,
+                        buttonAcceptText: S.of(context).warning_button_title_ok,
+                        buttonCancelText: S
+                            .of(context)
+                            .warning_button_title_Cancel,
+                        onPressed: () {
+                          context
+                              .read<FavouriteProductCubit>()
+                              .deleteFavoriteProduct(
+                                productModel: productModel,
+                              );
+                        },
+                      );
+                    },
                   ),
                 );
               },

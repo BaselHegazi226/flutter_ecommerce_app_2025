@@ -3,11 +3,18 @@ import 'package:flutter/material.dart';
 class IconWithCircleStyle extends StatelessWidget {
   const IconWithCircleStyle({
     super.key,
-    required this.widget,
+
     this.backgroundColor = const Color(0xffFAFAFA),
+    required this.icon,
+    required this.onPressed,
+    this.paddingValue = 4,
   });
-  final Widget widget;
+
   final Color? backgroundColor;
+  final VoidCallback onPressed;
+  final Icon icon;
+  final double paddingValue;
+
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.sizeOf(context);
@@ -22,7 +29,12 @@ class IconWithCircleStyle extends StatelessWidget {
                 : const Color(0xffFAFAFA)),
         shape: BoxShape.circle,
       ),
-      child: widget,
+      child: IconButton(
+        padding: EdgeInsets.all(paddingValue),
+        splashColor: Colors.transparent,
+        onPressed: BorderRadius.only,
+        icon: icon,
+      ),
     );
   }
 }

@@ -51,21 +51,18 @@ class ModeSection extends StatelessWidget {
                       backgroundColor: isDark
                           ? Colors.grey.shade50.withAlpha(32)
                           : Colors.grey.shade300.withAlpha(32),
-                      widget: IconButton(
-                        padding: const EdgeInsets.all(4),
-                        onPressed: () {
-                          appSettingCubit.selectedTheme(
-                            theme: isDark ? ThemeMode.light : ThemeMode.dark,
-                          );
-                        },
-                        icon: Icon(
-                          isDark
-                              ? Icons.light_mode_outlined
-                              : Icons.dark_mode_outlined,
-                          color: isDark
-                              ? Colors.grey.shade100
-                              : Colors.grey.shade400,
-                        ),
+                      onPressed: () {
+                        appSettingCubit.selectedTheme(
+                          theme: isDark ? ThemeMode.light : ThemeMode.dark,
+                        );
+                      },
+                      icon: Icon(
+                        isDark
+                            ? Icons.light_mode_outlined
+                            : Icons.dark_mode_outlined,
+                        color: isDark
+                            ? Colors.grey.shade100
+                            : Colors.grey.shade400,
                       ),
                     ),
                   ],

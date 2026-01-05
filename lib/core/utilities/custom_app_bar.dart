@@ -18,17 +18,15 @@ customAppBar(BuildContext context, String title, VoidCallback onPressed) {
     leading: Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8),
       child: IconWithCircleStyle(
+        paddingValue: 0,
         backgroundColor: Colors.grey.shade500.withAlpha(32),
-        widget: IconButton(
-          padding: EdgeInsets.zero,
-          onPressed: onPressed,
-          icon: Icon(
-            Icons.arrow_back_ios_new_outlined,
-            size: 20,
-            color: Theme.of(context).brightness == Brightness.dark
-                ? Colors.white
-                : Colors.black,
-          ),
+        onPressed: onPressed,
+        icon: Icon(
+          Icons.arrow_back_ios_new_outlined,
+          size: 20,
+          color: Theme.of(context).brightness == Brightness.dark
+              ? Colors.white
+              : Colors.black,
         ),
       ),
     ),

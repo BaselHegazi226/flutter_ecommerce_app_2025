@@ -143,14 +143,11 @@ class _OrderHistoryActiveSelectionViewState
                     ),
                   ),
                   IconWithCircleStyle(
-                    widget: IconButton(
-                      padding: const EdgeInsets.all(4),
-                      onPressed: _confirmDelete,
-                      icon: const Icon(
-                        Icons.delete_outline,
-                        color: Colors.black,
-                        size: 24,
-                      ),
+                    onPressed: _confirmDelete,
+                    icon: const Icon(
+                      Icons.delete_outline,
+                      color: Colors.black,
+                      size: 24,
                     ),
                   ),
                   const SizedBox(width: 12),
