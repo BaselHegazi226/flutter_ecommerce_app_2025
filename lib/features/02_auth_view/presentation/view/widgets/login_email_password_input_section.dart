@@ -28,6 +28,7 @@ class _LoginEmailPasswordInputSectionState
   ValueNotifier<bool> isLoadingValueNotifier = ValueNotifier(false);
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   AutovalidateMode autoValidateMode = AutovalidateMode.disabled;
+
   @override
   void dispose() {
     isLoadingValueNotifier.dispose();
@@ -81,7 +82,7 @@ class _LoginEmailPasswordInputSectionState
                   title: S.of(context).loginSuccessTitle,
                   description: S.of(context).loginSuccessDesc,
                   onAutoCompleteCompleted: (value) {
-                    GoRouter.of(context).push(Routes.homeView);
+                    GoRouter.of(context).go(Routes.homeView);
                   },
                 );
               } else if (state is SignInWithEmailFailure) {
