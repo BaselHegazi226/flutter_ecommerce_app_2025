@@ -32,7 +32,7 @@ class IconWithCircleStyle extends StatelessWidget {
       child: IconButton(
         padding: EdgeInsets.all(paddingValue),
         splashColor: Colors.transparent,
-        onPressed: BorderRadius.only,
+        onPressed: onPressed,
         icon: icon,
       ),
     );
