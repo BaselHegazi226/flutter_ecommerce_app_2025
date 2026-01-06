@@ -9,7 +9,6 @@ import 'package:flutter_e_commerce_app_2025/features/05_cart_view/presentation/v
 import 'package:flutter_e_commerce_app_2025/features/05_cart_view/presentation/view/widgets/section_payment_track_item.dart';
 import 'package:flutter_e_commerce_app_2025/features/05_cart_view/presentation/view_model/cart_bloc/cart_bloc.dart';
 import 'package:flutter_e_commerce_app_2025/features/05_cart_view/presentation/view_model/payment_bloc/payment_bloc.dart';
-import 'package:intl/intl.dart';
 
 import '../../../../../generated/l10n.dart';
 import '../../../data/model/order_model.dart';
@@ -63,14 +62,8 @@ class SectionPayment extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   checkCircleSection(context),
-                  const SizedBox(height: 36),
+                  const SizedBox(height: 24),
                   dateStateSection(updatedOrder, context),
-                  const SizedBox(height: 36),
-                  CustomText(
-                    text:
-                        '${S.of(context).orderOrderId}: OD-${orderModel!.orderId.split('-').take(2).join('-')}-N',
-                    fontSize: 16,
-                  ),
                   const SizedBox(height: 16),
                   SectionPaymentTrackItem(
                     orderModel: updatedOrder,
@@ -120,12 +113,9 @@ class SectionPayment extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             CustomText(
-              text: DateFormat(
-                'MMMM dd, yyyy',
-              ).format(updatedOrder.checkoutDateAt).toString(),
-              fontSize: 14,
-              color: kGreyColor,
-              alignment: Alignment.centerLeft,
+              text:
+                  '${S.of(context).orderOrderId}: OD-${orderModel!.orderId.split('-').take(2).join('-')}-N',
+              fontSize: 16,
             ),
             Container(
               color: orderStateData(
