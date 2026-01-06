@@ -11,10 +11,12 @@ class CustomTextFormField extends StatelessWidget {
     required this.validator,
     required this.textEditingController,
   });
+
   final String text, hintText;
   final void Function(String?)? onSaved;
   final String? Function(String?)? validator;
   final TextEditingController textEditingController;
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -33,11 +35,13 @@ class CustomTextFormField extends StatelessWidget {
               fontWeight: FontWeight.w400,
               color: kGreyColor,
             ),
-            enabledBorder: const UnderlineInputBorder(
-              borderSide: BorderSide(color: kGreyColor),
+            enabledBorder: UnderlineInputBorder(
+              borderSide: BorderSide(
+                color: Theme.of(context).primaryColor.withAlpha(100),
+              ),
             ),
-            focusedBorder: const UnderlineInputBorder(
-              borderSide: BorderSide(color: kPrimaryColor),
+            focusedBorder: UnderlineInputBorder(
+              borderSide: BorderSide(color: Theme.of(context).primaryColor),
             ),
           ),
         ),
