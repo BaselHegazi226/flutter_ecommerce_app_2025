@@ -76,38 +76,37 @@ class SectionPayment extends StatelessWidget {
                     orderModel: updatedOrder,
                     onBack: onBack,
                   ),
-                  const SizedBox(height: 24),
-
                   // زر الرجوع بعد الجريد
-                  Row(
-                    children: [
-                      Expanded(
-                        child: CustomButton(
-                          backgroundColor:
-                              Theme.of(context).brightness == Brightness.dark
-                              ? Colors.grey.shade700
-                              : kScaffoldColor,
-                          borderColor:
-                              Theme.of(context).brightness == Brightness.dark
-                              ? Colors.white
-                              : kPrimaryColor,
-                          textColor:
-                              Theme.of(context).brightness == Brightness.dark
-                              ? Colors.grey.shade200
-                              : kPrimaryColor,
-                          onPressed: onBack,
-                          text: S.of(context).cart_back,
-                        ),
-                      ),
-                      const Expanded(child: SizedBox()),
-                    ],
-                  ),
                 ],
               ),
             ),
           ),
         ),
-
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: Row(
+            children: [
+              Expanded(
+                child: CustomButton(
+                  backgroundColor:
+                      Theme.of(context).brightness == Brightness.dark
+                      ? Colors.grey.shade700
+                      : kScaffoldColor,
+                  borderColor: Theme.of(context).brightness == Brightness.dark
+                      ? Colors.white
+                      : kPrimaryColor,
+                  textColor: Theme.of(context).brightness == Brightness.dark
+                      ? Colors.grey.shade200
+                      : kPrimaryColor,
+                  onPressed: onBack,
+                  text: S.of(context).cart_back,
+                ),
+              ),
+              const Expanded(child: SizedBox()),
+            ],
+          ),
+        ),
+        const SizedBox(height: 16),
         // سكشن السعر ثابت
         buildBlocConsumer(),
       ],
@@ -157,7 +156,7 @@ class SectionPayment extends StatelessWidget {
           text: S.of(context).orderReady,
           fontSize: 18,
           alignment: Alignment.center,
-          color: Colors.grey.shade900,
+          fontWeight: FontWeight.bold,
         ),
         Icon(
           Icons.check_circle,

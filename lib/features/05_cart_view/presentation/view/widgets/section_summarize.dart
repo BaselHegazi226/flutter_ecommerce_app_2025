@@ -4,7 +4,7 @@ import 'package:flutter_e_commerce_app_2025/core/helper/const.dart';
 import 'package:flutter_e_commerce_app_2025/core/helper/extensions_of_s_localization.dart';
 import 'package:flutter_e_commerce_app_2025/core/utilities/custom_loading_indicator.dart';
 import 'package:flutter_e_commerce_app_2025/core/utilities/custom_text.dart';
-import 'package:flutter_e_commerce_app_2025/features/05_cart_view/presentation/view/widgets/summarize_products_order_list.dart';
+import 'package:flutter_e_commerce_app_2025/core/utilities/show_order_list.dart';
 import 'package:flutter_e_commerce_app_2025/features/05_cart_view/presentation/view_model/checkout_cubit/checkout_cubit.dart';
 import 'package:flutter_e_commerce_app_2025/features/05_cart_view/presentation/view_model/get_cart_cubit/get_cart_cubit.dart';
 import 'package:flutter_e_commerce_app_2025/features/05_cart_view/presentation/view_model/get_cart_cubit/get_cart_state.dart';
@@ -14,6 +14,7 @@ import '../../../../../generated/l10n.dart';
 
 class SummarizeView extends StatefulWidget {
   const SummarizeView({super.key, required this.onNext, required this.onBack});
+
   final VoidCallback onNext, onBack;
 
   @override
@@ -39,63 +40,81 @@ class _SummarizeViewState extends State<SummarizeView> {
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SummarizeProductsOrderList(carts: carts),
-                Container(height: 1, color: kGreyColor),
-                const SizedBox(height: 16),
-                CustomText(
-                  text: getDeliveryMethodTitleWithAnyLanguage(
-                    cubit.getDeliveryMethodModel!.title,
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        ShowOrderList(carts: carts),
+                        const SizedBox(height: 4),
+                        Container(
+                          height: 1,
+                          color: Theme.of(context).brightness == Brightness.dark
+                              ? Colors.grey.shade50
+                              : Colors.black26,
+                        ),
+                        const SizedBox(height: 16),
+                        CustomText(
+                          text: getDeliveryMethodTitleWithAnyLanguage(
+                            cubit.getDeliveryMethodModel!.title,
+                          ),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18,
+                        ),
+                        const SizedBox(height: 16),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Flexible(
+                              child: Text(
+                                '${S.of(context).formStreet1}: ${cubit.getLocationModel?.street1}\n'
+                                '${S.of(context).formStreet2}: ${cubit.getLocationModel?.street2}\n'
+                                '${S.of(context).formCity}: ${cubit.getLocationModel?.city}\n'
+                                '${S.of(context).formState}: ${cubit.getLocationModel?.state}\n'
+                                '${S.of(context).formCountry}: ${cubit.getLocationModel?.country}',
+                                softWrap: true,
+                                style: const TextStyle(fontSize: 16),
+                              ),
+                            ),
+                            Icon(
+                              Icons.check_circle,
+                              color:
+                                  Theme.of(context).brightness ==
+                                      Brightness.dark
+                                  ? Colors.grey.shade200
+                                  : kPrimaryColor,
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 16),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            CustomText(
+                              text: S.of(context).cartTotal,
+                              fontSize: 18,
+                              alignment: Alignment.centerLeft,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            CustomText(
+                              text:
+                                  '${priceShowed(totalPrice)} ${S.of(context).EP}',
+                              fontSize: 16,
+                              alignment: Alignment.centerLeft,
+                              color:
+                                  Theme.of(context).brightness ==
+                                      Brightness.dark
+                                  ? Colors.grey.shade200
+                                  : kPrimaryColor,
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
-                  fontSize: 18,
-                  color: Colors.grey.shade900,
                 ),
                 const SizedBox(height: 16),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Flexible(
-                      child: Text(
-                        '${S.of(context).formStreet1}: ${cubit.getLocationModel?.street1}\n'
-                        '${S.of(context).formStreet2}: ${cubit.getLocationModel?.street2}\n'
-                        '${S.of(context).formCity}: ${cubit.getLocationModel?.city}\n'
-                        '${S.of(context).formState}: ${cubit.getLocationModel?.state}\n'
-                        '${S.of(context).formCountry}: ${cubit.getLocationModel?.country}',
-                        softWrap: true,
-                        style: const TextStyle(fontSize: 16),
-                      ),
-                    ),
-                    Icon(
-                      Icons.check_circle,
-                      color: Theme.of(context).brightness == Brightness.dark
-                          ? Colors.grey.shade200
-                          : kPrimaryColor,
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 16),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    CustomText(
-                      text: S.of(context).cartTotal,
-                      fontSize: 18,
-                      alignment: Alignment.centerLeft,
-                      color: Colors.grey.shade900,
-                    ),
-                    CustomText(
-                      text: '${priceShowed(totalPrice)} ${S.of(context).EP}',
-                      fontSize: 16,
-                      alignment: Alignment.centerLeft,
-                      color: Theme.of(context).brightness == Brightness.dark
-                          ? Colors.grey.shade200
-                          : kPrimaryColor,
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 16),
-                const Expanded(child: SizedBox()),
                 Align(
                   alignment: Alignment.bottomCenter,
                   child: Row(
@@ -149,7 +168,6 @@ class _SummarizeViewState extends State<SummarizeView> {
                     ],
                   ),
                 ),
-                const SizedBox(height: 20),
               ],
             ),
           );

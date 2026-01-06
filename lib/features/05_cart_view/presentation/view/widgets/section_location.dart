@@ -16,6 +16,7 @@ import '../../view_model/checkout_cubit/checkout_cubit.dart';
 class LocationView extends StatefulWidget {
   final VoidCallback onNext;
   final VoidCallback onBack;
+
   const LocationView({super.key, required this.onBack, required this.onNext});
 
   @override
@@ -57,107 +58,123 @@ class _LocationViewState extends State<LocationView> {
         return Form(
           key: _formKey,
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
+            padding: const EdgeInsets.all(16),
             child: Column(
               children: [
-                Row(
-                  spacing: 8,
-                  children: [
-                    const Icon(Icons.check_circle, color: kPrimaryColor),
-                    CustomText(
-                      text: S.of(context).cart_billing_address,
-                      fontSize: 14,
-                      alignment: Alignment.centerLeft,
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 20),
-                Column(
-                  spacing: 16,
-                  children: [
-                    CustomTextFormField(
-                      text: S.of(context).formStreet1,
-                      hintText: S.of(context).formEnterStreet1,
-                      onSaved: (value) {
-                        street1 = value!.trim();
-                      },
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return S.of(context).formStreet1Required;
-                        }
-                        return null;
-                      },
-                      textEditingController: textEditingControllerStreet1,
-                    ),
-                    CustomTextFormField(
-                      text: S.of(context).formStreet2,
-                      hintText: S.of(context).formEnterStreet2,
-                      onSaved: (value) {
-                        street2 = value!.trim();
-                      },
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return S.of(context).formStreet2Required;
-                        }
-                        return null;
-                      },
-                      textEditingController: textEditingControllerStreet2,
-                    ),
-                    CustomTextFormField(
-                      text: S.of(context).formCity,
-                      hintText: S.of(context).formEnterCity,
-                      onSaved: (value) {
-                        city = value!.trim();
-                      },
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return S.of(context).formCityRequired;
-                        }
-                        return null;
-                      },
-                      textEditingController: textEditingControllerCity,
-                    ),
-                    Row(
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: Column(
                       children: [
-                        Expanded(
-                          child: CustomTextFormField(
-                            text: S.of(context).formState,
-                            hintText: S.of(context).formEnterState,
-                            onSaved: (value) {
-                              stateEnum = value!.trim();
-                            },
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return S.of(context).formStateRequired;
-                              }
-                              return null;
-                            },
-                            textEditingController: textEditingControllerState,
-                          ),
+                        Row(
+                          spacing: 8,
+                          children: [
+                            const Icon(
+                              Icons.check_circle,
+                              color: kPrimaryColor,
+                            ),
+                            CustomText(
+                              text: S.of(context).cart_billing_address,
+                              fontSize: 14,
+                              alignment: Alignment.centerLeft,
+                            ),
+                          ],
                         ),
-                        const SizedBox(width: 24),
-                        Expanded(
-                          child: CustomTextFormField(
-                            text: S.of(context).formCountry,
-                            hintText: S.of(context).formEnterCountry,
-                            onSaved: (value) {
-                              country = value!.trim();
-                            },
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return S.of(context).formCountryRequired;
-                              }
-                              return null;
-                            },
-                            textEditingController: textEditingControllerCountry,
-                          ),
+                        const SizedBox(height: 20),
+                        Column(
+                          spacing: 16,
+                          children: [
+                            CustomTextFormField(
+                              text: S.of(context).formStreet1,
+                              hintText: S.of(context).formEnterStreet1,
+                              onSaved: (value) {
+                                street1 = value!.trim();
+                              },
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return S.of(context).formStreet1Required;
+                                }
+                                return null;
+                              },
+                              textEditingController:
+                                  textEditingControllerStreet1,
+                            ),
+                            CustomTextFormField(
+                              text: S.of(context).formStreet2,
+                              hintText: S.of(context).formEnterStreet2,
+                              onSaved: (value) {
+                                street2 = value!.trim();
+                              },
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return S.of(context).formStreet2Required;
+                                }
+                                return null;
+                              },
+                              textEditingController:
+                                  textEditingControllerStreet2,
+                            ),
+                            CustomTextFormField(
+                              text: S.of(context).formCity,
+                              hintText: S.of(context).formEnterCity,
+                              onSaved: (value) {
+                                city = value!.trim();
+                              },
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return S.of(context).formCityRequired;
+                                }
+                                return null;
+                              },
+                              textEditingController: textEditingControllerCity,
+                            ),
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: CustomTextFormField(
+                                    text: S.of(context).formState,
+                                    hintText: S.of(context).formEnterState,
+                                    onSaved: (value) {
+                                      stateEnum = value!.trim();
+                                    },
+                                    validator: (value) {
+                                      if (value == null || value.isEmpty) {
+                                        return S.of(context).formStateRequired;
+                                      }
+                                      return null;
+                                    },
+                                    textEditingController:
+                                        textEditingControllerState,
+                                  ),
+                                ),
+                                const SizedBox(width: 24),
+                                Expanded(
+                                  child: CustomTextFormField(
+                                    text: S.of(context).formCountry,
+                                    hintText: S.of(context).formEnterCountry,
+                                    onSaved: (value) {
+                                      country = value!.trim();
+                                    },
+                                    validator: (value) {
+                                      if (value == null || value.isEmpty) {
+                                        return S
+                                            .of(context)
+                                            .formCountryRequired;
+                                      }
+                                      return null;
+                                    },
+                                    textEditingController:
+                                        textEditingControllerCountry,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
                         ),
                       ],
                     ),
-                  ],
+                  ),
                 ),
                 const SizedBox(height: 16),
-                const Expanded(child: SizedBox()),
                 Align(
                   alignment: Alignment.bottomCenter,
                   child: Row(
@@ -222,7 +239,6 @@ class _LocationViewState extends State<LocationView> {
                     ],
                   ),
                 ),
-                const SizedBox(height: 16),
               ],
             ),
           ),
