@@ -134,9 +134,7 @@ extension OrderLocalizationX on S {
 
   String get orderHistoryNoOrdersFound => order_history_no_found_orders;
 
-  String get orderSelected => order_selected_all;
-
-  String get orderUnselected => order_unselected_all;
+  String get orderSelected => order_all;
 
   String get orderDeleteHistory => delete_order_history_title;
 
