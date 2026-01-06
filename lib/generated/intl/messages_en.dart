@@ -361,6 +361,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "order_added_done": MessageLookupByLibrary.simpleMessage(
       "Is Already added",
     ),
+    "order_all": MessageLookupByLibrary.simpleMessage("All"),
     "order_cancel": MessageLookupByLibrary.simpleMessage("Cancel Order"),
     "order_delete": MessageLookupByLibrary.simpleMessage("Delete"),
     "order_delivered": MessageLookupByLibrary.simpleMessage("Delivered"),
@@ -376,12 +377,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "order_ready": MessageLookupByLibrary.simpleMessage(
       "Order is Ready To Make",
     ),
-    "order_selected_all": MessageLookupByLibrary.simpleMessage("Selected All"),
     "order_total_price": MessageLookupByLibrary.simpleMessage("Total Price"),
     "order_transmit": MessageLookupByLibrary.simpleMessage("Transmit"),
-    "order_unselected_all": MessageLookupByLibrary.simpleMessage(
-      "Unselected All",
-    ),
     "profile": MessageLookupByLibrary.simpleMessage("Profile"),
     "profile_delete_favourite_Item_desc": MessageLookupByLibrary.simpleMessage(
       "Are you sure to delete item from favourite products",

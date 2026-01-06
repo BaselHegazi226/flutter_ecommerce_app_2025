@@ -344,6 +344,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "order_added_done": MessageLookupByLibrary.simpleMessage(
       "تمت اضافه المنتج من قبل",
     ),
+    "order_all": MessageLookupByLibrary.simpleMessage("الكل"),
     "order_cancel": MessageLookupByLibrary.simpleMessage("إلغاء الطلب"),
     "order_delete": MessageLookupByLibrary.simpleMessage("حذف"),
     "order_delivered": MessageLookupByLibrary.simpleMessage("تم التسليم"),
@@ -357,12 +358,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "order_order_id": MessageLookupByLibrary.simpleMessage("رقم الطلب"),
     "order_pending": MessageLookupByLibrary.simpleMessage("قيد الانتظار"),
     "order_ready": MessageLookupByLibrary.simpleMessage("الطلب جاهز للتنفيذ"),
-    "order_selected_all": MessageLookupByLibrary.simpleMessage("تحديد الكل"),
     "order_total_price": MessageLookupByLibrary.simpleMessage("السعر الإجمالي"),
     "order_transmit": MessageLookupByLibrary.simpleMessage("قيد الإرسال"),
-    "order_unselected_all": MessageLookupByLibrary.simpleMessage(
-      "إلغاء تحديد الكل",
-    ),
     "profile": MessageLookupByLibrary.simpleMessage("الملف الشخصي"),
     "profile_delete_favourite_Item_desc": MessageLookupByLibrary.simpleMessage(
       "هل تريد بالفعل حذف العنصر من المفضله",

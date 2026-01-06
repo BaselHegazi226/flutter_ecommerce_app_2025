@@ -424,24 +424,9 @@ class S {
     return Intl.message('Delete', name: 'order_delete', desc: '', args: []);
   }
 
-  /// `Selected All`
-  String get order_selected_all {
-    return Intl.message(
-      'Selected All',
-      name: 'order_selected_all',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Unselected All`
-  String get order_unselected_all {
-    return Intl.message(
-      'Unselected All',
-      name: 'order_unselected_all',
-      desc: '',
-      args: [],
-    );
+  /// `All`
+  String get order_all {
+    return Intl.message('All', name: 'order_all', desc: '', args: []);
   }
 
   /// `Order id`
