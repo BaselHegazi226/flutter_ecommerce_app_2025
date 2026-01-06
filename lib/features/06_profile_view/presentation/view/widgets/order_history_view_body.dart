@@ -31,6 +31,7 @@ class _OrderHistoryViewBodyState extends State<OrderHistoryViewBody> {
       builder: (context, state) {
         if (state is GetOrderListSuccess) {
           final orders = state.orders;
+          debugPrint('order length = ${orders.length} ==============>');
           if (orders.isEmpty) {
             return NoItemFound(
               itemTitle: S.of(context).orderHistoryNoOrdersFound,

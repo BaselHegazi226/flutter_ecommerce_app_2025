@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_e_commerce_app_2025/core/helper/const.dart';
 import 'package:flutter_e_commerce_app_2025/core/utilities/custom_text.dart';
+import 'package:flutter_e_commerce_app_2025/core/utilities/show_order_list.dart';
 import 'package:flutter_e_commerce_app_2025/features/05_cart_view/data/model/order_model.dart';
-import 'package:flutter_e_commerce_app_2025/features/06_profile_view/presentation/view/widgets/order_history_item.dart';
 import 'package:intl/intl.dart';
 
 class OrderHistoryUnactiveSelectionView extends StatelessWidget {
@@ -21,6 +21,7 @@ class OrderHistoryUnactiveSelectionView extends StatelessWidget {
       itemCount: orders.length,
       itemBuilder: (context, index) {
         final order = orders[index];
+        final cart = order.cartModelList;
         return Padding(
           padding: const EdgeInsets.all(16),
           child: Column(
@@ -37,7 +38,19 @@ class OrderHistoryUnactiveSelectionView extends StatelessWidget {
 
               InkWell(
                 onLongPress: () => onActivate(order),
-                child: OrderHistoryItem(orderModel: order),
+                child: Column(
+                  children: [
+                    ShowOrderList(carts: cart),
+                    Container(
+                      height: 1,
+                      color: index < cart.length
+                          ? Theme.of(context).brightness == Brightness.dark
+                                ? Colors.grey.shade50
+                                : Colors.black26
+                          : Colors.transparent,
+                    ),
+                  ],
+                ),
               ),
             ],
           ),

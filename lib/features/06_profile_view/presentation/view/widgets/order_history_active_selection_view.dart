@@ -5,10 +5,10 @@ import 'package:flutter_e_commerce_app_2025/core/helper/extensions_of_s_localiza
 import 'package:flutter_e_commerce_app_2025/core/utilities/custom_dialog_state.dart';
 import 'package:flutter_e_commerce_app_2025/core/utilities/custom_text.dart';
 import 'package:flutter_e_commerce_app_2025/core/utilities/icon_with_circle_style.dart';
+import 'package:flutter_e_commerce_app_2025/core/utilities/show_order_list.dart';
 import 'package:flutter_e_commerce_app_2025/features/05_cart_view/data/model/order_model.dart';
 import 'package:flutter_e_commerce_app_2025/features/05_cart_view/presentation/view_model/order_cubit/order_cubit.dart';
 import 'package:flutter_e_commerce_app_2025/features/05_cart_view/presentation/view_model/order_cubit/order_state.dart';
-import 'package:flutter_e_commerce_app_2025/features/06_profile_view/presentation/view/widgets/order_history_item.dart';
 import 'package:flutter_e_commerce_app_2025/generated/l10n.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:iconify_flutter/icons/carbon.dart';
@@ -69,44 +69,53 @@ class _OrderHistoryActiveSelectionViewState
                 },
                 itemBuilder: (context, index) {
                   final order = widget.orders[index];
+                  final cart = order.cartModelList;
                   final id = order.orderId;
                   final isSelected = selectedMap[id] ?? false;
 
                   return InkWell(
-                    splashColor: Colors.transparent,
+                    splashColor: kPrimaryColor.withAlpha(8),
                     onTap: () => _selectOnly(order),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Expanded(
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 16),
-                            child: Column(
-                              spacing: 8,
-                              children: [
-                                CustomText(
-                                  text: DateFormat(
-                                    'MMMM dd, yyyy',
-                                  ).format(order.checkoutDateAt).toString(),
-                                  fontSize: 14,
-                                  color: kGreyColor,
-                                  alignment: Alignment.centerLeft,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      child: Column(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              CustomText(
+                                text: DateFormat(
+                                  'MMMM dd, yyyy',
+                                ).format(order.checkoutDateAt).toString(),
+                                fontSize: 14,
+                                color: kGreyColor,
+                                alignment: Alignment.centerLeft,
+                              ),
+                              IconButton(
+                                onPressed: () => _toggleItem(order, isSelected),
+                                icon: Icon(
+                                  isSelected
+                                      ? Icons.check_circle_rounded
+                                      : Icons.circle_outlined,
+                                  color: isSelected
+                                      ? Theme.of(context).primaryColor
+                                      : kGreyColor,
                                 ),
-                                OrderHistoryItem(orderModel: order),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
-                        ),
-                        IconButton(
-                          onPressed: () => _toggleItem(order, isSelected),
-                          icon: Icon(
-                            isSelected
-                                ? Icons.check_circle_rounded
-                                : Icons.circle_outlined,
-                            color: isSelected ? kPrimaryColor : kGreyColor,
+                          ShowOrderList(carts: cart),
+                          Container(
+                            height: 1,
+                            color: index < cart.length
+                                ? Theme.of(context).brightness ==
+                                          Brightness.dark
+                                      ? Colors.grey.shade50
+                                      : Colors.black26
+                                : Colors.transparent,
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   );
                 },
@@ -143,10 +152,11 @@ class _OrderHistoryActiveSelectionViewState
                     ),
                   ),
                   IconWithCircleStyle(
+                    backgroundColor: Colors.grey.shade500.withAlpha(32),
                     onPressed: _confirmDelete,
-                    icon: const Icon(
+                    icon: Icon(
                       Icons.delete_outline,
-                      color: Colors.black,
+                      color: Colors.grey.shade50,
                       size: 24,
                     ),
                   ),
@@ -168,11 +178,11 @@ class _OrderHistoryActiveSelectionViewState
               Row(
                 children: [
                   CustomText(
-                    text: isAllSelected
-                        ? S.of(context).orderUnselected
-                        : S.of(context).orderSelected,
+                    text: isAllSelected ? S.of(context).orderSelected : '',
                     fontSize: 14,
-                    color: isAllSelected ? kPrimaryColor : kGreyColor,
+                    color: isAllSelected
+                        ? Theme.of(context).primaryColor
+                        : kGreyColor,
                     alignment: Alignment.center,
                   ),
                   IconButton(
@@ -181,7 +191,9 @@ class _OrderHistoryActiveSelectionViewState
                       isAllSelected
                           ? Icons.check_box_outlined
                           : Icons.check_box_outline_blank_outlined,
-                      color: isAllSelected ? kPrimaryColor : kGreyColor,
+                      color: isAllSelected
+                          ? Theme.of(context).primaryColor
+                          : kGreyColor,
                       size: 24,
                     ),
                   ),

@@ -6,6 +6,7 @@ import 'order_history_unactive_selection_view.dart';
 
 class OrderHistorySelectionClass extends StatefulWidget {
   const OrderHistorySelectionClass({super.key, required this.orders});
+
   final List<OrderModel> orders;
 
   @override
