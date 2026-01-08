@@ -29,14 +29,14 @@ class LanguageSection extends StatelessWidget {
           title: S.of(context).settingsLanguage,
         ),
         Container(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
           decoration: BoxDecoration(
             border: Border.all(
               color: Theme.of(context).brightness == Brightness.dark
                   ? Colors.grey.shade200
                   : Colors.grey.shade500,
             ),
-            borderRadius: BorderRadius.circular(8),
+            borderRadius: BorderRadius.circular(16),
           ),
           child: DropdownButton<String>(
             underline: const SizedBox(),

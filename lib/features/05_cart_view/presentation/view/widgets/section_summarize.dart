@@ -38,7 +38,7 @@ class _SummarizeViewState extends State<SummarizeView> {
           final totalPrice = state.totalPrice;
           cubit.setCartData(totalPrice: totalPrice, cartList: carts);
           return Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
+            padding: const EdgeInsets.all(16),
             child: Column(
               children: [
                 Expanded(
