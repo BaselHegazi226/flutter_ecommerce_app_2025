@@ -105,6 +105,7 @@ class _OrderHistoryActiveSelectionViewState
                             ],
                           ),
                           ShowOrderList(carts: cart),
+                          const SizedBox(height: 16),
                           Container(
                             height: 1,
                             color: index < cart.length
@@ -152,11 +153,16 @@ class _OrderHistoryActiveSelectionViewState
                     ),
                   ),
                   IconWithCircleStyle(
-                    backgroundColor: Colors.grey.shade500.withAlpha(32),
+                    backgroundColor:
+                        Theme.of(context).brightness == Brightness.dark
+                        ? Colors.grey.shade500.withAlpha(32)
+                        : Colors.grey.shade300.withAlpha(32),
                     onPressed: _confirmDelete,
                     icon: Icon(
                       Icons.delete_outline,
-                      color: Colors.grey.shade50,
+                      color: Theme.of(context).brightness == Brightness.dark
+                          ? Colors.grey.shade50
+                          : Colors.black,
                       size: 24,
                     ),
                   ),

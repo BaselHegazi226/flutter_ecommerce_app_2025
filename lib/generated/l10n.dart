@@ -474,10 +474,10 @@ class S {
     );
   }
 
-  /// `Are you sure to delete all order history?`
+  /// `Are you sure to delete all order history? \n`
   String get delete_order_description {
     return Intl.message(
-      'Are you sure to delete all order history?',
+      'Are you sure to delete all order history? \n',
       name: 'delete_order_description',
       desc: '',
       args: [],
@@ -1069,6 +1069,16 @@ class S {
     );
   }
 
+  /// `The data update failed due to some problems that may be related to the internet. Please try again!`
+  String get failure_updateProfile_desc {
+    return Intl.message(
+      'The data update failed due to some problems that may be related to the internet. Please try again!',
+      name: 'failure_updateProfile_desc',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Connection timeout. Please try again.`
   String get error_connectionTimeout {
     return Intl.message(
@@ -1334,6 +1344,16 @@ class S {
     );
   }
 
+  /// `Update Profile`
+  String get profile_update_title_button {
+    return Intl.message(
+      'Update Profile',
+      name: 'profile_update_title_button',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Shipping Address`
   String get profile_shippingAddress {
     return Intl.message(
@@ -1399,6 +1419,26 @@ class S {
     return Intl.message(
       'User Email',
       name: 'profile_userEmail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Logout`
+  String get profile_logout_title {
+    return Intl.message(
+      'Logout',
+      name: 'profile_logout_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Are you sure to logout?`
+  String get profile_logout_desc {
+    return Intl.message(
+      'Are you sure to logout?',
+      name: 'profile_logout_desc',
       desc: '',
       args: [],
     );

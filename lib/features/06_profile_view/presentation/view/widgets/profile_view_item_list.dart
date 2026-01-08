@@ -33,10 +33,10 @@ class ProfileViewItemList extends StatelessWidget {
             if (profileListFun(context)[index].route == null) {
               warningAwesomeDialog(
                 context,
-                title: 'Sign Out',
-                description: 'Are You Sure To Sign Out?',
-                buttonAcceptText: 'Ok',
-                buttonCancelText: 'Cancel',
+                title: S.of(context).profileLogoutTitle,
+                description: S.of(context).profileLogoutDesc,
+                buttonAcceptText: S.of(context).warning_button_title_ok,
+                buttonCancelText: S.of(context).warning_button_title_Cancel,
                 onPressed: () {
                   context.read<UserInfoCubit>().signOut();
                   GoRouter.of(context).go(Routes.loginView);

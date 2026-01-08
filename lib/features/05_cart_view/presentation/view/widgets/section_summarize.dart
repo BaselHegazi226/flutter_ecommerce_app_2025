@@ -47,7 +47,7 @@ class _SummarizeViewState extends State<SummarizeView> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         ShowOrderList(carts: carts),
-                        const SizedBox(height: 4),
+                        const SizedBox(height: 16),
                         Container(
                           height: 1,
                           color: Theme.of(context).brightness == Brightness.dark

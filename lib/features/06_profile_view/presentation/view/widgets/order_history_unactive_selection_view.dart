@@ -41,6 +41,7 @@ class OrderHistoryUnactiveSelectionView extends StatelessWidget {
                 child: Column(
                   children: [
                     ShowOrderList(carts: cart),
+                    const SizedBox(height: 16),
                     Container(
                       height: 1,
                       color: index < cart.length

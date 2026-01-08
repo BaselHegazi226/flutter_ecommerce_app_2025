@@ -17,7 +17,6 @@ class ModeSection extends StatelessWidget {
   Widget build(BuildContext context) {
     final appSettingCubit = AppSettingCubit.get(context);
     bool isDark = appSettingCubit.isDarkModeEnabled();
-    debugPrint('isDark  = $isDark');
     return BlocConsumer<AppSettingCubit, AppSettingStates>(
       listener: (context, state) {
         if (state is SelectedThemeSuccess) {

@@ -9,7 +9,7 @@ class CustomSettingsContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: MediaQuery.sizeOf(context).width,
-      height: 54,
+      height: 72,
       decoration: BoxDecoration(
         border: Border.all(
           color: Theme.of(context).brightness == Brightness.dark

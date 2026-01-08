@@ -215,7 +215,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Women\'s Watches",
     ),
     "delete_order_description": MessageLookupByLibrary.simpleMessage(
-      "Are you sure to delete all order history?",
+      "Are you sure to delete all order history? \n",
     ),
     "delete_order_history_title": MessageLookupByLibrary.simpleMessage(
       "Delete Order History",
@@ -308,6 +308,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "failure_register_title": MessageLookupByLibrary.simpleMessage(
       "Registration Failed",
     ),
+    "failure_updateProfile_desc": MessageLookupByLibrary.simpleMessage(
+      "The data update failed due to some problems that may be related to the internet. Please try again!",
+    ),
     "failure_updateProfile_title": MessageLookupByLibrary.simpleMessage(
       "Update Failed",
     ),
@@ -388,11 +391,18 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "profile_edit": MessageLookupByLibrary.simpleMessage("Edit Profile"),
     "profile_favourite": MessageLookupByLibrary.simpleMessage("Favourite"),
+    "profile_logout_desc": MessageLookupByLibrary.simpleMessage(
+      "Are you sure to logout?",
+    ),
+    "profile_logout_title": MessageLookupByLibrary.simpleMessage("Logout"),
     "profile_noFavourite": MessageLookupByLibrary.simpleMessage(
       "No Favourite Item Found",
     ),
     "profile_shippingAddress": MessageLookupByLibrary.simpleMessage(
       "Shipping Address",
+    ),
+    "profile_update_title_button": MessageLookupByLibrary.simpleMessage(
+      "Update Profile",
     ),
     "profile_userEmail": MessageLookupByLibrary.simpleMessage("User Email"),
     "profile_userName": MessageLookupByLibrary.simpleMessage("User Name"),

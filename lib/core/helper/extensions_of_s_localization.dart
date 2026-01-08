@@ -227,6 +227,12 @@ extension SuccessLocalizationX on S {
 
   String get profileDeleteItemDesc => profile_delete_favourite_Item_desc;
 
+  String get profileLogoutTitle => profile_logout_title;
+
+  String get profileLogoutDesc => profile_logout_desc;
+
+  String get profileUpdateTitleButton => profile_update_title_button;
+
   // Orders
   String get removeOrderSuccessTitle => success_removeOrder_title;
 

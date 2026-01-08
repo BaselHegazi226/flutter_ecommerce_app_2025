@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_e_commerce_app_2025/core/helper/extensions_of_s_localization.dart';
 import 'package:flutter_e_commerce_app_2025/core/utilities/show_snack_bar.dart';
+import 'package:flutter_e_commerce_app_2025/core/utilities/toastnotification.dart';
 import 'package:flutter_e_commerce_app_2025/features/06_profile_view/presentation/view_model/edit_profile_cubit/edit_profile_cubit.dart';
 import 'package:flutter_e_commerce_app_2025/features/06_profile_view/presentation/view_model/edit_profile_cubit/edit_profile_state.dart';
+import 'package:toastification/toastification.dart';
 
 import '../../../../../core/helper/const.dart';
 import '../../../../../core/utilities/custom_button.dart';
@@ -42,9 +44,19 @@ class _InputSectionState extends State<InputSection> {
     return BlocConsumer<EditProfileCubit, EditProfileState>(
       listener: (context, state) {
         if (state is EditProfileUpdatingSuccess) {
-          debugPrint('updated profile Successfully');
+          ToastNotification.flatColoredToastNotificationService(
+            onAutoCompleteCompleted: (value) {},
+            title: S.of(context).success_updateProfile_title,
+            description: S.of(context).success_updateProfile_desc,
+            toastNotificationType: ToastificationType.success,
+          );
         } else if (state is EditProfileUpdatingFailure) {
-          debugPrint('updated profile Successfully');
+          ToastNotification.flatColoredToastNotificationService(
+            onAutoCompleteCompleted: (value) {},
+            title: S.of(context).failure_updateProfile_title,
+            description: S.of(context).failure_updateProfile_desc,
+            toastNotificationType: ToastificationType.error,
+          );
         }
       },
       builder: (context, state) {
@@ -52,15 +64,12 @@ class _InputSectionState extends State<InputSection> {
         return Form(
           key: formKey,
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               CustomText(
                 text: S.of(context).profileUserName,
                 fontSize: 16,
                 fontWeight: FontWeight.w700,
-                alignment: S.of(context).profileUserName == 'User Name'
-                    ? Alignment.centerLeft
-                    : Alignment.centerRight,
               ),
               const SizedBox(height: 16),
               TextFormField(
@@ -77,7 +86,7 @@ class _InputSectionState extends State<InputSection> {
                 },
                 controller: textEditingControllerName,
                 decoration: InputDecoration(
-                  hintText: 'User Name',
+                  hintText: S.of(context).profileUserName,
                   hintStyle: const TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w400,
@@ -97,14 +106,7 @@ class _InputSectionState extends State<InputSection> {
                 ),
               ),
               const SizedBox(height: 24),
-              CustomText(
-                text: S.of(context).profileUserEmail,
-                fontSize: 16,
-                fontWeight: FontWeight.w700,
-                alignment: S.of(context).profileUserEmail == 'User Email'
-                    ? Alignment.centerLeft
-                    : Alignment.centerRight,
-              ),
+              CustomText(text: S.of(context).profileUserEmail, fontSize: 16),
               const SizedBox(height: 16),
               Container(
                 padding: const EdgeInsets.all(16),
@@ -148,7 +150,7 @@ class _InputSectionState extends State<InputSection> {
                     showSafeSnackBar(context, 'Not changed Data', Colors.grey);
                   }
                 },
-                text: 'Update Profile',
+                text: S.of(context).profileUpdateTitleButton,
               ),
               const SizedBox(height: 24),
             ],

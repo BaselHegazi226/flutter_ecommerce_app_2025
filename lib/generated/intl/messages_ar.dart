@@ -210,7 +210,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "ساعات نسائية",
     ),
     "delete_order_description": MessageLookupByLibrary.simpleMessage(
-      "هل انت متأكد من حذف تاريخ المنتجات بأكمله؟",
+      "هل انت متأكد من حذف تاريخ السجل بأكمله؟ \n",
     ),
     "delete_order_history_title": MessageLookupByLibrary.simpleMessage(
       "حذف تاريخ الطلبات",
@@ -293,6 +293,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "failure_register_title": MessageLookupByLibrary.simpleMessage(
       "فشل إنشاء الحساب",
     ),
+    "failure_updateProfile_desc": MessageLookupByLibrary.simpleMessage(
+      "فشل تحديث البيانات بسبب بعض المشاكل التي ممكن ان تكون متعلقه بالأنترنت حاول مره اخرى من فضلك!",
+    ),
     "failure_updateProfile_title": MessageLookupByLibrary.simpleMessage(
       "فشل تحديث البيانات",
     ),
@@ -369,11 +372,20 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "profile_edit": MessageLookupByLibrary.simpleMessage("تعديل الملف الشخصي"),
     "profile_favourite": MessageLookupByLibrary.simpleMessage("المفضلة"),
+    "profile_logout_desc": MessageLookupByLibrary.simpleMessage(
+      "هل تريد بالفعل تسجيل الخروج من حسابك؟",
+    ),
+    "profile_logout_title": MessageLookupByLibrary.simpleMessage(
+      "تسجيل الخروج",
+    ),
     "profile_noFavourite": MessageLookupByLibrary.simpleMessage(
       "لا توجد عناصر مفضلة",
     ),
     "profile_shippingAddress": MessageLookupByLibrary.simpleMessage(
       "عنوان الشحن",
+    ),
+    "profile_update_title_button": MessageLookupByLibrary.simpleMessage(
+      "تحديث ملفك",
     ),
     "profile_userEmail": MessageLookupByLibrary.simpleMessage(
       "البريد الإلكتروني",
