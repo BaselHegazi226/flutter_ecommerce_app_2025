@@ -11,8 +11,10 @@ class PriceButtonSection extends StatelessWidget {
     required this.value,
     required this.widget,
   });
+
   final String title, value;
   final Widget widget;
+
   @override
   Widget build(BuildContext context) {
     return CustomLayout(
@@ -37,14 +39,16 @@ class CustomButtonSectionMobile extends StatelessWidget {
     required this.value,
     required this.widget,
   });
+
   final String title, value;
   final Widget widget;
+
   @override
   Widget build(BuildContext context) {
     return Container(
       width: MediaQuery.sizeOf(context).width,
       height: 88,
-      padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 30),
+      padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
       decoration: BoxDecoration(
         color: Theme.of(context).scaffoldBackgroundColor,
         boxShadow: [
@@ -101,8 +105,10 @@ class CustomButtonSectionTablet extends StatelessWidget {
     required this.value,
     required this.widget,
   });
+
   final String title, value;
   final Widget widget;
+
   @override
   Widget build(BuildContext context) {
     return Container(
