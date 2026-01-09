@@ -10,7 +10,7 @@ class Assets {
   static const String profileNoHistoryOrder =
       'assets/images/profile/no_history_order.svg';
   static const String profileNoLocation =
-      'assets/images/profile/no_location.svg';
+      'assets/images/profile/no_location_history.svg';
   static const String profileUnFavouriteHeart =
       'assets/images/profile/un_favourite_heart.svg';
   static const String splashEcommerce = 'assets/images/splash/ecommerce.png';

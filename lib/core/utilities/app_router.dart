@@ -53,10 +53,7 @@ abstract class AppRouter {
           /// Home
           GoRoute(
             path: Routes.homeView,
-            pageBuilder: (context, state) => AppTransitions.fadeScale(
-              child: const HomeView(),
-              key: state.pageKey,
-            ),
+            builder: (context, state) => const HomeView(),
             routes: [
               GoRoute(
                 path: Routes.showAllView,
@@ -71,19 +68,13 @@ abstract class AppRouter {
           /// Search
           GoRoute(
             path: Routes.searchView,
-            pageBuilder: (context, state) => AppTransitions.fadeScale(
-              child: const SearchView(),
-              key: state.pageKey,
-            ),
+            builder: (context, state) => const SearchView(),
           ),
 
           /// Cart
           GoRoute(
             path: Routes.cartView,
-            pageBuilder: (context, state) => AppTransitions.fadeScale(
-              child: const CartView(),
-              key: state.pageKey,
-            ),
+            builder: (context, state) => const CartView(),
             routes: [
               GoRoute(
                 path: Routes.checkoutView,
@@ -104,10 +95,7 @@ abstract class AppRouter {
           /// Profile
           GoRoute(
             path: Routes.profileView,
-            pageBuilder: (context, state) => AppTransitions.fadeScale(
-              child: const ProfileView(),
-              key: state.pageKey,
-            ),
+            builder: (context, state) => const ProfileView(),
             routes: [
               GoRoute(
                 path: Routes.editProfileView,

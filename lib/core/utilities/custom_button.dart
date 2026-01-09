@@ -14,6 +14,7 @@ class CustomButton extends StatelessWidget {
     this.paddingValue = 12,
     this.textSize = 20,
     this.isLoading = false,
+    this.fontWeight = FontWeight.w700,
   });
 
   final void Function()? onPressed;
@@ -24,6 +25,7 @@ class CustomButton extends StatelessWidget {
   final double textSize;
   final double paddingValue;
   final bool isLoading;
+  final FontWeight fontWeight;
 
   @override
   Widget build(BuildContext context) {
@@ -50,6 +52,7 @@ class CustomButton extends StatelessWidget {
               color: textColor,
               fontSize: textSize,
               alignment: Alignment.center,
+              fontWeight: fontWeight,
             ),
     );
   }
@@ -67,6 +70,7 @@ class CustomTextIconButton extends StatelessWidget {
     this.paddingValue = 8,
     this.textSize = 18,
     this.isLoading = false,
+    this.fontWeight = FontWeight.w700,
   });
 
   final void Function()? onPressed;
@@ -78,6 +82,7 @@ class CustomTextIconButton extends StatelessWidget {
   final double paddingValue;
   final bool isLoading;
   final IconData iconData;
+  final FontWeight fontWeight;
 
   @override
   Widget build(BuildContext context) {
@@ -107,6 +112,7 @@ class CustomTextIconButton extends StatelessWidget {
                   color: textColor,
                   fontSize: textSize,
                   alignment: Alignment.center,
+                  fontWeight: fontWeight,
                 ),
                 const SizedBox(width: 8),
                 Icon(
