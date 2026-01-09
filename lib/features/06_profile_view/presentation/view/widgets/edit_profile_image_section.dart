@@ -21,7 +21,6 @@ class ImageSection extends StatelessWidget {
     return Stack(
       children: [
         CustomImage(
-          enableBorder: false,
           child: imageUrl != null && imageUrl!.length > 100
               ? Image.memory(base64Decode(imageUrl!))
               : imageUrl != null && imageUrl!.contains('http')

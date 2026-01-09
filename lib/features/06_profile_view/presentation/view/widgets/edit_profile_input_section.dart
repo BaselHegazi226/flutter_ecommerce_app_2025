@@ -5,6 +5,7 @@ import 'package:flutter_e_commerce_app_2025/core/utilities/show_snack_bar.dart';
 import 'package:flutter_e_commerce_app_2025/core/utilities/toastnotification.dart';
 import 'package:flutter_e_commerce_app_2025/features/06_profile_view/presentation/view_model/edit_profile_cubit/edit_profile_cubit.dart';
 import 'package:flutter_e_commerce_app_2025/features/06_profile_view/presentation/view_model/edit_profile_cubit/edit_profile_state.dart';
+import 'package:go_router/go_router.dart';
 import 'package:toastification/toastification.dart';
 
 import '../../../../../core/helper/const.dart';
@@ -20,23 +21,27 @@ class InputSection extends StatefulWidget {
 }
 
 class _InputSectionState extends State<InputSection> {
-  String name = '';
-  String email = '';
-  TextEditingController textEditingControllerName = TextEditingController();
-  GlobalKey<FormState> formKey = GlobalKey();
+  String _name = '';
+  final TextEditingController _textEditingControllerName =
+      TextEditingController();
+  final GlobalKey<FormState> _formKey = GlobalKey();
 
   @override
   void initState() {
     super.initState();
-    final cubit = context.read<EditProfileCubit>();
-    textEditingControllerName.text = cubit.getUserModel!.name;
-    name = cubit.getUserModel!.name;
+    _giveParameterValuesFun();
   }
 
   @override
   void dispose() {
-    textEditingControllerName.dispose();
+    _textEditingControllerName.dispose();
     super.dispose();
+  }
+
+  void _giveParameterValuesFun() {
+    final cubit = context.read<EditProfileCubit>();
+    _textEditingControllerName.text = cubit.getUserModel!.name;
+    _name = cubit.getUserModel!.name;
   }
 
   @override
@@ -45,14 +50,18 @@ class _InputSectionState extends State<InputSection> {
       listener: (context, state) {
         if (state is EditProfileUpdatingSuccess) {
           ToastNotification.flatColoredToastNotificationService(
-            onAutoCompleteCompleted: (value) {},
+            onAutoCompleteCompleted: (value) {
+              GoRouter.of(context).pop();
+            },
             title: S.of(context).success_updateProfile_title,
             description: S.of(context).success_updateProfile_desc,
             toastNotificationType: ToastificationType.success,
           );
         } else if (state is EditProfileUpdatingFailure) {
           ToastNotification.flatColoredToastNotificationService(
-            onAutoCompleteCompleted: (value) {},
+            onAutoCompleteCompleted: (value) {
+              GoRouter.of(context).pop();
+            },
             title: S.of(context).failure_updateProfile_title,
             description: S.of(context).failure_updateProfile_desc,
             toastNotificationType: ToastificationType.error,
@@ -62,78 +71,17 @@ class _InputSectionState extends State<InputSection> {
       builder: (context, state) {
         final cubit = context.read<EditProfileCubit>();
         return Form(
-          key: formKey,
+          key: _formKey,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              CustomText(
-                text: S.of(context).profileUserName,
-                fontSize: 16,
-                fontWeight: FontWeight.w700,
-              ),
-              const SizedBox(height: 16),
-              TextFormField(
-                onSaved: (value) {
-                  name = value!.trim();
-                },
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    name = cubit.getUserModel!.name;
-                  } else {
-                    name = value;
-                  }
-                  return null;
-                },
-                controller: textEditingControllerName,
-                decoration: InputDecoration(
-                  hintText: S.of(context).profileUserName,
-                  hintStyle: const TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w400,
-                  ),
-                  prefixIcon: const Icon(Icons.person_outline),
-                  suffixIcon: const Icon(Icons.edit_outlined),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: Theme.of(context).primaryColor.withAlpha(100),
-                    ),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: Theme.of(context).primaryColor,
-                    ),
-                  ),
-                ),
-              ),
+              _buildUserNameField(context, cubit),
               const SizedBox(height: 24),
-              CustomText(text: S.of(context).profileUserEmail, fontSize: 16),
-              const SizedBox(height: 16),
-              Container(
-                padding: const EdgeInsets.all(16),
-                decoration: BoxDecoration(
-                  borderRadius: const BorderRadius.all(Radius.circular(4)),
-                  border: Border.all(color: Colors.grey),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                      spacing: 16,
-                      children: [
-                        const Icon(Icons.email_outlined),
-                        CustomText(
-                          text: cubit.getUserModel!.email,
-                          fontSize: 16,
-                        ),
-                      ],
-                    ),
-                    const Icon(Icons.edit_off_outlined),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 24),
+              _buildUserEmailField(context, cubit),
+              const SizedBox(height: 40),
               CustomButton(
                 isLoading: state is EditProfileLoadingData,
+                fontWeight: FontWeight.w700,
                 textColor: Theme.of(context).brightness == Brightness.dark
                     ? Colors.grey.shade600
                     : Colors.grey.shade200,
@@ -141,9 +89,9 @@ class _InputSectionState extends State<InputSection> {
                     ? Colors.grey.shade200
                     : kPrimaryColor,
                 onPressed: () {
-                  if (formKey.currentState!.validate()) {
+                  if (_formKey.currentState!.validate()) {
                     context.read<EditProfileCubit>().updateUserName(
-                      newName: name,
+                      newName: _name,
                     );
                     context.read<EditProfileCubit>().saveChanges();
                   } else {
@@ -152,11 +100,86 @@ class _InputSectionState extends State<InputSection> {
                 },
                 text: S.of(context).profileUpdateTitleButton,
               ),
-              const SizedBox(height: 24),
             ],
           ),
         );
       },
+    );
+  }
+
+  Column _buildUserEmailField(BuildContext context, EditProfileCubit cubit) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        CustomText(text: S.of(context).profileUserEmail, fontSize: 16),
+        const SizedBox(height: 16),
+        Container(
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            borderRadius: const BorderRadius.all(Radius.circular(4)),
+            border: Border.all(color: Colors.grey),
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                spacing: 16,
+                children: [
+                  const Icon(Icons.email_outlined),
+                  CustomText(text: cubit.getUserModel!.email, fontSize: 16),
+                ],
+              ),
+              const Icon(Icons.edit_off_outlined),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  Column _buildUserNameField(BuildContext context, EditProfileCubit cubit) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        CustomText(
+          text: S.of(context).profileUserName,
+          fontSize: 16,
+          fontWeight: FontWeight.w700,
+        ),
+        const SizedBox(height: 16),
+        TextFormField(
+          onSaved: (value) {
+            _name = value!.trim();
+          },
+          validator: (value) {
+            if (value == null || value.isEmpty) {
+              _name = cubit.getUserModel!.name;
+            } else {
+              _name = value;
+            }
+            return null;
+          },
+          controller: _textEditingControllerName,
+          decoration: InputDecoration(
+            fillColor: Theme.of(context).scaffoldBackgroundColor,
+            hintText: S.of(context).profileUserName,
+            hintStyle: const TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.w400,
+            ),
+            prefixIcon: const Icon(Icons.person_outline),
+            suffixIcon: const Icon(Icons.edit_outlined),
+            enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: Theme.of(context).primaryColor.withAlpha(100),
+              ),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: Theme.of(context).primaryColor),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
