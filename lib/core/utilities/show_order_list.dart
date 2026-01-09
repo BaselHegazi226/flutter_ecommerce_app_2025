@@ -11,7 +11,7 @@ class ShowOrderList extends StatelessWidget {
   const ShowOrderList({
     super.key,
     required this.carts,
-    this.heightOfList = 184,
+    this.heightOfList = 192,
   });
 
   final List<CartModel> carts;
@@ -62,20 +62,20 @@ class ShowOrderItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Container(
           height: 100,
-          width: 92,
+          width: 120,
           decoration: BoxDecoration(
             color: Theme.of(context).brightness == Brightness.dark
                 ? Colors.grey.shade500.withAlpha(32)
                 : Colors.grey.shade200,
             borderRadius: const BorderRadius.all(Radius.circular(8)),
           ),
+          clipBehavior: Clip.antiAlias,
           child: CachedNetworkImage(
-            height: 80,
-            width: 70,
-            fit: BoxFit.contain,
+            //  fit: BoxFit.contain,
             errorWidget: (error, url, x) {
               return const Icon(Icons.image);
             },
