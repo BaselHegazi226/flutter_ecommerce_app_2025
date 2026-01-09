@@ -81,6 +81,8 @@ extension HomeLocalizationX on S {
   String get homeNoProduct => home_no_products_now;
 
   String get homeNoCategory => home_not_categories_available_now;
+
+  String get homeNoUserFound => home_not_user_found;
 }
 
 //Cart extension of S
@@ -347,6 +349,8 @@ extension ProfileLocalizationX on S {
   String get profileEdit => profile_edit;
 
   String get profileShippingAddress => profile_shippingAddress;
+
+  String get profileNoShippingAddress => profile_no_shipping_address;
 
   String get profileFavourite => profile_favourite;
 
