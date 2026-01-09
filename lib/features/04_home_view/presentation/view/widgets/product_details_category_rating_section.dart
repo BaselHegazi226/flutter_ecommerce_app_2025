@@ -22,7 +22,6 @@ class ProductDetailsCategoryRatingSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Wrap(
       runSpacing: 8,
-      runAlignment: WrapAlignment.start,
       children: [
         CustomTitleValueItem(
           title: S.of(context).homeCategory,
@@ -33,7 +32,7 @@ class ProductDetailsCategoryRatingSection extends StatelessWidget {
             color: kGreyColor,
           ),
         ),
-        const SizedBox(width: 20),
+        const SizedBox(width: 12),
         CustomTitleValueItem(
           title: S.of(context).homeRating,
           value: starFunctionLikeGooglePlay(context, rating: rating),
