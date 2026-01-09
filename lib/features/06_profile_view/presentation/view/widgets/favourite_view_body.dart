@@ -46,7 +46,6 @@ class FavouriteViewBody extends StatelessWidget {
                 },
                 itemBuilder: (context, index) {
                   final item = favourites[index];
-                  debugPrint('image = ${item.images[0]}');
                   return InkWell(
                     onTap: () {
                       GoRouter.of(

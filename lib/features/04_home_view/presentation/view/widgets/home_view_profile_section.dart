@@ -1,10 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_e_commerce_app_2025/core/helper/const.dart';
 import 'package:flutter_e_commerce_app_2025/core/helper/extensions_of_s_localization.dart';
 import 'package:flutter_e_commerce_app_2025/core/utilities/custom_text.dart';
-import 'package:flutter_e_commerce_app_2025/features/02_auth_view/data/model/user_model.dart';
 import 'package:flutter_e_commerce_app_2025/features/06_profile_view/presentation/view/widgets/profile_view_custom_image.dart';
 import 'package:flutter_e_commerce_app_2025/generated/l10n.dart';
 
@@ -30,16 +28,16 @@ class HomeViewProfileSection extends StatelessWidget {
 
           final photoUrl = userModel.photoUrl;
 
-          return buildDataSection(context, userModel, size, photoUrl);
+          return buildDataSection(context, userModel.name, size, photoUrl);
         }
         // حالة الفشل
         else if (state is GetUserInfoLocalFailure ||
             state is GetUserInfoFromFirestoreFailure) {
-          return Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Image.asset(Assets.profileDefulatProfileImage, fit: BoxFit.cover),
-            ],
+          return buildDataSection(
+            context,
+            '',
+            size,
+            Assets.profileDefulatProfileImage,
           );
         }
 
@@ -51,7 +49,7 @@ class HomeViewProfileSection extends StatelessWidget {
 
   Row buildDataSection(
     BuildContext context,
-    UserModel userModel,
+    String userName,
     Size size,
     String? photoUrl,
   ) {
@@ -62,11 +60,11 @@ class HomeViewProfileSection extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            CustomText(text: '${S.of(context).homeWelcome} ,', fontSize: 24),
+            CustomText(text: S.of(context).homeWelcome, fontSize: 24),
             CustomText(
-              text: userModel.name,
+              text: userName,
               fontSize: 20,
-              color: kPrimaryColor,
+              color: Theme.of(context).primaryColor,
             ),
           ],
         ),
@@ -76,6 +74,13 @@ class HomeViewProfileSection extends StatelessWidget {
               ? CachedNetworkImage(
                   imageUrl: photoUrl,
                   fit: BoxFit.cover,
+                  placeholder: (context, state) => Container(
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).brightness == Brightness.dark
+                          ? Colors.grey.shade300
+                          : Colors.grey.shade500,
+                    ),
+                  ),
                   errorWidget: (context, error, widget) {
                     return const Icon(Icons.image_not_supported_outlined);
                   },

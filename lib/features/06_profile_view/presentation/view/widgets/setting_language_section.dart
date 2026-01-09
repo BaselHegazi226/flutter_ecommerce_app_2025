@@ -39,9 +39,31 @@ class LanguageSection extends StatelessWidget {
             borderRadius: BorderRadius.circular(16),
           ),
           child: DropdownButton<String>(
+            borderRadius: const BorderRadius.all(Radius.circular(8)),
+            dropdownColor: Theme.of(context).brightness == Brightness.dark
+                ? Colors.grey.shade100
+                : Colors.grey.shade800,
             underline: const SizedBox(),
             value: dropdownValue,
             isExpanded: true,
+            // 👇 هنا بنظبط شكل العنصر المختار قبل الفتح
+            selectedItemBuilder: (BuildContext context) {
+              return ['العربية', 'English'].map((String value) {
+                return Row(
+                  children: [
+                    value == 'العربية'
+                        ? const Iconify(Twemoji.flag_for_flag_egypt, size: 20)
+                        : const Iconify(
+                            Twemoji.flag_for_flag_united_states,
+                            size: 20,
+                          ),
+                    const SizedBox(width: 12),
+                    Text(value),
+                  ],
+                );
+              }).toList();
+            },
+
             icon: Icon(
               Icons.keyboard_arrow_down,
               color: Theme.of(context).iconTheme.color,
@@ -54,6 +76,8 @@ class LanguageSection extends StatelessWidget {
                 appSettingCubit.selectedLanguage(language: language);
               }
             },
+
+            // عناصر القائمه الفعليه
             items: ['العربية', 'English'].map((String value) {
               return DropdownMenuItem<String>(
                 value: value,
@@ -65,8 +89,15 @@ class LanguageSection extends StatelessWidget {
                             Twemoji.flag_for_flag_united_states,
                             size: 20,
                           ),
-                    const SizedBox(width: 8),
-                    Text(value),
+                    const SizedBox(width: 12),
+                    Text(
+                      value,
+                      style: TextStyle(
+                        color: Theme.of(context).brightness == Brightness.dark
+                            ? Colors.grey.shade800
+                            : Colors.grey.shade100,
+                      ),
+                    ),
                   ],
                 ),
               );

@@ -24,11 +24,11 @@ class FavouriteViewItem extends StatelessWidget {
         borderRadius: const BorderRadius.all(Radius.circular(4)),
         color: Theme.of(context).brightness == Brightness.dark
             ? Colors.grey.shade500.withAlpha(32)
-            : Colors.grey.shade100.withAlpha(32),
+            : Colors.grey.shade600.withAlpha(32),
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Expanded(child: _customImage(context, productModel.images[0])),
           const SizedBox(width: 16),
@@ -40,11 +40,10 @@ class FavouriteViewItem extends StatelessWidget {
 
   Widget _customImage(BuildContext context, String imageUrl) {
     return Container(
-      padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
         color: Theme.of(context).brightness == Brightness.dark
-            ? Colors.grey.shade500.withAlpha(32)
-            : Colors.grey.shade200.withAlpha(32),
+            ? Colors.grey.shade400.withAlpha(32)
+            : Colors.grey.shade700.withAlpha(32),
         borderRadius: const BorderRadius.all(Radius.circular(8)),
       ),
       child: AspectRatio(
@@ -52,7 +51,6 @@ class FavouriteViewItem extends StatelessWidget {
         child: CachedNetworkImage(
           fit: BoxFit.contain,
           errorWidget: (context, url, error) {
-            debugPrint('error for image = $error');
             return const Icon(Icons.image_not_supported_outlined);
           },
           imageUrl: imageUrl,
@@ -64,66 +62,18 @@ class FavouriteViewItem extends StatelessWidget {
   Widget _detailsSection(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.start,
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          spacing: 4,
           children: [
-            Flexible(
-              child: CustomText(
-                text: productModel.title,
-                maxLines: 1,
-                fontSize: 16,
-                color: Colors.grey.shade900,
-              ),
+            CustomText(
+              text: productModel.title,
+              maxLines: 1,
+              fontSize: 16,
+              color: Colors.grey.shade900,
             ),
-            BlocConsumer<FavouriteProductCubit, FavouriteProductState>(
-              listener: (context, state) {
-                if (state is DeleteFavouriteProductSuccess ||
-                    state is GetFavouriteProductByIdSuccess) {
-                } else if (state is AddFavouriteProductFailure ||
-                    state is GetFavouriteProductByIdFailure) {}
-              },
-              builder: (context, state) {
-                final isFavourite = state is GetFavouriteProductsSuccess;
-                return Flexible(
-                  child: IconWithCircleStyle(
-                    backgroundColor: Colors.grey.shade400.withAlpha(32),
-                    icon: Icon(
-                      isFavourite
-                          ? Icons.favorite_outlined
-                          : Icons.favorite_border_outlined,
-                      color: isFavourite
-                          ? Theme.of(context).brightness == Brightness.dark
-                                ? Colors.white
-                                : Colors.red.shade500
-                          : Theme.of(context).brightness == Brightness.dark
-                          ? Colors.white
-                          : Colors.black,
-                      size: 20,
-                    ),
-                    onPressed: () {
-                      warningAwesomeDialog(
-                        context,
-                        title: S.of(context).profileDeleteItemTitle,
-                        description: S.of(context).profileDeleteItemDesc,
-                        buttonAcceptText: S.of(context).warning_button_title_ok,
-                        buttonCancelText: S
-                            .of(context)
-                            .warning_button_title_Cancel,
-                        onPressed: () {
-                          context
-                              .read<FavouriteProductCubit>()
-                              .deleteFavoriteProduct(
-                                productModel: productModel,
-                              );
-                        },
-                      );
-                    },
-                  ),
-                );
-              },
-            ),
+            buildHeartIcon(),
           ],
         ),
         CustomText(text: productModel.description, fontSize: 14, maxLines: 4),
@@ -134,6 +84,50 @@ class FavouriteViewItem extends StatelessWidget {
           color: kPrimaryColor,
         ),
       ],
+    );
+  }
+
+  BlocConsumer<FavouriteProductCubit, FavouriteProductState> buildHeartIcon() {
+    return BlocConsumer<FavouriteProductCubit, FavouriteProductState>(
+      listener: (context, state) {
+        if (state is DeleteFavouriteProductSuccess ||
+            state is GetFavouriteProductByIdSuccess) {
+        } else if (state is AddFavouriteProductFailure ||
+            state is GetFavouriteProductByIdFailure) {}
+      },
+      builder: (context, state) {
+        final isFavourite = state is GetFavouriteProductsSuccess;
+        return IconWithCircleStyle(
+          backgroundColor: Colors.grey.shade400.withAlpha(32),
+          icon: Icon(
+            isFavourite
+                ? Icons.favorite_outlined
+                : Icons.favorite_border_outlined,
+            color: isFavourite
+                ? Theme.of(context).brightness == Brightness.dark
+                      ? Colors.white
+                      : Colors.red.shade500
+                : Theme.of(context).brightness == Brightness.dark
+                ? Colors.white
+                : Colors.black,
+            size: 20,
+          ),
+          onPressed: () {
+            warningAwesomeDialog(
+              context,
+              title: S.of(context).profileDeleteItemTitle,
+              description: S.of(context).profileDeleteItemDesc,
+              buttonAcceptText: S.of(context).warning_button_title_ok,
+              buttonCancelText: S.of(context).warning_button_title_Cancel,
+              onPressed: () {
+                context.read<FavouriteProductCubit>().deleteFavoriteProduct(
+                  productModel: productModel,
+                );
+              },
+            );
+          },
+        );
+      },
     );
   }
 }

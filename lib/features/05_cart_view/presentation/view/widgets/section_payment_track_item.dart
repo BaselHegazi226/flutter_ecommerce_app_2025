@@ -47,8 +47,8 @@ class SectionPaymentTrackItemMobile extends StatelessWidget {
       padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
         color: Theme.of(context).brightness == Brightness.dark
-            ? Colors.grey.shade500
-            : Colors.grey.shade200,
+            ? Colors.grey.shade500.withAlpha(64)
+            : Colors.grey.shade100.withAlpha(150),
         borderRadius: const BorderRadius.all(Radius.circular(8)),
       ),
       child: FittedBox(fit: BoxFit.scaleDown, child: _customImage(imageUrl)),
@@ -94,8 +94,8 @@ class SectionPaymentTrackItemTablet extends StatelessWidget {
       padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
         color: Theme.of(context).brightness == Brightness.dark
-            ? Colors.grey.shade500
-            : Colors.grey.shade200,
+            ? Colors.grey.shade500.withAlpha(64)
+            : Colors.grey.shade100.withAlpha(150),
         borderRadius: const BorderRadius.all(Radius.circular(8)),
       ),
       child: FittedBox(fit: BoxFit.scaleDown, child: _customImage(imageUrl)),

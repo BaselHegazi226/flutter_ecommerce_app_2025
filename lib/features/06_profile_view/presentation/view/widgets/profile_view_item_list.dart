@@ -100,7 +100,7 @@ class ProfileViewItemList extends StatelessWidget {
       ),
       ProfileViewItemModel(
         route: Routes.favoriteView,
-        iconData: Icons.favorite_outline,
+        iconData: Icons.favorite,
         title: S.of(context).profileFavourite,
       ),
       ProfileViewItemModel(

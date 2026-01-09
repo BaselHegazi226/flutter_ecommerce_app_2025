@@ -3,18 +3,19 @@ import 'package:flutter/material.dart';
 class CustomImage extends StatelessWidget {
   const CustomImage({
     super.key,
-    this.imageWidth,
+    this.imageWidth = 150,
     required this.child,
     this.enableBorder = true,
   });
-  final double? imageWidth;
+
+  final double imageWidth;
   final Widget child;
   final bool enableBorder;
+
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.sizeOf(context);
     return Container(
-      width: imageWidth ?? size.width * .5,
+      width: imageWidth,
       decoration: BoxDecoration(
         border: enableBorder
             ? Border.all(
@@ -26,7 +27,7 @@ class CustomImage extends StatelessWidget {
         shape: BoxShape.circle,
       ),
       child: CircleAvatar(
-        radius: imageWidth != null ? imageWidth! / 2 : size.width * .5 / 2,
+        radius: imageWidth / 2,
         backgroundColor: Colors.transparent,
         child: ClipOval(child: child),
       ),

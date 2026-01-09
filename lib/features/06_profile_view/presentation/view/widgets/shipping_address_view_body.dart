@@ -22,9 +22,11 @@ class ShippingAddressViewBody extends StatelessWidget {
         if (state is GetUserLocationSuccess) {
           final locationModel = state.locationModel;
           if (locationModel.street1.isEmpty) {
-            return const NoItemFound(
-              itemTitle: 'No Location Found try make order!',
-              itemImage: Assets.profileNoLocation,
+            return Center(
+              child: NoItemFound(
+                itemTitle: S.of(context).profileNoShippingAddress,
+                itemImage: Assets.profileUnFavouriteHeart,
+              ),
             );
           }
           return Column(
@@ -45,9 +47,11 @@ class ShippingAddressViewBody extends StatelessWidget {
             ],
           );
         } else if (state is GetUserLocationFailure) {
-          return NoItemFound(
-            itemTitle: S.of(context).orderNoLocation,
-            itemImage: Assets.profileNoLocation,
+          return Center(
+            child: NoItemFound(
+              itemTitle: S.of(context).orderNoLocation,
+              itemImage: Assets.profileNoLocation,
+            ),
           );
         } else {
           return const CustomCircleIndicator(color: kPrimaryColor);
