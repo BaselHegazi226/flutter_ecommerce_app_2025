@@ -12,7 +12,8 @@ import 'package:flutter_e_commerce_app_2025/features/05_cart_view/presentation/v
 import 'package:flutter_e_commerce_app_2025/generated/l10n.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:iconify_flutter/icons/carbon.dart';
-import 'package:intl/intl.dart';
+
+import '../../../../../core/helper/date_formatter.dart';
 
 class OrderHistoryActiveSelectionView extends StatefulWidget {
   const OrderHistoryActiveSelectionView({
@@ -79,17 +80,18 @@ class _OrderHistoryActiveSelectionViewState
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 16),
                       child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               CustomText(
-                                text: DateFormat(
-                                  'MMMM dd, yyyy',
-                                ).format(order.checkoutDateAt).toString(),
+                                text: DateFormatter.format(
+                                  order.checkoutDateAt,
+                                  S.of(context).orderHistory,
+                                ),
                                 fontSize: 14,
                                 color: kGreyColor,
-                                alignment: Alignment.centerLeft,
                               ),
                               IconButton(
                                 onPressed: () => _toggleItem(order, isSelected),

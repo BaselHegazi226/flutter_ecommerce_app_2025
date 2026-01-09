@@ -3,7 +3,10 @@ import 'package:flutter_e_commerce_app_2025/core/helper/const.dart';
 import 'package:flutter_e_commerce_app_2025/core/utilities/custom_text.dart';
 import 'package:flutter_e_commerce_app_2025/core/utilities/show_order_list.dart';
 import 'package:flutter_e_commerce_app_2025/features/05_cart_view/data/model/order_model.dart';
-import 'package:intl/intl.dart';
+
+import '../../../../../core/helper/date_formatter.dart';
+import '../../../../../core/helper/extensions_of_s_localization.dart';
+import '../../../../../generated/l10n.dart';
 
 class OrderHistoryUnactiveSelectionView extends StatelessWidget {
   const OrderHistoryUnactiveSelectionView({
@@ -25,15 +28,16 @@ class OrderHistoryUnactiveSelectionView extends StatelessWidget {
         return Padding(
           padding: const EdgeInsets.all(16),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             spacing: 8,
             children: [
               CustomText(
-                text: DateFormat(
-                  'MMMM dd, yyyy',
-                ).format(order.checkoutDateAt).toString(),
+                text: DateFormatter.format(
+                  order.checkoutDateAt,
+                  S.of(context).orderHistory,
+                ),
                 fontSize: 14,
                 color: kGreyColor,
-                alignment: Alignment.centerLeft,
               ),
 
               InkWell(
