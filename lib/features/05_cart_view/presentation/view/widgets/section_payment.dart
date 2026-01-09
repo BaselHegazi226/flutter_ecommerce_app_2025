@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_e_commerce_app_2025/core/helper/const.dart';
@@ -65,10 +66,7 @@ class SectionPayment extends StatelessWidget {
                   const SizedBox(height: 24),
                   dateStateSection(updatedOrder, context),
                   const SizedBox(height: 16),
-                  SectionPaymentTrackItem(
-                    orderModel: updatedOrder,
-                    onBack: onBack,
-                  ),
+                  SectionPaymentTrackItem(orderModel: updatedOrder),
                   // زر الرجوع بعد الجريد
                 ],
               ),
@@ -112,10 +110,11 @@ class SectionPayment extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            CustomText(
-              text:
-                  '${S.of(context).orderOrderId}: OD-${orderModel!.orderId.split('-').take(2).join('-')}-N',
-              fontSize: 16,
+            AutoSizeText(
+              '${S.of(context).orderOrderId}: OD-${orderModel!.orderId.split('-').take(2).join('-')}-N',
+              minFontSize: 12,
+              maxFontSize: 16,
+              maxLines: 1,
             ),
             Container(
               color: orderStateData(
@@ -144,7 +143,7 @@ class SectionPayment extends StatelessWidget {
       children: [
         CustomText(
           text: S.of(context).orderReady,
-          fontSize: 18,
+          fontSize: 16,
           alignment: Alignment.center,
           fontWeight: FontWeight.bold,
         ),
@@ -162,7 +161,6 @@ class SectionPayment extends StatelessWidget {
     return BlocConsumer<PaymentBloc, PaymentState>(
       listener: (context, state) {
         if (state is ImplementPaymentWithPayMobSuccess) {
-          debugPrint('url success = ${state.successUrl}');
           Navigator.push(
             context,
             MaterialPageRoute(

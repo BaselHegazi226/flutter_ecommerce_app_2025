@@ -5,39 +5,23 @@ import 'package:flutter_e_commerce_app_2025/core/utilities/custom_layout.dart';
 import '../../../data/model/order_model.dart';
 
 class SectionPaymentTrackItem extends StatelessWidget {
-  const SectionPaymentTrackItem({
-    super.key,
-    required this.orderModel,
-    required this.onBack,
-  });
+  const SectionPaymentTrackItem({super.key, required this.orderModel});
 
   final OrderModel? orderModel;
-  final VoidCallback onBack;
 
   @override
   Widget build(BuildContext context) {
     return CustomLayout(
-      mobileWidget: SectionPaymentTrackItemMobile(
-        onBack: onBack,
-        orderModel: orderModel,
-      ),
-      tabletWidget: SectionPaymentTrackItemTablet(
-        onBack: onBack,
-        orderModel: orderModel,
-      ),
+      mobileWidget: SectionPaymentTrackItemMobile(orderModel: orderModel),
+      tabletWidget: SectionPaymentTrackItemTablet(orderModel: orderModel),
     );
   }
 }
 
 class SectionPaymentTrackItemMobile extends StatelessWidget {
-  const SectionPaymentTrackItemMobile({
-    super.key,
-    this.orderModel,
-    required this.onBack,
-  });
+  const SectionPaymentTrackItemMobile({super.key, this.orderModel});
 
   final OrderModel? orderModel;
-  final VoidCallback onBack;
 
   @override
   Widget build(BuildContext context) {
@@ -48,8 +32,8 @@ class SectionPaymentTrackItemMobile extends StatelessWidget {
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2, // خلي اتنين جنب بعض
         crossAxisSpacing: 16, // مسافة أفقية بين العناصر
-        mainAxisSpacing: 12, // مسافة رأسية بين العناصر
-        childAspectRatio: 1.2,
+        mainAxisSpacing: 16, // مسافة رأسية بين العناصر
+        childAspectRatio: 1.5,
       ),
       itemBuilder: (context, index) {
         final product = orderModel!.cartModelList[index];
@@ -60,6 +44,7 @@ class SectionPaymentTrackItemMobile extends StatelessWidget {
 
   buildItem(BuildContext context, String imageUrl) {
     return Container(
+      padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
         color: Theme.of(context).brightness == Brightness.dark
             ? Colors.grey.shade500
@@ -81,14 +66,9 @@ class SectionPaymentTrackItemMobile extends StatelessWidget {
 }
 
 class SectionPaymentTrackItemTablet extends StatelessWidget {
-  const SectionPaymentTrackItemTablet({
-    super.key,
-    this.orderModel,
-    required this.onBack,
-  });
+  const SectionPaymentTrackItemTablet({super.key, this.orderModel});
 
   final OrderModel? orderModel;
-  final VoidCallback onBack;
 
   @override
   Widget build(BuildContext context) {
@@ -99,8 +79,8 @@ class SectionPaymentTrackItemTablet extends StatelessWidget {
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2, // خلي اتنين جنب بعض
         crossAxisSpacing: 16, // مسافة أفقية بين العناصر
-        mainAxisSpacing: 12, // مسافة رأسية بين العناصر
-        childAspectRatio: 1.2,
+        mainAxisSpacing: 16, // مسافة رأسية بين العناصر
+        childAspectRatio: 1.5,
       ),
       itemBuilder: (context, index) {
         final product = orderModel!.cartModelList[index];
@@ -111,6 +91,7 @@ class SectionPaymentTrackItemTablet extends StatelessWidget {
 
   buildItem(BuildContext context, String imageUrl) {
     return Container(
+      padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
         color: Theme.of(context).brightness == Brightness.dark
             ? Colors.grey.shade500
