@@ -79,9 +79,9 @@ class S {
     return Intl.message('Profile', name: 'nav_profile', desc: '', args: []);
   }
 
-  /// `Welcome`
+  /// `Welcome, `
   String get home_welcome {
-    return Intl.message('Welcome', name: 'home_welcome', desc: '', args: []);
+    return Intl.message('Welcome, ', name: 'home_welcome', desc: '', args: []);
   }
 
   /// `Categories`
@@ -164,6 +164,16 @@ class S {
     return Intl.message(
       'No Categories available now!',
       name: 'home_not_categories_available_now',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No User Data Found`
+  String get home_not_user_found {
+    return Intl.message(
+      'No User Data Found',
+      name: 'home_not_user_found',
       desc: '',
       args: [],
     );
@@ -1359,6 +1369,16 @@ class S {
     return Intl.message(
       'Shipping Address',
       name: 'profile_shippingAddress',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No Location Found try make order!`
+  String get profile_no_shipping_address {
+    return Intl.message(
+      'No Location Found try make order!',
+      name: 'profile_no_shipping_address',
       desc: '',
       args: [],
     );

@@ -352,10 +352,13 @@ class MessageLookup extends MessageLookupByLibrary {
     "home_not_categories_available_now": MessageLookupByLibrary.simpleMessage(
       "No Categories available now!",
     ),
+    "home_not_user_found": MessageLookupByLibrary.simpleMessage(
+      "No User Data Found",
+    ),
     "home_price": MessageLookupByLibrary.simpleMessage("Price"),
     "home_rating": MessageLookupByLibrary.simpleMessage("Rating"),
     "home_showAll": MessageLookupByLibrary.simpleMessage("Show All"),
-    "home_welcome": MessageLookupByLibrary.simpleMessage("Welcome"),
+    "home_welcome": MessageLookupByLibrary.simpleMessage("Welcome, "),
     "items": MessageLookupByLibrary.simpleMessage("items"),
     "nav_cart": MessageLookupByLibrary.simpleMessage("Cart"),
     "nav_home": MessageLookupByLibrary.simpleMessage("Home"),
@@ -397,6 +400,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "profile_logout_title": MessageLookupByLibrary.simpleMessage("Logout"),
     "profile_noFavourite": MessageLookupByLibrary.simpleMessage(
       "No Favourite Item Found",
+    ),
+    "profile_no_shipping_address": MessageLookupByLibrary.simpleMessage(
+      "No Location Found try make order!",
     ),
     "profile_shippingAddress": MessageLookupByLibrary.simpleMessage(
       "Shipping Address",

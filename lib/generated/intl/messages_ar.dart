@@ -335,10 +335,13 @@ class MessageLookup extends MessageLookupByLibrary {
     "home_not_categories_available_now": MessageLookupByLibrary.simpleMessage(
       "لا توجد فئات متوفره الآن",
     ),
+    "home_not_user_found": MessageLookupByLibrary.simpleMessage(
+      "لا يوجد بيانات مستخدم متاحه الآن",
+    ),
     "home_price": MessageLookupByLibrary.simpleMessage("السعر"),
     "home_rating": MessageLookupByLibrary.simpleMessage("التقييم"),
     "home_showAll": MessageLookupByLibrary.simpleMessage("عرض الكل"),
-    "home_welcome": MessageLookupByLibrary.simpleMessage("مرحبًا بك"),
+    "home_welcome": MessageLookupByLibrary.simpleMessage("مرحبًا بك, "),
     "items": MessageLookupByLibrary.simpleMessage("العناصر"),
     "nav_cart": MessageLookupByLibrary.simpleMessage("السلة"),
     "nav_home": MessageLookupByLibrary.simpleMessage("الرئيسية"),
@@ -380,6 +383,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "profile_noFavourite": MessageLookupByLibrary.simpleMessage(
       "لا توجد عناصر مفضلة",
+    ),
+    "profile_no_shipping_address": MessageLookupByLibrary.simpleMessage(
+      "لا يوجد عنوان شحن تم ادخاله",
     ),
     "profile_shippingAddress": MessageLookupByLibrary.simpleMessage(
       "عنوان الشحن",
