@@ -137,18 +137,22 @@ class CustomGridListView extends StatelessWidget {
     this.itemsInLine = 2,
     this.crossAxisSpacing = 16,
     this.mainAxisSpacing = 16,
+    this.shrinkWrap = false,
   });
 
   final double childAspectRatio;
   final List<dynamic> items;
   final int itemsInLine;
   final double crossAxisSpacing, mainAxisSpacing;
+  final bool shrinkWrap;
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.sizeOf(context);
     return GridView.builder(
       itemCount: items.length,
+      physics: const BouncingScrollPhysics(),
+      shrinkWrap: shrinkWrap,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: itemsInLine,
         crossAxisSpacing: crossAxisSpacing,
