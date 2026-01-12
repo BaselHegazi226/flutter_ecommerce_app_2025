@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_e_commerce_app_2025/core/utilities/custom_loading_indicator.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 
-import '../helper/const.dart';
 import 'custom_text.dart';
 
 class CustomSocialButton extends StatelessWidget {
@@ -14,6 +13,7 @@ class CustomSocialButton extends StatelessWidget {
     this.iconifyColor,
     required this.valueNotifierLoading,
   });
+
   final void Function()? onPressed;
   final String text;
   final String iconifyData;
@@ -37,7 +37,11 @@ class CustomSocialButton extends StatelessWidget {
           ),
           onPressed: onPressed,
           child: value
-              ? const CustomCircleIndicator(color: kPrimaryColor)
+              ? CustomCircleIndicator(
+                  color: Theme.of(context).brightness == Brightness.dark
+                      ? Colors.grey.shade200
+                      : Colors.grey.shade800,
+                )
               : Stack(
                   alignment: Alignment.center,
                   children: [

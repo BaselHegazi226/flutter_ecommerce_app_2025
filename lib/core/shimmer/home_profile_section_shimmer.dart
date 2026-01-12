@@ -14,7 +14,7 @@ Widget homeProfileSectionShimmer(Size size) {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              width: 90,
+              width: size.width * .3,
               height: 20,
               decoration: BoxDecoration(
                 color: Colors.white,

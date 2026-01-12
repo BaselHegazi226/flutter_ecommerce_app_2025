@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_e_commerce_app_2025/core/errors/catch_error_handle.dart';
 import 'package:hive/hive.dart';
 
-import '../../features/04_home_view/data/model/product_model.dart';
+import '../../features/05_home_view/data/model/product_model.dart';
 import '../errors/failure.dart';
 import '../helper/adapter_identifiers.dart';
 

@@ -22,7 +22,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
-    "EP": MessageLookupByLibrary.simpleMessage("جنيه مصري"),
+    "EP": MessageLookupByLibrary.simpleMessage("ج.م"),
     "about_me_app_admin": MessageLookupByLibrary.simpleMessage(
       "لوحات تحكم (Admin Panels)",
     ),
@@ -343,10 +343,33 @@ class MessageLookup extends MessageLookupByLibrary {
     "home_showAll": MessageLookupByLibrary.simpleMessage("عرض الكل"),
     "home_welcome": MessageLookupByLibrary.simpleMessage("مرحبًا بك, "),
     "items": MessageLookupByLibrary.simpleMessage("العناصر"),
+    "language_selected_text": MessageLookupByLibrary.simpleMessage(
+      "اختر لغتك المفضله",
+    ),
     "nav_cart": MessageLookupByLibrary.simpleMessage("السلة"),
     "nav_home": MessageLookupByLibrary.simpleMessage("الرئيسية"),
-    "nav_profile": MessageLookupByLibrary.simpleMessage("الملف الشخصي"),
-    "nav_search": MessageLookupByLibrary.simpleMessage("بحث"),
+    "nav_profile": MessageLookupByLibrary.simpleMessage("البروفايل"),
+    "nav_search": MessageLookupByLibrary.simpleMessage("البحث"),
+    "onboarding_desc_img1": MessageLookupByLibrary.simpleMessage(
+      "اعثر بسهولة على المنتجات التي تبحث عنها\nوصول سريع لما يهمك دون تعقيد",
+    ),
+    "onboarding_desc_img2": MessageLookupByLibrary.simpleMessage(
+      "استكشف تشكيلة متنوعة من المنتجات\nمختارة بعناية لتناسب جميع الأذواق",
+    ),
+    "onboarding_desc_img3": MessageLookupByLibrary.simpleMessage(
+      "أكمل عمليات الدفع بسهولة وأمان\nمع خيارات دفع متعددة وموثوقة",
+    ),
+    "onboarding_next": MessageLookupByLibrary.simpleMessage("التالي"),
+    "onboarding_skip": MessageLookupByLibrary.simpleMessage("تخطي"),
+    "onboarding_title_img1": MessageLookupByLibrary.simpleMessage(
+      "اكتشف المنتجات ببحث ذكي وسريع",
+    ),
+    "onboarding_title_img2": MessageLookupByLibrary.simpleMessage(
+      "تصفح مجموعة واسعة من المنتجات",
+    ),
+    "onboarding_title_img3": MessageLookupByLibrary.simpleMessage(
+      "تجربة دفع آمنة وسلسة",
+    ),
     "order_added_done": MessageLookupByLibrary.simpleMessage(
       "تمت اضافه المنتج من قبل",
     ),
@@ -366,7 +389,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "order_ready": MessageLookupByLibrary.simpleMessage("الطلب جاهز للتنفيذ"),
     "order_total_price": MessageLookupByLibrary.simpleMessage("السعر الإجمالي"),
     "order_transmit": MessageLookupByLibrary.simpleMessage("قيد الإرسال"),
-    "profile": MessageLookupByLibrary.simpleMessage("الملف الشخصي"),
+    "profile": MessageLookupByLibrary.simpleMessage("البروفايل"),
     "profile_delete_favourite_Item_desc": MessageLookupByLibrary.simpleMessage(
       "هل تريد بالفعل حذف العنصر من المفضله",
     ),

@@ -2,6 +2,8 @@ class Routes {
   static const String splashView = '/splashView';
   static const String loginView = '/loginView';
   static const String registerView = '/registerView';
+  static const String onBoardingView = '/onBoardingView';
+  static const String languageView = '/languageView';
   static const String mainView = '/mainView';
   static const String categoryView = '/categoryView';
   static const String productDetailsView = '/productDetailsView';

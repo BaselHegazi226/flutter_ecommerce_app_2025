@@ -360,10 +360,33 @@ class MessageLookup extends MessageLookupByLibrary {
     "home_showAll": MessageLookupByLibrary.simpleMessage("Show All"),
     "home_welcome": MessageLookupByLibrary.simpleMessage("Welcome, "),
     "items": MessageLookupByLibrary.simpleMessage("items"),
+    "language_selected_text": MessageLookupByLibrary.simpleMessage(
+      "Select Favourite Language",
+    ),
     "nav_cart": MessageLookupByLibrary.simpleMessage("Cart"),
     "nav_home": MessageLookupByLibrary.simpleMessage("Home"),
     "nav_profile": MessageLookupByLibrary.simpleMessage("Profile"),
     "nav_search": MessageLookupByLibrary.simpleMessage("Search"),
+    "onboarding_desc_img1": MessageLookupByLibrary.simpleMessage(
+      "Easily find the products you are looking for\nQuick access to what matters most",
+    ),
+    "onboarding_desc_img2": MessageLookupByLibrary.simpleMessage(
+      "Browse a diverse range of products\nCarefully selected to match every taste",
+    ),
+    "onboarding_desc_img3": MessageLookupByLibrary.simpleMessage(
+      "Complete your payments safely and smoothly Multiple trusted payment options available",
+    ),
+    "onboarding_next": MessageLookupByLibrary.simpleMessage("Next"),
+    "onboarding_skip": MessageLookupByLibrary.simpleMessage("Skip"),
+    "onboarding_title_img1": MessageLookupByLibrary.simpleMessage(
+      "Discover Products With Smart Search",
+    ),
+    "onboarding_title_img2": MessageLookupByLibrary.simpleMessage(
+      "Explore A Wide Product Collection",
+    ),
+    "onboarding_title_img3": MessageLookupByLibrary.simpleMessage(
+      "Secure And Simple Checkout Experience",
+    ),
     "order_added_done": MessageLookupByLibrary.simpleMessage(
       "Is Already added",
     ),

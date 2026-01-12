@@ -619,6 +619,86 @@ class S {
     );
   }
 
+  /// `Select Favourite Language`
+  String get language_selected_text {
+    return Intl.message(
+      'Select Favourite Language',
+      name: 'language_selected_text',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Discover Products With Smart Search`
+  String get onboarding_title_img1 {
+    return Intl.message(
+      'Discover Products With Smart Search',
+      name: 'onboarding_title_img1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Easily find the products you are looking for\nQuick access to what matters most`
+  String get onboarding_desc_img1 {
+    return Intl.message(
+      'Easily find the products you are looking for\nQuick access to what matters most',
+      name: 'onboarding_desc_img1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Explore A Wide Product Collection`
+  String get onboarding_title_img2 {
+    return Intl.message(
+      'Explore A Wide Product Collection',
+      name: 'onboarding_title_img2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Browse a diverse range of products\nCarefully selected to match every taste`
+  String get onboarding_desc_img2 {
+    return Intl.message(
+      'Browse a diverse range of products\nCarefully selected to match every taste',
+      name: 'onboarding_desc_img2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Secure And Simple Checkout Experience`
+  String get onboarding_title_img3 {
+    return Intl.message(
+      'Secure And Simple Checkout Experience',
+      name: 'onboarding_title_img3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Complete your payments safely and smoothly Multiple trusted payment options available`
+  String get onboarding_desc_img3 {
+    return Intl.message(
+      'Complete your payments safely and smoothly Multiple trusted payment options available',
+      name: 'onboarding_desc_img3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Next`
+  String get onboarding_next {
+    return Intl.message('Next', name: 'onboarding_next', desc: '', args: []);
+  }
+
+  /// `Skip`
+  String get onboarding_skip {
+    return Intl.message('Skip', name: 'onboarding_skip', desc: '', args: []);
+  }
+
   /// `Email`
   String get auth_email {
     return Intl.message('Email', name: 'auth_email', desc: '', args: []);

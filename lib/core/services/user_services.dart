@@ -4,9 +4,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_e_commerce_app_2025/core/errors/catch_error_handle.dart';
-import 'package:flutter_e_commerce_app_2025/features/02_auth_view/data/model/user_model.dart';
 import 'package:http/http.dart' as http;
 
+import '../../features/03_auth_view/data/model/user_model.dart';
 import '../errors/failure.dart';
 
 class UserServices {
@@ -15,7 +15,9 @@ class UserServices {
 
   // Singleton
   static final UserServices _instance = UserServices._internal();
+
   UserServices._internal();
+
   factory UserServices() => _instance;
 
   Future<Either<Failure, void>> addUserToFirebase(UserModel userModel) async {

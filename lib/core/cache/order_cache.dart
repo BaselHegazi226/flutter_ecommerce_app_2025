@@ -1,18 +1,20 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_e_commerce_app_2025/core/errors/failure.dart';
-import 'package:flutter_e_commerce_app_2025/features/05_cart_view/data/model/cart_model.dart';
-import 'package:flutter_e_commerce_app_2025/features/05_cart_view/data/model/delivery_method_model.dart';
-import 'package:flutter_e_commerce_app_2025/features/05_cart_view/data/model/location_model.dart';
 import 'package:hive/hive.dart';
 
-import '../../features/05_cart_view/data/model/order_model.dart';
+import '../../features/07_cart_view/data/model/cart_model.dart';
+import '../../features/07_cart_view/data/model/delivery_method_model.dart';
+import '../../features/07_cart_view/data/model/location_model.dart';
+import '../../features/07_cart_view/data/model/order_model.dart';
 import '../errors/catch_error_handle.dart';
 import '../helper/adapter_identifiers.dart';
 
 abstract class OrderCache {
   Future<void> init();
+
   Future<Either<Failure, void>> addOrder({required OrderModel orderModel});
+
   Future<Either<Failure, OrderModel>> updateOrder({
     required String orderId,
     DeliveryMethodModel? deliverMethodModel,
@@ -22,18 +24,25 @@ abstract class OrderCache {
     double? totalPrice,
     OrderStateEnum? orderState,
   });
+
   Future<Either<Failure, List<OrderModel>>> getOrderList();
+
   Future<Either<Failure, OrderModel>> getOrderState({
     required OrderModel orderModel,
   });
+
   Future<Either<Failure, void>> deleteAllOrders();
+
   Future<Either<Failure, void>> deleteOrder({required OrderModel orderModel});
+
   Future<Either<Failure, void>> deleteMultipleOrderItem({
     required List<OrderModel> orderList,
   });
+
   Future<Either<Failure, void>> saveUserLocation({
     required LocationModel locationModel,
   });
+
   Future<Either<Failure, LocationModel?>> getUserLocation();
 }
 
@@ -41,7 +50,9 @@ class OrderCacheImplement implements OrderCache {
   late Box<OrderModel> _hiveBoxOrderModel;
   late Box<LocationModel> _hiveBoxLocationModel;
   final String userId;
+
   OrderCacheImplement({required this.userId});
+
   @override
   Future<void> init() async {
     //register all model adaptors

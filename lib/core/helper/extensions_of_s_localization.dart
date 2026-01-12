@@ -1,6 +1,24 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_e_commerce_app_2025/generated/l10n.dart';
 
+extension OnboardingLoclicationX on S {
+  String get onBoardingTitleImg1 => onboarding_title_img1;
+
+  String get onBoardingDescImg1 => onboarding_desc_img1;
+
+  String get onBoardingTitleImg2 => onboarding_title_img2;
+
+  String get onBoardingDescImg2 => onboarding_desc_img2;
+
+  String get onBoardingTitleImg3 => onboarding_title_img3;
+
+  String get onBoardingDescImg3 => onboarding_desc_img3;
+
+  String get onBoardingNext => onboarding_next;
+
+  String get onBoardingSkip => onboarding_skip;
+}
+
 extension AuthLocalizationX on S {
   // Common
   String get authEmail => auth_email;

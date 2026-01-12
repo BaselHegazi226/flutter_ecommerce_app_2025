@@ -7,7 +7,7 @@ import 'package:flutter_e_commerce_app_2025/core/helper/adapter_identifiers.dart
 import 'package:hive/hive.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../features/02_auth_view/data/model/user_model.dart';
+import '../../features/03_auth_view/data/model/user_model.dart';
 
 abstract class UserInfoCache {
   Future<void> init();

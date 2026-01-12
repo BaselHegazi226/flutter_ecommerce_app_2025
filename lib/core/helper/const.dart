@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
-import '../../features/04_home_view/data/model/category_model.dart';
-import '../../features/05_cart_view/data/model/order_model.dart';
+import '../../features/05_home_view/data/model/category_model.dart';
+import '../../features/07_cart_view/data/model/order_model.dart';
 import '../../generated/l10n.dart';
 import 'extensions_of_s_localization.dart';
 
@@ -11,6 +11,17 @@ const Color kPrimaryWrongColor = Colors.red;
 const Color kGreyColor = Color(0xff929292);
 const Color kScaffoldColor = Color(0xffFDFDFD);
 const Color kScaffoldColor2 = Color(0xffefe8df);
+
+final Color kCheckoutStepperFinishedColorDark = Colors.grey.shade400;
+final Color kCheckoutStepperFinishedColorLight = const Color(
+  0xff3d9970,
+).withAlpha(125);
+
+final Color kCheckoutStepperActiveColorDark = Colors.grey.shade200;
+const Color kCheckoutStepperActiveColorLight = Color(0xff3d9970);
+
+final Color kCheckoutStepperUnreachedColorDark = Colors.grey.shade500;
+final Color kCheckoutStepperUnreachedColorLight = Colors.grey.shade400;
 
 String priceShowed(double price) {
   return price.round().toStringAsFixed(2);

@@ -32,3 +32,12 @@ customAppBar(BuildContext context, String title, VoidCallback onPressed) {
     ),
   );
 }
+
+AppBar customTabsAppbar(BuildContext context, String title) {
+  return AppBar(
+    backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+    surfaceTintColor: Theme.of(context).scaffoldBackgroundColor,
+    title: CustomText(text: title, fontSize: 20, fontWeight: FontWeight.bold),
+    centerTitle: true,
+  );
+}

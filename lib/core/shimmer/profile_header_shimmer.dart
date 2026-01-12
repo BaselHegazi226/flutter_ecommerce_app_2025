@@ -11,6 +11,7 @@ Widget profileHeaderShimmer(Size size) {
         // صورة البروفايل (دائرة)
         Container(
           height: size.height * .1,
+          width: size.width * .2,
           decoration: const BoxDecoration(
             color: Colors.white,
             shape: BoxShape.circle,

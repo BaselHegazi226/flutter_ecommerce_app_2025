@@ -2,9 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_e_commerce_app_2025/core/errors/failure.dart';
-import 'package:flutter_e_commerce_app_2025/features/05_cart_view/data/model/cart_model.dart';
 
-import '../../features/05_cart_view/data/model/order_model.dart';
+import '../../features/07_cart_view/data/model/cart_model.dart';
+import '../../features/07_cart_view/data/model/order_model.dart';
 import '../errors/catch_error_handle.dart';
 
 class ProductServices {

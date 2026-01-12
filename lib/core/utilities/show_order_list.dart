@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
-import '../../features/05_cart_view/data/model/cart_model.dart';
+import '../../features/07_cart_view/data/model/cart_model.dart';
 import '../../generated/l10n.dart';
 import '../helper/const.dart';
 import '../helper/extensions_of_s_localization.dart';

@@ -5,13 +5,13 @@ class IconWithCircleStyle extends StatelessWidget {
     super.key,
     this.backgroundColor = const Color(0xffFAFAFA),
     required this.icon,
-    required this.onPressed,
+    this.onPressed,
     this.paddingValue = 4,
-    this.size = 40, // حجم الدائرة
+    this.size = 32, // حجم الدائرة
   });
 
   final Color? backgroundColor;
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
   final Icon icon;
   final double paddingValue;
   final double size;
@@ -35,7 +35,10 @@ class IconWithCircleStyle extends StatelessWidget {
                     ? Colors.grey.shade500.withAlpha(32)
                     : const Color(0xffFAFAFA)),
           ),
-          child: Padding(padding: EdgeInsets.all(paddingValue), child: icon),
+          child: Padding(
+            padding: EdgeInsets.all(paddingValue),
+            child: Center(child: icon),
+          ),
         ),
       ),
     );

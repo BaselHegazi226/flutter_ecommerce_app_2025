@@ -8,9 +8,9 @@ class Assets {
   static const String profileDefulatProfileImage =
       'assets/images/profile/defulat_profile_image.png';
   static const String profileNoHistoryOrder =
-      'assets/images/profile/no_history_order.svg';
+      'assets/images/profile/no_history_data.svg';
   static const String profileNoLocation =
-      'assets/images/profile/no_location_history.svg';
+      'assets/images/profile/no_location_data.svg';
   static const String profileUnFavouriteHeart =
       'assets/images/profile/un_favourite_heart.svg';
   static const String splashEcommerce = 'assets/images/splash/ecommerce.png';
@@ -19,4 +19,10 @@ class Assets {
       'assets/images/splash/ecommerce_logo_2025_green.png';
   static const String splashAppLogoDark =
       'assets/images/splash/ecommerce_logo_2025_white.png';
+  static const String onboardingImage1 =
+      'assets/images/onboarding/undraw_mobile-search_macy.svg';
+  static const String onboardingImage2 =
+      'assets/images/onboarding/undraw_breakfast_rgx5.svg';
+  static const String onboardingImage3 =
+      'assets/images/onboarding/undraw_online-payments_d5ef.svg';
 }

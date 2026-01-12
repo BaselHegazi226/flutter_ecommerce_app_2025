@@ -6,7 +6,7 @@ import 'package:flutter_e_commerce_app_2025/core/errors/failure.dart';
 import 'package:flutter_e_commerce_app_2025/core/helper/adapter_identifiers.dart';
 import 'package:hive/hive.dart';
 
-import '../../features/05_cart_view/data/model/cart_model.dart';
+import '../../features/07_cart_view/data/model/cart_model.dart';
 
 abstract class CartCache {
   Future<void> init();
