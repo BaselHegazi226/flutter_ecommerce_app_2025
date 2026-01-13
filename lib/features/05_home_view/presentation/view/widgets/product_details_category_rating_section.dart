@@ -32,7 +32,7 @@ class ProductDetailsCategoryRatingSection extends StatelessWidget {
             color: kGreyColor,
           ),
         ),
-        const SizedBox(width: 12),
+        const SizedBox(width: 4),
         CustomTitleValueItem(
           title: S.of(context).homeRating,
           value: starFunctionLikeGooglePlay(context, rating: rating),

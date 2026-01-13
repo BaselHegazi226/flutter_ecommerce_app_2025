@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_e_commerce_app_2025/core/helper/extensions_of_s_localization.dart';
 import 'package:flutter_e_commerce_app_2025/core/shimmer/custom_sliver_grid_shimmer.dart';
 import 'package:flutter_e_commerce_app_2025/core/utilities/custom_layout.dart';
+import 'package:flutter_e_commerce_app_2025/generated/l10n.dart';
 
 import '../../../../../core/utilities/custom_sliver_grid_list_view.dart';
 import '../../../../../core/utilities/custom_text.dart';
@@ -20,11 +22,11 @@ class SearchViewGridList extends StatelessWidget {
           final products = state.products;
 
           if (products.isEmpty) {
-            return const SliverToBoxAdapter(
+            return SliverToBoxAdapter(
               child: Align(
                 alignment: AlignmentGeometry.center,
                 child: CustomText(
-                  text: 'No products are available!',
+                  text: S.of(context).homeNoProduct,
                   fontSize: 20,
                   alignment: Alignment.center,
                 ),
@@ -42,7 +44,7 @@ class SearchViewGridList extends StatelessWidget {
           return SliverToBoxAdapter(
             child: Center(
               child: CustomText(
-                text: '${state.errorMessage} and we will repair it soon!',
+                text: state.errorMessage,
                 fontSize: 18,
                 alignment: Alignment.center,
               ),

@@ -187,21 +187,28 @@ class _MainViewState extends State<MainView> {
           GButton(
             icon: Icons.home,
             text: S.of(context).navHome,
-            margin: S.of(context).navHome == 'Home'
-                ? const EdgeInsets.only(left: 4)
-                : const EdgeInsets.only(right: 4),
+            textSize: 12,
+            margin: const EdgeInsetsDirectional.only(start: 6),
+            padding: const EdgeInsets.all(8),
           ),
-          GButton(icon: Icons.search_outlined, text: S.of(context).navSearch),
+          GButton(
+            icon: Icons.search_outlined,
+            text: S.of(context).navSearch,
+            textSize: 12,
+            padding: const EdgeInsets.all(8),
+          ),
           GButton(
             icon: Icons.shopping_cart_outlined,
             text: S.of(context).navCart,
+            textSize: 12,
+            padding: const EdgeInsets.all(8),
           ),
           GButton(
             icon: Icons.person_2_outlined,
             text: S.of(context).navProfile,
-            margin: S.of(context).navProfile == 'Profile'
-                ? const EdgeInsets.only(right: 4)
-                : const EdgeInsets.only(left: 4),
+            textSize: 12,
+            padding: const EdgeInsets.all(8),
+            margin: const EdgeInsetsDirectional.only(end: 6),
           ),
         ],
       ),

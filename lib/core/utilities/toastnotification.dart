@@ -8,7 +8,6 @@ class ToastNotification {
     String title = 'Hello , World!',
     String description = 'This is a sample toast message.',
     bool languageIsArabic = false,
-    Alignment alignment = Alignment.topRight,
     required Function(ToastificationItem)? onAutoCompleteCompleted,
   }) {
     toastification.show(
@@ -34,7 +33,6 @@ class ToastNotification {
           style: const TextStyle(color: Colors.black, fontSize: 12),
         ),
       ),
-      alignment: alignment,
       direction: languageIsArabic ? TextDirection.rtl : TextDirection.ltr,
       animationDuration: const Duration(milliseconds: 300),
       animationBuilder: (context, animation, alignment, child) {
@@ -44,7 +42,8 @@ class ToastNotification {
         _iconByState(toastNotificationType: toastNotificationType),
         color: _colorByState(toastNotificationType: toastNotificationType),
       ),
-      showIcon: true, // show or hide the icon
+      showIcon: true,
+      // show or hide the icon
       primaryColor: _colorByState(toastNotificationType: toastNotificationType),
       backgroundColor: Colors.white,
       foregroundColor: _colorByState(
@@ -87,7 +86,6 @@ class ToastNotification {
     String title = 'Hello , World!',
     String description = 'This is a sample toast message.',
     bool languageIsArabic = false,
-    Alignment alignment = Alignment.topRight,
     required Function(ToastificationItem)? onAutoCompleteCompleted,
   }) {
     toastification.show(
@@ -112,7 +110,6 @@ class ToastNotification {
           style: const TextStyle(color: Colors.black),
         ),
       ),
-      alignment: alignment,
       direction: languageIsArabic ? TextDirection.rtl : TextDirection.ltr,
       animationDuration: const Duration(milliseconds: 300),
       animationBuilder: (context, animation, alignment, child) {
@@ -166,7 +163,6 @@ class ToastNotification {
     String title = 'Hello , World!',
     String description = 'This is a sample toast message.',
     bool languageIsArabic = false,
-    Alignment alignment = Alignment.topRight,
     required Function(ToastificationItem)? onAutoCompleteCompleted,
   }) {
     toastification.show(
@@ -187,7 +183,6 @@ class ToastNotification {
           style: const TextStyle(color: Colors.white),
         ),
       ),
-      alignment: alignment,
       direction: languageIsArabic ? TextDirection.rtl : TextDirection.ltr,
       animationDuration: const Duration(milliseconds: 300),
       animationBuilder: (context, animation, alignment, child) {
@@ -197,7 +192,8 @@ class ToastNotification {
         _iconByState(toastNotificationType: toastNotificationType),
         color: Colors.white,
       ),
-      showIcon: true, // show or hide the icon
+      showIcon: true,
+      // show or hide the icon
       primaryColor: _colorByState(
         toastNotificationType: toastNotificationType,
       ).withAlpha(124),
@@ -239,7 +235,6 @@ class ToastNotification {
     String title = 'Hello , World!',
     String description = 'This is a sample toast message.',
     bool languageIsArabic = false,
-    Alignment alignment = Alignment.topRight,
     required Function(ToastificationItem)? onAutoCompleteCompleted,
   }) {
     toastification.show(
@@ -264,7 +259,6 @@ class ToastNotification {
           style: const TextStyle(color: Colors.black),
         ),
       ),
-      alignment: alignment,
       direction: languageIsArabic ? TextDirection.rtl : TextDirection.ltr,
       animationDuration: const Duration(milliseconds: 300),
       animationBuilder: (context, animation, alignment, child) {
@@ -274,7 +268,8 @@ class ToastNotification {
         _iconByState(toastNotificationType: toastNotificationType),
         color: _colorByState(toastNotificationType: toastNotificationType),
       ),
-      showIcon: true, // show or hide the icon
+      showIcon: true,
+      // show or hide the icon
       primaryColor: _colorByState(toastNotificationType: toastNotificationType),
       backgroundColor: Colors.white,
       foregroundColor: _colorByState(

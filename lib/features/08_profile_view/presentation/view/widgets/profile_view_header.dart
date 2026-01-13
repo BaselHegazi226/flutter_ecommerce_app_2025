@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_e_commerce_app_2025/core/shimmer/profile_header_shimmer.dart';
 import 'package:flutter_e_commerce_app_2025/core/utilities/custom_text.dart';
+import 'package:flutter_e_commerce_app_2025/features/03_auth_view/data/model/user_model.dart';
 
 import '../../../../../generated/assets.dart';
 import '../../view_model/user_info_cubit/user_info_cubit.dart';
@@ -26,51 +27,7 @@ class ProfileViewHeader extends StatelessWidget {
 
           final photoUrl = userModel.photoUrl;
 
-          return Row(
-            children: [
-              CustomImage(
-                imageWidthPar: size.width * .25,
-                child: photoUrl != null && photoUrl.startsWith('http')
-                    ? CachedNetworkImage(
-                        imageUrl: photoUrl,
-                        fit: BoxFit.cover,
-                        errorWidget: (context, error, widget) {
-                          return const Icon(Icons.image_not_supported_outlined);
-                        },
-                      )
-                    : Image.asset(Assets.profileDefulatProfileImage),
-              ),
-              const SizedBox(width: 24),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  FittedBox(
-                    fit: BoxFit.scaleDown,
-                    child: CustomText(
-                      text: userModel.name,
-                      maxLines: 2,
-                      fontSize: 20,
-                      alignment: Alignment.center,
-                      color: Theme.of(context).brightness == Brightness.dark
-                          ? Colors.grey.shade200
-                          : Colors.black,
-                    ),
-                  ),
-                  FittedBox(
-                    fit: BoxFit.scaleDown,
-                    child: CustomText(
-                      text: userModel.email,
-                      fontSize: 14,
-                      alignment: Alignment.center,
-                      color: Theme.of(context).brightness == Brightness.dark
-                          ? Colors.grey.shade200
-                          : Colors.black.withAlpha(180),
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          );
+          return _buildDataSection(size, photoUrl, userModel, context);
         }
         // حالة الفشل
         else if (state is GetUserInfoLocalFailure ||
@@ -90,6 +47,61 @@ class ProfileViewHeader extends StatelessWidget {
         // حالة التحميل
         return profileHeaderShimmer(size);
       },
+    );
+  }
+
+  Row _buildDataSection(
+    Size size,
+    String? photoUrl,
+    UserModel userModel,
+    BuildContext context,
+  ) {
+    return Row(
+      children: [
+        CustomImage(
+          imageWidthPar: size.width * .25,
+          child: photoUrl != null && photoUrl.startsWith('http')
+              ? CachedNetworkImage(
+                  imageUrl: photoUrl,
+                  fit: BoxFit.cover,
+                  errorWidget: (context, error, widget) {
+                    return const Icon(Icons.image_not_supported_outlined);
+                  },
+                )
+              : Image.asset(Assets.profileDefulatProfileImage),
+        ),
+        const SizedBox(width: 16),
+        Flexible(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              FittedBox(
+                fit: BoxFit.scaleDown,
+                child: CustomText(
+                  text: userModel.name,
+                  maxLines: 2,
+                  fontSize: 20,
+                  alignment: Alignment.center,
+                  color: Theme.of(context).brightness == Brightness.dark
+                      ? Colors.grey.shade200
+                      : Colors.black,
+                ),
+              ),
+              FittedBox(
+                fit: BoxFit.scaleDown,
+                child: CustomText(
+                  text: userModel.email,
+                  fontSize: 14,
+                  alignment: Alignment.center,
+                  color: Theme.of(context).brightness == Brightness.dark
+                      ? Colors.grey.shade200
+                      : Colors.black.withAlpha(180),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 }

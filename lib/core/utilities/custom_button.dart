@@ -68,7 +68,7 @@ class CustomTextIconButton extends StatelessWidget {
     this.backgroundColor = kPrimaryColor,
     this.textColor = Colors.white,
     this.paddingValue = 8,
-    this.textSize = 16,
+    this.textSize = 14,
     this.isLoading = false,
     this.fontWeight = FontWeight.w700,
   });

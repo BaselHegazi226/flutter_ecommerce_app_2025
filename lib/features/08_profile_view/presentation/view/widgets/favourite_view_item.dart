@@ -15,7 +15,7 @@ class FavouriteViewItemMobile extends StatelessWidget {
   const FavouriteViewItemMobile({super.key, required this.productModel});
 
   final ProductModel productModel;
-  static const double _itemHeight = 230;
+  static const double _itemHeight = 176;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +30,7 @@ class FavouriteViewItemMobile extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Expanded(child: _customImage(context, productModel.images[0])),
-          const SizedBox(width: 16),
+          const SizedBox(width: 20),
           Expanded(flex: 2, child: _detailsSection(context)),
         ],
       ),
@@ -40,7 +40,7 @@ class FavouriteViewItemMobile extends StatelessWidget {
   Widget _detailsSection(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      mainAxisAlignment: MainAxisAlignment.center,
       spacing: 16,
       children: [_titleHeartSection(), _descPriceSection(context)],
     );
@@ -66,7 +66,7 @@ class FavouriteViewItemMobile extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        CustomText(text: productModel.description, fontSize: 14),
+        CustomText(text: productModel.description, maxLines: 3, fontSize: 14),
         const SizedBox(height: 8),
         CustomText(
           text: '${priceShowed(productModel.price)} ${S.of(context).EP}',
@@ -123,7 +123,7 @@ class FavouriteViewItemMobile extends StatelessWidget {
 
   Widget _customImage(BuildContext context, String imageUrl) {
     return Container(
-      height: _itemHeight - 30,
+      height: _itemHeight,
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: Theme.of(context).brightness == Brightness.dark
@@ -146,7 +146,7 @@ class FavouriteViewItemTablet extends StatelessWidget {
   const FavouriteViewItemTablet({super.key, required this.productModel});
 
   final ProductModel productModel;
-  static const double _itemHeight = 230;
+  static const double _itemHeight = 234;
 
   @override
   Widget build(BuildContext context) {
@@ -161,7 +161,7 @@ class FavouriteViewItemTablet extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Expanded(child: _customImage(context, productModel.images[0])),
-          const SizedBox(width: 16),
+          const SizedBox(width: 24),
           Expanded(flex: 2, child: _detailsSection(context)),
         ],
       ),
@@ -171,6 +171,7 @@ class FavouriteViewItemTablet extends StatelessWidget {
   Widget _detailsSection(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.center,
       spacing: 16,
       children: [_titleHeartSection(), _descPriceSection(context)],
     );
@@ -253,8 +254,6 @@ class FavouriteViewItemTablet extends StatelessWidget {
 
   Widget _customImage(BuildContext context, String imageUrl) {
     return Container(
-      height: _itemHeight,
-      padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
         color: Theme.of(context).brightness == Brightness.dark
             ? Colors.grey.shade400.withAlpha(32)

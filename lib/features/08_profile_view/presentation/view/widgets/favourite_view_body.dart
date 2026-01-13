@@ -89,6 +89,7 @@ class FavouriteViewBodyTablet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.sizeOf(context);
     return BlocConsumer<FavouriteProductCubit, FavouriteProductState>(
       listener: (context, state) {
         if (state is DeleteFavouriteProductSuccess) {
@@ -108,32 +109,22 @@ class FavouriteViewBodyTablet extends StatelessWidget {
           }
           return Padding(
             padding: const EdgeInsets.all(16),
-            child: Column(
-              children: [
-                Expanded(
-                  child: GridView.builder(
-                    itemCount: state.favouriteList.length,
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          crossAxisSpacing: 16,
-                          mainAxisSpacing: 16,
-                          childAspectRatio: 1.85,
-                        ),
-                    itemBuilder: (context, index) {
-                      final item = state.favouriteList[index];
-                      return InkWell(
-                        onTap: () {
-                          GoRouter.of(
-                            context,
-                          ).push(Routes.productDetailsView, extra: item.id);
-                        },
-                        child: FavouriteViewItemTablet(productModel: item),
-                      );
-                    },
-                  ),
-                ),
-              ],
+            child: ListView.separated(
+              itemCount: favourites.length,
+              separatorBuilder: (context, index) {
+                return const SizedBox(height: 16);
+              },
+              itemBuilder: (context, index) {
+                final item = favourites[index];
+                return InkWell(
+                  onTap: () {
+                    GoRouter.of(
+                      context,
+                    ).push(Routes.productDetailsView, extra: item.id);
+                  },
+                  child: FavouriteViewItemTablet(productModel: item),
+                );
+              },
             ),
           );
         } else if (state is GetFavouriteProductsFailure) {
