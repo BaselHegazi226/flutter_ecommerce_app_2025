@@ -66,12 +66,11 @@ class HomeViewProfileSection extends StatelessWidget {
               width: size.width * .35,
               child: AutoSizeText(
                 userName,
-                minFontSize: 6,
-                maxFontSize: 24,
-                maxLines: 2,
+                minFontSize: 14,
+                maxFontSize: 20,
                 style: TextStyle(
                   color: Theme.of(context).primaryColor,
-                  fontSize: 20,
+                  fontSize: 18,
                 ),
               ),
             ),

@@ -133,7 +133,7 @@ class FavouriteViewItemMobile extends StatelessWidget {
         borderRadius: const BorderRadius.all(Radius.circular(8)),
       ),
       child: CachedNetworkImage(
-        fit: BoxFit.cover,
+        fit: BoxFit.contain,
         errorWidget: (context, url, error) {
           return const Icon(Icons.image_not_supported_outlined);
         },
