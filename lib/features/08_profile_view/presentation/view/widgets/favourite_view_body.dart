@@ -89,7 +89,6 @@ class FavouriteViewBodyTablet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.sizeOf(context);
     return BlocConsumer<FavouriteProductCubit, FavouriteProductState>(
       listener: (context, state) {
         if (state is DeleteFavouriteProductSuccess) {

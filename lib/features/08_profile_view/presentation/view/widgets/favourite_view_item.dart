@@ -54,7 +54,7 @@ class FavouriteViewItemMobile extends StatelessWidget {
         CustomText(
           text: productModel.title,
           maxLines: 1,
-          fontSize: 16,
+          fontSize: 14,
           fontWeight: FontWeight.bold,
         ),
         buildHeartIcon(),
@@ -66,12 +66,13 @@ class FavouriteViewItemMobile extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        CustomText(text: productModel.description, maxLines: 3, fontSize: 14),
+        CustomText(text: productModel.description, maxLines: 3, fontSize: 12),
         const SizedBox(height: 8),
         CustomText(
           text: '${priceShowed(productModel.price)} ${S.of(context).EP}',
-          fontSize: 14,
+          fontSize: 12,
           color: kPrimaryColor,
+          fontWeight: FontWeight.w500,
         ),
       ],
     );
@@ -185,7 +186,7 @@ class FavouriteViewItemTablet extends StatelessWidget {
         CustomText(
           text: productModel.title,
           maxLines: 1,
-          fontSize: 16,
+          fontSize: 14,
           fontWeight: FontWeight.bold,
         ),
         buildHeartIcon(),
@@ -197,12 +198,13 @@ class FavouriteViewItemTablet extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        CustomText(text: productModel.description, fontSize: 14),
+        CustomText(text: productModel.description, fontSize: 12),
         const SizedBox(height: 8),
         CustomText(
           text: '${priceShowed(productModel.price)} ${S.of(context).EP}',
-          fontSize: 14,
+          fontSize: 12,
           color: kPrimaryColor,
+          fontWeight: FontWeight.w500,
         ),
       ],
     );
