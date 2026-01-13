@@ -29,7 +29,7 @@ class ProfileViewHeader extends StatelessWidget {
           return Row(
             children: [
               CustomImage(
-                imageWidthPar: size.width * .2,
+                imageWidthPar: size.width * .25,
                 child: photoUrl != null && photoUrl.startsWith('http')
                     ? CachedNetworkImage(
                         imageUrl: photoUrl,
