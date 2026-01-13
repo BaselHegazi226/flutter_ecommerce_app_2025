@@ -11,7 +11,7 @@ class ShowOrderList extends StatelessWidget {
   const ShowOrderList({
     super.key,
     required this.carts,
-    this.heightOfList = 192,
+    this.heightOfList = 200,
   });
 
   final List<CartModel> carts;
@@ -66,7 +66,7 @@ class ShowOrderItem extends StatelessWidget {
       children: [
         Container(
           height: 100,
-          width: 120,
+          width: 168,
           decoration: BoxDecoration(
             color: Theme.of(context).brightness == Brightness.dark
                 ? Colors.grey.shade500.withAlpha(32)
@@ -82,6 +82,7 @@ class ShowOrderItem extends StatelessWidget {
             imageUrl: imageUrl,
           ),
         ),
+        const SizedBox(height: 8),
         CustomText(
           text: title.split(" ").take(2).join(" "),
           fontSize: 16,

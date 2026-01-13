@@ -54,16 +54,22 @@ class CartViewItemMobile extends StatelessWidget {
           flex: 2,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              CustomText(
-                text: title.split(" ").take(3).join(" "),
-                fontSize: 20,
-              ),
-              const SizedBox(height: 4),
-              CustomText(
-                text: '${priceShowed(price)} ${S.of(context).EP}',
-                fontSize: 20,
-                color: kPrimaryColor,
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  CustomText(
+                    text: title.split(" ").take(3).join(" "),
+                    fontSize: 20,
+                  ),
+                  const SizedBox(height: 4),
+                  CustomText(
+                    text: '${priceShowed(price)} ${S.of(context).EP}',
+                    fontSize: 20,
+                    color: kPrimaryColor,
+                  ),
+                ],
               ),
               const SizedBox(height: 16),
               Row(
@@ -110,7 +116,7 @@ class CartViewItemTablet extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SizedBox(
-          height: 200,
+          height: 180,
           child: Container(
             decoration: BoxDecoration(
               color: Theme.of(context).brightness == Brightness.dark
@@ -134,19 +140,37 @@ class CartViewItemTablet extends StatelessWidget {
           flex: 2,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              CustomText(
-                text: title.split(" ").take(3).join(" "),
-                fontSize: 20,
-              ),
-              const SizedBox(height: 4),
-              CustomText(
-                text: '${priceShowed(price)} ${S.of(context).EP}',
-                fontSize: 20,
-                color: kPrimaryColor,
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  CustomText(
+                    text: title.split(" ").take(3).join(" "),
+                    fontSize: 20,
+                  ),
+                  const SizedBox(height: 4),
+                  CustomText(
+                    text: '${priceShowed(price)} ${S.of(context).EP}',
+                    fontSize: 20,
+                    color: kPrimaryColor,
+                  ),
+                ],
               ),
               const SizedBox(height: 16),
-              CartViewCountSection(count: count, id: productId),
+              Row(
+                children: [
+                  Expanded(
+                    flex: 2,
+                    child: CartViewCountSection(count: count, id: productId),
+                  ),
+                  SizedBox(width: screenSize.width * .02),
+                  Expanded(
+                    flex: 1,
+                    child: DeleteCartProductSection(productId: productId),
+                  ),
+                ],
+              ),
             ],
           ),
         ),

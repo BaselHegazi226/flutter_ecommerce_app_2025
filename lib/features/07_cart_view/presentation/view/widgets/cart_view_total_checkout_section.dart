@@ -55,13 +55,13 @@ class CartViewTotalCheckoutSection extends StatelessWidget {
             ),
           );
         } else {
-          return const Row(
+          return Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              CustomCircleIndicator(color: kPrimaryColor),
+              const CustomCircleIndicator(color: kPrimaryColor),
               CustomButton(
                 onPressed: null,
-                text: 'CHECKOUT',
+                text: S.of(context).cartCheckout,
                 backgroundColor: kPrimaryColor,
               ),
             ],

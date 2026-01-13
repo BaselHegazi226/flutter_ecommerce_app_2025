@@ -106,7 +106,27 @@ class _OrderHistoryActiveSelectionViewState
                               ),
                             ],
                           ),
-                          ShowOrderList(carts: cart),
+                          Column(
+                            children: [
+                              ShowOrderList(carts: cart),
+                              const SizedBox(height: 16),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  CustomText(
+                                    text: S.of(context).cartTotal,
+                                    fontSize: 16,
+                                  ),
+                                  CustomText(
+                                    text:
+                                        '${priceShowed(order.totalPrice)} ${S.of(context).EP}',
+                                    fontSize: 16,
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
                           const SizedBox(height: 16),
                           Container(
                             height: 1,

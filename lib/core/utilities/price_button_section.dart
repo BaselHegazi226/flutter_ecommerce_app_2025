@@ -113,7 +113,7 @@ class CustomButtonSectionTablet extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: MediaQuery.sizeOf(context).width,
-      height: 88,
+      height: 92,
       padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 30),
       decoration: BoxDecoration(
         color: Theme.of(context).scaffoldBackgroundColor,

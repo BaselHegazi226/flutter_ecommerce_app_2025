@@ -12,7 +12,7 @@ class CustomButton extends StatelessWidget {
     this.backgroundColor = kPrimaryColor,
     this.textColor = Colors.white,
     this.paddingValue = 12,
-    this.textSize = 20,
+    this.textSize = 14,
     this.isLoading = false,
     this.fontWeight = FontWeight.w700,
   });
@@ -68,7 +68,7 @@ class CustomTextIconButton extends StatelessWidget {
     this.backgroundColor = kPrimaryColor,
     this.textColor = Colors.white,
     this.paddingValue = 8,
-    this.textSize = 18,
+    this.textSize = 16,
     this.isLoading = false,
     this.fontWeight = FontWeight.w700,
   });
@@ -117,7 +117,7 @@ class CustomTextIconButton extends StatelessWidget {
                 const SizedBox(width: 8),
                 Icon(
                   iconData,
-                  size: 24,
+                  size: 20,
                   color: isDark ? Colors.grey.shade900 : Colors.grey.shade50,
                 ),
               ],

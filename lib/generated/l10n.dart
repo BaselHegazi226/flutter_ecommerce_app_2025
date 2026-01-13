@@ -179,9 +179,9 @@ class S {
     );
   }
 
-  /// `CHECKOUT`
+  /// `Checkout`
   String get cart_checkout {
-    return Intl.message('CHECKOUT', name: 'cart_checkout', desc: '', args: []);
+    return Intl.message('Checkout', name: 'cart_checkout', desc: '', args: []);
   }
 
   /// `Billing Address`

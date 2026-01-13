@@ -48,27 +48,24 @@ class FavouriteViewBodyMobile extends StatelessWidget {
               ),
             );
           }
-          return AnimatedContainer(
-            duration: const Duration(seconds: 1),
-            child: Padding(
-              padding: const EdgeInsets.all(16),
-              child: ListView.separated(
-                itemCount: favourites.length,
-                separatorBuilder: (context, index) {
-                  return const SizedBox(height: 16);
-                },
-                itemBuilder: (context, index) {
-                  final item = favourites[index];
-                  return InkWell(
-                    onTap: () {
-                      GoRouter.of(
-                        context,
-                      ).push(Routes.productDetailsView, extra: item.id);
-                    },
-                    child: FavouriteViewItem(productModel: item),
-                  );
-                },
-              ),
+          return Padding(
+            padding: const EdgeInsets.all(16),
+            child: ListView.separated(
+              itemCount: favourites.length,
+              separatorBuilder: (context, index) {
+                return const SizedBox(height: 16);
+              },
+              itemBuilder: (context, index) {
+                final item = favourites[index];
+                return InkWell(
+                  onTap: () {
+                    GoRouter.of(
+                      context,
+                    ).push(Routes.productDetailsView, extra: item.id);
+                  },
+                  child: FavouriteViewItemMobile(productModel: item),
+                );
+              },
             ),
           );
         } else if (state is GetFavouriteProductsFailure) {
@@ -109,30 +106,34 @@ class FavouriteViewBodyTablet extends StatelessWidget {
               ),
             );
           }
-          return AnimatedContainer(
-            duration: const Duration(seconds: 1),
-            child: Padding(
-              padding: const EdgeInsets.all(16),
-              child: GridView.builder(
-                itemCount: state.favouriteList.length,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 16,
-                  mainAxisSpacing: 16,
-                  childAspectRatio: 2,
-                ),
-                itemBuilder: (context, index) {
-                  final item = state.favouriteList[index];
-                  return InkWell(
-                    onTap: () {
-                      GoRouter.of(
-                        context,
-                      ).push(Routes.productDetailsView, extra: item.id);
+          return Padding(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              children: [
+                Expanded(
+                  child: GridView.builder(
+                    itemCount: state.favouriteList.length,
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          crossAxisSpacing: 16,
+                          mainAxisSpacing: 16,
+                          childAspectRatio: 1.85,
+                        ),
+                    itemBuilder: (context, index) {
+                      final item = state.favouriteList[index];
+                      return InkWell(
+                        onTap: () {
+                          GoRouter.of(
+                            context,
+                          ).push(Routes.productDetailsView, extra: item.id);
+                        },
+                        child: FavouriteViewItemTablet(productModel: item),
+                      );
                     },
-                    child: FavouriteViewItem(productModel: item),
-                  );
-                },
-              ),
+                  ),
+                ),
+              ],
             ),
           );
         } else if (state is GetFavouriteProductsFailure) {

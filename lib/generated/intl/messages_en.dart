@@ -135,7 +135,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "cart_billing_address": MessageLookupByLibrary.simpleMessage(
       "Billing Address",
     ),
-    "cart_checkout": MessageLookupByLibrary.simpleMessage("CHECKOUT"),
+    "cart_checkout": MessageLookupByLibrary.simpleMessage("Checkout"),
     "cart_delete_product_desc": MessageLookupByLibrary.simpleMessage(
       "Are you sure to delete product?",
     ),

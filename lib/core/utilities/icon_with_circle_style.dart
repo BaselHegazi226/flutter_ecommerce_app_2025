@@ -7,7 +7,7 @@ class IconWithCircleStyle extends StatelessWidget {
     required this.icon,
     this.onPressed,
     this.paddingValue = 4,
-    this.size = 32, // حجم الدائرة
+    this.size = 34, // حجم الدائرة
   });
 
   final Color? backgroundColor;
