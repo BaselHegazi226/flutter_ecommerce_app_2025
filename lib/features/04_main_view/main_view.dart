@@ -167,7 +167,7 @@ class _MainViewState extends State<MainView> {
             ? Colors.grey.shade200
             : Colors.green.shade100,
         activeColor: Colors.white,
-        iconSize: 20,
+        iconSize: 16,
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
         tabBackgroundGradient: const LinearGradient(
           colors: [Colors.white30, Colors.white54],
@@ -187,26 +187,26 @@ class _MainViewState extends State<MainView> {
           GButton(
             icon: Icons.home,
             text: S.of(context).navHome,
-            textSize: 12,
+            textSize: 10,
             margin: const EdgeInsetsDirectional.only(start: 6),
             padding: const EdgeInsets.all(8),
           ),
           GButton(
             icon: Icons.search_outlined,
             text: S.of(context).navSearch,
-            textSize: 12,
+            textSize: 10,
             padding: const EdgeInsets.all(8),
           ),
           GButton(
             icon: Icons.shopping_cart_outlined,
             text: S.of(context).navCart,
-            textSize: 12,
+            textSize: 10,
             padding: const EdgeInsets.all(8),
           ),
           GButton(
             icon: Icons.person_2_outlined,
             text: S.of(context).navProfile,
-            textSize: 12,
+            textSize: 10,
             padding: const EdgeInsets.all(8),
             margin: const EdgeInsetsDirectional.only(end: 6),
           ),

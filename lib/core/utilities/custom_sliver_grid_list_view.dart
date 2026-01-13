@@ -87,6 +87,7 @@ class CustomSliverGridItem extends StatelessWidget {
   Expanded _buildImageSection() {
     return Expanded(
       child: Container(
+        padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
           color: Colors.grey.shade500.withAlpha(32),
           borderRadius: const BorderRadius.all(Radius.circular(8)),
