@@ -348,7 +348,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "nav_cart": MessageLookupByLibrary.simpleMessage("السلة"),
     "nav_home": MessageLookupByLibrary.simpleMessage("الرئيسية"),
-    "nav_profile": MessageLookupByLibrary.simpleMessage("البروفايل"),
+    "nav_profile": MessageLookupByLibrary.simpleMessage("الملف الشخصي"),
     "nav_search": MessageLookupByLibrary.simpleMessage("البحث"),
     "onboarding_desc_img1": MessageLookupByLibrary.simpleMessage(
       "اعثر بسهولة على المنتجات التي تبحث عنها\nوصول سريع لما يهمك دون تعقيد",
@@ -389,7 +389,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "order_ready": MessageLookupByLibrary.simpleMessage("الطلب جاهز للتنفيذ"),
     "order_total_price": MessageLookupByLibrary.simpleMessage("السعر الإجمالي"),
     "order_transmit": MessageLookupByLibrary.simpleMessage("قيد الإرسال"),
-    "profile": MessageLookupByLibrary.simpleMessage("البروفايل"),
+    "profile": MessageLookupByLibrary.simpleMessage("الملف الشخصي"),
     "profile_delete_favourite_Item_desc": MessageLookupByLibrary.simpleMessage(
       "هل تريد بالفعل حذف العنصر من المفضله",
     ),

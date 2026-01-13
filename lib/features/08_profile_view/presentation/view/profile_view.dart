@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_e_commerce_app_2025/core/helper/extensions_of_s_localization.dart';
 import 'package:flutter_e_commerce_app_2025/core/utilities/custom_app_bar.dart';
 import 'package:flutter_e_commerce_app_2025/features/08_profile_view/presentation/view/widgets/profile_view_body.dart';
 
@@ -16,7 +17,7 @@ class ProfileView extends StatelessWidget {
       create: (context) => UserInfoCubit()..getUserInfo(),
       child: SafeArea(
         child: Scaffold(
-          appBar: customTabsAppbar(context, S.of(context).profile),
+          appBar: customTabsAppbar(context, S.of(context).navProfile),
           body: const ProfileViewBody(),
         ),
       ),

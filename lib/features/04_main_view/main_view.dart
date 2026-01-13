@@ -167,7 +167,7 @@ class _MainViewState extends State<MainView> {
             ? Colors.grey.shade200
             : Colors.green.shade100,
         activeColor: Colors.white,
-        iconSize: 22,
+        iconSize: 20,
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
         tabBackgroundGradient: const LinearGradient(
           colors: [Colors.white30, Colors.white54],
@@ -188,8 +188,8 @@ class _MainViewState extends State<MainView> {
             icon: Icons.home,
             text: S.of(context).navHome,
             margin: S.of(context).navHome == 'Home'
-                ? const EdgeInsets.only(left: 8)
-                : const EdgeInsets.only(right: 8),
+                ? const EdgeInsets.only(left: 4)
+                : const EdgeInsets.only(right: 4),
           ),
           GButton(icon: Icons.search_outlined, text: S.of(context).navSearch),
           GButton(
@@ -200,8 +200,8 @@ class _MainViewState extends State<MainView> {
             icon: Icons.person_2_outlined,
             text: S.of(context).navProfile,
             margin: S.of(context).navProfile == 'Profile'
-                ? const EdgeInsets.only(right: 8)
-                : const EdgeInsets.only(left: 8),
+                ? const EdgeInsets.only(right: 4)
+                : const EdgeInsets.only(left: 4),
           ),
         ],
       ),
