@@ -186,7 +186,7 @@ class FavouriteViewItemTablet extends StatelessWidget {
         CustomText(
           text: productModel.title,
           maxLines: 1,
-          fontSize: 14,
+          fontSize: 16,
           fontWeight: FontWeight.bold,
         ),
         buildHeartIcon(),
@@ -198,11 +198,11 @@ class FavouriteViewItemTablet extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        CustomText(text: productModel.description, fontSize: 12),
+        CustomText(text: productModel.description, fontSize: 14),
         const SizedBox(height: 8),
         CustomText(
           text: '${priceShowed(productModel.price)} ${S.of(context).EP}',
-          fontSize: 12,
+          fontSize: 14,
           color: kPrimaryColor,
           fontWeight: FontWeight.w500,
         ),
