@@ -100,7 +100,7 @@ class CartViewListTablet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Stack(
       children: [
         Positioned.fill(
           child: GridView.builder(
@@ -133,7 +133,12 @@ class CartViewListTablet extends StatelessWidget {
             },
           ),
         ),
-        //const CartViewTotalCheckoutSection(),
+        Positioned(
+          right: 0,
+          left: 0,
+          bottom: MediaQuery.paddingOf(context).bottom,
+          child: const CartViewTotalCheckoutSection(),
+        ),
       ],
     );
   }
