@@ -8,9 +8,20 @@ Shimmer homeCategoryShimmerItem(Size screenSize) {
     child: Container(
       height: 40,
       width: 156,
+      padding: const EdgeInsets.all(4),
       decoration: BoxDecoration(
-        color: Colors.white,
+        border: Border.all(color: Colors.grey.shade300),
         borderRadius: BorderRadius.circular(32),
+      ),
+      child: Center(
+        child: Container(
+          height: 8,
+          width: 64,
+          decoration: BoxDecoration(
+            color: Colors.grey.shade100,
+            borderRadius: BorderRadius.circular(32),
+          ),
+        ),
       ),
     ),
   );

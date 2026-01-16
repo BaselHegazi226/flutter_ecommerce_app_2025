@@ -29,6 +29,7 @@ class CustomTextFormField extends StatelessWidget {
           validator: validator,
           controller: textEditingController,
           decoration: InputDecoration(
+            fillColor: Theme.of(context).scaffoldBackgroundColor,
             hintText: hintText,
             hintStyle: const TextStyle(
               fontSize: 14,

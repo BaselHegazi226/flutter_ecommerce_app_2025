@@ -1,28 +1,31 @@
 import 'package:dartz/dartz.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_e_commerce_app_2025/core/errors/catch_error_handle.dart';
+import 'package:flutter_e_commerce_app_2025/features/05_home_view/data/model/favourite_model.dart';
 import 'package:hive/hive.dart';
 
-import '../../features/05_home_view/data/model/product_model.dart';
 import '../errors/failure.dart';
 import '../helper/adapter_identifiers.dart';
 
 abstract class FavouriteCache {
   Future<void> init();
+
   Future<Either<Failure, bool>> addFavouriteProduct({
-    required ProductModel productModel,
+    required FavouriteModel favouriteModel,
   });
+
   Future<Either<Failure, bool>> deleteFavouriteProduct({
-    required ProductModel productModel,
+    required FavouriteModel favouriteModel,
   });
-  Future<Either<Failure, List<ProductModel>>> getFavouriteProducts();
+
+  Future<Either<Failure, List<FavouriteModel>>> getFavouriteProducts();
+
   Future<Either<Failure, AddToFavouriteEnum>> getFavouriteProductById({
     required int productId,
   });
 }
 
 class FavouriteCacheImplement extends FavouriteCache {
-  late Box<ProductModel> hiveBoxFavouriteProductModel;
+  late Box<FavouriteModel> hiveBoxFavouriteProductModel;
   final String userId;
 
   FavouriteCacheImplement({required this.userId});
@@ -33,24 +36,23 @@ class FavouriteCacheImplement extends FavouriteCache {
     FavouriteCacheAdaptorsClass.registerAllAdaptors();
     //open box
     final boxName = 'FavouriteProductBox$userId';
-    debugPrint('user id from favourite cache = $userId');
     hiveBoxFavouriteProductModel = Hive.isBoxOpen(boxName)
-        ? Hive.box<ProductModel>(boxName)
-        : await Hive.openBox<ProductModel>(boxName);
+        ? Hive.box<FavouriteModel>(boxName)
+        : await Hive.openBox<FavouriteModel>(boxName);
   }
 
   @override
   Future<Either<Failure, bool>> addFavouriteProduct({
-    required ProductModel productModel,
+    required FavouriteModel favouriteModel,
   }) async {
     try {
-      if (hiveBoxFavouriteProductModel.get(productModel.id) == null) {
-        final productModelIndependent = ProductModel.fromJson(
-          productModel.toJson(),
+      if (hiveBoxFavouriteProductModel.get(favouriteModel.id) == null) {
+        final favouriteModelIndependent = FavouriteModel.fromJson(
+          favouriteModel.toJson(),
         );
         await hiveBoxFavouriteProductModel.put(
-          productModelIndependent.id,
-          productModelIndependent,
+          favouriteModelIndependent.id,
+          favouriteModelIndependent,
         );
       }
       return right(true);
@@ -61,14 +63,14 @@ class FavouriteCacheImplement extends FavouriteCache {
 
   @override
   Future<Either<Failure, bool>> deleteFavouriteProduct({
-    required ProductModel productModel,
+    required FavouriteModel favouriteModel,
   }) async {
     try {
-      if (hiveBoxFavouriteProductModel.get(productModel.id) != null) {
-        final productModelIndependent = ProductModel.fromJson(
-          productModel.toJson(),
+      if (hiveBoxFavouriteProductModel.get(favouriteModel.id) != null) {
+        final favouriteModelIndependent = FavouriteModel.fromJson(
+          favouriteModel.toJson(),
         );
-        await hiveBoxFavouriteProductModel.delete(productModelIndependent.id);
+        await hiveBoxFavouriteProductModel.delete(favouriteModelIndependent.id);
         return right(true);
       } else {
         return right(false);
@@ -79,14 +81,17 @@ class FavouriteCacheImplement extends FavouriteCache {
   }
 
   @override
-  Future<Either<Failure, List<ProductModel>>> getFavouriteProducts() async {
+  Future<Either<Failure, List<FavouriteModel>>> getFavouriteProducts() async {
     try {
-      List<ProductModel> favouriteList = hiveBoxFavouriteProductModel.values
+      List<FavouriteModel> favouriteList = hiveBoxFavouriteProductModel.values
           .map((item) {
-            final independentProduct = ProductModel.fromJson(item.toJson());
-            return independentProduct;
+            return item.copyWith();
           })
           .toList();
+
+      // ترتيب السلة حسب وقت الإضافة (الأحدث أولاً)
+      favouriteList.sort((a, b) => b.addAt.compareTo(a.addAt));
+
       return right(favouriteList);
     } catch (e) {
       return left(CatchErrorHandle.catchBack(failure: e));
@@ -113,19 +118,8 @@ enum AddToFavouriteEnum { added, notAdded }
 
 class FavouriteCacheAdaptorsClass {
   static void registerAllAdaptors() {
-    if (!Hive.isAdapterRegistered(AdaptorsIdentifiers.metaModelAdapter)) {
-      Hive.registerAdapter(MetaAdapter());
-    }
-    if (!Hive.isAdapterRegistered(AdaptorsIdentifiers.productModelAdapter)) {
-      Hive.registerAdapter(ProductModelAdapter());
-    }
-    if (!Hive.isAdapterRegistered(AdaptorsIdentifiers.dimensionModelAdapter)) {
-      Hive.registerAdapter(DimensionsAdapter());
-    }
-    if (!Hive.isAdapterRegistered(AdaptorsIdentifiers.reviewModelAdapter)) {
-      Hive.registerAdapter(ReviewAdapter());
+    if (!Hive.isAdapterRegistered(AdaptorsIdentifiers.favouriteModelAdapter)) {
+      Hive.registerAdapter(FavouriteModelAdapter());
     }
   }
 }
-
-enum AddToCartEnum { added, notAdded }

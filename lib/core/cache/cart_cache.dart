@@ -143,8 +143,6 @@ class CartCacheImplement implements CartCache {
   @override
   Future<Either<Failure, List<CartModel>>> getCartList() async {
     try {
-      debugPrint('CartCache opened for userId = $userId');
-
       List<CartModel> cartList = hiveBoxProductModel.values.map((cart) {
         return cart.copyWith();
       }).toList();
@@ -176,7 +174,14 @@ class CartCacheImplement implements CartCache {
     required int id,
   }) async {
     try {
-      if (hiveBoxProductModel.get(id) != null) {
+      final existingModel = hiveBoxProductModel.get(id);
+      if (existingModel!=null) {
+
+        //delete operation
+        await hiveBoxProductModel.delete(id);
+
+        
+
         List<CartModel> cartList = hiveBoxProductModel.values.map((cart) {
           return cart.copyWith();
         }).toList();
@@ -231,7 +236,6 @@ class CartCacheImplement implements CartCache {
         .map((cart) => CartModel.fromJson(cart))
         .toList();
     try {
-      debugPrint('CartCache opened for userId = $userId');
       for (var cart in allCartList) {
         final cartModelIndependent = CartModel.fromJson(cart.toJson());
         final newCartModel = cart.copyWith(
@@ -246,7 +250,6 @@ class CartCacheImplement implements CartCache {
 
       return right(null);
     } catch (e) {
-      debugPrint('exceptionnnnnnnnn : $e=============.');
       return left(CatchErrorHandle.catchBack(failure: e));
     }
   }

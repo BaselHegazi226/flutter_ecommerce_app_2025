@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_e_commerce_app_2025/core/helper/const.dart';
-import 'package:flutter_e_commerce_app_2025/core/helper/extensions_of_s_localization.dart';
 import 'package:flutter_e_commerce_app_2025/core/utilities/custom_button.dart';
 import 'package:flutter_e_commerce_app_2025/core/utilities/custom_text.dart';
 import 'package:flutter_e_commerce_app_2025/core/utilities/custom_text_form_field.dart';
+import 'package:flutter_e_commerce_app_2025/core/utilities/extensions_of_s_localization.dart';
 
 import '../../../../../generated/l10n.dart';
 import '../../../data/model/location_model.dart';

@@ -1,9 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_e_commerce_app_2025/core/helper/const.dart';
+import 'package:flutter_e_commerce_app_2025/core/utilities/custom_sliver_grid_list_view.dart';
 import 'package:flutter_e_commerce_app_2025/generated/l10n.dart';
 
-import '../../../../../core/shimmer/category_shimmer.dart';
 import '../../../../../core/utilities/custom_text.dart';
 
 class ProductAppItem extends StatelessWidget {
@@ -43,7 +43,7 @@ class ProductAppItem extends StatelessWidget {
                   return const Icon(Icons.image);
                 },
                 placeholder: (context, url) {
-                  return categoryImageShimmer();
+                  return customSliverImageShimmer();
                 },
               ),
             ),

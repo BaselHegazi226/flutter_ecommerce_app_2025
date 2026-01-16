@@ -4,7 +4,7 @@ import 'package:flutter_e_commerce_app_2025/core/utilities/custom_text.dart';
 import 'package:flutter_e_commerce_app_2025/core/utilities/show_order_list.dart';
 
 import '../../../../../core/helper/date_formatter.dart';
-import '../../../../../core/helper/extensions_of_s_localization.dart';
+import '../../../../../core/utilities/extensions_of_s_localization.dart';
 import '../../../../../generated/l10n.dart';
 import '../../../../07_cart_view/data/model/order_model.dart';
 

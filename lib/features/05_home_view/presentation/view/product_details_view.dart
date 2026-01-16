@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_e_commerce_app_2025/core/utilities/app_get.dart';
 import 'package:flutter_e_commerce_app_2025/core/utilities/custom_loading_indicator.dart';
 import 'package:flutter_e_commerce_app_2025/core/utilities/custom_text.dart';
+import 'package:flutter_e_commerce_app_2025/features/05_home_view/data/model/favourite_model.dart';
 import 'package:flutter_e_commerce_app_2025/features/05_home_view/presentation/view/widgets/product_details_price_button_section.dart';
 import 'package:flutter_e_commerce_app_2025/features/05_home_view/presentation/view/widgets/product_details_view_body.dart';
 
@@ -37,7 +38,18 @@ class ProductDetailsView extends StatelessWidget {
             builder: (context, state) {
               if (state is GetProductByIdSuccess) {
                 final productModel = state.productModel;
-                return ProductDetailsViewBody(productModel: productModel);
+                final favouriteModel = FavouriteModel(
+                  id: productModel.id,
+                  title: productModel.title,
+                  desc: productModel.description,
+                  image: productModel.images[0],
+                  price: productModel.price,
+                  addAt: DateTime.now(),
+                );
+                return ProductDetailsViewBody(
+                  productModel: productModel,
+                  favouriteModel: favouriteModel,
+                );
               } else if (state is GetProductByIdFailure) {
                 return Center(
                   child: CustomText(

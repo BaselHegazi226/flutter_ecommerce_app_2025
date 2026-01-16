@@ -1,20 +1,23 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter_e_commerce_app_2025/features/05_home_view/data/model/favourite_model.dart';
 
 import '../../../../../core/cache/favourite_cache.dart';
-import '../../../data/model/product_model.dart';
 
 part 'favourite_product_state.dart';
 
 class FavouriteProductCubit extends Cubit<FavouriteProductState> {
   final FavouriteCache favouriteCache;
+
   FavouriteProductCubit({required this.favouriteCache})
     : super(FavouriteProductInitial());
 
-  Future<void> addFavoriteProduct({required ProductModel productModel}) async {
+  Future<void> addFavoriteProduct({
+    required FavouriteModel favouriteModel,
+  }) async {
     emit(AddFavouriteProductLoading());
     final result = await favouriteCache.addFavouriteProduct(
-      productModel: productModel,
+      favouriteModel: favouriteModel,
     );
     result.fold(
       (error) {
@@ -31,11 +34,11 @@ class FavouriteProductCubit extends Cubit<FavouriteProductState> {
   }
 
   Future<void> deleteFavoriteProduct({
-    required ProductModel productModel,
+    required FavouriteModel favouriteModel,
   }) async {
     emit(DeleteFavouriteProductLoading());
     final result = await favouriteCache.deleteFavouriteProduct(
-      productModel: productModel,
+      favouriteModel: favouriteModel,
     );
     result.fold(
       (error) {
@@ -63,9 +66,6 @@ class FavouriteProductCubit extends Cubit<FavouriteProductState> {
         );
       },
       (success) {
-        debugPrint(
-          'success get favourite products =======================================>',
-        );
         emit(GetFavouriteProductsSuccess(favouriteList: success));
       },
     );

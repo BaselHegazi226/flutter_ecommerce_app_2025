@@ -2,7 +2,7 @@ import 'package:easy_stepper/easy_stepper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_e_commerce_app_2025/core/helper/const.dart';
-import 'package:flutter_e_commerce_app_2025/core/helper/extensions_of_s_localization.dart';
+import 'package:flutter_e_commerce_app_2025/core/utilities/extensions_of_s_localization.dart';
 import 'package:flutter_e_commerce_app_2025/features/07_cart_view/presentation/view/widgets/section_delivery.dart';
 import 'package:flutter_e_commerce_app_2025/features/07_cart_view/presentation/view/widgets/section_location.dart';
 import 'package:flutter_e_commerce_app_2025/features/07_cart_view/presentation/view/widgets/section_summarize.dart';

@@ -3,8 +3,8 @@ import 'package:flutter_e_commerce_app_2025/core/helper/routes.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../../core/helper/const.dart';
-import '../../../../../core/helper/extensions_of_s_localization.dart';
 import '../../../../../core/utilities/custom_text.dart';
+import '../../../../../core/utilities/extensions_of_s_localization.dart';
 import '../../../../../generated/l10n.dart';
 import '../../../data/model/onboarding_item_model.dart';
 import 'onboarding_view_description_section.dart';

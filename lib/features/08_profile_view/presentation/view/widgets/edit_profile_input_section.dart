@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_e_commerce_app_2025/core/helper/extensions_of_s_localization.dart';
+import 'package:flutter_e_commerce_app_2025/core/utilities/extensions_of_s_localization.dart';
 import 'package:flutter_e_commerce_app_2025/core/utilities/show_snack_bar.dart';
 import 'package:flutter_e_commerce_app_2025/core/utilities/toastnotification.dart';
 import 'package:go_router/go_router.dart';

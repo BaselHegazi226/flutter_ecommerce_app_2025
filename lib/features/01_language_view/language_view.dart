@@ -7,6 +7,7 @@ import 'package:go_router/go_router.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 
 import '../../core/helper/const.dart';
+import '../../core/utilities/custom_circle_button.dart';
 import '../../core/utilities/custom_text.dart';
 import '../08_profile_view/presentation/view_model/settings_cubit/settings_cubit.dart';
 import '../08_profile_view/presentation/view_model/settings_cubit/settings_state.dart';
@@ -17,17 +18,11 @@ class LanguageView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final appSettingCubit = AppSettingCubit.get(context);
-    bool isDark = appSettingCubit.isDarkModeEnabled();
     return SafeArea(
       child: Scaffold(
         body: Padding(
           padding: const EdgeInsets.all(16),
-          child: BlocConsumer<AppSettingCubit, AppSettingStates>(
-            listener: (context, state) {
-              if (state is SelectedThemeSuccess) {
-                isDark = appSettingCubit.isDarkModeEnabled();
-              }
-            },
+          child: BlocBuilder<AppSettingCubit, AppSettingStates>(
             builder: (context, state) {
               return Column(
                 spacing: 16,
@@ -45,6 +40,10 @@ class LanguageView extends StatelessWidget {
           ),
         ),
         floatingActionButton: CustomCircleButton(
+          backgroundColor: Theme.of(context).brightness == Brightness.dark
+              ? Colors.grey.shade500.withAlpha(124)
+              : kPrimaryColor,
+          iconColor: Colors.grey.shade50,
           onPressed: () {
             GoRouter.of(context).push(Routes.onBoardingView);
           },
@@ -143,35 +142,6 @@ class LanguageSectionInLang extends StatelessWidget {
           );
         }).toList(),
       ),
-    );
-  }
-}
-
-class CustomCircleButton extends StatelessWidget {
-  const CustomCircleButton({
-    super.key,
-    required this.onPressed,
-    this.iconData = Icons.arrow_forward_outlined,
-    this.iconColor = Colors.white,
-    this.backgroundColor = kPrimaryColor,
-    this.borderColor = Colors.transparent,
-  });
-
-  final VoidCallback onPressed;
-  final IconData iconData;
-  final Color iconColor, backgroundColor, borderColor;
-
-  @override
-  Widget build(BuildContext context) {
-    return OutlinedButton(
-      style: OutlinedButton.styleFrom(
-        backgroundColor: backgroundColor,
-        side: BorderSide(color: borderColor),
-        shape: const CircleBorder(),
-        padding: const EdgeInsets.all(8),
-      ),
-      onPressed: onPressed,
-      child: Icon(iconData, size: 24, color: iconColor),
     );
   }
 }

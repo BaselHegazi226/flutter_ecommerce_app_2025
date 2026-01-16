@@ -10,4 +10,5 @@ class AdaptorsIdentifiers {
   static const int deliveryMethodModelAdapter = 8;
   static const int locationModelAdapter = 9;
   static const int orderStateEnumAdapter = 10;
+  static const int favouriteModelAdapter = 11;
 }

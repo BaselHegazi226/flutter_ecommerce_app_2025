@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_e_commerce_app_2025/core/helper/extensions_of_s_localization.dart';
+import 'package:flutter_e_commerce_app_2025/core/utilities/extensions_of_s_localization.dart';
 
 import '../../../../../core/utilities/custom_text.dart';
 import '../../../../../generated/l10n.dart';

@@ -4,7 +4,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import '../../features/05_home_view/data/model/category_model.dart';
 import '../../features/07_cart_view/data/model/order_model.dart';
 import '../../generated/l10n.dart';
-import 'extensions_of_s_localization.dart';
+import '../utilities/extensions_of_s_localization.dart';
 
 const Color kPrimaryColor = Color(0xff3d9970);
 const Color kPrimaryWrongColor = Colors.red;

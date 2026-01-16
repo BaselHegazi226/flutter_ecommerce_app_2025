@@ -2,19 +2,20 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_e_commerce_app_2025/core/helper/const.dart';
-import 'package:flutter_e_commerce_app_2025/core/helper/extensions_of_s_localization.dart';
 import 'package:flutter_e_commerce_app_2025/core/utilities/custom_text.dart';
+import 'package:flutter_e_commerce_app_2025/core/utilities/extensions_of_s_localization.dart';
 import 'package:flutter_e_commerce_app_2025/core/utilities/icon_with_circle_style.dart';
+import 'package:flutter_e_commerce_app_2025/features/05_home_view/data/model/favourite_model.dart';
 
 import '../../../../../core/utilities/custom_dialog_state.dart';
 import '../../../../../generated/l10n.dart';
-import '../../../../05_home_view/data/model/product_model.dart';
 import '../../../../05_home_view/presentation/view_model/favourite_product_cubit/favourite_product_cubit.dart';
+import 'favourite_delete_section.dart';
 
 class FavouriteViewItemMobile extends StatelessWidget {
-  const FavouriteViewItemMobile({super.key, required this.productModel});
+  const FavouriteViewItemMobile({super.key, required this.favouriteModel});
 
-  final ProductModel productModel;
+  final FavouriteModel favouriteModel;
   static const double _itemHeight = 176;
 
   @override
@@ -29,7 +30,7 @@ class FavouriteViewItemMobile extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Expanded(child: _customImage(context, productModel.images[0])),
+          Expanded(child: _customImage(context, favouriteModel.image)),
           const SizedBox(width: 20),
           Expanded(flex: 2, child: _detailsSection(context)),
         ],
@@ -52,7 +53,9 @@ class FavouriteViewItemMobile extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         CustomText(
-          text: productModel.title,
+          text: favouriteModel.title.split(" ").take(2).join(" ").length < 15
+              ? favouriteModel.title.split(" ").take(2).join(" ")
+              : favouriteModel.title.split(" ").take(1).join(" "),
           maxLines: 1,
           fontSize: 14,
           fontWeight: FontWeight.bold,
@@ -66,13 +69,19 @@ class FavouriteViewItemMobile extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        CustomText(text: productModel.description, maxLines: 3, fontSize: 12),
+        CustomText(text: favouriteModel.desc, maxLines: 3, fontSize: 12),
         const SizedBox(height: 8),
-        CustomText(
-          text: '${priceShowed(productModel.price)} ${S.of(context).EP}',
-          fontSize: 12,
-          color: kPrimaryColor,
-          fontWeight: FontWeight.w500,
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            CustomText(
+              text: '${priceShowed(favouriteModel.price)} ${S.of(context).EP}',
+              fontSize: 12,
+              color: kPrimaryColor,
+              fontWeight: FontWeight.w500,
+            ),
+            FavouriteDeleteSection(favouriteModel: favouriteModel),
+          ],
         ),
       ],
     );
@@ -112,7 +121,7 @@ class FavouriteViewItemMobile extends StatelessWidget {
               buttonCancelText: S.of(context).warning_button_title_Cancel,
               onPressed: () {
                 context.read<FavouriteProductCubit>().deleteFavoriteProduct(
-                  productModel: productModel,
+                  favouriteModel: favouriteModel,
                 );
               },
             );
@@ -127,10 +136,8 @@ class FavouriteViewItemMobile extends StatelessWidget {
       height: _itemHeight,
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Theme.of(context).brightness == Brightness.dark
-            ? Colors.grey.shade400.withAlpha(32)
-            : Colors.grey.shade700.withAlpha(32),
-        borderRadius: const BorderRadius.all(Radius.circular(8)),
+        color: Colors.grey.shade400.withAlpha(32),
+        borderRadius: const BorderRadius.all(Radius.circular(4)),
       ),
       child: CachedNetworkImage(
         fit: BoxFit.contain,
@@ -144,9 +151,9 @@ class FavouriteViewItemMobile extends StatelessWidget {
 }
 
 class FavouriteViewItemTablet extends StatelessWidget {
-  const FavouriteViewItemTablet({super.key, required this.productModel});
+  const FavouriteViewItemTablet({super.key, required this.favouriteModel});
 
-  final ProductModel productModel;
+  final FavouriteModel favouriteModel;
   static const double _itemHeight = 234;
 
   @override
@@ -161,7 +168,7 @@ class FavouriteViewItemTablet extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Expanded(child: _customImage(context, productModel.images[0])),
+          Expanded(child: _customImage(context, favouriteModel.image)),
           const SizedBox(width: 24),
           Expanded(flex: 2, child: _detailsSection(context)),
         ],
@@ -183,11 +190,13 @@ class FavouriteViewItemTablet extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        CustomText(
-          text: productModel.title,
-          maxLines: 1,
-          fontSize: 16,
-          fontWeight: FontWeight.bold,
+        Expanded(
+          child: CustomText(
+            text: favouriteModel.title.split(" ").take(4).join(" "),
+            maxLines: 1,
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+          ),
         ),
         buildHeartIcon(),
       ],
@@ -198,13 +207,19 @@ class FavouriteViewItemTablet extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        CustomText(text: productModel.description, fontSize: 14),
+        CustomText(text: favouriteModel.desc, fontSize: 14),
         const SizedBox(height: 8),
-        CustomText(
-          text: '${priceShowed(productModel.price)} ${S.of(context).EP}',
-          fontSize: 14,
-          color: kPrimaryColor,
-          fontWeight: FontWeight.w500,
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            CustomText(
+              text: '${priceShowed(favouriteModel.price)} ${S.of(context).EP}',
+              fontSize: 14,
+              color: kPrimaryColor,
+              fontWeight: FontWeight.w500,
+            ),
+            FavouriteDeleteSection(favouriteModel: favouriteModel),
+          ],
         ),
       ],
     );
@@ -244,7 +259,7 @@ class FavouriteViewItemTablet extends StatelessWidget {
               buttonCancelText: S.of(context).warning_button_title_Cancel,
               onPressed: () {
                 context.read<FavouriteProductCubit>().deleteFavoriteProduct(
-                  productModel: productModel,
+                  favouriteModel: favouriteModel,
                 );
               },
             );

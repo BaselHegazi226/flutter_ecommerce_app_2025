@@ -22,10 +22,13 @@ class ImageSection extends StatelessWidget {
       children: [
         CustomImage(
           child: imageUrl != null && imageUrl!.length > 100
-              ? Image.memory(base64Decode(imageUrl!))
+              ? Image.memory(base64Decode(imageUrl!), fit: BoxFit.contain)
               : imageUrl != null && imageUrl!.contains('http')
-              ? CachedNetworkImage(imageUrl: imageUrl!)
-              : Image.asset(Assets.profileDefulatProfileImage),
+              ? CachedNetworkImage(imageUrl: imageUrl!, fit: BoxFit.contain)
+              : Image.asset(
+                  Assets.profileDefulatProfileImage,
+                  fit: BoxFit.contain,
+                ),
         ),
         Positioned(
           bottom: size.width * 0.025,

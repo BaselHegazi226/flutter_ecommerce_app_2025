@@ -11,6 +11,7 @@ final class AddFavouriteProductLoading extends FavouriteProductState {}
 
 final class AddFavouriteProductFailure extends FavouriteProductState {
   final String errorMessage;
+
   AddFavouriteProductFailure({required this.errorMessage});
 }
 
@@ -22,6 +23,7 @@ final class DeleteFavouriteProductLoading extends FavouriteProductState {}
 
 final class DeleteFavouriteProductFailure extends FavouriteProductState {
   final String errorMessage;
+
   DeleteFavouriteProductFailure({required this.errorMessage});
 }
 
@@ -38,7 +40,7 @@ final class GetFavouriteProductsFailure extends FavouriteProductState {
 }
 
 final class GetFavouriteProductsSuccess extends FavouriteProductState {
-  final List<ProductModel> favouriteList;
+  final List<FavouriteModel> favouriteList;
 
   GetFavouriteProductsSuccess({required this.favouriteList});
 }

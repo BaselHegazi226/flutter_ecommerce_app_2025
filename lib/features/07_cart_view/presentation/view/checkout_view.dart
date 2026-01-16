@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_e_commerce_app_2025/core/cache/order_cache.dart';
-import 'package:flutter_e_commerce_app_2025/core/helper/extensions_of_s_localization.dart';
+import 'package:flutter_e_commerce_app_2025/core/utilities/extensions_of_s_localization.dart';
 import 'package:flutter_e_commerce_app_2025/features/07_cart_view/presentation/view/widgets/checkout_view_body.dart';
 import 'package:flutter_e_commerce_app_2025/generated/l10n.dart';
 import 'package:go_router/go_router.dart';

@@ -1,17 +1,23 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_e_commerce_app_2025/core/helper/extensions_of_s_localization.dart';
+import 'package:flutter_e_commerce_app_2025/core/utilities/extensions_of_s_localization.dart';
+import 'package:flutter_e_commerce_app_2025/features/05_home_view/data/model/favourite_model.dart';
+import 'package:flutter_e_commerce_app_2025/features/05_home_view/data/model/product_model.dart';
 import 'package:flutter_e_commerce_app_2025/features/05_home_view/presentation/view/widgets/product_details_category_rating_section.dart';
 import 'package:flutter_e_commerce_app_2025/features/05_home_view/presentation/view/widgets/product_details_icon_section.dart';
 
 import '../../../../../core/utilities/custom_text.dart';
 import '../../../../../generated/l10n.dart';
-import '../../../data/model/product_model.dart';
 
 class ProductDetailsViewBody extends StatelessWidget {
-  const ProductDetailsViewBody({super.key, required this.productModel});
+  const ProductDetailsViewBody({
+    super.key,
+    required this.productModel,
+    required this.favouriteModel,
+  });
 
   final ProductModel productModel;
+  final FavouriteModel favouriteModel;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +29,9 @@ class ProductDetailsViewBody extends StatelessWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.all(16),
-                child: ProductDetailsIconSection(productModel: productModel),
+                child: ProductDetailsIconSection(
+                  favouriteModel: favouriteModel,
+                ),
               ),
               AspectRatio(
                 aspectRatio: 1.3,

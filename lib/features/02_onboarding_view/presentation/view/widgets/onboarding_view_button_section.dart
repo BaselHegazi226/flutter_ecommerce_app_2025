@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../core/helper/const.dart';
-import '../../../../01_language_view/language_view.dart';
+import '../../../../../core/utilities/custom_circle_button.dart';
 
 class OnBoardingViewButtonSection extends StatelessWidget {
   const OnBoardingViewButtonSection({
@@ -38,9 +38,7 @@ class OnBoardingViewButtonSection extends StatelessWidget {
           backgroundColor: Theme.of(context).brightness == Brightness.dark
               ? Colors.grey.shade500.withAlpha(124)
               : kPrimaryColor,
-          iconColor: Theme.of(context).brightness == Brightness.dark
-              ? Colors.grey.shade800
-              : Colors.grey.shade50,
+          iconColor: Colors.grey.shade50,
         ),
       ],
     );

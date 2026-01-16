@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_e_commerce_app_2025/core/helper/extensions_of_s_localization.dart';
 import 'package:flutter_e_commerce_app_2025/core/utilities/custom_layout.dart';
 import 'package:flutter_e_commerce_app_2025/core/utilities/custom_text.dart';
+import 'package:flutter_e_commerce_app_2025/core/utilities/extensions_of_s_localization.dart';
 
 import '../../../../../generated/l10n.dart';
 
@@ -134,9 +134,12 @@ class ProfileViewItemTablet extends StatelessWidget {
               CustomText(text: title, fontSize: 18, color: textColor),
             ],
           ),
-          ?title != S.of(context).settingsLogout
-              ? const Icon(Icons.arrow_forward_ios_outlined, size: 24)
-              : null,
+          Icon(
+            title != S.of(context).settingsLogout
+                ? Icons.arrow_forward_ios_outlined
+                : null,
+            size: title != S.of(context).settingsLogout ? 24 : 0,
+          ),
         ],
       ),
     );

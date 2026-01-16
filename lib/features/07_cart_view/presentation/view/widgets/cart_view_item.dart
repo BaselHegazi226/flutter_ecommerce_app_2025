@@ -32,6 +32,7 @@ class CartViewItemMobile extends StatelessWidget {
         Expanded(
           flex: 1,
           child: Container(
+            padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
               color: Theme.of(context).brightness == Brightness.dark
                   ? Colors.grey.shade500.withAlpha(32)
@@ -41,7 +42,7 @@ class CartViewItemMobile extends StatelessWidget {
             child: AspectRatio(
               aspectRatio: .75,
               child: CachedNetworkImage(
-                fit: BoxFit.contain,
+                fit: BoxFit.cover,
                 errorWidget: (error, url, x) {
                   return const Icon(Icons.image);
                 },
@@ -60,8 +61,11 @@ class CartViewItemMobile extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   CustomText(
-                    text: title.split(" ").take(3).join(" "),
-                    fontSize: 20,
+                    text: title.split(" ").take(2).join(" ").length > 15
+                        ? title.split(" ").take(1).join(" ")
+                        : title.split(" ").take(2).join(" "),
+                    fontSize: 18,
+                    fontWeight: FontWeight.w500,
                   ),
                   const SizedBox(height: 4),
                   CustomText(

@@ -6,7 +6,6 @@ import '../../../../core/helper/routes.dart';
 import '../../../../core/utilities/custom_text.dart';
 import '../../../../generated/l10n.dart';
 import '../helper/const.dart';
-import '../shimmer/category_shimmer.dart';
 
 class CustomSliverGridListView extends StatelessWidget {
   final double childAspectRatio;
@@ -100,7 +99,7 @@ class CustomSliverGridItem extends StatelessWidget {
             return const Icon(Icons.image);
           },
           placeholder: (context, url) {
-            return categoryImageShimmer();
+            return customSliverImageShimmer();
           },
         ),
       ),
@@ -182,4 +181,15 @@ class CustomGridListView extends StatelessWidget {
       },
     );
   }
+}
+
+customSliverImageShimmer() {
+  return Expanded(
+    child: Container(
+      decoration: BoxDecoration(
+        color: Colors.transparent,
+        borderRadius: BorderRadius.circular(8),
+      ),
+    ),
+  );
 }

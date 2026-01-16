@@ -1,6 +1,6 @@
 import 'package:colorful_iconify_flutter/icons/twemoji.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_e_commerce_app_2025/core/helper/extensions_of_s_localization.dart';
+import 'package:flutter_e_commerce_app_2025/core/utilities/extensions_of_s_localization.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 
 import '../../../../../core/utilities/icon_with_circle_style.dart';

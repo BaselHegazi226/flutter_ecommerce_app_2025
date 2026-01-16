@@ -3,13 +3,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_e_commerce_app_2025/core/utilities/icon_with_circle_style.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../data/model/product_model.dart';
+import '../../../data/model/favourite_model.dart';
 import '../../view_model/favourite_product_cubit/favourite_product_cubit.dart';
 
 class ProductDetailsIconSection extends StatelessWidget {
-  const ProductDetailsIconSection({super.key, required this.productModel});
+  const ProductDetailsIconSection({super.key, required this.favouriteModel});
 
-  final ProductModel productModel;
+  final FavouriteModel favouriteModel;
 
   @override
   Widget build(BuildContext context) {
@@ -24,20 +24,7 @@ class ProductDetailsIconSection extends StatelessWidget {
           },
           icon: const Icon(Icons.arrow_back_ios_new_outlined, size: 20),
         ),
-        BlocConsumer<FavouriteProductCubit, FavouriteProductState>(
-          listener: (context, state) {
-            if (state is AddFavouriteProductSuccess ||
-                state is GetFavouriteProductByIdSuccess) {
-              debugPrint(
-                'success add product to favourite list ==========================>',
-              );
-            } else if (state is AddFavouriteProductFailure ||
-                state is GetFavouriteProductByIdFailure) {
-              debugPrint(
-                'Failure add product to favourite list ==========================>',
-              );
-            }
-          },
+        BlocBuilder<FavouriteProductCubit, FavouriteProductState>(
           builder: (context, state) {
             final isFavourite =
                 state is AddFavouriteProductSuccess ||
@@ -63,11 +50,11 @@ class ProductDetailsIconSection extends StatelessWidget {
               onPressed: () {
                 if (!isFavourite) {
                   context.read<FavouriteProductCubit>().addFavoriteProduct(
-                    productModel: productModel,
+                    favouriteModel: favouriteModel,
                   );
                 } else {
                   context.read<FavouriteProductCubit>().deleteFavoriteProduct(
-                    productModel: productModel,
+                    favouriteModel: favouriteModel,
                   );
                 }
               },

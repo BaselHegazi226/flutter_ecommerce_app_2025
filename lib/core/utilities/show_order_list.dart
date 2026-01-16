@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import '../../features/07_cart_view/data/model/cart_model.dart';
 import '../../generated/l10n.dart';
 import '../helper/const.dart';
-import '../helper/extensions_of_s_localization.dart';
 import 'custom_text.dart';
+import 'extensions_of_s_localization.dart';
 
 class ShowOrderList extends StatelessWidget {
   const ShowOrderList({
