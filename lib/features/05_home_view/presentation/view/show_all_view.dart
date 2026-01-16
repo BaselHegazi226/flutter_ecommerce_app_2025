@@ -15,15 +15,15 @@ class ShowAllView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => ShowAllCubit()..showAllProduct(),
-      child: SafeArea(
-        child: Scaffold(
-          appBar: customAppBar(context, S.of(context).homeAllProducts, () {
-            GoRouter.of(context).pop();
-          }),
-          body: const Padding(
-            padding: EdgeInsets.all(16),
-            child: ShowAllViewBody(),
-          ),
+
+      child: Scaffold(
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        appBar: customAppBar(context, S.of(context).homeAllProducts, () {
+          GoRouter.of(context).pop();
+        }),
+        body: const Padding(
+          padding: EdgeInsets.all(16),
+          child: ShowAllViewBody(),
         ),
       ),
     );

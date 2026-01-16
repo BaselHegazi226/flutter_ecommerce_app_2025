@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_e_commerce_app_2025/core/utilities/custom_app_bar.dart';
+import 'package:flutter_e_commerce_app_2025/generated/l10n.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class PaymentWebView extends StatefulWidget {
@@ -15,6 +16,7 @@ class PaymentWebView extends StatefulWidget {
 class _PaymentWebViewState extends State<PaymentWebView> {
   late final WebViewController controller;
   bool _handle = false;
+
   @override
   void initState() {
     super.initState();
@@ -52,7 +54,8 @@ class _PaymentWebViewState extends State<PaymentWebView> {
   Widget build(BuildContext context) {
     debugPrint('now in web view');
     return Scaffold(
-      appBar: customAppBar(context, 'Payment', () {
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      appBar: customAppBar(context, S.of(context).cart_payment, () {
         Navigator.pop(context);
       }),
       body: WebViewWidget(controller: controller),

@@ -39,8 +39,7 @@ class OnboardingContent extends StatelessWidget {
           ),
 
           OnBoardingViewImageSection(image: data.image),
-          const SizedBox(height: 48),
-
+          const SizedBox(height: 16),
           OnBoardingViewDescriptionSection(
             title1: data.title1,
             subTitle: data.subTitle,

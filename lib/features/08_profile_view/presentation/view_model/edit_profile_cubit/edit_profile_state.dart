@@ -10,7 +10,7 @@ final class EditProfileGetData extends EditProfileState {
   EditProfileGetData({required this.userModel});
 }
 
-final class EditProfileLoadingData extends EditProfileState {}
+final class EditProfileLoading extends EditProfileState {}
 
 final class EditProfileDataUpdating extends EditProfileState {
   final UserModel userModel;
@@ -18,14 +18,14 @@ final class EditProfileDataUpdating extends EditProfileState {
   EditProfileDataUpdating({required this.userModel});
 }
 
-final class EditProfileUpdatingSuccess extends EditProfileState {
+final class EditProfileSuccess extends EditProfileState {
   final UserModel updatedUserModel;
 
-  EditProfileUpdatingSuccess({required this.updatedUserModel});
+  EditProfileSuccess({required this.updatedUserModel});
 }
 
-final class EditProfileUpdatingFailure extends EditProfileState {
+final class EditProfileFailure extends EditProfileState {
   final String errorMessage;
 
-  EditProfileUpdatingFailure({required this.errorMessage});
+  EditProfileFailure({required this.errorMessage});
 }

@@ -86,14 +86,14 @@ class CustomSliverGridItem extends StatelessWidget {
   Expanded _buildImageSection() {
     return Expanded(
       child: Container(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(32),
         decoration: BoxDecoration(
           color: Colors.grey.shade500.withAlpha(32),
           borderRadius: const BorderRadius.all(Radius.circular(8)),
         ),
         child: CachedNetworkImage(
           imageUrl: image,
-          fit: BoxFit.contain,
+          fit: BoxFit.cover,
           // مهم عشان تملى المساحة كويس
           errorWidget: (error, url, child) {
             return const Icon(Icons.image);

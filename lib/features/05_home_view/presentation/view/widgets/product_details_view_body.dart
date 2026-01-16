@@ -28,7 +28,10 @@ class ProductDetailsViewBody extends StatelessWidget {
           Column(
             children: [
               Padding(
-                padding: const EdgeInsets.all(16),
+                padding: const EdgeInsets.symmetric(
+                  vertical: 36,
+                  horizontal: 16,
+                ),
                 child: ProductDetailsIconSection(
                   favouriteModel: favouriteModel,
                 ),
@@ -46,7 +49,7 @@ class ProductDetailsViewBody extends StatelessWidget {
                   },
                 ),
               ),
-              Divider(color: Colors.grey.shade500.withAlpha(32)),
+              Divider(color: Colors.grey.shade500.withAlpha(64)),
             ],
           ),
           const SizedBox(height: 4),

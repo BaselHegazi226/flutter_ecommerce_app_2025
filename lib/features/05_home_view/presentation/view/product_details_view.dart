@@ -32,50 +32,49 @@ class ProductDetailsView extends StatelessWidget {
           )..getFavouriteProductById(productId: productId),
         ),
       ],
-      child: SafeArea(
-        child: Scaffold(
-          body: BlocBuilder<ProductCubit, ProductState>(
-            builder: (context, state) {
-              if (state is GetProductByIdSuccess) {
-                final productModel = state.productModel;
-                final favouriteModel = FavouriteModel(
-                  id: productModel.id,
-                  title: productModel.title,
-                  desc: productModel.description,
-                  image: productModel.images[0],
-                  price: productModel.price,
-                  addAt: DateTime.now(),
-                );
-                return ProductDetailsViewBody(
-                  productModel: productModel,
-                  favouriteModel: favouriteModel,
-                );
-              } else if (state is GetProductByIdFailure) {
-                return Center(
-                  child: CustomText(
-                    text: state.errorMessage,
-                    fontSize: 20,
-                    alignment: Alignment.center,
-                  ),
-                );
-              } else {
-                return CustomCircleIndicator(
-                  color: Theme.of(context).primaryColor,
-                );
-              }
-            },
-          ),
-          bottomNavigationBar: BlocBuilder<ProductCubit, ProductState>(
-            builder: (context, state) {
-              if (state is GetProductByIdSuccess) {
-                final productModel = state.productModel;
-                return ProductDetailsPriceButtonSection(
-                  productModel: productModel,
-                );
-              }
-              return const SizedBox.shrink();
-            },
-          ),
+      child: Scaffold(
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        body: BlocBuilder<ProductCubit, ProductState>(
+          builder: (context, state) {
+            if (state is GetProductByIdSuccess) {
+              final productModel = state.productModel;
+              final favouriteModel = FavouriteModel(
+                id: productModel.id,
+                title: productModel.title,
+                desc: productModel.description,
+                image: productModel.images[0],
+                price: productModel.price,
+                addAt: DateTime.now(),
+              );
+              return ProductDetailsViewBody(
+                productModel: productModel,
+                favouriteModel: favouriteModel,
+              );
+            } else if (state is GetProductByIdFailure) {
+              return Center(
+                child: CustomText(
+                  text: state.errorMessage,
+                  fontSize: 20,
+                  alignment: Alignment.center,
+                ),
+              );
+            } else {
+              return CustomCircleIndicator(
+                color: Theme.of(context).primaryColor,
+              );
+            }
+          },
+        ),
+        bottomNavigationBar: BlocBuilder<ProductCubit, ProductState>(
+          builder: (context, state) {
+            if (state is GetProductByIdSuccess) {
+              final productModel = state.productModel;
+              return ProductDetailsPriceButtonSection(
+                productModel: productModel,
+              );
+            }
+            return const SizedBox.shrink();
+          },
         ),
       ),
     );

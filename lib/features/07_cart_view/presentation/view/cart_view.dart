@@ -31,11 +31,11 @@ class CartView extends StatelessWidget {
             context.read<GetCartCubit>().getCartProductsAndTotal();
           }
         },
-        child: SafeArea(
-          child: Scaffold(
-            appBar: customTabsAppbar(context, S.of(context).navCart),
-            body: const CartViewBody(),
-          ),
+
+        child: Scaffold(
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+          appBar: customTabsAppbar(context, S.of(context).navCart),
+          body: const CartViewBody(),
         ),
       ),
     );

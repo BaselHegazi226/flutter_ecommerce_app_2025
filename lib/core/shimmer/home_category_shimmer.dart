@@ -6,7 +6,7 @@ Shimmer homeCategoryShimmerItem(Size screenSize) {
     baseColor: Colors.grey.shade300,
     highlightColor: Colors.grey.shade100,
     child: Container(
-      height: 40,
+      height: 44,
       width: 156,
       padding: const EdgeInsets.all(4),
       decoration: BoxDecoration(

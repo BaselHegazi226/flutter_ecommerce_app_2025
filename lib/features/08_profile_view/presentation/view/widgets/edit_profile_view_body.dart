@@ -27,7 +27,7 @@ class EditProfileViewBody extends StatelessWidget {
                       context.read<EditProfileCubit>().prepareImageToUpload();
                     },
                   );
-                } else if (state is EditProfileUpdatingSuccess) {
+                } else if (state is EditProfileSuccess) {
                   return ImageSection(
                     imageUrl: state.updatedUserModel.photoUrl,
                     onPressed: () {

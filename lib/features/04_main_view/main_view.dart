@@ -16,7 +16,7 @@ class MainView extends StatefulWidget {
 }
 
 class _MainViewState extends State<MainView> {
-  ValueNotifier<int> valueNotifierSelectedItem = ValueNotifier(0);
+  final ValueNotifier<int> _selectedIndex = ValueNotifier(0);
 
   final tabs = [
     Routes.homeView,
@@ -26,25 +26,36 @@ class _MainViewState extends State<MainView> {
   ];
 
   @override
+  void dispose() {
+    _selectedIndex.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder(
-      valueListenable: valueNotifierSelectedItem,
-      builder: (context, index, child) {
-        return Scaffold(
-          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-          body: widget.child,
-          extendBody: true, // عشان الخلفية تبان تحت الـ NavBar
-          bottomNavigationBar: _buildBlurNavBar(context),
-        );
-      },
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        extendBody: true,
+        body: widget.child, // المحتوى بيتغير حسب الـ route
+        bottomNavigationBar: ValueListenableBuilder<int>(
+          valueListenable: _selectedIndex,
+          builder: (context, index, _) {
+            return _buildBlurNavBar(context, index);
+          },
+        ),
+      ),
     );
   }
 
-  Widget _buildBlurNavBar(BuildContext context) {
+  Widget _buildBlurNavBar(BuildContext context, int currentIndex) {
+    final size = MediaQuery.sizeOf(context);
+    final double textSize = size.width > 700 ? 12 : 10;
+
     return Container(
       height: 75,
       decoration: BoxDecoration(
-        color: Colors.grey.shade50,
+        color: Theme.of(context).scaffoldBackgroundColor,
         borderRadius: const BorderRadius.only(
           topLeft: Radius.circular(16),
           topRight: Radius.circular(16),
@@ -58,15 +69,17 @@ class _MainViewState extends State<MainView> {
         ],
       ),
       child: GNav(
-        gap: 8,
+        selectedIndex: currentIndex,
+        // <-- ربطه بالـ ValueNotifier
+        gap: 4,
         duration: const Duration(milliseconds: 600),
         curve: Curves.easeInOut,
         color: Theme.of(context).brightness == Brightness.dark
             ? Colors.grey.shade200
             : Colors.green.shade100,
         activeColor: Colors.white,
-        iconSize: 20,
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+        iconSize: textSize + 8,
+        padding: EdgeInsets.zero,
         tabBackgroundGradient: const LinearGradient(
           colors: [Colors.white30, Colors.white54],
         ),
@@ -77,43 +90,44 @@ class _MainViewState extends State<MainView> {
         style: GnavStyle.google,
         haptic: true,
         onTabChange: (index) {
-          changeValueOfSelectedItem(index);
-          context.go(tabs[index]);
-          debugPrint(index.toString());
+          if (index == _selectedIndex.value) return;
+
+          _selectedIndex.value = index;
+          context.go(tabs[index]); // التنقل
         },
         tabs: [
           GButton(
             icon: Icons.home,
             text: S.of(context).navHome,
-            textSize: 12,
-            margin: const EdgeInsetsDirectional.only(start: 6),
+            textSize: textSize,
+            gap: 4,
             padding: const EdgeInsets.all(8),
+            margin: const EdgeInsetsDirectional.only(start: 2),
           ),
           GButton(
             icon: Icons.search_outlined,
             text: S.of(context).navSearch,
-            textSize: 12,
+            textSize: textSize,
+            gap: 4,
             padding: const EdgeInsets.all(8),
           ),
           GButton(
             icon: Icons.shopping_cart_outlined,
             text: S.of(context).navCart,
-            textSize: 12,
+            textSize: textSize,
+            gap: 4,
             padding: const EdgeInsets.all(8),
           ),
           GButton(
             icon: Icons.person_2_outlined,
             text: S.of(context).navProfile,
-            textSize: 12,
+            textSize: textSize,
+            gap: 4,
             padding: const EdgeInsets.all(8),
-            margin: const EdgeInsetsDirectional.only(end: 6),
+            margin: const EdgeInsetsDirectional.only(end: 2),
           ),
         ],
       ),
     );
-  }
-
-  changeValueOfSelectedItem(int currentIndex) {
-    valueNotifierSelectedItem.value = currentIndex;
   }
 }

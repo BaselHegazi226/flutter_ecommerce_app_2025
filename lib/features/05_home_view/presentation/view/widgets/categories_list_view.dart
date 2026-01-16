@@ -29,7 +29,7 @@ class _CategoriesListViewState extends State<CategoriesListView> {
           final categories = state.categories;
           debugPrint('categories = ${categories[0].toJson()}');
           return SizedBox(
-            height: 52,
+            height: 44,
             child: ValueListenableBuilder(
               valueListenable: selectedItem,
               builder: (context, value, child) {

@@ -12,10 +12,12 @@ class EditProfileCubit extends Cubit<EditProfileState> {
   final ProfileRepoImpl profileRepo = ProfileRepoImpl();
   final UserServices userFirebaseStore = UserServices();
   final UserInfoCubit userInfoCubit;
+
   EditProfileCubit({required this.userInfoCubit}) : super(EditProfileInitial());
   UserModel? _userModel;
 
   UserModel? get getUserModel => _userModel;
+
   void getCurrentUserData() {
     final state = userInfoCubit.state;
     if (state is GetUserInfoLocalSuccess) {
@@ -35,13 +37,8 @@ class EditProfileCubit extends Cubit<EditProfileState> {
     final result = await profileRepo.pickImageFromDevice();
     result.fold(
       (error) {
-        debugPrint(
-          'image piked from device failure : ${error.errorKey} ======================>',
-        );
         emit(
-          EditProfileUpdatingFailure(
-            errorMessage: error.errorKey ?? 'unknown error',
-          ),
+          EditProfileFailure(errorMessage: error.errorKey ?? 'unknown error'),
         );
       },
       (imagePickerSuccess) async {
@@ -50,26 +47,18 @@ class EditProfileCubit extends Cubit<EditProfileState> {
         );
         result.fold(
           (error) {
-            debugPrint(
-              'updated info failure : ${error.errorKey} ======================>>',
-            );
             emit(
-              EditProfileUpdatingFailure(
+              EditProfileFailure(
                 errorMessage: error.errorKey ?? 'unknown error',
               ),
             );
           },
           (successUrl) async {
-            debugPrint(
-              'upload to cloudinary successfully ======================>',
-            );
             _userModel = _userModel!.copyWith(newPhotoUrl: successUrl);
             if (_userModel != null) {
-              debugPrint('updated info success ======================>>');
               emit(EditProfileDataUpdating(userModel: _userModel!));
             } else {
-              debugPrint('No user found ======================>>');
-              emit(EditProfileUpdatingFailure(errorMessage: 'No User Found'));
+              emit(EditProfileFailure(errorMessage: 'No User Found'));
             }
           },
         );
@@ -80,33 +69,26 @@ class EditProfileCubit extends Cubit<EditProfileState> {
   updateUserName({String? newName}) async {
     if (_userModel == null) return;
     _userModel = _userModel!.copyWith(newName: newName);
-    debugPrint('updated user name success ======================>>');
     emit(EditProfileDataUpdating(userModel: _userModel!));
   }
 
   Future<void> saveChanges() async {
     if (_userModel == null) return;
 
-    emit(EditProfileLoadingData());
+    emit(EditProfileLoading());
 
     final result = await profileRepo.updateUserInfo(newUserModel: _userModel!);
 
     result.fold(
       (error) {
-        debugPrint(
-          'updated info failure : ${error.errorKey} ======================>',
-        );
         emit(
-          EditProfileUpdatingFailure(
-            errorMessage: error.errorKey ?? 'No user found',
-          ),
+          EditProfileFailure(errorMessage: error.errorKey ?? 'No user found'),
         );
       },
       (_) async {
-        debugPrint('updated all info success ======================>>');
         await userInfoCubit.getUserInfo();
         emit(EditProfileDataUpdating(userModel: _userModel!));
-        emit(EditProfileUpdatingSuccess(updatedUserModel: _userModel!));
+        emit(EditProfileSuccess(updatedUserModel: _userModel!));
       },
     );
   }

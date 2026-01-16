@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_e_commerce_app_2025/core/utilities/app_get.dart';
+import 'package:flutter_e_commerce_app_2025/core/utilities/custom_app_bar.dart';
+import 'package:flutter_e_commerce_app_2025/core/utilities/extensions_of_s_localization.dart';
 import 'package:flutter_e_commerce_app_2025/features/05_home_view/presentation/view/widgets/home_view_body.dart';
+import 'package:flutter_e_commerce_app_2025/generated/l10n.dart';
 
 import '../../../08_profile_view/presentation/view_model/user_info_cubit/user_info_cubit.dart';
 import '../../data/repo/home_view_repo_impl.dart';
@@ -26,7 +29,11 @@ class HomeView extends StatelessWidget {
               ProductCubit()..getProductsByCategory(category: 'SmartPhones'),
         ),
       ],
-      child: const SafeArea(child: Scaffold(body: HomeViewBody())),
+      child: Scaffold(
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        appBar: customTabsAppbar(context, S.of(context).navHome),
+        body: const HomeViewBody(),
+      ),
     );
   }
 }

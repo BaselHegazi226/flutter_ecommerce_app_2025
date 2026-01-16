@@ -16,11 +16,12 @@ class SearchView extends StatelessWidget {
       create: (context) =>
           SearchResultCubit()
             ..getSearchResultByCategory(category: 'smartPhones'),
-      child: SafeArea(
-        child: Scaffold(
-          appBar: customTabsAppbar(context, S.of(context).navSearch),
-          body: const SearchViewBody(),
-        ),
+
+      child: Scaffold(
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+
+        appBar: customTabsAppbar(context, S.of(context).navSearch),
+        body: const SearchViewBody(),
       ),
     );
   }

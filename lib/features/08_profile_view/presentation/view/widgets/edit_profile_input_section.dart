@@ -48,7 +48,7 @@ class _InputSectionState extends State<InputSection> {
   Widget build(BuildContext context) {
     return BlocConsumer<EditProfileCubit, EditProfileState>(
       listener: (context, state) {
-        if (state is EditProfileUpdatingSuccess) {
+        if (state is EditProfileSuccess) {
           ToastNotification.flatColoredToastNotificationService(
             onAutoCompleteCompleted: (value) {
               GoRouter.of(context).pop();
@@ -57,7 +57,7 @@ class _InputSectionState extends State<InputSection> {
             description: S.of(context).success_updateProfile_desc,
             toastNotificationType: ToastificationType.success,
           );
-        } else if (state is EditProfileUpdatingFailure) {
+        } else if (state is EditProfileFailure) {
           ToastNotification.flatColoredToastNotificationService(
             onAutoCompleteCompleted: (value) {
               GoRouter.of(context).pop();
@@ -80,7 +80,7 @@ class _InputSectionState extends State<InputSection> {
               _buildUserEmailField(context, cubit),
               const SizedBox(height: 40),
               CustomButton(
-                isLoading: state is EditProfileLoadingData,
+                isLoading: state is EditProfileLoading,
                 fontWeight: FontWeight.w700,
                 textColor: Theme.of(context).brightness == Brightness.dark
                     ? Colors.grey.shade600

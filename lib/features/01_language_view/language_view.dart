@@ -17,7 +17,6 @@ class LanguageView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final appSettingCubit = AppSettingCubit.get(context);
     return SafeArea(
       child: Scaffold(
         body: Padding(
@@ -33,7 +32,7 @@ class LanguageView extends StatelessWidget {
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
                   ),
-                  const LanguageSectionInLang(),
+                  const SelectedLanguageSection(),
                 ],
               );
             },
@@ -53,8 +52,8 @@ class LanguageView extends StatelessWidget {
   }
 }
 
-class LanguageSectionInLang extends StatelessWidget {
-  const LanguageSectionInLang({super.key});
+class SelectedLanguageSection extends StatelessWidget {
+  const SelectedLanguageSection({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -47,12 +47,11 @@ class _CartViewBodyState extends State<CartViewBody> {
           );
         } else if (state is GetProductCartAndTotalFailure) {
           return Center(child: Text(state.errorMessage));
-        } else {
-          return CustomLayout(
-            mobileWidget: cartViewItemShimmerListMobile(screenSize),
-            tabletWidget: cartViewItemShimmerListTablet(screenSize),
-          );
         }
+        return CustomLayout(
+          mobileWidget: cartViewItemShimmerListMobile(screenSize),
+          tabletWidget: cartViewItemShimmerListTablet(screenSize),
+        );
       },
     );
   }

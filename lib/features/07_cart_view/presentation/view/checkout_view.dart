@@ -69,12 +69,8 @@ class _CheckoutViewState extends State<CheckoutView> {
             );
           }
         },
-        child: const SafeArea(
-          child: Scaffold(
-            resizeToAvoidBottomInset: true,
-            body: CheckoutViewBody(),
-          ),
-        ),
+
+        child: const Scaffold(body: CheckoutViewBody()),
       ),
     );
   }

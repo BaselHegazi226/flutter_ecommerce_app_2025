@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_e_commerce_app_2025/core/helper/routes.dart';
 import 'package:flutter_e_commerce_app_2025/core/utilities/custom_layout.dart';
+import 'package:flutter_e_commerce_app_2025/features/07_cart_view/presentation/view/widgets/cart_view_total_checkout_section.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../data/model/cart_model.dart';
 import 'cart_view_item.dart';
-import 'cart_view_total_checkout_section.dart';
 
 class CartViewListSection extends StatelessWidget {
   const CartViewListSection({
@@ -44,9 +44,9 @@ class CartViewListViewMobile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Stack(
       children: [
-        Expanded(
+        Positioned.fill(
           child: ListView.separated(
             separatorBuilder: (context, index) {
               return SizedBox(height: screenSize.height * .02);
@@ -76,7 +76,13 @@ class CartViewListViewMobile extends StatelessWidget {
             },
           ),
         ),
-        const CartViewTotalCheckoutSection(),
+        Positioned(
+          left: 0,
+          right: 0,
+          bottom: MediaQuery.paddingOf(context).bottom,
+          child: const CartViewTotalCheckoutSection(),
+        ),
+        //const CartViewTotalCheckoutSection(),
       ],
     );
   }
@@ -96,7 +102,7 @@ class CartViewListTablet extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Expanded(
+        Positioned.fill(
           child: GridView.builder(
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
@@ -127,7 +133,7 @@ class CartViewListTablet extends StatelessWidget {
             },
           ),
         ),
-        const CartViewTotalCheckoutSection(),
+        //const CartViewTotalCheckoutSection(),
       ],
     );
   }

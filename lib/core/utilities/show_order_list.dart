@@ -67,6 +67,7 @@ class ShowOrderItem extends StatelessWidget {
         Container(
           height: 100,
           width: 168,
+          padding: const EdgeInsets.all(8),
           decoration: BoxDecoration(
             color: Theme.of(context).brightness == Brightness.dark
                 ? Colors.grey.shade500.withAlpha(32)

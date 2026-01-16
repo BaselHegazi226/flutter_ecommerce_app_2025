@@ -175,68 +175,73 @@ class _LocationViewState extends State<LocationView> {
                   ),
                 ),
                 const SizedBox(height: 16),
-                Align(
-                  alignment: Alignment.bottomCenter,
-                  child: Row(
-                    spacing: 16,
-                    children: [
-                      Expanded(
-                        child: CustomButton(
-                          backgroundColor:
-                              Theme.of(context).brightness == Brightness.dark
-                              ? Colors.grey.shade700
-                              : kScaffoldColor,
-                          borderColor:
-                              Theme.of(context).brightness == Brightness.dark
-                              ? Colors.white
-                              : kPrimaryColor,
-                          textColor:
-                              Theme.of(context).brightness == Brightness.dark
-                              ? Colors.grey.shade200
-                              : kPrimaryColor,
-                          onPressed: widget.onBack,
-                          text: S.of(context).cart_back,
+                SafeArea(
+                  bottom: true,
+                  child: Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Row(
+                      spacing: 16,
+                      children: [
+                        Expanded(
+                          child: CustomButton(
+                            backgroundColor:
+                                Theme.of(context).brightness == Brightness.dark
+                                ? Colors.grey.shade700
+                                : kScaffoldColor,
+                            borderColor:
+                                Theme.of(context).brightness == Brightness.dark
+                                ? Colors.white
+                                : kPrimaryColor,
+                            textColor:
+                                Theme.of(context).brightness == Brightness.dark
+                                ? Colors.grey.shade200
+                                : kPrimaryColor,
+                            onPressed: widget.onBack,
+                            text: S.of(context).cart_back,
+                          ),
                         ),
-                      ),
-                      Expanded(
-                        child: CustomButton(
-                          onPressed: () {
-                            if (_formKey.currentState!.validate()) {
-                              _formKey.currentState!.save();
-                              locationModel = LocationModel(
-                                street1: street1,
-                                street2: street2,
-                                city: city,
-                                state: stateEnum,
-                                country: country,
-                              );
-                              cubit.fillLocation(locationModel: locationModel);
-                              if (cubit.getLocationModel != null) {
-                                widget.onNext();
-                                context
-                                    .read<GetCartCubit>()
-                                    .getCartProductsAndTotal();
-                                context.read<OrderCubit>().saveUserLocation(
+                        Expanded(
+                          child: CustomButton(
+                            onPressed: () {
+                              if (_formKey.currentState!.validate()) {
+                                _formKey.currentState!.save();
+                                locationModel = LocationModel(
+                                  street1: street1,
+                                  street2: street2,
+                                  city: city,
+                                  state: stateEnum,
+                                  country: country,
+                                );
+                                cubit.fillLocation(
                                   locationModel: locationModel,
                                 );
+                                if (cubit.getLocationModel != null) {
+                                  widget.onNext();
+                                  context
+                                      .read<GetCartCubit>()
+                                      .getCartProductsAndTotal();
+                                  context.read<OrderCubit>().saveUserLocation(
+                                    locationModel: locationModel,
+                                  );
+                                }
+                              } else {
+                                autoValidateMode =
+                                    AutovalidateMode.onUserInteraction;
                               }
-                            } else {
-                              autoValidateMode =
-                                  AutovalidateMode.onUserInteraction;
-                            }
-                          },
-                          text: S.of(context).cart_next,
-                          textColor:
-                              Theme.of(context).brightness == Brightness.dark
-                              ? Colors.grey.shade600
-                              : Colors.grey.shade200,
-                          backgroundColor:
-                              Theme.of(context).brightness == Brightness.dark
-                              ? Colors.grey.shade200
-                              : kPrimaryColor,
+                            },
+                            text: S.of(context).cart_next,
+                            textColor:
+                                Theme.of(context).brightness == Brightness.dark
+                                ? Colors.grey.shade600
+                                : Colors.grey.shade200,
+                            backgroundColor:
+                                Theme.of(context).brightness == Brightness.dark
+                                ? Colors.grey.shade200
+                                : kPrimaryColor,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ],
