@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_e_commerce_app_2025/core/helper/const.dart';
 import 'package:flutter_e_commerce_app_2025/core/helper/routes.dart';
-import 'package:flutter_e_commerce_app_2025/core/utilities/custom_layout.dart';
 import 'package:flutter_e_commerce_app_2025/core/utilities/custom_loading_indicator.dart';
 import 'package:flutter_e_commerce_app_2025/core/utilities/custom_text.dart';
 import 'package:flutter_e_commerce_app_2025/core/utilities/extensions_of_s_localization.dart';
@@ -19,18 +18,6 @@ class FavouriteViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const CustomLayout(
-      mobileWidget: FavouriteViewBodyMobile(),
-      tabletWidget: FavouriteViewBodyTablet(),
-    );
-  }
-}
-
-class FavouriteViewBodyMobile extends StatelessWidget {
-  const FavouriteViewBodyMobile({super.key});
-
-  @override
-  Widget build(BuildContext context) {
     return BlocConsumer<FavouriteProductCubit, FavouriteProductState>(
       listener: (context, state) {
         if (state is DeleteFavouriteProductSuccess) {
@@ -56,72 +43,14 @@ class FavouriteViewBodyMobile extends StatelessWidget {
                 return const SizedBox(height: 16);
               },
               itemBuilder: (context, index) {
-                final item = favourites[index];
+                final favouriteItem = favourites[index];
                 return InkWell(
                   onTap: () {
                     GoRouter.of(
                       context,
-                    ).push(Routes.productDetailsView, extra: item.id);
+                    ).push(Routes.productDetailsView, extra: favouriteItem.id);
                   },
-                  child: FavouriteViewItemMobile(favouriteModel: item),
-                );
-              },
-            ),
-          );
-        } else if (state is GetFavouriteProductsFailure) {
-          return Center(
-            child: CustomText(
-              text: state.errorMessage,
-              fontSize: 18,
-              alignment: Alignment.center,
-            ),
-          );
-        } else {
-          return const CustomCircleIndicator(color: kPrimaryColor);
-        }
-      },
-    );
-  }
-}
-
-class FavouriteViewBodyTablet extends StatelessWidget {
-  const FavouriteViewBodyTablet({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocConsumer<FavouriteProductCubit, FavouriteProductState>(
-      listener: (context, state) {
-        if (state is DeleteFavouriteProductSuccess) {
-          context.read<FavouriteProductCubit>().getFavouriteProducts();
-        }
-      },
-      builder: (context, state) {
-        if (state is GetFavouriteProductsSuccess) {
-          final favourites = state.favouriteList;
-          if (favourites.isEmpty) {
-            return Center(
-              child: NoItemFound(
-                itemTitle: S.of(context).profileNoFavourite,
-                itemImage: Assets.profileUnFavouriteHeart,
-              ),
-            );
-          }
-          return Padding(
-            padding: const EdgeInsets.all(16),
-            child: ListView.separated(
-              itemCount: favourites.length,
-              separatorBuilder: (context, index) {
-                return const SizedBox(height: 16);
-              },
-              itemBuilder: (context, index) {
-                final item = favourites[index];
-                return InkWell(
-                  onTap: () {
-                    GoRouter.of(
-                      context,
-                    ).push(Routes.productDetailsView, extra: item.id);
-                  },
-                  child: FavouriteViewItemTablet(favouriteModel: item),
+                  child: FavouriteViewItem(favouriteModel: favouriteItem),
                 );
               },
             ),

@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_e_commerce_app_2025/core/helper/const.dart';
+import 'package:flutter_e_commerce_app_2025/core/utilities/custom_layout.dart';
 import 'package:flutter_e_commerce_app_2025/core/utilities/custom_text.dart';
 import 'package:flutter_e_commerce_app_2025/core/utilities/extensions_of_s_localization.dart';
 import 'package:flutter_e_commerce_app_2025/core/utilities/icon_with_circle_style.dart';
@@ -11,6 +12,20 @@ import '../../../../../core/utilities/custom_dialog_state.dart';
 import '../../../../../generated/l10n.dart';
 import '../../../../05_home_view/presentation/view_model/favourite_product_cubit/favourite_product_cubit.dart';
 import 'favourite_delete_section.dart';
+
+class FavouriteViewItem extends StatelessWidget {
+  const FavouriteViewItem({super.key, required this.favouriteModel});
+
+  final FavouriteModel favouriteModel;
+
+  @override
+  Widget build(BuildContext context) {
+    return CustomLayout(
+      mobileWidget: FavouriteViewItemMobile(favouriteModel: favouriteModel),
+      tabletWidget: FavouriteViewItemTablet(favouriteModel: favouriteModel),
+    );
+  }
+}
 
 class FavouriteViewItemMobile extends StatelessWidget {
   const FavouriteViewItemMobile({super.key, required this.favouriteModel});
@@ -41,9 +56,13 @@ class FavouriteViewItemMobile extends StatelessWidget {
   Widget _detailsSection(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
       spacing: 16,
-      children: [_titleHeartSection(), _descPriceSection(context)],
+      children: [
+        _titleHeartSection(),
+        _descPriceSection(context),
+        _buildPriceDeleteSection(context),
+      ],
     );
   }
 
@@ -70,19 +89,21 @@ class FavouriteViewItemMobile extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         CustomText(text: favouriteModel.desc, maxLines: 3, fontSize: 12),
-        const SizedBox(height: 8),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            CustomText(
-              text: '${priceShowed(favouriteModel.price)} ${S.of(context).EP}',
-              fontSize: 12,
-              color: kPrimaryColor,
-              fontWeight: FontWeight.w500,
-            ),
-            FavouriteDeleteSection(favouriteModel: favouriteModel),
-          ],
+      ],
+    );
+  }
+
+  _buildPriceDeleteSection(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        CustomText(
+          text: '${priceShowed(favouriteModel.price)} ${S.of(context).EP}',
+          fontSize: 12,
+          color: kPrimaryColor,
+          fontWeight: FontWeight.w500,
         ),
+        FavouriteDeleteSection(favouriteModel: favouriteModel),
       ],
     );
   }
@@ -179,9 +200,15 @@ class FavouriteViewItemTablet extends StatelessWidget {
   Widget _detailsSection(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
       spacing: 16,
-      children: [_titleHeartSection(), _descPriceSection(context)],
+      children: [
+        Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [_titleHeartSection(), _descPriceSection(context)],
+        ),
+        _priceDeleteSection(context),
+      ],
     );
   }
 
@@ -209,18 +236,21 @@ class FavouriteViewItemTablet extends StatelessWidget {
       children: [
         CustomText(text: favouriteModel.desc, fontSize: 14),
         const SizedBox(height: 8),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            CustomText(
-              text: '${priceShowed(favouriteModel.price)} ${S.of(context).EP}',
-              fontSize: 14,
-              color: kPrimaryColor,
-              fontWeight: FontWeight.w500,
-            ),
-            FavouriteDeleteSection(favouriteModel: favouriteModel),
-          ],
+      ],
+    );
+  }
+
+  Row _priceDeleteSection(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        CustomText(
+          text: '${priceShowed(favouriteModel.price)} ${S.of(context).EP}',
+          fontSize: 14,
+          color: kPrimaryColor,
+          fontWeight: FontWeight.w500,
         ),
+        FavouriteDeleteSection(favouriteModel: favouriteModel),
       ],
     );
   }
