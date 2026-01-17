@@ -22,7 +22,7 @@ class ShowAllView extends StatelessWidget {
           GoRouter.of(context).pop();
         }),
         body: const Padding(
-          padding: EdgeInsets.all(16),
+          padding: EdgeInsets.symmetric(vertical: 32, horizontal: 16),
           child: ShowAllViewBody(),
         ),
       ),

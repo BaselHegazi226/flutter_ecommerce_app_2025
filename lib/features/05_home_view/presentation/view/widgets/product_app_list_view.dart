@@ -43,7 +43,7 @@ class ProductAppListViewMobile extends StatelessWidget {
         } else if (state is GetProductFailure) {
           return SliverToBoxAdapter(
             child: CustomText(
-              text: '${state.errorMessage} and we will repair it soon!',
+              text: state.errorMessage,
               fontSize: 18,
               alignment: Alignment.center,
             ),

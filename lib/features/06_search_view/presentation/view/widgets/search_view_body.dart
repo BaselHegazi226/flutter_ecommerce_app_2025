@@ -18,6 +18,7 @@ class SearchViewBody extends StatelessWidget {
           padding: EdgeInsets.all(16),
           sliver: SearchViewGridList(),
         ),
+        SliverToBoxAdapter(child: SizedBox(height: size.height * .025)),
       ],
     );
   }

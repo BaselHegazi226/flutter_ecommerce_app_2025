@@ -313,14 +313,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.8"
-  curved_navigation_bar:
-    dependency: "direct main"
-    description:
-      name: curved_navigation_bar
-      sha256: bb4ab128fcb6f4a9f0f1f72d227db531818b20218984789777f049fcbf919279
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.0.6"
   dart_style:
     dependency: transitive
     description:
@@ -595,14 +587,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  flutter_onboarding_slider:
-    dependency: "direct main"
-    description:
-      name: flutter_onboarding_slider
-      sha256: "70d6b7c8d469abb31f66fd80c61915d7ff9c05d2c9001ec7db659702e7bc4f9d"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.0.11"
   flutter_plugin_android_lifecycle:
     dependency: transitive
     description:
@@ -1269,14 +1253,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.28.0"
-  salomon_bottom_bar:
-    dependency: "direct main"
-    description:
-      name: salomon_bottom_bar
-      sha256: e20abf2e449749432223a8b4e6647c212eef6c2b638e0ed8cc92eff9529c2b48
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.3.2"
   shared_preferences:
     dependency: "direct main"
     description:

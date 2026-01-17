@@ -34,6 +34,7 @@ class HomeViewBody extends StatelessWidget {
           padding: EdgeInsets.all(16),
           sliver: ProductAppListView(),
         ),
+        SliverToBoxAdapter(child: SizedBox(height: screenSize.height * .025)),
       ],
     );
   }

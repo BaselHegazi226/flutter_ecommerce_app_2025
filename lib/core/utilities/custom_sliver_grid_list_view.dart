@@ -98,9 +98,6 @@ class CustomSliverGridItem extends StatelessWidget {
           errorWidget: (error, url, child) {
             return const Icon(Icons.image);
           },
-          placeholder: (context, url) {
-            return customSliverImageShimmer();
-          },
         ),
       ),
     );
@@ -181,15 +178,4 @@ class CustomGridListView extends StatelessWidget {
       },
     );
   }
-}
-
-customSliverImageShimmer() {
-  return Expanded(
-    child: Container(
-      decoration: BoxDecoration(
-        color: Colors.transparent,
-        borderRadius: BorderRadius.circular(8),
-      ),
-    ),
-  );
 }

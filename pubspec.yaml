@@ -75,7 +75,7 @@ dependencies:
   webview_flutter: ^4.13.0
   flutter_rating_bar: ^4.0.1
   flutter_launcher_icons: ^0.14.4
-  flutter_onboarding_slider: ^1.0.11
+
 
 
 dev_dependencies:
@@ -138,8 +138,8 @@ flutter_intl:
 flutter_launcher_icons:
   android: true
   ios: true
-  image_path: "assets/images/splash/app_logo.png"
+  image_path: "assets/images/splash/matgarna_logo.png"
 flutter_native_splash:
-  image: assets/images/splash/app_logo.png
+  image: assets/images/splash/matgarna_logo.png
   android: true
   ios: true
