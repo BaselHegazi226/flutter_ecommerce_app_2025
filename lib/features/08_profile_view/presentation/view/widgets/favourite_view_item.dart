@@ -40,7 +40,10 @@ class FavouriteViewItemMobile extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Expanded(
-            child: FavouriteItemCustomImage(imageUrl: favouriteModel.image),
+            child: FavouriteItemCustomImage(
+              imageUrl: favouriteModel.image,
+              itemHeight: _itemHeight,
+            ),
           ),
           const SizedBox(width: 20),
           Expanded(flex: 2, child: _detailsSection(context)),
@@ -52,7 +55,6 @@ class FavouriteViewItemMobile extends StatelessWidget {
   Widget _detailsSection(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
       spacing: 16,
       children: [
         FavouriteTitleHeartSection(
@@ -89,7 +91,10 @@ class FavouriteViewItemTablet extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Expanded(
-            child: FavouriteItemCustomImage(imageUrl: favouriteModel.image),
+            child: FavouriteItemCustomImage(
+              imageUrl: favouriteModel.image,
+              itemHeight: _itemHeight,
+            ),
           ),
           const SizedBox(width: 24),
           Expanded(flex: 2, child: _detailsSection(context)),

@@ -2,13 +2,19 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class FavouriteItemCustomImage extends StatelessWidget {
-  const FavouriteItemCustomImage({super.key, required this.imageUrl});
+  const FavouriteItemCustomImage({
+    super.key,
+    required this.imageUrl,
+    required this.itemHeight,
+  });
 
   final String imageUrl;
+  final double itemHeight;
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: itemHeight,
       decoration: BoxDecoration(
         color: Theme.of(context).brightness == Brightness.dark
             ? Colors.grey.shade400.withAlpha(32)
