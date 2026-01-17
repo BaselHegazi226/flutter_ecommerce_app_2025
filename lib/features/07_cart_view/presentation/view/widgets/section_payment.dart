@@ -99,7 +99,7 @@ class SectionPayment extends StatelessWidget {
         ),
         const SizedBox(height: 16),
         // سكشن السعر ثابت
-        SafeArea(bottom: true, child: buildBlocConsumer()),
+        buildBlocConsumer(),
       ],
     );
   }

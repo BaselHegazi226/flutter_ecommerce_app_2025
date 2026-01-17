@@ -44,9 +44,9 @@ class CartViewListViewMobile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
+    return Column(
       children: [
-        Positioned.fill(
+        Expanded(
           child: ListView.separated(
             separatorBuilder: (context, index) {
               return SizedBox(height: screenSize.height * .02);
@@ -76,13 +76,7 @@ class CartViewListViewMobile extends StatelessWidget {
             },
           ),
         ),
-        Positioned(
-          left: 0,
-          right: 0,
-          bottom: MediaQuery.paddingOf(context).bottom,
-          child: const CartViewTotalCheckoutSection(),
-        ),
-        //const CartViewTotalCheckoutSection(),
+        const CartViewTotalCheckoutSection(),
       ],
     );
   }
@@ -100,9 +94,9 @@ class CartViewListTablet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
+    return Column(
       children: [
-        Positioned.fill(
+        Expanded(
           child: GridView.builder(
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
@@ -133,12 +127,7 @@ class CartViewListTablet extends StatelessWidget {
             },
           ),
         ),
-        Positioned(
-          right: 0,
-          left: 0,
-          bottom: MediaQuery.paddingOf(context).bottom,
-          child: const CartViewTotalCheckoutSection(),
-        ),
+        const CartViewTotalCheckoutSection(),
       ],
     );
   }

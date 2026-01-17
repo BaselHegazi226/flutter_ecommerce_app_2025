@@ -115,60 +115,57 @@ class _SummarizeViewState extends State<SummarizeView> {
                   ),
                 ),
                 const SizedBox(height: 16),
-                SafeArea(
-                  bottom: true,
-                  child: Align(
-                    alignment: Alignment.bottomCenter,
-                    child: Row(
-                      spacing: 16,
-                      children: [
-                        Expanded(
-                          child: CustomButton(
-                            backgroundColor:
-                                Theme.of(context).brightness == Brightness.dark
-                                ? Colors.grey.shade700
-                                : kScaffoldColor,
-                            borderColor:
-                                Theme.of(context).brightness == Brightness.dark
-                                ? Colors.white
-                                : kPrimaryColor,
-                            textColor:
-                                Theme.of(context).brightness == Brightness.dark
-                                ? Colors.grey.shade200
-                                : kPrimaryColor,
-                            onPressed: widget.onBack,
-                            text: S.of(context).cart_back,
-                          ),
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Row(
+                    spacing: 16,
+                    children: [
+                      Expanded(
+                        child: CustomButton(
+                          backgroundColor:
+                              Theme.of(context).brightness == Brightness.dark
+                              ? Colors.grey.shade700
+                              : kScaffoldColor,
+                          borderColor:
+                              Theme.of(context).brightness == Brightness.dark
+                              ? Colors.white
+                              : kPrimaryColor,
+                          textColor:
+                              Theme.of(context).brightness == Brightness.dark
+                              ? Colors.grey.shade200
+                              : kPrimaryColor,
+                          onPressed: widget.onBack,
+                          text: S.of(context).cart_back,
                         ),
-                        Expanded(
-                          child: CustomButton(
-                            onPressed: () {
-                              if (cubit.getLocationModel == null ||
-                                  cubit.getDeliveryMethodModel == null) {
-                                return;
-                              }
+                      ),
+                      Expanded(
+                        child: CustomButton(
+                          onPressed: () {
+                            if (cubit.getLocationModel == null ||
+                                cubit.getDeliveryMethodModel == null) {
+                              return;
+                            }
 
-                              widget.onNext();
-                              debugPrint(
-                                'location model = ${cubit.getLocationModel?.toJson()} from summarize view=============================>',
-                              );
-                              debugPrint(
-                                'location model = ${cubit.getDeliveryMethodModel?.toJson()} from summarize view=============================>',
-                              );
-                            },
-                            text: S.of(context).cartDelivery,
-                            textColor:
-                                Theme.of(context).brightness == Brightness.dark
-                                ? Colors.grey.shade600
-                                : Colors.grey.shade200,
-                            backgroundColor:
-                                Theme.of(context).brightness == Brightness.dark
-                                ? Colors.grey.shade200
-                                : kPrimaryColor,
-                          ),
+                            widget.onNext();
+                            debugPrint(
+                              'location model = ${cubit.getLocationModel?.toJson()} from summarize view=============================>',
+                            );
+                            debugPrint(
+                              'location model = ${cubit.getDeliveryMethodModel?.toJson()} from summarize view=============================>',
+                            );
+                          },
+                          text: S.of(context).cartDelivery,
+                          textColor:
+                              Theme.of(context).brightness == Brightness.dark
+                              ? Colors.grey.shade600
+                              : Colors.grey.shade200,
+                          backgroundColor:
+                              Theme.of(context).brightness == Brightness.dark
+                              ? Colors.grey.shade200
+                              : kPrimaryColor,
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
               ],

@@ -57,36 +57,33 @@ class _DeliveryViewState extends State<DeliveryView> {
             ),
           ),
           const SizedBox(height: 16),
-          SafeArea(
-            bottom: true,
-            child: Row(
-              children: [
-                const Expanded(flex: 2, child: SizedBox()),
-                Expanded(
-                  child: CustomButton(
-                    onPressed: () {
-                      if (cubit.getDeliveryMethodModel != null) {
-                        widget.onNext();
-                      } else {
-                        showSafeSnackBar(
-                          context,
-                          'choose any delivery method',
-                          Colors.grey,
-                        );
-                      }
-                    },
-                    text: S.of(context).cart_next,
-                    textColor: Theme.of(context).brightness == Brightness.dark
-                        ? Colors.grey.shade600
-                        : Colors.grey.shade200,
-                    backgroundColor:
-                        Theme.of(context).brightness == Brightness.dark
-                        ? Colors.grey.shade200
-                        : Theme.of(context).primaryColor,
-                  ),
+          Row(
+            children: [
+              const Expanded(flex: 2, child: SizedBox()),
+              Expanded(
+                child: CustomButton(
+                  onPressed: () {
+                    if (cubit.getDeliveryMethodModel != null) {
+                      widget.onNext();
+                    } else {
+                      showSafeSnackBar(
+                        context,
+                        'choose any delivery method',
+                        Colors.grey,
+                      );
+                    }
+                  },
+                  text: S.of(context).cart_next,
+                  textColor: Theme.of(context).brightness == Brightness.dark
+                      ? Colors.grey.shade600
+                      : Colors.grey.shade200,
+                  backgroundColor:
+                      Theme.of(context).brightness == Brightness.dark
+                      ? Colors.grey.shade200
+                      : Theme.of(context).primaryColor,
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ],
       ),

@@ -33,17 +33,18 @@ class _MainViewState extends State<MainView> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-        extendBody: true,
-        body: widget.child, // المحتوى بيتغير حسب الـ route
-        bottomNavigationBar: ValueListenableBuilder<int>(
-          valueListenable: _selectedIndex,
-          builder: (context, index, _) {
-            return _buildBlurNavBar(context, index);
-          },
-        ),
+    return Scaffold(
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      extendBody: true,
+      body: SafeArea(
+        bottom: true,
+        child: widget.child,
+      ), // المحتوى بيتغير حسب الـ route
+      bottomNavigationBar: ValueListenableBuilder<int>(
+        valueListenable: _selectedIndex,
+        builder: (context, index, _) {
+          return _buildBlurNavBar(context, index);
+        },
       ),
     );
   }
@@ -70,7 +71,6 @@ class _MainViewState extends State<MainView> {
       ),
       child: GNav(
         selectedIndex: currentIndex,
-        // <-- ربطه بالـ ValueNotifier
         gap: 4,
         duration: const Duration(milliseconds: 600),
         curve: Curves.easeInOut,

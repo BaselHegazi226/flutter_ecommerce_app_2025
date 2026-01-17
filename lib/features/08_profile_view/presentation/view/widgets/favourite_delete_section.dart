@@ -29,6 +29,7 @@ class FavouriteDeleteSection extends StatelessWidget {
               favouriteModel: favouriteModel,
             );
           },
+          cancelOnPressed: () {},
         );
       },
       icon: Icon(
