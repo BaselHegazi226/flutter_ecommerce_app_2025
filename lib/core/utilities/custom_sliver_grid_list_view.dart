@@ -109,16 +109,15 @@ class CustomSliverGridItem extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         CustomText(
-          text: title.replaceAll("/n", " "),
+          text: title.replaceAll("\"n", " "),
           fontSize: 16,
           maxLines: 1,
           fontWeight: FontWeight.bold,
         ),
         CustomText(
-          text: description.split(" ").take(3).join(" ").length > 20
-              ? description.split(" ").take(2).join(" ")
-              : description.split(" ").take(3).join(" "),
+          text: description.replaceAll("\n", " "),
           fontSize: 12,
+          maxLines: 1,
           color: const Color(0xff929292),
         ),
         CustomText(
