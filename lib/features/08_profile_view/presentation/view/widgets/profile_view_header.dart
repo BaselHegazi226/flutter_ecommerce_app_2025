@@ -59,11 +59,10 @@ class ProfileViewHeader extends StatelessWidget {
     return Row(
       children: [
         CustomImage(
-          imageWidthPar: size.width * .28,
-          child: photoUrl != null && photoUrl.startsWith('http')
+          imageSize: size.width * .2,
+          imageProvider: photoUrl != null && photoUrl.startsWith('http')
               ? CachedNetworkImage(
                   imageUrl: photoUrl,
-                  fit: BoxFit.cover,
                   errorWidget: (context, error, widget) {
                     return const Icon(Icons.image_not_supported_outlined);
                   },

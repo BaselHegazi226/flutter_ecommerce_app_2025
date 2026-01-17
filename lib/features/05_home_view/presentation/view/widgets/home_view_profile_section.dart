@@ -67,7 +67,9 @@ class HomeViewProfileSection extends StatelessWidget {
               child: AutoSizeText(
                 userName,
                 minFontSize: 14,
+                maxLines: 1,
                 maxFontSize: 20,
+                overflow: TextOverflow.ellipsis,
                 style: TextStyle(
                   color: Theme.of(context).primaryColor,
                   fontSize: 18,
@@ -77,11 +79,10 @@ class HomeViewProfileSection extends StatelessWidget {
           ],
         ),
         CustomImage(
-          imageWidthPar: size.width * .3,
-          child: photoUrl != null && photoUrl.startsWith('http')
+          imageSize: size.width * .2,
+          imageProvider: photoUrl != null && photoUrl.startsWith('http')
               ? CachedNetworkImage(
                   imageUrl: photoUrl,
-                  fit: BoxFit.cover,
                   placeholder: (context, state) => Container(
                     decoration: BoxDecoration(
                       color: Theme.of(context).brightness == Brightness.dark

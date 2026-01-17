@@ -33,19 +33,16 @@ class _MainViewState extends State<MainView> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      extendBody: true,
-      body: SafeArea(
-        bottom: true,
-        child: widget.child,
-      ), // المحتوى بيتغير حسب الـ route
-      bottomNavigationBar: ValueListenableBuilder<int>(
-        valueListenable: _selectedIndex,
-        builder: (context, index, _) {
-          return _buildBlurNavBar(context, index);
-        },
-      ),
+    return ValueListenableBuilder(
+      valueListenable: _selectedIndex,
+      builder: (context, index, child) {
+        return Scaffold(
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+          extendBody: true, // عشان الخلفية تبان تحت الـ NavBar
+          body: SafeArea(bottom: true, child: widget.child),
+          bottomNavigationBar: _buildBlurNavBar(context, index),
+        );
+      },
     );
   }
 
@@ -78,7 +75,7 @@ class _MainViewState extends State<MainView> {
             ? Colors.grey.shade200
             : Colors.green.shade100,
         activeColor: Colors.white,
-        iconSize: textSize + 8,
+        iconSize: textSize + 10,
         padding: EdgeInsets.zero,
         tabBackgroundGradient: const LinearGradient(
           colors: [Colors.white30, Colors.white54],
@@ -90,19 +87,17 @@ class _MainViewState extends State<MainView> {
         style: GnavStyle.google,
         haptic: true,
         onTabChange: (index) {
-          if (index == _selectedIndex.value) return;
-
-          _selectedIndex.value = index;
-          context.go(tabs[index]); // التنقل
+          changeValueOfSelectedItem(index);
+          context.go(tabs[index]);
         },
         tabs: [
           GButton(
-            icon: Icons.home,
+            icon: Icons.home_filled,
             text: S.of(context).navHome,
             textSize: textSize,
             gap: 4,
             padding: const EdgeInsets.all(8),
-            margin: const EdgeInsetsDirectional.only(start: 2),
+            margin: const EdgeInsetsDirectional.only(start: 4),
           ),
           GButton(
             icon: Icons.search_outlined,
@@ -112,22 +107,27 @@ class _MainViewState extends State<MainView> {
             padding: const EdgeInsets.all(8),
           ),
           GButton(
-            icon: Icons.shopping_cart_outlined,
+            icon: Icons.shopping_cart,
             text: S.of(context).navCart,
             textSize: textSize,
+            iconSize: textSize + 12,
             gap: 4,
             padding: const EdgeInsets.all(8),
           ),
           GButton(
-            icon: Icons.person_2_outlined,
+            icon: Icons.person,
             text: S.of(context).navProfile,
             textSize: textSize,
             gap: 4,
             padding: const EdgeInsets.all(8),
-            margin: const EdgeInsetsDirectional.only(end: 2),
+            margin: const EdgeInsetsDirectional.only(end: 4),
           ),
         ],
       ),
     );
+  }
+
+  changeValueOfSelectedItem(int currentIndex) {
+    _selectedIndex.value = currentIndex;
   }
 }

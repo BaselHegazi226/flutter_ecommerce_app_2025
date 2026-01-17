@@ -43,6 +43,7 @@ class EditProfileViewBody extends StatelessWidget {
                 );
               },
             ),
+            const SizedBox(height: 24),
             const InputSection(),
           ],
         ),

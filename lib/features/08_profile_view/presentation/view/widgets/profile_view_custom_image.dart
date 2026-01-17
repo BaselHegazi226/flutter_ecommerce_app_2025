@@ -3,37 +3,40 @@ import 'package:flutter/material.dart';
 class CustomImage extends StatelessWidget {
   const CustomImage({
     super.key,
-    this.imageWidthPar,
-    required this.child,
+    this.imageSize = 100,
+    required this.imageProvider,
     this.enableBorder = true,
+    this.borderColor = Colors.grey,
+    this.borderWidth = 2.0,
   });
 
-  final double? imageWidthPar;
-  final Widget child;
+  final double imageSize;
+  final Widget imageProvider;
   final bool enableBorder;
+  final Color borderColor;
+  final double borderWidth;
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.sizeOf(context);
-    final imageWidth = imageWidthPar != null
-        ? imageWidthPar! / 2
-        : size.width * .4;
     return Container(
-      width: imageWidth,
+      width: imageSize,
+      height: imageSize,
       decoration: BoxDecoration(
-        border: enableBorder
-            ? Border.all(
-                color: Theme.of(context).brightness == Brightness.dark
-                    ? Colors.grey.shade200
-                    : Colors.grey.shade800,
-              )
-            : null,
         shape: BoxShape.circle,
+        border: enableBorder
+            ? Border.all(color: borderColor, width: borderWidth)
+            : null,
       ),
-      child: CircleAvatar(
-        radius: imageWidth / 2,
-        backgroundColor: Colors.transparent,
-        child: ClipOval(child: child),
+      child: ClipOval(
+        child: SizedBox(
+          width: imageSize,
+          height: imageSize,
+          child: FittedBox(
+            fit: BoxFit.cover, // يحافظ على الصورة أو أي Widget
+            clipBehavior: Clip.hardEdge,
+            child: imageProvider,
+          ),
+        ),
       ),
     );
   }
