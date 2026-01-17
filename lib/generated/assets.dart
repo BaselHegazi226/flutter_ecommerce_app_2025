@@ -13,7 +13,6 @@ class Assets {
       'assets/images/profile/no_location_data.svg';
   static const String profileUnFavouriteHeart =
       'assets/images/profile/un_favourite_heart.svg';
-  static const String matganaLogo = 'assets/images/splash/matgarna_logo.png';
   static const String splashAppLogoLight =
       'assets/images/splash/ecommerce_logo_2025_green.png';
   static const String splashAppLogoDark =
