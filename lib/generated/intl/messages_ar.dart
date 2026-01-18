@@ -123,6 +123,11 @@ class MessageLookup extends MessageLookupByLibrary {
     "auth_signUpToContinue": MessageLookupByLibrary.simpleMessage(
       "أنشئ حسابًا للمتابعة",
     ),
+    "calendar_cancel": MessageLookupByLibrary.simpleMessage("إلغاء"),
+    "calendar_confirm": MessageLookupByLibrary.simpleMessage("تأكيد"),
+    "calendar_title": MessageLookupByLibrary.simpleMessage(
+      "اختر تاريخ التوصيل",
+    ),
     "cart_alreadyInCart": MessageLookupByLibrary.simpleMessage(
       "هذا المنتج مضاف بالفعل إلى السلة",
     ),
@@ -150,12 +155,21 @@ class MessageLookup extends MessageLookupByLibrary {
     "cart_orderWillBe": MessageLookupByLibrary.simpleMessage(
       "سيتم التوصيل خلال 3 إلى 5 أيام عمل",
     ),
+    "cart_orderWillBe_result": MessageLookupByLibrary.simpleMessage(
+      "سيتم التوصيل خلال 3 إلى 5 أيام عمل",
+    ),
     "cart_payment": MessageLookupByLibrary.simpleMessage("الدفع"),
     "cart_pickAParticular": MessageLookupByLibrary.simpleMessage(
       "اختر تاريخًا من التقويم ليتم التوصيل في هذا اليوم",
     ),
+    "cart_pickAParticular_result": MessageLookupByLibrary.simpleMessage(
+      "طلبك سوف يصل في تاريخ",
+    ),
     "cart_placeYourOrder": MessageLookupByLibrary.simpleMessage(
       "قم بطلبك قبل الساعة 6 مساءً ليتم التوصيل في اليوم التالي",
+    ),
+    "cart_placeYourOrder_result": MessageLookupByLibrary.simpleMessage(
+      "طلبك سوف يصل اليوم التالي لو قمت بالطلب بعد 6 مساءً",
     ),
     "cart_standardDelivery": MessageLookupByLibrary.simpleMessage("توصيل عادي"),
     "cart_summarize": MessageLookupByLibrary.simpleMessage("الملخص"),

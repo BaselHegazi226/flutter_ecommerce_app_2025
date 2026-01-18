@@ -53,190 +53,183 @@ class _LocationViewState extends State<LocationView> {
         }
         return Form(
           key: _formKey,
-          child: Padding(
-            padding: const EdgeInsets.all(16),
-            child: Column(
-              children: [
-                Expanded(
-                  child: SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        Row(
-                          spacing: 8,
-                          children: [
-                            Icon(
-                              Icons.check_circle,
-                              color: Theme.of(context).primaryColor,
-                            ),
-                            CustomText(
-                              text: S.of(context).cart_billing_address,
-                              fontSize: 14,
-                              alignment: Alignment.centerLeft,
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 20),
-                        Column(
-                          spacing: 16,
-                          children: [
-                            CustomTextFormField(
-                              text: S.of(context).formStreet1,
-                              hintText: S.of(context).formEnterStreet1,
-                              onSaved: (value) {
-                                street1 = value!.trim();
-                              },
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return S.of(context).formStreet1Required;
-                                }
-                                return null;
-                              },
-                              textEditingController:
-                                  textEditingControllerStreet1,
-                            ),
-                            CustomTextFormField(
-                              text: S.of(context).formStreet2,
-                              hintText: S.of(context).formEnterStreet2,
-                              onSaved: (value) {
-                                street2 = value!.trim();
-                              },
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return S.of(context).formStreet2Required;
-                                }
-                                return null;
-                              },
-                              textEditingController:
-                                  textEditingControllerStreet2,
-                            ),
-                            CustomTextFormField(
-                              text: S.of(context).formCity,
-                              hintText: S.of(context).formEnterCity,
-                              onSaved: (value) {
-                                city = value!.trim();
-                              },
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return S.of(context).formCityRequired;
-                                }
-                                return null;
-                              },
-                              textEditingController: textEditingControllerCity,
-                            ),
-                            Row(
-                              children: [
-                                Expanded(
-                                  child: CustomTextFormField(
-                                    text: S.of(context).formState,
-                                    hintText: S.of(context).formEnterState,
-                                    onSaved: (value) {
-                                      stateEnum = value!.trim();
-                                    },
-                                    validator: (value) {
-                                      if (value == null || value.isEmpty) {
-                                        return S.of(context).formStateRequired;
-                                      }
-                                      return null;
-                                    },
-                                    textEditingController:
-                                        textEditingControllerState,
-                                  ),
-                                ),
-                                const SizedBox(width: 24),
-                                Expanded(
-                                  child: CustomTextFormField(
-                                    text: S.of(context).formCountry,
-                                    hintText: S.of(context).formEnterCountry,
-                                    onSaved: (value) {
-                                      country = value!.trim();
-                                    },
-                                    validator: (value) {
-                                      if (value == null || value.isEmpty) {
-                                        return S
-                                            .of(context)
-                                            .formCountryRequired;
-                                      }
-                                      return null;
-                                    },
-                                    textEditingController:
-                                        textEditingControllerCountry,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 16),
-                Align(
-                  alignment: Alignment.bottomCenter,
-                  child: Row(
-                    spacing: 16,
+          child: Column(
+            children: [
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
                     children: [
-                      Expanded(
-                        child: CustomButton(
-                          backgroundColor:
-                              Theme.of(context).brightness == Brightness.dark
-                              ? Colors.grey.shade700
-                              : kScaffoldColor,
-                          borderColor:
-                              Theme.of(context).brightness == Brightness.dark
-                              ? Colors.white
-                              : kPrimaryColor,
-                          textColor:
-                              Theme.of(context).brightness == Brightness.dark
-                              ? Colors.grey.shade200
-                              : kPrimaryColor,
-                          onPressed: widget.onBack,
-                          text: S.of(context).cart_back,
-                        ),
+                      Row(
+                        spacing: 8,
+                        children: [
+                          Icon(
+                            Icons.check_circle,
+                            color: Theme.of(context).primaryColor,
+                          ),
+                          CustomText(
+                            text: S.of(context).cart_billing_address,
+                            fontSize: 14,
+                            alignment: Alignment.centerLeft,
+                          ),
+                        ],
                       ),
-                      Expanded(
-                        child: CustomButton(
-                          onPressed: () {
-                            if (_formKey.currentState!.validate()) {
-                              _formKey.currentState!.save();
-                              locationModel = LocationModel(
-                                street1: street1,
-                                street2: street2,
-                                city: city,
-                                state: stateEnum,
-                                country: country,
-                              );
-                              cubit.fillLocation(locationModel: locationModel);
-                              if (cubit.getLocationModel != null) {
-                                widget.onNext();
-                                context
-                                    .read<GetCartCubit>()
-                                    .getCartProductsAndTotal();
-                                context.read<OrderCubit>().saveUserLocation(
-                                  locationModel: locationModel,
-                                );
+                      const SizedBox(height: 20),
+                      Column(
+                        spacing: 16,
+                        children: [
+                          CustomTextFormField(
+                            text: S.of(context).formStreet1,
+                            hintText: S.of(context).formEnterStreet1,
+                            onSaved: (value) {
+                              street1 = value!.trim();
+                            },
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return S.of(context).formStreet1Required;
                               }
-                            } else {
-                              autoValidateMode =
-                                  AutovalidateMode.onUserInteraction;
-                            }
-                          },
-                          text: S.of(context).cart_next,
-                          textColor:
-                              Theme.of(context).brightness == Brightness.dark
-                              ? Colors.grey.shade600
-                              : Colors.grey.shade200,
-                          backgroundColor:
-                              Theme.of(context).brightness == Brightness.dark
-                              ? Colors.grey.shade200
-                              : kPrimaryColor,
-                        ),
+                              return null;
+                            },
+                            textEditingController: textEditingControllerStreet1,
+                          ),
+                          CustomTextFormField(
+                            text: S.of(context).formStreet2,
+                            hintText: S.of(context).formEnterStreet2,
+                            onSaved: (value) {
+                              street2 = value!.trim();
+                            },
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return S.of(context).formStreet2Required;
+                              }
+                              return null;
+                            },
+                            textEditingController: textEditingControllerStreet2,
+                          ),
+                          CustomTextFormField(
+                            text: S.of(context).formCity,
+                            hintText: S.of(context).formEnterCity,
+                            onSaved: (value) {
+                              city = value!.trim();
+                            },
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return S.of(context).formCityRequired;
+                              }
+                              return null;
+                            },
+                            textEditingController: textEditingControllerCity,
+                          ),
+                          Row(
+                            children: [
+                              Expanded(
+                                child: CustomTextFormField(
+                                  text: S.of(context).formState,
+                                  hintText: S.of(context).formEnterState,
+                                  onSaved: (value) {
+                                    stateEnum = value!.trim();
+                                  },
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return S.of(context).formStateRequired;
+                                    }
+                                    return null;
+                                  },
+                                  textEditingController:
+                                      textEditingControllerState,
+                                ),
+                              ),
+                              const SizedBox(width: 24),
+                              Expanded(
+                                child: CustomTextFormField(
+                                  text: S.of(context).formCountry,
+                                  hintText: S.of(context).formEnterCountry,
+                                  onSaved: (value) {
+                                    country = value!.trim();
+                                  },
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return S.of(context).formCountryRequired;
+                                    }
+                                    return null;
+                                  },
+                                  textEditingController:
+                                      textEditingControllerCountry,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
                       ),
                     ],
                   ),
                 ),
-              ],
-            ),
+              ),
+              const SizedBox(height: 16),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: Row(
+                  spacing: 16,
+                  children: [
+                    Expanded(
+                      child: CustomButton(
+                        backgroundColor:
+                            Theme.of(context).brightness == Brightness.dark
+                            ? Colors.grey.shade700
+                            : kScaffoldColor,
+                        borderColor:
+                            Theme.of(context).brightness == Brightness.dark
+                            ? Colors.white
+                            : kPrimaryColor,
+                        textColor:
+                            Theme.of(context).brightness == Brightness.dark
+                            ? Colors.grey.shade200
+                            : kPrimaryColor,
+                        onPressed: widget.onBack,
+                        text: S.of(context).cart_back,
+                      ),
+                    ),
+                    Expanded(
+                      child: CustomButton(
+                        onPressed: () {
+                          if (_formKey.currentState!.validate()) {
+                            _formKey.currentState!.save();
+                            locationModel = LocationModel(
+                              street1: street1,
+                              street2: street2,
+                              city: city,
+                              state: stateEnum,
+                              country: country,
+                            );
+                            cubit.fillLocation(locationModel: locationModel);
+                            if (cubit.getLocationModel != null) {
+                              widget.onNext();
+                              context
+                                  .read<GetCartCubit>()
+                                  .getCartProductsAndTotal();
+                              context.read<OrderCubit>().saveUserLocation(
+                                locationModel: locationModel,
+                              );
+                            }
+                          } else {
+                            autoValidateMode =
+                                AutovalidateMode.onUserInteraction;
+                          }
+                        },
+                        text: S.of(context).cart_next,
+                        textColor:
+                            Theme.of(context).brightness == Brightness.dark
+                            ? Colors.grey.shade600
+                            : Colors.grey.shade200,
+                        backgroundColor:
+                            Theme.of(context).brightness == Brightness.dark
+                            ? Colors.grey.shade200
+                            : kPrimaryColor,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
         );
       },

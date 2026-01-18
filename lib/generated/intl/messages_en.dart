@@ -128,6 +128,11 @@ class MessageLookup extends MessageLookupByLibrary {
     "auth_signUpToContinue": MessageLookupByLibrary.simpleMessage(
       "Create an account to continue",
     ),
+    "calendar_cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
+    "calendar_confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
+    "calendar_title": MessageLookupByLibrary.simpleMessage(
+      "Choose delivery date",
+    ),
     "cart_alreadyInCart": MessageLookupByLibrary.simpleMessage(
       "This product is already added to the cart",
     ),
@@ -155,12 +160,21 @@ class MessageLookup extends MessageLookupByLibrary {
     "cart_orderWillBe": MessageLookupByLibrary.simpleMessage(
       "Order will be delivered between 3 - 5 business days",
     ),
+    "cart_orderWillBe_result": MessageLookupByLibrary.simpleMessage(
+      "Order will be delivered between 3 - 5 business days",
+    ),
     "cart_payment": MessageLookupByLibrary.simpleMessage("Payment"),
     "cart_pickAParticular": MessageLookupByLibrary.simpleMessage(
       "Pick a particular date from the calendar and order will be delivered on selected date",
     ),
+    "cart_pickAParticular_result": MessageLookupByLibrary.simpleMessage(
+      "Your order will reach in",
+    ),
     "cart_placeYourOrder": MessageLookupByLibrary.simpleMessage(
       "Place your order before 6pm and your items will be delivered the next day",
+    ),
+    "cart_placeYourOrder_result": MessageLookupByLibrary.simpleMessage(
+      "Your order will reach before 6pm and your items will be delivered the next day",
     ),
     "cart_standardDelivery": MessageLookupByLibrary.simpleMessage(
       "Standard Delivery",

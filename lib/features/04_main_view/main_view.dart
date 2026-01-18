@@ -48,8 +48,13 @@ class _MainViewState extends State<MainView> {
 
   Widget _buildBlurNavBar(BuildContext context, int currentIndex) {
     final size = MediaQuery.sizeOf(context);
-    final double textSize = size.width > 700 ? 12 : 10;
-
+    final double textSize = S.of(context).navHome == 'Search'
+        ? size.width > 700
+              ? 10
+              : 8
+        : size.width > 700
+        ? 12
+        : 10;
     return Container(
       height: 75,
       decoration: BoxDecoration(
@@ -117,6 +122,7 @@ class _MainViewState extends State<MainView> {
           GButton(
             icon: Icons.person,
             text: S.of(context).navProfile,
+            iconSize: textSize + 12,
             textSize: textSize,
             gap: 4,
             padding: const EdgeInsets.all(8),

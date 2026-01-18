@@ -1,6 +1,5 @@
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_e_commerce_app_2025/core/errors/failure.dart';
 import 'package:flutter_e_commerce_app_2025/core/services/user_services.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
@@ -12,6 +11,9 @@ import '../model/user_model.dart';
 import 'auth_repo.dart';
 
 class AuthRepoImpl implements AuthRepo {
+  final UserServices _userServices = UserServices();
+  final UserInfoCacheImplement _userCache = UserInfoCacheImplement();
+
   @override
   Future<Either<Failure, UserCredential>> signInWithEmail({
     required String email,
@@ -20,69 +22,38 @@ class AuthRepoImpl implements AuthRepo {
     try {
       final userCredential = await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
-      final user = userCredential.user;
-      if (user != null && userCredential.credential != null) {
-        UserModel userModel = UserModel(
-          id: user.uid,
-          name: user.displayName ?? 'guest',
-          email: user.email ?? 'guest',
-          photoUrl: user.photoURL,
-          provider: 'google',
-        );
-        final String userToken = userCredential.credential!.token.toString();
-        await saveUser(userModel: userModel, userToken: userToken);
-      }
+
+      await _handleUserAfterLogin(userCredential);
+
       return right(userCredential);
     } on FirebaseAuthException catch (exception) {
-      debugPrint(('auth exce code = ${exception.code}'));
-      return left(FirebaseFailure.fromFirebaseException(exception: exception));
-    } on FirebaseException catch (exception) {
-      debugPrint(('exce = $exception'));
       return left(FirebaseFailure.fromFirebaseException(exception: exception));
     } catch (e) {
-      debugPrint(('eeee= ${e.toString()}'));
       return left(CatchErrorHandle.catchBack(failure: e));
     }
   }
 
   @override
   Future<Either<Failure, UserCredential?>> signInWithFacebook() async {
-    debugPrint('now in login with facebook');
     try {
-      // Trigger the sign-in flow
       final LoginResult loginResult = await FacebookAuth.instance.login();
 
-      debugPrint('status code for login with facebook : ${loginResult.status}');
-      if (loginResult.status == LoginStatus.success) {
-        final OAuthCredential facebookAuthCredential =
-            FacebookAuthProvider.credential(
-              loginResult.accessToken!.tokenString,
-            );
-
-        // Once signed in, return the UserCredential
-        UserCredential userCredential = await FirebaseAuth.instance
-            .signInWithCredential(facebookAuthCredential);
-
-        final user = userCredential.user;
-        if (user != null && userCredential.credential != null) {
-          UserModel userModel = UserModel(
-            id: user.uid,
-            name: user.displayName ?? 'guest',
-            email: user.email ?? 'guest',
-            photoUrl: user.photoURL,
-            provider: 'facebook',
-          );
-          final String userToken = userCredential.credential!.token.toString();
-          await saveUser(userModel: userModel, userToken: userToken);
-        }
-        return right(userCredential);
-      } else {
-        debugPrint('status = ${loginResult.status}');
+      if (loginResult.status != LoginStatus.success) {
         return right(null);
       }
-      // Create a credential from the access token
+
+      final credential = FacebookAuthProvider.credential(
+        loginResult.accessToken!.tokenString,
+      );
+
+      final userCredential = await FirebaseAuth.instance.signInWithCredential(
+        credential,
+      );
+
+      await _handleUserAfterLogin(userCredential);
+
+      return right(userCredential);
     } catch (e) {
-      debugPrint('error = ${e.toString()}');
       return left(CatchErrorHandle.catchBack(failure: e));
     }
   }
@@ -90,42 +61,26 @@ class AuthRepoImpl implements AuthRepo {
   @override
   Future<Either<Failure, UserCredential>> signInWithGoogle() async {
     try {
-      // Trigger the authentication flow
-      debugPrint('now in try ');
-
       final googleSignIn = GoogleSignIn.instance;
       await googleSignIn.initialize();
       await googleSignIn.signOut();
 
-      final GoogleSignInAccount googleUser = await googleSignIn.authenticate(
-        scopeHint: ['email'],
-      );
+      final googleUser = await googleSignIn.authenticate(scopeHint: ['email']);
 
-      final GoogleSignInAuthentication googleAuth = googleUser.authentication;
+      final googleAuth = googleUser.authentication;
+
       final credential = GoogleAuthProvider.credential(
         idToken: googleAuth.idToken,
       );
-      // تسجيل الدخول في Firebase
-      UserCredential userCredential = await FirebaseAuth.instance
-          .signInWithCredential(credential);
-      final user = userCredential.user;
-      if (user != null && userCredential.credential != null) {
-        UserModel userModel = UserModel(
-          id: user.uid,
-          name: user.displayName ?? 'guest',
-          email: user.email ?? 'guest',
-          photoUrl: user.photoURL,
-          provider: 'google',
-        );
-        final String userToken = userCredential.credential!.token.toString();
-        await saveUser(userModel: userModel, userToken: userToken);
-      }
-      //save user data
 
-      // خزن حالة المستخدم
+      final userCredential = await FirebaseAuth.instance.signInWithCredential(
+        credential,
+      );
+
+      await _handleUserAfterLogin(userCredential);
+
       return right(userCredential);
     } catch (e) {
-      debugPrint('error=$e');
       return left(CatchErrorHandle.catchBack(failure: e));
     }
   }
@@ -137,77 +92,89 @@ class AuthRepoImpl implements AuthRepo {
     required String password,
   }) async {
     try {
-      final UserCredential userCredential = await FirebaseAuth.instance
+      final userCredential = await FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: email, password: password);
-      final user = userCredential.user;
-      if (user == null) {
-        debugPrint('user = null');
-      }
-      if (user != null) {
-        UserModel userModel = UserModel(
-          id: user.uid,
-          name: name,
-          email: email,
-          provider: 'email and password',
-          photoUrl: user.photoURL,
-        );
-        debugPrint('user id = ${userModel.id}');
-        final String? userToken = await user.getIdToken(true);
-        await saveUser(
-          userModel: userModel,
-          userToken: userToken ?? 'new user',
-        );
-      }
+
+      final user = userCredential.user!;
+      final userModel = UserModel(
+        id: user.uid,
+        name: name,
+        email: email,
+        photoUrl: user.photoURL,
+        provider: 'email',
+      );
+
+      await _userServices.addUserToFirebase(userModel);
+      await _userCache.saveUser(userModel: userModel);
+
       return right(userCredential);
     } catch (e) {
       return left(CatchErrorHandle.catchBack(failure: e));
     }
   }
 
-  @override
-  Future<Either<Failure, bool>> forgetPassword() {
-    // TODO: implement forgetPassword
-    throw UnimplementedError();
+  /// ================== 🔥 أهم جزء ==================
+  Future<void> _handleUserAfterLogin(UserCredential userCredential) async {
+    final user = userCredential.user;
+    if (user == null) return;
+
+    // 1️⃣ حاول تجيب المستخدم من Firestore
+    final remoteResult = await _userServices.getUserFromFirebase(user.uid);
+
+    await remoteResult.fold(
+      (_) async {
+        // ❌ حصل error → اعمل fallback بإنشاء مستخدم
+        final newUser = _mapFirebaseUserToModel(user);
+        await _userServices.addUserToFirebase(newUser);
+        await _userCache.saveUser(userModel: newUser);
+      },
+      (remoteUser) async {
+        if (remoteUser != null) {
+          // ✅ مستخدم موجود → استخدم بياناته (الصورة المعدلة محفوظة)
+          await _userCache.saveUser(userModel: remoteUser);
+        } else {
+          // 🆕 مستخدم جديد
+          final newUser = _mapFirebaseUserToModel(user);
+          await _userServices.addUserToFirebase(newUser);
+          await _userCache.saveUser(userModel: newUser);
+        }
+      },
+    );
   }
 
-  @override
-  Future<Either<Failure, bool>> updatePassword() {
-    // TODO: implement updatePassword
-    throw UnimplementedError();
+  UserModel _mapFirebaseUserToModel(User user) {
+    return UserModel(
+      id: user.uid,
+      name: user.displayName ?? 'guest',
+      email: user.email ?? 'guest',
+      photoUrl: user.photoURL,
+      provider: user.providerData.isNotEmpty
+          ? user.providerData.first.providerId
+          : 'unknown',
+    );
   }
 
-  @override
-  Future<Either<Failure, bool>> verifyCode() {
-    // TODO: implement verifyCode
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<Either<Failure, bool>> verifyEmail() {
-    // TODO: implement verifyEmail
-    throw UnimplementedError();
-  }
+  // ================== باقي الدوال بدون تغيير ==================
 
   @override
   Future<Either<Failure, String?>> isNewUser() async {
     try {
       final user = FirebaseAuth.instance.currentUser;
-
-      if (user == null) return right(null);
-
-      return right(user.uid);
+      return right(user?.uid);
     } catch (e) {
       return left(CatchErrorHandle.catchBack(failure: e));
     }
   }
 
-  Future<void> saveUser({
-    required UserModel userModel,
-    required String userToken,
-  }) async {
-    //save user data to shared preference
-    await UserInfoCacheImplement().saveUser(userModel: userModel);
-    //save user data to firebase
-    await UserServices().addUserToFirebase(userModel);
-  }
+  @override
+  Future<Either<Failure, bool>> forgetPassword() => throw UnimplementedError();
+
+  @override
+  Future<Either<Failure, bool>> updatePassword() => throw UnimplementedError();
+
+  @override
+  Future<Either<Failure, bool>> verifyCode() => throw UnimplementedError();
+
+  @override
+  Future<Either<Failure, bool>> verifyEmail() => throw UnimplementedError();
 }

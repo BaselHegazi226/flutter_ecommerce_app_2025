@@ -57,19 +57,16 @@ class SectionPayment extends StatelessWidget {
       children: [
         Expanded(
           child: SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.all(16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  checkCircleSection(context),
-                  const SizedBox(height: 24),
-                  dateStateSection(updatedOrder, context),
-                  const SizedBox(height: 16),
-                  SectionPaymentTrackItem(orderModel: updatedOrder),
-                  // زر الرجوع بعد الجريد
-                ],
-              ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                checkCircleSection(context),
+                const SizedBox(height: 24),
+                dateStateSection(updatedOrder, context),
+                const SizedBox(height: 16),
+                SectionPaymentTrackItem(orderModel: updatedOrder),
+                // زر الرجوع بعد الجريد
+              ],
             ),
           ),
         ),

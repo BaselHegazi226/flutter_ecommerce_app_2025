@@ -118,7 +118,7 @@ abstract class AppRouter {
             routes: [
               GoRoute(
                 path: Routes.editProfileView,
-                pageBuilder: (context, state) => AppTransitions.slideX(
+                pageBuilder: (context, state) => AppTransitions.fadeScale(
                   key: state.pageKey,
                   child: EditProfileView(
                     userInfoCubit: state.extra as UserInfoCubit,

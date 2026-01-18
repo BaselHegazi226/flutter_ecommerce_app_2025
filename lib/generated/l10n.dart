@@ -279,6 +279,16 @@ class S {
     );
   }
 
+  /// `Your order will reach before 6pm and your items will be delivered the next day`
+  String get cart_placeYourOrder_result {
+    return Intl.message(
+      'Your order will reach before 6pm and your items will be delivered the next day',
+      name: 'cart_placeYourOrder_result',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Pick a particular date from the calendar and order will be delivered on selected date`
   String get cart_pickAParticular {
     return Intl.message(
@@ -289,11 +299,56 @@ class S {
     );
   }
 
+  /// `Your order will reach in`
+  String get cart_pickAParticular_result {
+    return Intl.message(
+      'Your order will reach in',
+      name: 'cart_pickAParticular_result',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Order will be delivered between 3 - 5 business days`
   String get cart_orderWillBe {
     return Intl.message(
       'Order will be delivered between 3 - 5 business days',
       name: 'cart_orderWillBe',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Order will be delivered between 3 - 5 business days`
+  String get cart_orderWillBe_result {
+    return Intl.message(
+      'Order will be delivered between 3 - 5 business days',
+      name: 'cart_orderWillBe_result',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Choose delivery date`
+  String get calendar_title {
+    return Intl.message(
+      'Choose delivery date',
+      name: 'calendar_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancel`
+  String get calendar_cancel {
+    return Intl.message('Cancel', name: 'calendar_cancel', desc: '', args: []);
+  }
+
+  /// `Confirm`
+  String get calendar_confirm {
+    return Intl.message(
+      'Confirm',
+      name: 'calendar_confirm',
       desc: '',
       args: [],
     );

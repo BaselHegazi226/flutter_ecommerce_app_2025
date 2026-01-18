@@ -127,13 +127,25 @@ extension CartLocalizationX on S {
 
   String get cartPlaceYourOrder => cart_placeYourOrder;
 
+  String get cartPlaceYourResult => cart_placeYourOrder_result;
+
   String get cartPickAParticular => cart_pickAParticular;
 
+  String get cartPickAParticularResult => cart_pickAParticular_result;
+
   String get cartOrderWillBe => cart_orderWillBe;
+
+  String get cartOrderWillBeResult => cart_orderWillBe_result;
 
   String get cartTryToFill => cart_tryToFill;
 
   String get cartAlreadyInCart => cart_alreadyInCart;
+
+  String get calendarTitle => calendar_title;
+
+  String get calendarCancel => calendar_cancel;
+
+  String get calendarConfirm => calendar_confirm;
 }
 
 //order extension of S

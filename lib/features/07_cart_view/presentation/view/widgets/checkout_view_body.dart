@@ -22,7 +22,12 @@ class CheckoutViewBody extends StatelessWidget {
       builder: (context, state) {
         final cubit = context.read<CheckoutCubit>();
         return Padding(
-          padding: const EdgeInsets.only(bottom: 8, top: 24),
+          padding: const EdgeInsets.only(
+            bottom: 8,
+            top: 24,
+            right: 16,
+            left: 16,
+          ),
           child: CustomScrollView(
             slivers: [
               SliverToBoxAdapter(
@@ -30,7 +35,7 @@ class CheckoutViewBody extends StatelessWidget {
                   child: buildEasyStepper(cubit, context, isDark, size),
                 ),
               ),
-              const SliverToBoxAdapter(child: SizedBox(height: 24)),
+              const SliverToBoxAdapter(child: SizedBox(height: 20)),
               SliverFillRemaining(
                 hasScrollBody: true,
                 child: IndexedStack(

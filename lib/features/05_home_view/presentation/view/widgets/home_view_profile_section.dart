@@ -63,7 +63,7 @@ class HomeViewProfileSection extends StatelessWidget {
           children: [
             CustomText(text: S.of(context).homeWelcome, fontSize: 24),
             SizedBox(
-              width: size.width * .35,
+              width: size.width * .7,
               child: AutoSizeText(
                 userName,
                 minFontSize: 14,
