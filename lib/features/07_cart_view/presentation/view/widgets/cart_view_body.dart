@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_e_commerce_app_2025/core/shimmer/cart_shimmer.dart';
 import 'package:flutter_e_commerce_app_2025/core/utilities/custom_layout.dart';
 import 'package:flutter_e_commerce_app_2025/core/utilities/extensions_of_s_localization.dart';
+import 'package:flutter_e_commerce_app_2025/features/07_cart_view/presentation/view_model/checkout_cubit/checkout_cubit.dart';
 import 'package:flutter_e_commerce_app_2025/generated/assets.dart';
 
 import '../../../../../core/utilities/not_item_found.dart';
@@ -28,7 +29,28 @@ class _CartViewBodyState extends State<CartViewBody> {
   @override
   Widget build(BuildContext context) {
     final Size screenSize = MediaQuery.sizeOf(context);
-    return BlocBuilder<GetCartCubit, GetCartState>(
+    return BlocConsumer<GetCartCubit, GetCartState>(
+      listener: (context, state) {
+        if (state is GetProductCartAndTotalSuccess ||
+            state is GetProductCartAndTotalSuccessOnline) {
+          final cartList = (state is GetProductCartAndTotalSuccess)
+              ? state.carts
+              : (state as GetProductCartAndTotalSuccessOnline).carts;
+          final totalPrice = (state is GetProductCartAndTotalSuccess)
+              ? state.totalPrice
+              : (state as GetProductCartAndTotalSuccessOnline).totalPrice;
+          debugPrint('total price in cart view = $totalPrice');
+          for (var item in cartList) {
+            debugPrint(
+              'item of cart list in in cart view = ${item.toJson()} =====>',
+            );
+          }
+          context.read<CheckoutCubit>().setCartData(
+            totalPrice: totalPrice,
+            cartList: cartList,
+          );
+        }
+      },
       builder: (context, state) {
         if (state is GetProductCartAndTotalSuccess ||
             state is GetProductCartAndTotalSuccessOnline) {
@@ -48,9 +70,12 @@ class _CartViewBodyState extends State<CartViewBody> {
         } else if (state is GetProductCartAndTotalFailure) {
           return Center(child: Text(state.errorMessage));
         }
-        return CustomLayout(
-          mobileWidget: cartViewItemShimmerListMobile(screenSize),
-          tabletWidget: cartViewItemShimmerListTablet(screenSize),
+        return Padding(
+          padding: const EdgeInsets.all(16),
+          child: CustomLayout(
+            mobileWidget: cartViewItemShimmerListMobile(screenSize),
+            tabletWidget: cartViewItemShimmerListTablet(screenSize),
+          ),
         );
       },
     );

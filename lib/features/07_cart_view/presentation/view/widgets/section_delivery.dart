@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_e_commerce_app_2025/core/utilities/custom_button.dart';
 import 'package:flutter_e_commerce_app_2025/core/utilities/custom_text.dart';
-import 'package:flutter_e_commerce_app_2025/core/utilities/extensions_of_s_localization.dart';
+import 'package:flutter_e_commerce_app_2025/generated/l10n.dart';
 
 import '../../../../../core/helper/const.dart';
-import '../../../../../core/helper/date_formatter.dart';
-import '../../../../../generated/l10n.dart';
+import '../../../../../core/utilities/extensions_of_s_localization.dart';
 import '../../../data/model/delivery_method_model.dart';
 import '../../view_model/checkout_cubit/checkout_cubit.dart';
 
@@ -21,219 +20,185 @@ class DeliveryView extends StatefulWidget {
 
 class _DeliveryViewState extends State<DeliveryView> {
   final ValueNotifier<int> valueNotifier = ValueNotifier<int>(1);
-  final ValueNotifier<DeliveryMethodModel>
-  deliveryNotifier = ValueNotifier<DeliveryMethodModel>(
-    const DeliveryMethodModel(
-      title: 'Next Day Delivery',
-      subtitle:
-          'Place your order before 6pm and your items will be delivered the next day',
-    ),
-  );
 
-  DateTime? selectedDate;
+  final ValueNotifier<DeliveryMethodModel> deliveryNotifier =
+      ValueNotifier<DeliveryMethodModel>(
+        const DeliveryMethodModel(deliveryType: DeliveryType.standard),
+      );
 
   @override
   void initState() {
     super.initState();
-    // إرسال الطريقة الافتراضية عند البداية
-    context.read<CheckoutCubit>().chooseDeliveryMethod(
-      deliveryMethodModel: deliveryNotifier.value,
-    );
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final cubit = context.read<CheckoutCubit>();
+      final currentDelivery =
+          cubit.getDeliveryMethod ??
+          const DeliveryMethodModel(deliveryType: DeliveryType.standard);
+
+      deliveryNotifier.value = currentDelivery;
+      valueNotifier.value = _indexFromType(currentDelivery.deliveryType);
+
+      // send initial value if null
+      if (cubit.getDeliveryMethod == null) {
+        cubit.chooseDeliveryMethod(deliveryMethodModel: currentDelivery);
+      }
+    });
+  }
+
+  int _indexFromType(DeliveryType type) {
+    switch (type) {
+      case DeliveryType.standard:
+        return 1;
+      case DeliveryType.nextDay:
+        return 2;
+      case DeliveryType.nominated:
+        return 3;
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    final cubit = context.read<CheckoutCubit>();
+    final size = MediaQuery.sizeOf(context);
+    final isDark = Theme.of(context).brightness == Brightness.dark;
 
-    return Column(
-      children: [
-        Expanded(
-          child: SingleChildScrollView(
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: Column(
+        children: [
+          Expanded(
             child: ValueListenableBuilder<int>(
               valueListenable: valueNotifier,
-              builder: (context, value, _) {
-                return _buildRadioButtonsSections(context, value, cubit);
+              builder: (_, value, __) {
+                return _buildRadios(context, value, isDark);
               },
             ),
           ),
-        ),
-        const SizedBox(height: 16),
-        Row(
-          children: [
-            const Expanded(flex: 2, child: SizedBox()),
-            Expanded(
-              child: CustomButton(
-                onPressed: () {
-                  // لو Nominated Delivery ومش مختار تاريخ
-                  if (valueNotifier.value == 2 && selectedDate == null) {
-                    selectedDate = DateTime.now();
-                    final formattedDate = DateFormatter.format(
-                      selectedDate!,
-                      Localizations.localeOf(context).languageCode,
-                    );
-                    deliveryNotifier.value = DeliveryMethodModel(
-                      title: S.of(context).cart_nominatedDelivery,
-                      subtitle:
-                          '${S.of(context).cartPickAParticularResult} $formattedDate',
-                    );
-                    cubit.chooseDeliveryMethod(
-                      deliveryMethodModel: deliveryNotifier.value,
-                    );
-                  }
-                  widget.onNext();
-                },
-                text: S.of(context).cart_next,
-                textColor: Theme.of(context).brightness == Brightness.dark
-                    ? Colors.grey.shade600
-                    : Colors.grey.shade200,
-                backgroundColor: Theme.of(context).brightness == Brightness.dark
-                    ? Colors.grey.shade200
-                    : Theme.of(context).primaryColor,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              SizedBox(
+                width: size.width * .3,
+                child: CustomButton(
+                  text: S.of(context).cart_next,
+                  onPressed: widget.onNext,
+                  textColor: isDark
+                      ? Colors.grey.shade600
+                      : Colors.grey.shade200,
+                  backgroundColor: isDark
+                      ? Colors.grey.shade200
+                      : Theme.of(context).primaryColor,
+                ),
               ),
-            ),
-          ],
-        ),
-      ],
+            ],
+          ),
+        ],
+      ),
     );
   }
 
-  Column _buildRadioButtonsSections(
-    BuildContext context,
-    int value,
-    CheckoutCubit cubit,
-  ) {
-    final theme = Theme.of(context);
-
+  Column _buildRadios(BuildContext context, int value, bool isDark) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // Next Day Delivery
-        RadioListTile(
-          value: 1,
-          groupValue: value,
-          activeColor: theme.primaryColor,
-          onChanged: (index) {
-            changeValueNotifier(index!);
-            selectedDate = null;
+        _radioTile(
+          index: 1,
+          current: value,
+          model: const DeliveryMethodModel(deliveryType: DeliveryType.standard),
 
-            deliveryNotifier.value = DeliveryMethodModel(
-              title: S.of(context).cart_nextDayDelivery,
-              subtitle: S.of(context).cart_placeYourOrder,
-            );
-
-            cubit.chooseDeliveryMethod(
-              deliveryMethodModel: deliveryNotifier.value,
-            );
-          },
-          title: CustomText(
-            text: S.of(context).cart_nextDayDelivery,
-            fontSize: 18,
-          ),
-          subtitle: CustomText(
-            text: S.of(context).cart_placeYourOrder,
-            fontSize: 14,
-          ),
+          onTap: () => _updateDelivery(1, DeliveryType.standard),
         ),
-
-        const SizedBox(height: 32),
-
-        // Nominated Delivery
-        RadioListTile(
-          value: 2,
-          groupValue: value,
-          activeColor: theme.primaryColor,
-          onChanged: (index) async {
-            changeValueNotifier(index!);
-
-            deliveryNotifier.value = DeliveryMethodModel(
-              title: S.of(context).cart_nominatedDelivery,
-              subtitle: S.of(context).cart_pickAParticular,
-            );
-
-            cubit.chooseDeliveryMethod(
-              deliveryMethodModel: deliveryNotifier.value,
-            );
-
-            // اختر التاريخ
-            final pickedDate = await _showDeliveryDateBottomSheet(context);
-            selectedDate = pickedDate ?? DateTime.now();
-
-            // استخدم DateFormatter حسب لغة التطبيق
-            final formattedDate = DateFormatter.format(
-              selectedDate!,
-              Localizations.localeOf(context).languageCode,
-            );
-
-            deliveryNotifier.value = DeliveryMethodModel(
-              title: S.of(context).cart_nominatedDelivery,
-              subtitle:
-                  '${S.of(context).cartPickAParticularResult} $formattedDate',
-            );
-
-            cubit.chooseDeliveryMethod(
-              deliveryMethodModel: deliveryNotifier.value,
-            );
-          },
-          title: CustomText(
-            text: S.of(context).cart_nominatedDelivery,
-            fontSize: 18,
-          ),
-          subtitle: ValueListenableBuilder<DeliveryMethodModel>(
-            valueListenable: deliveryNotifier,
-            builder: (context, model, _) {
-              return CustomText(
-                text: model.title == S.of(context).cart_nominatedDelivery
-                    ? model.subtitle
-                    : S.of(context).cart_pickAParticular,
-                fontSize: 14,
-              );
-            },
-          ),
+        const SizedBox(height: 24),
+        _radioTile(
+          index: 2,
+          current: value,
+          model: const DeliveryMethodModel(deliveryType: DeliveryType.nextDay),
+          onTap: () => _updateDelivery(2, DeliveryType.nextDay),
         ),
+        const SizedBox(height: 24),
+        ValueListenableBuilder<DeliveryMethodModel>(
+          valueListenable: deliveryNotifier,
+          builder: (_, model, __) {
+            final displayModel = model.deliveryType == DeliveryType.nominated
+                ? model
+                : const DeliveryMethodModel(
+                    deliveryType: DeliveryType.nominated,
+                  );
 
-        const SizedBox(height: 32),
+            return _radioTile(
+              index: 3,
+              current: value,
+              model: displayModel,
 
-        // Standard Delivery
-        RadioListTile(
-          value: 3,
-          groupValue: value,
-          activeColor: theme.primaryColor,
-          onChanged: (index) {
-            changeValueNotifier(index!);
-            selectedDate = null;
-
-            deliveryNotifier.value = DeliveryMethodModel(
-              title: S.of(context).cart_standardDelivery,
-              subtitle: S.of(context).cart_orderWillBe,
-            );
-
-            cubit.chooseDeliveryMethod(
-              deliveryMethodModel: deliveryNotifier.value,
+              onTap: () async {
+                valueNotifier.value = 3;
+                final checkoutCubit = context.read<CheckoutCubit>();
+                final date = await _showDatePicker(context);
+                final selected = date ?? DateTime.now();
+                final newModel = DeliveryMethodModel(
+                  deliveryType: DeliveryType.nominated,
+                  selectedTime: selected,
+                );
+                deliveryNotifier.value = newModel;
+                checkoutCubit.chooseDeliveryMethod(
+                  deliveryMethodModel: newModel,
+                );
+              },
             );
           },
-          title: CustomText(
-            text: S.of(context).cart_standardDelivery,
-            fontSize: 18,
-          ),
-          subtitle: CustomText(
-            text: S.of(context).cart_orderWillBe,
-            fontSize: 14,
-          ),
         ),
       ],
     );
   }
 
-  void changeValueNotifier(int index) {
-    valueNotifier.value = index;
+  Widget _radioTile({
+    required int index,
+    required int current,
+    required DeliveryMethodModel model,
+    required VoidCallback onTap,
+  }) {
+    return RadioListTile<int>(
+      value: index,
+      groupValue: current,
+      onChanged: (_) => onTap(),
+      activeColor: Theme.of(context).primaryColor,
+      title: CustomText(
+        text: model.title(context),
+        fontSize: 18,
+        fontWeight: FontWeight.bold,
+      ),
+      subtitle: CustomText(text: model.subtitle(context), fontSize: 14),
+    );
   }
 
-  Future<DateTime?> _showDeliveryDateBottomSheet(BuildContext context) {
+  void _updateDelivery(int index, DeliveryType type) {
+    valueNotifier.value = index;
+
+    final model = DeliveryMethodModel(deliveryType: type);
+
+    deliveryNotifier.value = model;
+
+    context.read<CheckoutCubit>().chooseDeliveryMethod(
+      deliveryMethodModel: model,
+    );
+  }
+
+  Future<DateTime?> _showDatePicker(BuildContext context) {
     DateTime tempDate = DateTime.now();
+
+    double textScale() {
+      final width = MediaQuery.of(context).size.width;
+      if (width >= 900) return 1.0;
+      if (width >= 600) return 0.95;
+      return 0.9;
+    }
+
+    final scale = textScale();
 
     return showModalBottomSheet<DateTime>(
       context: context,
       isScrollControlled: true,
+      barrierColor: Colors.grey.withAlpha(32),
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
       ),
@@ -244,12 +209,17 @@ class _DeliveryViewState extends State<DeliveryView> {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              /// Title
               Text(
                 S.of(context).calendarTitle,
-                style: Theme.of(context).textTheme.titleLarge,
+                style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                  fontSize: 22 * scale,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
               const SizedBox(height: 16),
 
+              /// Calendar
               Theme(
                 data: Theme.of(context).copyWith(
                   colorScheme: Theme.of(context).brightness == Brightness.dark
@@ -261,33 +231,29 @@ class _DeliveryViewState extends State<DeliveryView> {
                           primary: kPrimaryColor,
                           onPrimary: Colors.white,
                         ),
+                  textTheme: Theme.of(context).textTheme.copyWith(
+                    titleLarge: Theme.of(
+                      context,
+                    ).textTheme.titleLarge?.copyWith(fontSize: 18 * scale),
+                    titleMedium: Theme.of(
+                      context,
+                    ).textTheme.titleMedium?.copyWith(fontSize: 16 * scale),
+                    bodyMedium: Theme.of(
+                      context,
+                    ).textTheme.bodyMedium?.copyWith(fontSize: 14 * scale),
+                    labelLarge: Theme.of(
+                      context,
+                    ).textTheme.labelLarge?.copyWith(fontSize: 16 * scale),
+                  ),
                 ),
                 child: CalendarDatePicker(
                   initialDate: tempDate,
                   firstDate: DateTime.now(),
                   lastDate: DateTime(2026, 12, 31),
                   onDateChanged: (date) {
-                    tempDate = date;
+                    Navigator.pop(context, date);
                   },
                 ),
-              ),
-              const SizedBox(height: 12),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  TextButton(
-                    onPressed: () => Navigator.pop(context),
-                    child: Text(
-                      S.of(context).calendar_cancel,
-                      style: TextStyle(color: Theme.of(context).primaryColor),
-                    ),
-                  ),
-                  const SizedBox(width: 8),
-                  ElevatedButton(
-                    onPressed: () => Navigator.pop(context, tempDate),
-                    child: Text(S.of(context).calendar_confirm),
-                  ),
-                ],
               ),
             ],
           ),

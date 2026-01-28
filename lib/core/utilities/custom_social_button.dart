@@ -35,7 +35,7 @@ class CustomSocialButton extends StatelessWidget {
               side: BorderSide(color: Color(0xffDDDDDD)),
             ),
           ),
-          onPressed: onPressed,
+          onPressed: value ? null : onPressed,
           child: value
               ? CustomCircleIndicator(
                   color: Theme.of(context).brightness == Brightness.dark

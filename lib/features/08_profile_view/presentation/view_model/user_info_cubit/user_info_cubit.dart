@@ -6,14 +6,14 @@ import 'package:flutter_e_commerce_app_2025/core/services/user_services.dart';
 import 'package:flutter_e_commerce_app_2025/features/08_profile_view/presentation/view_model/user_info_cubit/user_info_state.dart';
 
 import '../../../../03_auth_view/data/model/user_model.dart';
-import '../../../data/repo/profile_repo_impl.dart';
+import '../../../data/repo_impl/profile_repo_impl.dart';
 
 class UserInfoCubit extends Cubit<UserInfoState> {
   final UserInfoCacheImplement userInfoCache = UserInfoCacheImplement();
   final UserServices userFirebaseStore = UserServices();
-  final ProfileRepoImpl profileRepo = ProfileRepoImpl();
+  final ProfileRepoImpl profileRepo;
 
-  UserInfoCubit() : super(UserInfoInitial());
+  UserInfoCubit(this.profileRepo) : super(UserInfoInitial());
 
   Future<UserModel?> getUserInfo() async {
     emit(GetUserInfoLocalLoading());
@@ -83,18 +83,11 @@ class UserInfoCubit extends Cubit<UserInfoState> {
     return null;
   }
 
-  Future<void> signOut() async {
-    emit(SignOutLoading());
+  Future<void> updateUser(UserModel updatedUser) async {
+    // 1️⃣ خزّن في الكاش
+    await userInfoCache.saveUser(userModel: updatedUser);
 
-    final result = await profileRepo.signOut();
-
-    result.fold(
-      (error) {
-        emit(SignOutFailure(errorMessage: error.errorKey ?? 'sign out error'));
-      },
-      (_) {
-        emit(SignOutSuccess());
-      },
-    );
+    // 2️⃣ اعمل emit مباشر
+    emit(GetUserInfoLocalSuccess(userModel: updatedUser));
   }
 }

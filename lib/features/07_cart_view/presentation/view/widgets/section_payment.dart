@@ -31,8 +31,7 @@ class SectionPayment extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<CheckoutCubit, CheckoutState>(
       builder: (context, state) {
-        // لو الحالة نجاح، خد الموديل الجديد
-        final updatedOrder = (state is OrderReadySuccess)
+        final updatedOrder = state is OrderModelCreatedSuccess
             ? state.order
             : orderModel;
 
@@ -41,7 +40,6 @@ class SectionPayment extends StatelessWidget {
             child: CustomText(
               text: 'Order Data Not Found',
               fontSize: 18,
-              alignment: Alignment.center,
               color: kPrimaryWrongColor,
             ),
           );
@@ -57,44 +55,22 @@ class SectionPayment extends StatelessWidget {
       children: [
         Expanded(
           child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                checkCircleSection(context),
-                const SizedBox(height: 24),
-                dateStateSection(updatedOrder, context),
-                const SizedBox(height: 16),
-                SectionPaymentTrackItem(orderModel: updatedOrder),
-                // زر الرجوع بعد الجريد
-              ],
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  checkCircleSection(context),
+                  const SizedBox(height: 16),
+                  dateStateSection(updatedOrder, context),
+                  const SizedBox(height: 8),
+                  SectionPaymentTrackItem(orderModel: updatedOrder),
+                  const SizedBox(height: 16),
+                ],
+              ),
             ),
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: Row(
-            children: [
-              Expanded(
-                child: CustomButton(
-                  backgroundColor:
-                      Theme.of(context).brightness == Brightness.dark
-                      ? Colors.grey.shade700
-                      : kScaffoldColor,
-                  borderColor: Theme.of(context).brightness == Brightness.dark
-                      ? Colors.white
-                      : kPrimaryColor,
-                  textColor: Theme.of(context).brightness == Brightness.dark
-                      ? Colors.grey.shade200
-                      : kPrimaryColor,
-                  onPressed: onBack,
-                  text: S.of(context).cart_back,
-                ),
-              ),
-              const Expanded(child: SizedBox()),
-            ],
-          ),
-        ),
-        const SizedBox(height: 16),
         // سكشن السعر ثابت
         buildBlocConsumer(),
       ],
@@ -114,19 +90,26 @@ class SectionPayment extends StatelessWidget {
               maxFontSize: 16,
               maxLines: 1,
             ),
-            Container(
-              color: orderStateData(
-                context,
-                updatedOrder.orderStateEnum,
-              )['color'],
-              padding: const EdgeInsets.all(8),
-              child: CustomText(
-                text: orderStateData(
-                  context,
-                  updatedOrder.orderStateEnum,
-                )['state'],
-                fontSize: 14,
-                alignment: Alignment.center,
+            TextButton(
+              onPressed: onBack,
+              child: Row(
+                spacing: 4,
+                children: [
+                  Icon(
+                    Icons.arrow_back,
+                    color: Theme.of(context).brightness == Brightness.dark
+                        ? Colors.blueGrey.shade200
+                        : Colors.deepOrange,
+                    size: 20,
+                  ),
+                  CustomText(
+                    text: S.of(context).changeOrder,
+                    fontSize: 16,
+                    color: Theme.of(context).brightness == Brightness.dark
+                        ? Colors.blueGrey.shade200
+                        : Colors.deepOrange,
+                  ),
+                ],
               ),
             ),
           ],

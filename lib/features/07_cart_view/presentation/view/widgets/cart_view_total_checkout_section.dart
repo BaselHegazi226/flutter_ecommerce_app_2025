@@ -10,6 +10,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../../generated/l10n.dart';
 import '../../view_model/cart_bloc/cart_bloc.dart';
+import '../../view_model/checkout_cubit/checkout_cubit.dart';
 import '../../view_model/get_cart_cubit/get_cart_cubit.dart';
 import '../../view_model/get_cart_cubit/get_cart_state.dart';
 
@@ -31,6 +32,7 @@ class CartViewTotalCheckoutSection extends StatelessWidget {
                   extra: {
                     'cart_bloc': context.read<CartBloc>(),
                     'get_cart_cubit': context.read<GetCartCubit>(),
+                    'checkout_cubit': context.read<CheckoutCubit>(),
                   },
                 );
               },

@@ -135,6 +135,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "cart_billing_address": MessageLookupByLibrary.simpleMessage(
       "عنوان الفاتوره",
     ),
+    "cart_change_order": MessageLookupByLibrary.simpleMessage("تغيير الطلب"),
     "cart_checkout": MessageLookupByLibrary.simpleMessage("إتمام الشراء"),
     "cart_delete_product_desc": MessageLookupByLibrary.simpleMessage(
       "هل انت متأكد من حذف هذا المنتج؟",
@@ -411,6 +412,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "حذف العنصر",
     ),
     "profile_edit": MessageLookupByLibrary.simpleMessage("تعديل الملف الشخصي"),
+    "profile_edit_save": MessageLookupByLibrary.simpleMessage("حفظ"),
     "profile_favourite": MessageLookupByLibrary.simpleMessage("المفضلة"),
     "profile_logout_desc": MessageLookupByLibrary.simpleMessage(
       "هل تريد بالفعل تسجيل الخروج من حسابك؟",
@@ -434,6 +436,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "البريد الإلكتروني",
     ),
     "profile_userName": MessageLookupByLibrary.simpleMessage("اسم المستخدم"),
+    "settings_change_theme": MessageLookupByLibrary.simpleMessage(
+      "تغيير الوضع",
+    ),
     "settings_dark": MessageLookupByLibrary.simpleMessage("داكن"),
     "settings_language": MessageLookupByLibrary.simpleMessage("اللغة"),
     "settings_light": MessageLookupByLibrary.simpleMessage("فاتح"),

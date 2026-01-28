@@ -19,118 +19,124 @@ class CheckoutCubit extends Cubit<CheckoutState> {
     required this.cartBloc,
     required this.getCartCubit,
   }) : super(CheckoutInitial());
+
   final OrderCubit orderCubit;
   final CartBloc cartBloc;
   final GetCartCubit getCartCubit;
+
   int _currentStep = 0;
+
   DeliveryMethodModel? _deliveryMethodModel;
   LocationModel? _locationModel;
-  OrderModel? _lastOrder;
+  OrderModel? _orderModel;
+
   List<CartModel> _carts = [];
   double _totalPrice = 0;
 
+  /* ========================= CART ========================= */
+  void setCartData({
+    required double totalPrice,
+    required List<CartModel> cartList,
+  }) {
+    _totalPrice = totalPrice;
+    _carts = cartList;
+
+    emit(CartDataUpdatedSuccess());
+    _tryBuildOrder();
+  }
+
+  /* ========================= DELIVERY ========================= */
   void chooseDeliveryMethod({
     required DeliveryMethodModel deliveryMethodModel,
   }) {
     _deliveryMethodModel = deliveryMethodModel;
+
     emit(ChooseDeliveryMethodDone(deliveryMethodModel: deliveryMethodModel));
+    _tryBuildOrder();
   }
 
+  /* ========================= LOCATION ========================= */
   void fillLocation({required LocationModel locationModel}) {
     _locationModel = locationModel;
+
     emit(FillLocationDone(locationModel: locationModel));
+    _tryBuildOrder();
   }
 
-  void nextStep() {
-    if (_currentStep < 5) {
-      _currentStep++;
+  /* ========================= ORDER BUILD ========================= */
+  void _tryBuildOrder() {
+    // 🔒 بناء الـ OrderModel مرة واحدة فقط
+    if (_orderModel != null) return;
+
+    if (_deliveryMethodModel == null ||
+        _locationModel == null ||
+        _carts.isEmpty ||
+        _totalPrice <= 0) {
+      return;
     }
-    debugPrint('current Step = $_currentStep');
-    emit(ChangedStep(currentStep: _currentStep));
+
+    _orderModel = OrderModel(
+      orderId: generateOrderNumber(),
+      cartModelList: _carts,
+      deliveryMethodModel: _deliveryMethodModel!,
+      locationModel: _locationModel!,
+      totalPrice: _totalPrice,
+      checkoutDateAt: DateTime.now(),
+      orderStateEnum: OrderStateEnum.pending,
+    );
+
+    // emit الحالة فقط، بدون أي تنقل
+    emit(OrderModelCreatedSuccess(order: _orderModel!));
+  }
+
+  /* ========================= STEPS ========================= */
+  void nextStep() {
+    if (_currentStep < 3) {
+      _currentStep++;
+      emit(ChangedStep(currentStep: _currentStep));
+    }
   }
 
   void previousStep() {
     if (_currentStep > 0) {
       _currentStep--;
+      emit(ChangedStep(currentStep: _currentStep));
     }
-    debugPrint('current Step = $_currentStep');
-    emit(ChangedStep(currentStep: _currentStep));
   }
 
   void resetStep() {
-    _lastOrder = null;
     _currentStep = 0;
+    _deliveryMethodModel = null;
     _locationModel = null;
-    _deliveryMethodModel = const DeliveryMethodModel(
-      title: 'Next Day Delivery',
-      subtitle:
-          'Place your order before 6pm and your items will be delivered the next day',
-    );
+    _orderModel = null;
     _carts = [];
     _totalPrice = 0;
 
     emit(CheckoutInitial());
   }
 
-  void setCartData({
-    required double totalPrice,
-    required List<CartModel> cartList,
-  }) {
-    _carts = cartList;
-    _totalPrice = totalPrice;
-  }
-
-  Future<void> orderReady() async {
-    emit(OrderReadyLoading());
-    if (_locationModel != null && _deliveryMethodModel != null) {
-      final orderModel = OrderModel(
-        orderId: generateOrderNumber(),
-        cartModelList: _carts,
-        deliveryMethodModel: _deliveryMethodModel!,
-        locationModel: _locationModel!,
-        totalPrice: _totalPrice,
-        checkoutDateAt: DateTime.now(),
-        orderStateEnum: OrderStateEnum.pending,
-      );
-      _lastOrder = orderModel;
-    }
-    if (_lastOrder != null) {
-      emit(OrderReadySuccess(order: _lastOrder!));
-    } else {
-      emit(OrderReadyFailure(errorMessage: 'Order Not Ready'));
-    }
-  }
-
+  /* ========================= CONFIRM ORDER ========================= */
   Future<void> confirmOrder() async {
-    emit(ConfirmOrderLoading());
-    if (_lastOrder == null) {
-      debugPrint('delivery model = ${_deliveryMethodModel?.toJson()}');
-      debugPrint('location model = ${_locationModel?.toJson()}');
-      debugPrint('order confirm failure===============================>');
-      emit(ConfirmOrderFailure(errorMessage: 'Missing Order Data'));
-    } else {
-      debugPrint('delivery model = ${_deliveryMethodModel?.toJson()}');
-      debugPrint('location model = ${_locationModel?.toJson()}');
-
-      await orderCubit.addOrder(orderModel: _lastOrder!);
-      emit(ConfirmOrderSuccess());
-      debugPrint('order confirm success===============================>');
-      cartBloc.add(DeleteAllProductsEvent());
-      //tigger the cart
-      await getCartCubit.getCartProductsAndTotal();
-      debugPrint('cart is deleted success===============================>');
+    if (_orderModel == null) {
+      emit(ConfirmOrderFailure(errorMessage: 'Order not ready'));
+      return;
     }
+
+    emit(ConfirmOrderLoading());
+
+    await orderCubit.addOrder(orderModel: _orderModel!);
+    emit(ConfirmOrderSuccess());
+
+    cartBloc.add(DeleteAllProductsEvent());
+    await getCartCubit.getCartProductsAndTotal();
   }
 
   Future<void> confirmOrderWithPayment(PaymentState state) async {}
 
-  int get getCurrentStep {
-    return _currentStep;
-  }
+  /* ========================= GETTERS ========================= */
+  int get currentStep => _currentStep;
 
-  DeliveryMethodModel? get getDeliveryMethodModel => _deliveryMethodModel;
+  OrderModel? get orderModel => _orderModel;
 
-  LocationModel? get getLocationModel => _locationModel;
-
-  OrderModel? get getOrderModel => _lastOrder;
+  DeliveryMethodModel? get getDeliveryMethod => _deliveryMethodModel;
 }

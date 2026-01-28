@@ -5,11 +5,12 @@ import 'package:flutter_e_commerce_app_2025/core/helper/const.dart';
 import 'package:flutter_e_commerce_app_2025/core/helper/routes.dart';
 import 'package:flutter_e_commerce_app_2025/core/utilities/custom_dialog_state.dart';
 import 'package:flutter_e_commerce_app_2025/core/utilities/extensions_of_s_localization.dart';
+import 'package:flutter_e_commerce_app_2025/features/08_profile_view/presentation/view_model/sign_out_cubit/sign_out_cubit.dart';
+import 'package:flutter_e_commerce_app_2025/features/08_profile_view/presentation/view_model/user_info_cubit/user_info_cubit.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../../generated/l10n.dart';
 import '../../../data/model/profile_view_item_model.dart';
-import '../../view_model/user_info_cubit/user_info_cubit.dart';
 import 'profile_view_item.dart';
 
 class ProfileViewItemList extends StatelessWidget {
@@ -38,7 +39,7 @@ class ProfileViewItemList extends StatelessWidget {
                 buttonAcceptText: S.of(context).warning_button_title_ok,
                 buttonCancelText: S.of(context).warning_button_title_Cancel,
                 onPressed: () {
-                  context.read<UserInfoCubit>().signOut();
+                  context.read<SignOutCubit>().signOut();
                   GoRouter.of(context).go(Routes.loginView);
                 },
               );
@@ -56,26 +57,8 @@ class ProfileViewItemList extends StatelessWidget {
 
   void handleProfileItemTap(BuildContext context, {required String route}) {
     if (route == Routes.editProfileView) {
-      // جلب بيانات المستخدم من الـ Cubit الحالي
-      //final state = context.read<UserInfoCubit>().state;
-      // UserModel? currentUser;
-      // if (state is GetUserInfoLocalSuccess) {
-      //   currentUser = state.userModel;
-      // } else if (state is GetUserInfoFromFirestoreSuccess) {
-      //   currentUser = state.userModel;
-      // }
-      //
-      // if (currentUser != null) {
-      //   GoRouter.of(context).push(
-      //     '${Routes.profileView}$route',
-      //     extra: cubit, // ← تمرير UserModel هنا
-      //   );
-      // }
       final cubit = context.read<UserInfoCubit>();
-      GoRouter.of(context).push(
-        '${Routes.profileView}$route',
-        extra: cubit, // ← تمرير UserModel هنا
-      );
+      GoRouter.of(context).push('${Routes.profileView}$route', extra: cubit);
     } else {
       GoRouter.of(context).push('${Routes.profileView}$route');
     }

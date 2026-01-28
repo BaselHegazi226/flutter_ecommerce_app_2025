@@ -80,9 +80,10 @@ class FavouriteViewItemTablet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.sizeOf(context);
     return Container(
       height: _itemHeight,
-      padding: const EdgeInsets.all(8),
+      padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         borderRadius: const BorderRadius.all(Radius.circular(4)),
         color: Colors.grey.shade500.withAlpha(32),
@@ -97,25 +98,29 @@ class FavouriteViewItemTablet extends StatelessWidget {
             ),
           ),
           const SizedBox(width: 24),
-          Expanded(flex: 2, child: _detailsSection(context)),
+          Expanded(flex: 2, child: _detailsSection(context, size)),
         ],
       ),
     );
   }
 
-  Widget _detailsSection(BuildContext context) {
+  Widget _detailsSection(BuildContext context, Size size) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      spacing: 16,
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      //spacing: 16,
       children: [
         Column(
           mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             FavouriteTitleHeartSection(
               title: favouriteModel.title.split(" ").take(4).join(" "),
             ),
-            CustomText(text: favouriteModel.desc, fontSize: 14),
+            SizedBox(
+              width: size.width * .3,
+              child: CustomText(text: favouriteModel.desc, fontSize: 14),
+            ),
           ],
         ),
         FavouriteDeletePriceSection(

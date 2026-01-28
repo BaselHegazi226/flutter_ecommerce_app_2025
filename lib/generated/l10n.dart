@@ -224,6 +224,16 @@ class S {
     return Intl.message('Finish', name: 'cart_finish', desc: '', args: []);
   }
 
+  /// `Change order`
+  String get cart_change_order {
+    return Intl.message(
+      'Change order',
+      name: 'cart_change_order',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Next`
   String get cart_next {
     return Intl.message('Next', name: 'cart_next', desc: '', args: []);
@@ -1599,6 +1609,11 @@ class S {
     );
   }
 
+  /// `Save`
+  String get profile_edit_save {
+    return Intl.message('Save', name: 'profile_edit_save', desc: '', args: []);
+  }
+
   /// `Settings`
   String get settings_title {
     return Intl.message('Settings', name: 'settings_title', desc: '', args: []);
@@ -1617,6 +1632,16 @@ class S {
   /// `Mode`
   String get settings_mode {
     return Intl.message('Mode', name: 'settings_mode', desc: '', args: []);
+  }
+
+  /// `Change Theme`
+  String get settings_change_theme {
+    return Intl.message(
+      'Change Theme',
+      name: 'settings_change_theme',
+      desc: '',
+      args: [],
+    );
   }
 
   /// `Language`

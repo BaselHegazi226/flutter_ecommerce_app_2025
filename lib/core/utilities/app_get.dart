@@ -1,7 +1,11 @@
 import 'package:flutter_e_commerce_app_2025/core/cache/cart_cache.dart';
 import 'package:flutter_e_commerce_app_2025/core/cache/favourite_cache.dart';
 import 'package:flutter_e_commerce_app_2025/core/cache/order_cache.dart';
+import 'package:flutter_e_commerce_app_2025/core/cache/user_info_cache.dart';
 import 'package:flutter_e_commerce_app_2025/core/services/product_services.dart';
+import 'package:flutter_e_commerce_app_2025/core/services/user_services.dart';
+import 'package:flutter_e_commerce_app_2025/features/08_profile_view/data/repo_impl/profile_repo_impl.dart';
+import 'package:flutter_e_commerce_app_2025/features/08_profile_view/domain/use_cases/profile_use_cases.dart';
 import 'package:get_it/get_it.dart';
 
 import '../../features/05_home_view/data/repo/home_view_repo_impl.dart';
@@ -20,6 +24,8 @@ class AppGet {
     required ProductServices productServices,
     required FavouriteCacheImplement favouriteCacheImplement,
     required OrderCacheImplement orderCacheImplement,
+    required UserInfoCache userInfoCache,
+    required UserServices userServices,
   }) {
     /// ============================
     /// Core / Cache / Services
@@ -58,6 +64,15 @@ class AppGet {
       getIt.registerLazySingleton<HomeViewRepoImpl>(() => HomeViewRepoImpl());
     }
 
+    if (!getIt.isRegistered<ProfileRepoImpl>()) {
+      getIt.registerLazySingleton<ProfileRepoImpl>(
+        () => ProfileRepoImpl(
+          userServices: userServices,
+          userInfoCache: userInfoCache,
+        ),
+      );
+    }
+
     /// ============================
     /// Cart UseCases
     /// ============================
@@ -89,6 +104,28 @@ class AppGet {
     if (!getIt.isRegistered<UpdateProductCountUseCase>()) {
       getIt.registerLazySingleton(
         () => UpdateProductCountUseCase(getIt<CartRepository>()),
+      );
+    }
+
+    if (!getIt.isRegistered<UploadImageToCloudniaryUseCase>()) {
+      getIt.registerLazySingleton(
+        () => UploadImageToCloudniaryUseCase(getIt<ProfileRepoImpl>()),
+      );
+    }
+    if (!getIt.isRegistered<ChangeCurrentUserNameUseCase>()) {
+      getIt.registerLazySingleton(
+        () => ChangeCurrentUserNameUseCase(getIt<ProfileRepoImpl>()),
+      );
+    }
+
+    if (!getIt.isRegistered<SignOutUseCase>()) {
+      getIt.registerLazySingleton(
+        () => SignOutUseCase(getIt<ProfileRepoImpl>()),
+      );
+    }
+    if (!getIt.isRegistered<UpdateProfileUseCase>()) {
+      getIt.registerLazySingleton(
+        () => UpdateProfileUseCase(getIt<ProfileRepoImpl>()),
       );
     }
 

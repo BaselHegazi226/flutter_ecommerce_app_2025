@@ -23,7 +23,12 @@ class CustomTextFormField extends StatelessWidget {
       spacing: 8,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        CustomText(text: text, color: Colors.black, fontSize: 16),
+        CustomText(
+          text: text,
+          color: Colors.black,
+          fontSize: 16,
+          fontWeight: FontWeight.bold,
+        ),
         TextFormField(
           onSaved: onSaved,
           validator: validator,

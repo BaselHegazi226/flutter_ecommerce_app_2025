@@ -1,5 +1,8 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_e_commerce_app_2025/core/helper/date_formatter.dart';
 import 'package:flutter_e_commerce_app_2025/generated/l10n.dart';
+
+import '../../features/07_cart_view/data/model/delivery_method_model.dart';
 
 extension OnboardingLoclicationX on S {
   String get onBoardingTitleImg1 => onboarding_title_img1;
@@ -146,6 +149,8 @@ extension CartLocalizationX on S {
   String get calendarCancel => calendar_cancel;
 
   String get calendarConfirm => calendar_confirm;
+
+  String get changeOrder => cart_change_order;
 }
 
 //order extension of S
@@ -363,6 +368,8 @@ extension SettingsLocalizationX on S {
 
   String get settingsMode => settings_mode;
 
+  String get settingsChangeTheme => settings_change_theme;
+
   String get settingsLanguage => settings_language;
 
   String get settingsOnOff => settings_onOff;
@@ -389,6 +396,8 @@ extension ProfileLocalizationX on S {
   String get profileUserName => profile_userName;
 
   String get profileUserEmail => profile_userEmail;
+
+  String get profileEditSave => profile_edit_save;
 }
 
 //About me extenstion of s
@@ -551,4 +560,36 @@ extension CategoryLocalizationX on S {
   String get categoryWomensShoes => category_womens_shoes;
 
   String get categoryWomensWatches => category_womens_watches;
+}
+
+extension DeliveryMethodLocalization on DeliveryMethodModel {
+  String title(BuildContext context) {
+    switch (deliveryType) {
+      case DeliveryType.standard:
+        return S.of(context).cart_standardDelivery;
+
+      case DeliveryType.nextDay:
+        return S.of(context).cart_nextDayDelivery;
+
+      case DeliveryType.nominated:
+        return S.of(context).cart_nominatedDelivery;
+    }
+  }
+
+  String subtitle(BuildContext context) {
+    switch (deliveryType) {
+      case DeliveryType.standard:
+        return S.of(context).cart_orderWillBe;
+
+      case DeliveryType.nextDay:
+        return S.of(context).cart_placeYourOrder;
+
+      case DeliveryType.nominated:
+        if (selectedTime == null) {
+          return S.of(context).cart_pickAParticular;
+        }
+        return '${S.of(context).cart_pickAParticular_result} '
+            '${DateFormatter.format(selectedTime!, S.of(context).cart_pickAParticular_result)}';
+    }
+  }
 }

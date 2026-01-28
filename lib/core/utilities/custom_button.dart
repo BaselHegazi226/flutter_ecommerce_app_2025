@@ -43,11 +43,11 @@ class CustomButton extends StatelessWidget {
         backgroundColor:
             backgroundColor ?? (isDark ? Colors.grey.shade400 : kScaffoldColor),
       ),
-
-      onPressed: onPressed,
+      onPressed: isLoading ? null : onPressed,
       child: isLoading
-          ? const CustomCircleIndicator()
+          ? CustomCircleIndicator(color: textColor, size: 24)
           : CustomText(
+              key: const ValueKey('text'),
               text: text,
               color: textColor,
               fontSize: textSize,
@@ -100,11 +100,11 @@ class CustomTextIconButton extends StatelessWidget {
         backgroundColor:
             backgroundColor ?? (isDark ? Colors.grey.shade400 : kScaffoldColor),
       ),
-
-      onPressed: onPressed,
+      onPressed: isLoading ? null : onPressed,
       child: isLoading
-          ? const CustomCircleIndicator()
+          ? CustomCircleIndicator(color: textColor, size: 24)
           : Row(
+              key: const ValueKey('content'),
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 CustomText(
@@ -115,11 +115,7 @@ class CustomTextIconButton extends StatelessWidget {
                   fontWeight: fontWeight,
                 ),
                 const SizedBox(width: 8),
-                Icon(
-                  iconData,
-                  size: 20,
-                  color: isDark ? Colors.grey.shade900 : Colors.grey.shade50,
-                ),
+                Icon(iconData, size: 20, color: textColor),
               ],
             ),
     );

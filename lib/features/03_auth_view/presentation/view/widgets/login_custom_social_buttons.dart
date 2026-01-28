@@ -45,6 +45,7 @@ class _SignInCustomSocialButtonsState extends State<SignInCustomSocialButtons> {
             },
             valueNotifierLoading: valueNotifierLoadingGoogle,
             text: S.of(context).authSignInWithGoogle,
+
             iconifyData: Logos.google_icon,
           );
         },

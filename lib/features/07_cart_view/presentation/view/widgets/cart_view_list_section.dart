@@ -19,15 +19,22 @@ class CartViewListSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomLayout(
-      mobileWidget: CartViewListViewMobile(
-        screenSize: screenSize,
-        cartList: cartList,
-      ),
-      tabletWidget: CartViewListTablet(
-        screenSize: screenSize,
-        cartList: cartList,
-      ),
+    return Column(
+      children: [
+        Expanded(
+          child: CustomLayout(
+            mobileWidget: CartViewListViewMobile(
+              screenSize: screenSize,
+              cartList: cartList,
+            ),
+            tabletWidget: CartViewListTablet(
+              screenSize: screenSize,
+              cartList: cartList,
+            ),
+          ),
+        ),
+        const CartViewTotalCheckoutSection(),
+      ],
     );
   }
 }
@@ -44,40 +51,33 @@ class CartViewListViewMobile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Expanded(
-          child: ListView.separated(
-            separatorBuilder: (context, index) {
-              return SizedBox(height: screenSize.height * .02);
-            },
-            physics: const BouncingScrollPhysics(),
-            scrollDirection: Axis.vertical,
-            itemCount: cartList.length,
-            itemBuilder: (context, index) {
-              final item = cartList[index];
-              return InkWell(
-                onTap: () {
-                  GoRouter.of(
-                    context,
-                  ).push(Routes.productDetailsView, extra: item.id);
-                },
-                child: Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: CartViewItemMobile(
-                    productId: item.id,
-                    title: item.title,
-                    imageUrl: item.imageUrl,
-                    price: item.price,
-                    count: item.productCount,
-                  ),
-                ),
-              );
-            },
+    return ListView.separated(
+      separatorBuilder: (context, index) {
+        return SizedBox(height: screenSize.height * .02);
+      },
+      physics: const BouncingScrollPhysics(),
+      scrollDirection: Axis.vertical,
+      itemCount: cartList.length,
+      itemBuilder: (context, index) {
+        final item = cartList[index];
+        return InkWell(
+          onTap: () {
+            GoRouter.of(
+              context,
+            ).push(Routes.productDetailsView, extra: item.id);
+          },
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: CartViewItemMobile(
+              productId: item.id,
+              title: item.title,
+              imageUrl: item.imageUrl,
+              price: item.price,
+              count: item.productCount,
+            ),
           ),
-        ),
-        const CartViewTotalCheckoutSection(),
-      ],
+        );
+      },
     );
   }
 }
@@ -94,41 +94,34 @@ class CartViewListTablet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Expanded(
-          child: GridView.builder(
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              mainAxisSpacing: 16,
-              crossAxisSpacing: 16,
-              childAspectRatio: 1.5,
+    return GridView.builder(
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        mainAxisSpacing: 16,
+        crossAxisSpacing: 16,
+        childAspectRatio: 1.5,
+      ),
+      itemCount: cartList.length,
+      itemBuilder: (context, index) {
+        final item = cartList[index];
+        return InkWell(
+          onTap: () {
+            GoRouter.of(
+              context,
+            ).push(Routes.productDetailsView, extra: item.id);
+          },
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: CartViewItemTablet(
+              productId: item.id,
+              title: item.title,
+              imageUrl: item.imageUrl,
+              price: item.price,
+              count: item.productCount,
             ),
-            itemCount: cartList.length,
-            itemBuilder: (context, index) {
-              final item = cartList[index];
-              return InkWell(
-                onTap: () {
-                  GoRouter.of(
-                    context,
-                  ).push(Routes.productDetailsView, extra: item.id);
-                },
-                child: Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: CartViewItemTablet(
-                    productId: item.id,
-                    title: item.title,
-                    imageUrl: item.imageUrl,
-                    price: item.price,
-                    count: item.productCount,
-                  ),
-                ),
-              );
-            },
           ),
-        ),
-        const CartViewTotalCheckoutSection(),
-      ],
+        );
+      },
     );
   }
 }

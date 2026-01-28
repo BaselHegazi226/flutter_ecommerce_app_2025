@@ -74,12 +74,11 @@ class OrderCacheImplement implements OrderCache {
   }) async {
     try {
       if (_hiveBoxOrderModel.get(orderModel.orderId) == null) {
-        final productModelIndependent = OrderModel.fromJson(
-          orderModel.toJson(),
-        );
+        await Hive.box<OrderModel>('OrderBox$userId').clear();
+        final orderModelIndependent = OrderModel.fromJson(orderModel.toJson());
         await _hiveBoxOrderModel.put(
-          productModelIndependent.orderId,
-          productModelIndependent,
+          orderModelIndependent.orderId,
+          orderModelIndependent,
         );
       }
       return right(null);
@@ -215,55 +214,81 @@ class OrderCacheImplement implements OrderCache {
       final days = difference.inDays;
 
       final independentModel = OrderModel.fromJson(orderModel.toJson());
+      final deliveryMethod = orderModel.deliveryMethodModel;
 
-      // Next Day Delivery: توصيل خلال 24 ساعة
-      if (orderModel.deliveryMethodModel ==
-          const DeliveryMethodModel(
-            title: 'Next Day Delivery',
-            subtitle:
-                'Place your order before 12 hours and your items will be delivered the next day',
-          )) {
-        if (hours < 12) {
-          independentModel.copyWith(newOrderStateEnum: OrderStateEnum.pending);
-        } else if (hours < 24) {
-          independentModel.copyWith(newOrderStateEnum: OrderStateEnum.transmit);
-        } else {
-          independentModel.copyWith(
-            newOrderStateEnum: OrderStateEnum.delivered,
-          );
-        }
+      switch (deliveryMethod.deliveryType) {
+        case DeliveryType.nextDay:
+          if (hours < 12) {
+            return right(
+              independentModel.copyWith(
+                newOrderStateEnum: OrderStateEnum.pending,
+              ),
+            );
+          } else if (hours < 24) {
+            return right(
+              independentModel.copyWith(
+                newOrderStateEnum: OrderStateEnum.transmit,
+              ),
+            );
+          } else {
+            return right(
+              independentModel.copyWith(
+                newOrderStateEnum: OrderStateEnum.delivered,
+              ),
+            );
+          }
+
+        case DeliveryType.standard:
+          if (days < 2) {
+            return right(
+              independentModel.copyWith(
+                newOrderStateEnum: OrderStateEnum.pending,
+              ),
+            );
+          } else if (days < 4) {
+            return right(
+              independentModel.copyWith(
+                newOrderStateEnum: OrderStateEnum.transmit,
+              ),
+            );
+          } else if (days <= 5) {
+            return right(
+              independentModel.copyWith(
+                newOrderStateEnum: OrderStateEnum.delivered,
+              ),
+            );
+          } else {
+            return right(
+              independentModel.copyWith(
+                newOrderStateEnum: OrderStateEnum.cancel,
+              ),
+            );
+          }
+
+        case DeliveryType.nominated:
+          final selectedDate =
+              deliveryMethod.selectedTime ?? orderModel.checkoutDateAt;
+
+          if (now.isBefore(selectedDate)) {
+            return right(
+              independentModel.copyWith(
+                newOrderStateEnum: OrderStateEnum.pending,
+              ),
+            );
+          } else if (now.isAtSameMomentAs(selectedDate)) {
+            return right(
+              independentModel.copyWith(
+                newOrderStateEnum: OrderStateEnum.transmit,
+              ),
+            );
+          } else {
+            return right(
+              independentModel.copyWith(
+                newOrderStateEnum: OrderStateEnum.delivered,
+              ),
+            );
+          }
       }
-      // Standard Delivery: توصيل خلال 3 إلى 5 أيام
-      else if (orderModel.deliveryMethodModel ==
-          const DeliveryMethodModel(
-            title: 'Standard Delivery',
-            subtitle: 'Order will be delivered between 3 - 5 business days',
-          )) {
-        if (days < 2) {
-          independentModel.copyWith(newOrderStateEnum: OrderStateEnum.pending);
-        } else if (days < 4) {
-          independentModel.copyWith(newOrderStateEnum: OrderStateEnum.transmit);
-        } else if (days <= 5) {
-          independentModel.copyWith(
-            newOrderStateEnum: OrderStateEnum.delivered,
-          );
-        } else {
-          independentModel.copyWith(newOrderStateEnum: OrderStateEnum.cancel);
-        }
-      }
-      // Nominated Delivery: المستخدم اختار تاريخ محدد بنفسه
-      else {
-        if (now.isBefore(orderModel.checkoutDateAt)) {
-          independentModel.copyWith(newOrderStateEnum: OrderStateEnum.pending);
-        } else if (now.isAtSameMomentAs(orderModel.checkoutDateAt)) {
-          independentModel.copyWith(newOrderStateEnum: OrderStateEnum.transmit);
-        } else {
-          independentModel.copyWith(
-            newOrderStateEnum: OrderStateEnum.delivered,
-          );
-        }
-      }
-      return right(independentModel);
     } catch (e) {
       return left(CatchErrorHandle.catchBack(failure: e));
     }
@@ -290,6 +315,9 @@ class OrderCacheAdaptorsClass {
   static void registerAllAdaptors() {
     if (!Hive.isAdapterRegistered(AdaptorsIdentifiers.orderModelAdapter)) {
       Hive.registerAdapter(OrderModelAdapter());
+    }
+    if (!Hive.isAdapterRegistered(AdaptorsIdentifiers.deliveryTypeAdapter)) {
+      Hive.registerAdapter(DeliveryTypeAdapter());
     }
     if (!Hive.isAdapterRegistered(
       AdaptorsIdentifiers.deliveryMethodModelAdapter,

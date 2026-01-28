@@ -1,5 +1,6 @@
 import 'package:flutter_e_commerce_app_2025/core/cache/order_cache.dart';
 import 'package:flutter_e_commerce_app_2025/core/services/product_services.dart';
+import 'package:flutter_e_commerce_app_2025/core/services/user_services.dart';
 
 import '../../../../../core/cache/cart_cache.dart';
 import '../../../../../core/cache/favourite_cache.dart';
@@ -51,12 +52,20 @@ Future<void> initMethods({required String userId}) async {
   final orderCacheImplement = OrderCacheImplement(userId: userId);
   await orderCacheImplement.init();
 
+  //user info cache implement
+  final userInfoCache = UserInfoCacheImplement();
+  await orderCacheImplement.init();
+
   //product services
   final ProductServices productServices = ProductServices(userId);
+  final UserServices userServices = UserServices();
+
   AppGet().setUp(
     cartCacheImplement: cartCacheImplement,
     favouriteCacheImplement: favouriteCacheImplement,
     orderCacheImplement: orderCacheImplement,
     productServices: productServices,
+    userInfoCache: userInfoCache,
+    userServices: userServices,
   );
 }

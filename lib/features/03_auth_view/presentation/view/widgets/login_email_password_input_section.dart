@@ -129,6 +129,7 @@ class _LoginEmailPasswordInputSectionState
                         Theme.of(context).brightness == Brightness.dark
                         ? Colors.grey.shade200
                         : kPrimaryColor,
+                    textSize: 18,
                   );
                 },
               );

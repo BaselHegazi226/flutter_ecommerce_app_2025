@@ -1,3 +1,6 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_e_commerce_app_2025/features/07_cart_view/presentation/view_model/checkout_cubit/checkout_cubit.dart';
+import 'package:flutter_e_commerce_app_2025/features/08_profile_view/presentation/view_model/user_info_cubit/user_info_cubit.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../features/00_splash_view/presentation/view/splash_view.dart';
@@ -21,7 +24,6 @@ import '../../features/08_profile_view/presentation/view/order_history_view.dart
 import '../../features/08_profile_view/presentation/view/profile_view.dart';
 import '../../features/08_profile_view/presentation/view/settings_view.dart';
 import '../../features/08_profile_view/presentation/view/shipping_address_view.dart';
-import '../../features/08_profile_view/presentation/view_model/user_info_cubit/user_info_cubit.dart';
 import '../helper/app_transitions.dart';
 import '../helper/routes.dart';
 
@@ -98,12 +100,23 @@ abstract class AppRouter {
               GoRoute(
                 path: Routes.checkoutView,
                 pageBuilder: (context, state) {
-                  final data = state.extra as Map<String, dynamic>;
+                  final data = state.extra as Map<String, dynamic>?;
+
+                  if (data == null) {
+                    return AppTransitions.slideX(
+                      key: state.pageKey,
+                      child: const Scaffold(
+                        body: Center(child: Text('Checkout data is missing')),
+                      ),
+                    );
+                  }
+
                   return AppTransitions.slideX(
                     key: state.pageKey,
                     child: CheckoutView(
                       cartBloc: data['cart_bloc'] as CartBloc,
                       getCartCubit: data['get_cart_cubit'] as GetCartCubit,
+                      checkoutCubit: data['checkout_cubit'] as CheckoutCubit,
                     ),
                   );
                 },
@@ -118,12 +131,13 @@ abstract class AppRouter {
             routes: [
               GoRoute(
                 path: Routes.editProfileView,
-                pageBuilder: (context, state) => AppTransitions.fadeScale(
-                  key: state.pageKey,
-                  child: EditProfileView(
-                    userInfoCubit: state.extra as UserInfoCubit,
-                  ),
-                ),
+                pageBuilder: (context, state) {
+                  final cubit = state.extra as UserInfoCubit;
+                  return AppTransitions.fadeScale(
+                    key: state.pageKey,
+                    child: EditProfileView(userInfoCubit: cubit),
+                  );
+                },
               ),
               GoRoute(
                 path: Routes.settingsView,

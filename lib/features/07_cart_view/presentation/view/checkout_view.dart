@@ -11,6 +11,7 @@ import '../../../../core/utilities/toastnotification.dart';
 import '../view_model/cart_bloc/cart_bloc.dart';
 import '../view_model/checkout_cubit/checkout_cubit.dart';
 import '../view_model/get_cart_cubit/get_cart_cubit.dart';
+import '../view_model/get_cart_cubit/get_cart_state.dart';
 import '../view_model/order_cubit/order_cubit.dart';
 import '../view_model/payment_bloc/payment_bloc.dart';
 
@@ -19,10 +20,12 @@ class CheckoutView extends StatefulWidget {
     super.key,
     required this.cartBloc,
     required this.getCartCubit,
+    required this.checkoutCubit,
   });
 
   final CartBloc cartBloc;
   final GetCartCubit getCartCubit;
+  final CheckoutCubit checkoutCubit;
 
   @override
   State<CheckoutView> createState() => _CheckoutViewState();
@@ -40,36 +43,57 @@ class _CheckoutViewState extends State<CheckoutView> {
                 ..getUserLocation(),
         ),
         BlocProvider.value(value: widget.cartBloc),
-        BlocProvider(
-          create: (context) => CheckoutCubit(
-            orderCubit: context.read<OrderCubit>(),
-            getCartCubit: widget.getCartCubit,
-            cartBloc: widget.cartBloc,
-          ),
-        ),
+        BlocProvider.value(value: widget.checkoutCubit),
         BlocProvider(create: (context) => PaymentBloc()),
       ],
-      child: BlocListener<CheckoutCubit, CheckoutState>(
-        listener: (context, state) {
-          if (state is ConfirmOrderSuccess) {
-            ToastNotification.flatColoredToastNotificationService(
-              onAutoCompleteCompleted: (value) {},
-              title: S.of(context).success_add_order_title,
-              description: S.of(context).success_add_order_desc,
-            );
-            if (GoRouter.of(context).canPop()) {
-              GoRouter.of(context).pop();
-            }
-          } else if (state is ConfirmOrderFailure) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(S.of(context).error(state.errorMessage)),
-                backgroundColor: Colors.red,
-              ),
-            );
-          }
-        },
+      child: MultiBlocListener(
+        listeners: [
+          BlocListener<GetCartCubit, GetCartState>(
+            listener: (context, state) {
+              if (state is GetProductCartAndTotalSuccess ||
+                  state is GetProductCartAndTotalSuccessOnline) {
+                final cartList = (state is GetProductCartAndTotalSuccess)
+                    ? state.carts
+                    : (state as GetProductCartAndTotalSuccessOnline).carts;
+                final totalPrice = (state is GetProductCartAndTotalSuccess)
+                    ? state.totalPrice
+                    : (state as GetProductCartAndTotalSuccessOnline).totalPrice;
+                debugPrint('total price in checkout view = $totalPrice');
+                for (var item in cartList) {
+                  debugPrint(
+                    'item of cart list in in checkout view = ${item.toJson()} =====>',
+                  );
+                }
 
+                context.read<CheckoutCubit>().setCartData(
+                  totalPrice: totalPrice,
+                  cartList: cartList,
+                );
+              }
+            },
+          ),
+          BlocListener<CheckoutCubit, CheckoutState>(
+            listener: (context, state) {
+              if (state is ConfirmOrderSuccess) {
+                ToastNotification.flatColoredToastNotificationService(
+                  onAutoCompleteCompleted: (value) {},
+                  title: S.of(context).success_add_order_title,
+                  description: S.of(context).success_add_order_desc,
+                );
+                if (GoRouter.of(context).canPop()) {
+                  GoRouter.of(context).pop();
+                }
+              } else if (state is ConfirmOrderFailure) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(S.of(context).error(state.errorMessage)),
+                    backgroundColor: Colors.red,
+                  ),
+                );
+              }
+            },
+          ),
+        ],
         child: const Scaffold(body: CheckoutViewBody()),
       ),
     );

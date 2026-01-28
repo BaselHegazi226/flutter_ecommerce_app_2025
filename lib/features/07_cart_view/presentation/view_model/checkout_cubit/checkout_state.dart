@@ -3,7 +3,15 @@ part of 'checkout_cubit.dart';
 @immutable
 sealed class CheckoutState {}
 
+/* ========================= INITIAL ========================= */
+
 final class CheckoutInitial extends CheckoutState {}
+
+/* ========================= CART ========================= */
+
+final class CartDataUpdatedSuccess extends CheckoutState {}
+
+/* ========================= DELIVERY ========================= */
 
 final class ChooseDeliveryMethodDone extends CheckoutState {
   final DeliveryMethodModel deliveryMethodModel;
@@ -11,19 +19,21 @@ final class ChooseDeliveryMethodDone extends CheckoutState {
   ChooseDeliveryMethodDone({required this.deliveryMethodModel});
 }
 
+/* ========================= LOCATION ========================= */
+
 final class FillLocationDone extends CheckoutState {
   final LocationModel locationModel;
+
   FillLocationDone({required this.locationModel});
 }
 
-final class ChangedStep extends CheckoutState {
-  final int currentStep;
+/* ========================= ORDER ========================= */
 
-  ChangedStep({required this.currentStep});
+final class OrderModelCreatedSuccess extends CheckoutState {
+  final OrderModel order;
+
+  OrderModelCreatedSuccess({required this.order});
 }
-
-//order states
-final class OrderReadyLoading extends CheckoutState {}
 
 final class OrderReadyFailure extends CheckoutState {
   final String errorMessage;
@@ -31,13 +41,16 @@ final class OrderReadyFailure extends CheckoutState {
   OrderReadyFailure({required this.errorMessage});
 }
 
-final class OrderReadySuccess extends CheckoutState {
-  final OrderModel order;
+/* ========================= STEPS ========================= */
 
-  OrderReadySuccess({required this.order});
+final class ChangedStep extends CheckoutState {
+  final int currentStep;
+
+  ChangedStep({required this.currentStep});
 }
 
-//order states
+/* ========================= CONFIRM ORDER ========================= */
+
 final class ConfirmOrderLoading extends CheckoutState {}
 
 final class ConfirmOrderFailure extends CheckoutState {
@@ -48,15 +61,6 @@ final class ConfirmOrderFailure extends CheckoutState {
 
 final class ConfirmOrderSuccess extends CheckoutState {}
 
-//order states with payment
-final class ConfirmOrderWithPaymentWithPaymentLoading extends CheckoutState {}
-
-final class ConfirmOrderWithPaymentWithPaymentFailure extends CheckoutState {
-  final String errorMessage;
-
-  ConfirmOrderWithPaymentWithPaymentFailure({required this.errorMessage});
-}
-
-final class ConfirmOrderWithPaymentWithPaymentSuccess extends CheckoutState {}
+/* ========================= CANCEL ========================= */
 
 final class CancelOrder extends CheckoutState {}

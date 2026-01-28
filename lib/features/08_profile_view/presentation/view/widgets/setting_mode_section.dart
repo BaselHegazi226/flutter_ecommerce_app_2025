@@ -43,9 +43,7 @@ class ModeSection extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     CustomText(
-                      text: isDark
-                          ? S.of(context).settingsLight
-                          : S.of(context).settingsDark,
+                      text: S.of(context).settingsChangeTheme,
                       fontSize: 16,
                       alignment: Alignment.center,
                     ),

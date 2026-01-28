@@ -18,6 +18,7 @@ class AppSettingCubit extends Cubit<AppSettingStates> {
     _loadLanguageByKey(savedLanguage);
     emit(SelectedThemeSuccess());
   }
+
   //lambada function to create Bloc Provider from this cubit
   static AppSettingCubit get(context) => BlocProvider.of(context);
 

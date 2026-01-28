@@ -140,6 +140,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "cart_billing_address": MessageLookupByLibrary.simpleMessage(
       "Billing Address",
     ),
+    "cart_change_order": MessageLookupByLibrary.simpleMessage("Change order"),
     "cart_checkout": MessageLookupByLibrary.simpleMessage("Checkout"),
     "cart_delete_product_desc": MessageLookupByLibrary.simpleMessage(
       "Are you sure to delete product?",
@@ -430,6 +431,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Delete Item",
     ),
     "profile_edit": MessageLookupByLibrary.simpleMessage("Edit Profile"),
+    "profile_edit_save": MessageLookupByLibrary.simpleMessage("Save"),
     "profile_favourite": MessageLookupByLibrary.simpleMessage("Favourite"),
     "profile_logout_desc": MessageLookupByLibrary.simpleMessage(
       "Are you sure to logout?",
@@ -449,6 +451,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "profile_userEmail": MessageLookupByLibrary.simpleMessage("User Email"),
     "profile_userName": MessageLookupByLibrary.simpleMessage("User Name"),
+    "settings_change_theme": MessageLookupByLibrary.simpleMessage(
+      "Change Theme",
+    ),
     "settings_dark": MessageLookupByLibrary.simpleMessage("Dark"),
     "settings_language": MessageLookupByLibrary.simpleMessage("Language"),
     "settings_light": MessageLookupByLibrary.simpleMessage("Light"),

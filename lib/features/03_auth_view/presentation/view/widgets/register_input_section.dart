@@ -122,6 +122,9 @@ class _RegisterInputSectionState extends State<RegisterInputSection> {
                 valueListenable: isLoadingValueNotifier,
                 builder: (context, value, child) {
                   return CustomButton(
+                    text: S.of(context).authSignUp,
+                    isLoading: value,
+                    textSize: 18,
                     textColor: Theme.of(context).brightness == Brightness.dark
                         ? Colors.grey.shade600
                         : Colors.grey.shade200,
@@ -143,8 +146,6 @@ class _RegisterInputSectionState extends State<RegisterInputSection> {
                         autoValidateMode = AutovalidateMode.always;
                       }
                     },
-                    text: S.of(context).authSignUp,
-                    isLoading: value,
                   );
                 },
               );

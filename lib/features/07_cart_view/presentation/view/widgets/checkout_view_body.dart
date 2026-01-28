@@ -18,64 +18,69 @@ class CheckoutViewBody extends StatelessWidget {
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final size = MediaQuery.sizeOf(context);
-    return BlocBuilder<CheckoutCubit, CheckoutState>(
-      builder: (context, state) {
-        final cubit = context.read<CheckoutCubit>();
-        return Padding(
-          padding: const EdgeInsets.only(
-            bottom: 8,
-            top: 24,
-            right: 16,
-            left: 16,
-          ),
-          child: CustomScrollView(
-            slivers: [
-              SliverToBoxAdapter(
-                child: Container(
-                  child: buildEasyStepper(cubit, context, isDark, size),
-                ),
-              ),
-              const SliverToBoxAdapter(child: SizedBox(height: 20)),
-              SliverFillRemaining(
-                hasScrollBody: true,
-                child: IndexedStack(
-                  index: cubit.getCurrentStep,
-                  children: [
-                    DeliveryView(onNext: cubit.nextStep),
-                    LocationView(
-                      onNext: cubit.nextStep,
-                      onBack: cubit.previousStep,
-                    ),
-                    SummarizeView(
-                      onNext: () {
-                        cubit.orderReady();
-                        cubit.nextStep();
-                      },
-                      onBack: cubit.previousStep,
-                    ),
-                    SectionPayment(
-                      orderModel: cubit.getOrderModel,
-                      onBack: cubit.previousStep,
-                      onFinish: cubit.confirmOrder, // هنا المهم
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        );
+    final checkoutCubit = context.read<CheckoutCubit>();
+
+    debugPrint(
+      'checkout view order model = ${checkoutCubit.orderModel?.toJson()}',
+    );
+
+    return BlocListener<CheckoutCubit, CheckoutState>(
+      listener: (context, state) {
+        if (state is OrderReadyFailure) {
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(SnackBar(content: Text(state.errorMessage)));
+        }
       },
+      child: BlocBuilder<CheckoutCubit, CheckoutState>(
+        builder: (context, state) {
+          return Padding(
+            padding: const EdgeInsets.only(bottom: 8, top: 24),
+            child: CustomScrollView(
+              slivers: [
+                SliverToBoxAdapter(
+                  child: buildEasyStepper(context, checkoutCubit, isDark, size),
+                ),
+                const SliverToBoxAdapter(child: SizedBox(height: 20)),
+                SliverFillRemaining(
+                  hasScrollBody: true,
+                  child: IndexedStack(
+                    index: checkoutCubit.currentStep,
+                    children: [
+                      DeliveryView(onNext: checkoutCubit.nextStep),
+                      LocationView(
+                        onNext: checkoutCubit.nextStep,
+                        onBack: checkoutCubit.previousStep,
+                      ),
+                      SummarizeView(
+                        checkoutCubit: checkoutCubit,
+                        onNext: checkoutCubit.nextStep,
+                        onBack: checkoutCubit.previousStep,
+                      ),
+                      SectionPayment(
+                        orderModel: checkoutCubit.orderModel,
+                        onBack: checkoutCubit.previousStep,
+                        onFinish: checkoutCubit.confirmOrder,
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          );
+        },
+      ),
     );
   }
 
   EasyStepper buildEasyStepper(
-    CheckoutCubit cubit,
     BuildContext context,
+    CheckoutCubit cubit,
     bool isDark,
     Size size,
   ) {
     return EasyStepper(
-      activeStep: cubit.getCurrentStep,
+      activeStep: cubit.currentStep,
       stepShape: StepShape.circle,
       lineStyle: LineStyle(
         lineLength: 50,
@@ -88,7 +93,8 @@ class CheckoutViewBody extends StatelessWidget {
       ),
       stepRadius: size.width > 700 ? 52 : 28,
       borderThickness: 2,
-      //finished step
+
+      // finished step
       finishedStepBorderColor: isDark
           ? kCheckoutStepperFinishedColorDark
           : kCheckoutStepperFinishedColorLight,
@@ -99,7 +105,8 @@ class CheckoutViewBody extends StatelessWidget {
       finishedStepIconColor: isDark
           ? kCheckoutStepperFinishedColorDark
           : kCheckoutStepperFinishedColorLight,
-      //active step
+
+      // active step
       activeStepBackgroundColor: Theme.of(context).scaffoldBackgroundColor,
       activeStepBorderColor: isDark
           ? kCheckoutStepperActiveColorDark
@@ -110,7 +117,8 @@ class CheckoutViewBody extends StatelessWidget {
       activeStepIconColor: isDark
           ? kCheckoutStepperActiveColorDark
           : kCheckoutStepperActiveColorLight,
-      //unreached step
+
+      // unreached step
       unreachedStepBorderColor: isDark
           ? kCheckoutStepperUnreachedColorDark
           : kCheckoutStepperUnreachedColorLight,
@@ -120,6 +128,7 @@ class CheckoutViewBody extends StatelessWidget {
       unreachedStepTextColor: isDark
           ? kCheckoutStepperUnreachedColorDark
           : kCheckoutStepperUnreachedColorLight,
+
       showLoadingAnimation: false,
       steps: [
         EasyStep(
@@ -136,12 +145,9 @@ class CheckoutViewBody extends StatelessWidget {
         ),
         EasyStep(
           icon: const Icon(Icons.credit_card),
-          title: S.of(context).cartFinish,
+          title: S.of(context).cart_payment,
         ),
       ],
-      // onStepReached: (index) {
-      //   setState(() => activeStep = index);
-      // },
     );
   }
 }
