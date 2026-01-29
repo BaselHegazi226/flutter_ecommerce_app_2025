@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_e_commerce_app_2025/core/helper/const.dart';
 import 'package:flutter_e_commerce_app_2025/core/shimmer/home_category_shimmer.dart';
 import 'package:flutter_e_commerce_app_2025/core/utilities/extensions_of_s_localization.dart';
 import 'package:flutter_e_commerce_app_2025/generated/l10n.dart';
 
-import '../../../../../core/helper/const.dart';
 import '../../../../../core/utilities/custom_text.dart';
 import '../../../data/model/category_model.dart';
 import '../../view_model/category_cubit/category_cubit.dart';
@@ -18,27 +18,27 @@ class CategoriesListView extends StatefulWidget {
 }
 
 class _CategoriesListViewState extends State<CategoriesListView> {
-  ValueNotifier<int> selectedItem = ValueNotifier(-1);
+  final ValueNotifier<int> selectedItem = ValueNotifier(-1);
 
   @override
   Widget build(BuildContext context) {
     final Size screenSize = MediaQuery.sizeOf(context);
+
     return BlocBuilder<CategoryCubit, CategoryState>(
       builder: (context, state) {
         if (state is GetCategorySuccess) {
           final categories = state.categories;
-          debugPrint('categories = ${categories[0].toJson()}');
+
           return SizedBox(
             height: 44,
-            child: ValueListenableBuilder(
+            child: ValueListenableBuilder<int>(
               valueListenable: selectedItem,
-              builder: (context, value, child) {
-                return buildListView(categories, screenSize);
+              builder: (context, value, _) {
+                return _buildListView(categories);
               },
             ),
           );
         } else if (state is GetCategoryFailure) {
-          debugPrint('error = ${state.errorMessage}');
           return Center(
             child: Text(S.of(context).home_not_categories_available_now),
           );
@@ -49,72 +49,114 @@ class _CategoriesListViewState extends State<CategoriesListView> {
     );
   }
 
-  ListView buildListView(List<CategoryModel> categories, Size screenSize) {
+  ListView _buildListView(List<CategoryModel> categories) {
     return ListView.separated(
       padding: EdgeInsets.zero,
       scrollDirection: Axis.horizontal,
       physics: const BouncingScrollPhysics(),
       itemCount: categories.length,
-      separatorBuilder: (context, index) {
-        return const SizedBox(width: 16);
-      },
+      separatorBuilder: (_, __) => const SizedBox(width: 16),
       itemBuilder: (context, index) {
-        return _categoryItem(
-          name: categories[index].name,
-          slug: S.of(context).categoryFunction(categories[index].slug),
+        final bool isSelected = selectedItem.value == index;
+        final colors = _resolveCategoryColors(
+          context: context,
+          isSelected: isSelected,
+        );
+
+        return _CategoryItem(
+          text: S.of(context).categoryFunction(categories[index].slug),
+          isSelected: isSelected,
+          isDark: Theme.of(context).brightness == Brightness.dark,
+          backgroundColor: colors.background,
+          textColor: colors.text,
+
           onTap: () {
             selectedItem.value = index;
             context.read<ProductCubit>().getProductsByCategory(
               category: categories[index].slug,
             );
-            debugPrint('name = ${categories[index].slug}');
           },
-          textColor: selectedItem.value == index
-              ? Colors.grey.shade50
-              : Colors.grey,
-          backgroundColor: selectedItem.value == index
-              ? Theme.of(context).brightness == Brightness.dark
-                    ? Colors.grey.shade500
-                    : kPrimaryColor
-              : Theme.of(context).scaffoldBackgroundColor,
-          borderColor: selectedItem.value == index
-              ? Colors.transparent
-              : Theme.of(context).brightness == Brightness.dark
-              ? Colors.grey.shade50
-              : Colors.grey,
         );
       },
     );
   }
+}
 
-  _categoryItem({
-    required String name,
-    required String slug,
+/* -------------------------------------------------------------------------- */
+/*                               UI COMPONENT                                 */
+/* -------------------------------------------------------------------------- */
 
-    required Color backgroundColor,
-    required Color borderColor,
-    required Color textColor,
-    required VoidCallback onTap,
-  }) {
+class _CategoryItem extends StatelessWidget {
+  const _CategoryItem({
+    required this.text,
+    required this.backgroundColor,
+    required this.textColor,
+    required this.onTap,
+    required this.isSelected,
+    required this.isDark,
+  });
+
+  final String text;
+  final Color backgroundColor;
+  final Color textColor;
+  final VoidCallback onTap;
+  final bool isSelected;
+  final bool isDark;
+
+  @override
+  Widget build(BuildContext context) {
     return InkWell(
       onTap: onTap,
-      borderRadius: const BorderRadius.all(Radius.circular(32)),
+      borderRadius: BorderRadius.circular(32),
       child: AnimatedContainer(
-        width: 156,
-        duration: const Duration(milliseconds: 400),
+        duration: const Duration(milliseconds: 350),
         curve: Curves.easeOutCubic,
+        width: 156,
         decoration: BoxDecoration(
           color: backgroundColor,
-          border: Border.all(color: borderColor),
-          borderRadius: const BorderRadius.all(Radius.circular(32)),
+          borderRadius: BorderRadius.circular(32),
         ),
+        alignment: Alignment.center,
         child: CustomText(
-          text: slug,
+          text: text,
           fontSize: 14,
-          alignment: Alignment.center,
+          fontWeight: isSelected ? FontWeight.w900 : FontWeight.w700,
           color: textColor,
         ),
       ),
+    );
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/*                             COLOR RESOLUTION                                */
+/* -------------------------------------------------------------------------- */
+
+class _CategoryColors {
+  final Color background;
+  final Color text;
+
+  const _CategoryColors({required this.background, required this.text});
+}
+
+_CategoryColors _resolveCategoryColors({
+  required BuildContext context,
+  required bool isSelected,
+}) {
+  final theme = Theme.of(context);
+  final isDark = theme.brightness == Brightness.dark;
+
+  if (isSelected) {
+    return _CategoryColors(
+      background: isDark ? Colors.grey.shade200 : kPrimaryColor,
+      text: isDark ? Colors.black54 : Colors.grey.shade100,
+    );
+  } else {
+    return _CategoryColors(
+      background: isDark
+          ? Colors.grey.shade600
+          : Colors.grey.shade500.withAlpha(32),
+      text: isDark ? Colors.white : Colors.black54,
     );
   }
 }
