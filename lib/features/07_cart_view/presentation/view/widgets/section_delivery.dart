@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_e_commerce_app_2025/core/utilities/custom_button.dart';
 import 'package:flutter_e_commerce_app_2025/core/utilities/custom_text.dart';
 import 'package:flutter_e_commerce_app_2025/generated/l10n.dart';
+import 'package:table_calendar/table_calendar.dart';
 
 import '../../../../../core/helper/const.dart';
 import '../../../../../core/utilities/extensions_of_s_localization.dart';
@@ -183,16 +184,10 @@ class _DeliveryViewState extends State<DeliveryView> {
   }
 
   Future<DateTime?> _showDatePicker(BuildContext context) {
-    DateTime tempDate = DateTime.now();
+    DateTime focusedDay = DateTime.now();
+    DateTime? selectedDay;
 
-    double textScale() {
-      final width = MediaQuery.of(context).size.width;
-      if (width >= 900) return 1.0;
-      if (width >= 600) return 0.95;
-      return 0.9;
-    }
-
-    final scale = textScale();
+    final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return showModalBottomSheet<DateTime>(
       context: context,
@@ -205,57 +200,120 @@ class _DeliveryViewState extends State<DeliveryView> {
       builder: (context) {
         return Padding(
           padding: const EdgeInsets.fromLTRB(20, 20, 20, 30),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              /// Title
-              Text(
-                S.of(context).calendarTitle,
-                style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                  fontSize: 22 * scale,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              const SizedBox(height: 16),
-
-              /// Calendar
-              Theme(
-                data: Theme.of(context).copyWith(
-                  colorScheme: Theme.of(context).brightness == Brightness.dark
-                      ? ColorScheme.dark(
-                          primary: Colors.grey.shade500,
-                          onPrimary: Colors.white,
-                        )
-                      : const ColorScheme.light(
-                          primary: kPrimaryColor,
-                          onPrimary: Colors.white,
-                        ),
-                  textTheme: Theme.of(context).textTheme.copyWith(
-                    titleLarge: Theme.of(
-                      context,
-                    ).textTheme.titleLarge?.copyWith(fontSize: 18 * scale),
-                    titleMedium: Theme.of(
-                      context,
-                    ).textTheme.titleMedium?.copyWith(fontSize: 16 * scale),
-                    bodyMedium: Theme.of(
-                      context,
-                    ).textTheme.bodyMedium?.copyWith(fontSize: 14 * scale),
-                    labelLarge: Theme.of(
-                      context,
-                    ).textTheme.labelLarge?.copyWith(fontSize: 16 * scale),
+          child: StatefulBuilder(
+            builder: (context, setState) {
+              return Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  /// Title
+                  Text(
+                    S.of(context).calendarTitle,
+                    style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                ),
-                child: CalendarDatePicker(
-                  initialDate: tempDate,
-                  firstDate: DateTime.now(),
-                  lastDate: DateTime(2026, 12, 31),
-                  onDateChanged: (date) {
-                    Navigator.pop(context, date);
-                  },
-                ),
-              ),
-            ],
+                  const SizedBox(height: 16),
+
+                  /// Calendar
+                  MediaQuery(
+                    data: MediaQuery.of(context).copyWith(
+                      textScaleFactor: 1, // يمنع تكبير النص من إعدادات الجهاز
+                    ),
+                    child: TableCalendar(
+                      firstDay: DateTime.now(),
+                      lastDay: DateTime(2026, 12, 31),
+                      focusedDay: focusedDay,
+
+                      rowHeight: 36,
+
+                      // خليتها متناسقة مع النص
+                      selectedDayPredicate: (day) {
+                        return selectedDay != null &&
+                            isSameDay(selectedDay, day);
+                      },
+
+                      onDaySelected: (selected, focused) {
+                        setState(() {
+                          selectedDay = selected;
+                          focusedDay = focused;
+                        });
+
+                        Navigator.pop(context, selected);
+                      },
+
+                      sixWeekMonthsEnforced: true,
+
+                      /// Header
+                      headerStyle: HeaderStyle(
+                        titleCentered: true,
+                        formatButtonVisible: false,
+                        titleTextStyle: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: isDark ? Colors.white : Colors.black,
+                        ),
+                        leftChevronIcon: Icon(
+                          Icons.chevron_left,
+                          color: isDark ? Colors.white : Colors.black,
+                        ),
+                        rightChevronIcon: Icon(
+                          Icons.chevron_right,
+                          color: isDark ? Colors.white : Colors.black,
+                        ),
+                      ),
+
+                      /// أيام الأسبوع
+                      daysOfWeekStyle: DaysOfWeekStyle(
+                        weekdayStyle: TextStyle(
+                          fontSize: 13,
+                          color: isDark
+                              ? Colors.grey.shade300
+                              : Colors.grey.shade700,
+                        ),
+                        weekendStyle: TextStyle(
+                          fontSize: 13,
+                          color: isDark
+                              ? Colors.grey.shade300
+                              : Colors.grey.shade700,
+                        ),
+                      ),
+
+                      /// شكل الأيام
+                      calendarStyle: CalendarStyle(
+                        outsideDaysVisible: false,
+
+                        /// كل النصوص نفس الحجم
+                        defaultTextStyle: const TextStyle(fontSize: 12),
+                        weekendTextStyle: const TextStyle(fontSize: 12),
+                        selectedTextStyle: const TextStyle(
+                          fontSize: 12,
+                          color: Colors.white,
+                        ),
+                        todayTextStyle: const TextStyle(
+                          fontSize: 12,
+                          color: Colors.white,
+                        ),
+                        disabledTextStyle: const TextStyle(fontSize: 11),
+
+                        /// اليوم الحالي
+                        todayDecoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: isDark ? Colors.grey.shade500 : kPrimaryColor,
+                        ),
+
+                        /// اليوم المختار
+                        selectedDecoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: isDark ? Colors.grey.shade500 : kPrimaryColor,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              );
+            },
           ),
         );
       },

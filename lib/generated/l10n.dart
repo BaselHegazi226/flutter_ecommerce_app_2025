@@ -694,10 +694,10 @@ class S {
     );
   }
 
-  /// `Discover Products With Smart Search`
+  /// `Discover products with smart and wide search`
   String get onboarding_title_img1 {
     return Intl.message(
-      'Discover Products With Smart Search',
+      'Discover products with smart and wide search',
       name: 'onboarding_title_img1',
       desc: '',
       args: [],
@@ -714,10 +714,10 @@ class S {
     );
   }
 
-  /// `Explore A Wide Product Collection`
+  /// `Explore a wide and several product collection`
   String get onboarding_title_img2 {
     return Intl.message(
-      'Explore A Wide Product Collection',
+      'Explore a wide and several product collection',
       name: 'onboarding_title_img2',
       desc: '',
       args: [],
@@ -734,10 +734,10 @@ class S {
     );
   }
 
-  /// `Secure And Simple Checkout Experience`
+  /// `Secure and simple checkout experience`
   String get onboarding_title_img3 {
     return Intl.message(
-      'Secure And Simple Checkout Experience',
+      'Secure and simple checkout experience',
       name: 'onboarding_title_img3',
       desc: '',
       args: [],

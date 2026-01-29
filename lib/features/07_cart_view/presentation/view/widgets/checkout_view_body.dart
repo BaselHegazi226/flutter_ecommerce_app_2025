@@ -20,10 +20,6 @@ class CheckoutViewBody extends StatelessWidget {
     final size = MediaQuery.sizeOf(context);
     final checkoutCubit = context.read<CheckoutCubit>();
 
-    debugPrint(
-      'checkout view order model = ${checkoutCubit.orderModel?.toJson()}',
-    );
-
     return BlocListener<CheckoutCubit, CheckoutState>(
       listener: (context, state) {
         if (state is OrderReadyFailure) {
@@ -91,7 +87,7 @@ class CheckoutViewBody extends StatelessWidget {
             ? Colors.grey.shade400
             : kPrimaryColor.withAlpha(125),
       ),
-      stepRadius: size.width > 700 ? 52 : 28,
+      stepRadius: size.width > 700 ? 36 : 20,
       borderThickness: 2,
 
       // finished step

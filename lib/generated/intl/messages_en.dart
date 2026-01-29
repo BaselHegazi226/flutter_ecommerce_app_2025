@@ -394,13 +394,13 @@ class MessageLookup extends MessageLookupByLibrary {
     "onboarding_next": MessageLookupByLibrary.simpleMessage("Next"),
     "onboarding_skip": MessageLookupByLibrary.simpleMessage("Skip"),
     "onboarding_title_img1": MessageLookupByLibrary.simpleMessage(
-      "Discover Products With Smart Search",
+      "Discover products with smart and wide search",
     ),
     "onboarding_title_img2": MessageLookupByLibrary.simpleMessage(
-      "Explore A Wide Product Collection",
+      "Explore a wide and several product collection",
     ),
     "onboarding_title_img3": MessageLookupByLibrary.simpleMessage(
-      "Secure And Simple Checkout Experience",
+      "Secure and simple checkout experience",
     ),
     "order_added_done": MessageLookupByLibrary.simpleMessage(
       "Is Already added",

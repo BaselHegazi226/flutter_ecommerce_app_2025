@@ -9,7 +9,9 @@ class NoItemFound extends StatelessWidget {
     required this.itemTitle,
     required this.itemImage,
   });
+
   final String itemTitle, itemImage;
+
   @override
   Widget build(BuildContext context) {
     final Size screenSize = MediaQuery.sizeOf(context);
@@ -22,6 +24,7 @@ class NoItemFound extends StatelessWidget {
           text: itemTitle,
           fontSize: 20,
           alignment: Alignment.center,
+          textAlign: TextAlign.center,
           color: Colors.black,
         ),
       ],
@@ -35,6 +38,7 @@ class NoItemFoundByIcon extends StatelessWidget {
     required this.itemTitle,
     required this.iconData,
   });
+
   final String itemTitle;
   final IconData iconData;
 
