@@ -4,11 +4,11 @@ import 'package:flutter_e_commerce_app_2025/core/helper/const.dart';
 import 'package:flutter_e_commerce_app_2025/core/utilities/custom_loading_indicator.dart';
 import 'package:flutter_e_commerce_app_2025/core/utilities/custom_text.dart';
 import 'package:flutter_e_commerce_app_2025/core/utilities/extensions_of_s_localization.dart';
+import 'package:flutter_e_commerce_app_2025/core/utilities/navigate_button.dart';
 import 'package:flutter_e_commerce_app_2025/core/utilities/show_order_list.dart';
 import 'package:flutter_e_commerce_app_2025/features/07_cart_view/data/model/order_model.dart';
 
 import '../../../../../core/helper/date_formatter.dart';
-import '../../../../../core/utilities/custom_button.dart';
 import '../../../../../generated/l10n.dart';
 import '../../../data/model/delivery_method_model.dart';
 import '../../view_model/checkout_cubit/checkout_cubit.dart';
@@ -154,7 +154,8 @@ class _SummarizeViewState extends State<SummarizeView> {
             children: [
               SizedBox(
                 width: size.width * .3,
-                child: CustomButton(
+                child: NavigateButton(
+                  isBack: true,
                   backgroundColor:
                       Theme.of(context).brightness == Brightness.dark
                       ? Colors.grey.shade700
@@ -172,7 +173,7 @@ class _SummarizeViewState extends State<SummarizeView> {
               const Spacer(),
               SizedBox(
                 width: size.width * .3,
-                child: CustomButton(
+                child: NavigateButton(
                   onPressed: () {
                     widget.onNext();
                   },

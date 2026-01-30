@@ -60,9 +60,16 @@ class SectionPayment extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  checkCircleSection(context),
+                  checkCircleSection(
+                    context,
+                    Theme.of(context).brightness == Brightness.dark,
+                  ),
                   const SizedBox(height: 16),
-                  dateStateSection(updatedOrder, context),
+                  dateStateSection(
+                    updatedOrder,
+                    context,
+                    Theme.of(context).brightness == Brightness.dark,
+                  ),
                   const SizedBox(height: 8),
                   SectionPaymentTrackItem(orderModel: updatedOrder),
                   const SizedBox(height: 16),
@@ -77,39 +84,51 @@ class SectionPayment extends StatelessWidget {
     );
   }
 
-  Column dateStateSection(OrderModel updatedOrder, BuildContext context) {
+  Column dateStateSection(
+    OrderModel updatedOrder,
+    BuildContext context,
+    bool isDark,
+  ) {
     return Column(
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             AutoSizeText(
               'OD-${orderModel!.orderId.split('-').take(2).join('-')}-N',
-              minFontSize: 8,
               style: const TextStyle(fontSize: 12),
+              minFontSize: 8,
               maxFontSize: 16,
               maxLines: 1,
             ),
             TextButton(
               onPressed: onBack,
-              child: Row(
-                spacing: 4,
-                children: [
-                  Icon(
-                    Icons.arrow_back,
-                    color: Theme.of(context).brightness == Brightness.dark
-                        ? Colors.blueGrey.shade200
-                        : Colors.deepOrange,
-                    size: 20,
-                  ),
-                  CustomText(
-                    text: S.of(context).changeOrder,
-                    fontSize: 16,
-                    color: Theme.of(context).brightness == Brightness.dark
-                        ? Colors.blueGrey.shade200
-                        : Colors.deepOrange,
-                  ),
-                ],
+              child: Container(
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color: isDark ? Colors.white24 : Colors.grey.shade300,
+                  borderRadius: const BorderRadius.all(Radius.circular(4)),
+                ),
+                child: Row(
+                  spacing: 4,
+                  children: [
+                    Icon(
+                      Icons.arrow_back,
+                      color: isDark
+                          ? Colors.blueGrey.shade200
+                          : Colors.deepOrange,
+                      size: 16,
+                    ),
+                    CustomText(
+                      text: S.of(context).cart_back,
+                      fontSize: 12,
+                      color: isDark
+                          ? Colors.blueGrey.shade200
+                          : Colors.deepOrange,
+                    ),
+                  ],
+                ),
               ),
             ),
           ],
@@ -118,7 +137,7 @@ class SectionPayment extends StatelessWidget {
     );
   }
 
-  Row checkCircleSection(BuildContext context) {
+  Row checkCircleSection(BuildContext context, bool isDark) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -130,9 +149,7 @@ class SectionPayment extends StatelessWidget {
         ),
         Icon(
           Icons.check_circle,
-          color: Theme.of(context).brightness == Brightness.dark
-              ? Colors.grey.shade200
-              : kPrimaryColor,
+          color: isDark ? Colors.grey.shade200 : kPrimaryColor,
         ),
       ],
     );
@@ -171,7 +188,11 @@ class SectionPayment extends StatelessWidget {
         }
       },
       builder: (context, state) {
-        return buildPriceButtonSection(context, state);
+        return buildPriceButtonSection(
+          context,
+          state,
+          Theme.of(context).brightness == Brightness.dark,
+        );
       },
     );
   }
@@ -179,6 +200,7 @@ class SectionPayment extends StatelessWidget {
   PriceButtonSection buildPriceButtonSection(
     BuildContext context,
     PaymentState state,
+    bool isDark,
   ) {
     return PriceButtonSection(
       title: S.of(context).cartTotal,
@@ -191,12 +213,8 @@ class SectionPayment extends StatelessWidget {
           );
         },
         text: S.of(context).cartPayment,
-        textColor: Theme.of(context).brightness == Brightness.dark
-            ? Colors.grey.shade600
-            : Colors.grey.shade200,
-        backgroundColor: Theme.of(context).brightness == Brightness.dark
-            ? Colors.grey.shade200
-            : kPrimaryColor,
+        textColor: isDark ? Colors.grey.shade600 : Colors.grey.shade200,
+        backgroundColor: isDark ? Colors.grey.shade200 : kPrimaryColor,
         iconData: Icons.payment_outlined,
       ),
     );

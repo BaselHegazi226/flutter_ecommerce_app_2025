@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_e_commerce_app_2025/core/utilities/custom_button.dart';
+import 'package:flutter_e_commerce_app_2025/core/utilities/navigate_button.dart';
 
 import '../../../../../core/helper/const.dart';
 import '../../../../../core/utilities/custom_text.dart';
@@ -90,9 +90,11 @@ class _LocationViewState extends State<LocationView> {
                     children: [
                       SizedBox(
                         width: size.width * .3,
-                        child: CustomButton(
+                        child: NavigateButton(
+                          isBack: true,
                           onPressed: widget.onBack,
                           text: S.of(context).cart_back,
+                          iconSize: 14,
                           backgroundColor:
                               Theme.of(context).brightness == Brightness.dark
                               ? Colors.grey.shade700
@@ -110,7 +112,7 @@ class _LocationViewState extends State<LocationView> {
                       const Spacer(),
                       SizedBox(
                         width: size.width * .3,
-                        child: CustomButton(
+                        child: NavigateButton(
                           onPressed: () {
                             if (_formKey.currentState!.validate()) {
                               _formKey.currentState!.save();

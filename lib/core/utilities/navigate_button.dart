@@ -1,69 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_e_commerce_app_2025/core/helper/const.dart';
-import 'package:flutter_e_commerce_app_2025/core/utilities/custom_loading_indicator.dart';
-import 'package:flutter_e_commerce_app_2025/core/utilities/custom_text.dart';
 
-class CustomButton extends StatelessWidget {
-  const CustomButton({
+import '../helper/const.dart';
+import 'custom_loading_indicator.dart';
+import 'custom_text.dart';
+
+class NavigateButton extends StatelessWidget {
+  const NavigateButton({
     super.key,
+    this.isBack = false,
     required this.onPressed,
     required this.text,
-    this.borderColor = Colors.transparent,
-    this.backgroundColor = kPrimaryColor,
-    this.textColor = Colors.white,
-    this.paddingValue = 12,
-    this.textSize = 14,
-    this.isLoading = false,
-    this.fontWeight = FontWeight.w700,
-  });
-
-  final void Function()? onPressed;
-  final String text;
-  final Color? backgroundColor;
-  final Color? borderColor;
-  final Color textColor;
-  final double textSize;
-  final double paddingValue;
-  final bool isLoading;
-  final FontWeight fontWeight;
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final isDark = theme.brightness == Brightness.dark;
-
-    return ElevatedButton(
-      style: ElevatedButton.styleFrom(
-        shape: RoundedRectangleBorder(
-          side: BorderSide(color: borderColor ?? Colors.transparent),
-          borderRadius: BorderRadius.circular(12),
-        ),
-        padding: EdgeInsets.all(paddingValue),
-        elevation: 1,
-        backgroundColor:
-            backgroundColor ?? (isDark ? Colors.grey.shade400 : kScaffoldColor),
-      ),
-      onPressed: isLoading ? null : onPressed,
-      child: isLoading
-          ? CustomCircleIndicator(color: textColor, size: 24)
-          : CustomText(
-              key: const ValueKey('text'),
-              text: text,
-              color: textColor,
-              fontSize: textSize,
-              alignment: Alignment.center,
-              fontWeight: fontWeight,
-            ),
-    );
-  }
-}
-
-class CustomTextIconButton extends StatelessWidget {
-  const CustomTextIconButton({
-    super.key,
-    required this.onPressed,
-    required this.text,
-    required this.iconData,
     this.borderColor = Colors.transparent,
     this.backgroundColor = kPrimaryColor,
     this.textColor = Colors.white,
@@ -71,8 +17,10 @@ class CustomTextIconButton extends StatelessWidget {
     this.textSize = 14,
     this.isLoading = false,
     this.fontWeight = FontWeight.w700,
-    this.iconSize = 20,
+    this.iconSize = 14,
   });
+
+  final bool isBack;
 
   final void Function()? onPressed;
   final String text;
@@ -83,7 +31,6 @@ class CustomTextIconButton extends StatelessWidget {
   final double paddingValue;
   final double iconSize;
   final bool isLoading;
-  final IconData iconData;
   final FontWeight fontWeight;
 
   @override
@@ -91,6 +38,50 @@ class CustomTextIconButton extends StatelessWidget {
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
 
+    if (isBack) {
+      return _buildElevatedButtonBack(isDark);
+    }
+    return _buildElevatedButtonNext(isDark);
+  }
+
+  ElevatedButton _buildElevatedButtonNext(bool isDark) {
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        shape: RoundedRectangleBorder(
+          side: BorderSide(color: borderColor ?? Colors.transparent),
+          borderRadius: BorderRadius.circular(12),
+        ),
+        padding: EdgeInsets.symmetric(horizontal: paddingValue),
+        elevation: 1,
+        backgroundColor:
+            backgroundColor ?? (isDark ? Colors.grey.shade400 : kScaffoldColor),
+      ),
+      onPressed: isLoading ? null : onPressed,
+      child: isLoading
+          ? CustomCircleIndicator(color: textColor, size: 24)
+          : Row(
+              key: const ValueKey('content'),
+              spacing: 8,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                CustomText(
+                  text: text,
+                  color: textColor,
+                  fontSize: textSize,
+                  alignment: Alignment.center,
+                  fontWeight: fontWeight,
+                ),
+                Icon(
+                  Icons.arrow_forward_ios_outlined,
+                  size: iconSize,
+                  color: textColor,
+                ),
+              ],
+            ),
+    );
+  }
+
+  ElevatedButton _buildElevatedButtonBack(bool isDark) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
         shape: RoundedRectangleBorder(
@@ -108,7 +99,13 @@ class CustomTextIconButton extends StatelessWidget {
           : Row(
               key: const ValueKey('content'),
               mainAxisAlignment: MainAxisAlignment.center,
+              spacing: 8,
               children: [
+                Icon(
+                  Icons.arrow_back_ios_new_outlined,
+                  size: iconSize,
+                  color: textColor,
+                ),
                 CustomText(
                   text: text,
                   color: textColor,
@@ -116,8 +113,6 @@ class CustomTextIconButton extends StatelessWidget {
                   alignment: Alignment.center,
                   fontWeight: fontWeight,
                 ),
-                const SizedBox(width: 8),
-                Icon(iconData, size: iconSize, color: textColor),
               ],
             ),
     );

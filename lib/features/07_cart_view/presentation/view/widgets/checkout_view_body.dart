@@ -35,7 +35,15 @@ class CheckoutViewBody extends StatelessWidget {
             child: CustomScrollView(
               slivers: [
                 SliverToBoxAdapter(
-                  child: buildEasyStepper(context, checkoutCubit, isDark, size),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: buildEasyStepper(
+                      context,
+                      checkoutCubit,
+                      isDark,
+                      size,
+                    ),
+                  ),
                 ),
                 const SliverToBoxAdapter(child: SizedBox(height: 20)),
                 SliverFillRemaining(
@@ -79,7 +87,7 @@ class CheckoutViewBody extends StatelessWidget {
       activeStep: cubit.currentStep,
       stepShape: StepShape.circle,
       lineStyle: LineStyle(
-        lineLength: 50,
+        lineLength: size.width > 700 ? 50 : 36,
         lineType: LineType.dashed,
         defaultLineColor: Colors.transparent,
         activeLineColor: isDark ? Colors.grey.shade200 : kPrimaryColor,
@@ -87,9 +95,12 @@ class CheckoutViewBody extends StatelessWidget {
             ? Colors.grey.shade400
             : kPrimaryColor.withAlpha(125),
       ),
-      stepRadius: size.width > 700 ? 36 : 20,
+      stepRadius: size.width > 700 ? 46 : 16,
       borderThickness: 2,
-
+      titleTextStyle: TextStyle(
+        fontSize: size.width > 700 ? 16 : 10,
+        fontWeight: FontWeight.w500,
+      ),
       // finished step
       finishedStepBorderColor: isDark
           ? kCheckoutStepperFinishedColorDark

@@ -74,7 +74,6 @@ class OrderCacheImplement implements OrderCache {
   }) async {
     try {
       if (_hiveBoxOrderModel.get(orderModel.orderId) == null) {
-        await Hive.box<OrderModel>('OrderBox$userId').clear();
         final orderModelIndependent = OrderModel.fromJson(orderModel.toJson());
         await _hiveBoxOrderModel.put(
           orderModelIndependent.orderId,

@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_e_commerce_app_2025/core/utilities/custom_button.dart';
 import 'package:flutter_e_commerce_app_2025/core/utilities/custom_text.dart';
+import 'package:flutter_e_commerce_app_2025/core/utilities/navigate_button.dart';
 import 'package:flutter_e_commerce_app_2025/generated/l10n.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 import '../../../../../core/helper/const.dart';
+import '../../../../../core/utilities/custom_button.dart';
 import '../../../../../core/utilities/extensions_of_s_localization.dart';
 import '../../../data/model/delivery_method_model.dart';
 import '../../view_model/checkout_cubit/checkout_cubit.dart';
@@ -80,7 +81,7 @@ class _DeliveryViewState extends State<DeliveryView> {
             children: [
               SizedBox(
                 width: size.width * .3,
-                child: CustomButton(
+                child: NavigateButton(
                   text: S.of(context).cart_next,
                   onPressed: widget.onNext,
                   textColor: isDark
@@ -184,8 +185,10 @@ class _DeliveryViewState extends State<DeliveryView> {
   }
 
   Future<DateTime?> _showDatePicker(BuildContext context) {
-    DateTime focusedDay = DateTime.now();
-    DateTime? selectedDay;
+    final ValueNotifier<DateTime?> selectedDayNotifier = ValueNotifier(null);
+    final ValueNotifier<DateTime> focusedDayNotifier = ValueNotifier(
+      DateTime.now(),
+    );
 
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
@@ -200,120 +203,152 @@ class _DeliveryViewState extends State<DeliveryView> {
       builder: (context) {
         return Padding(
           padding: const EdgeInsets.fromLTRB(20, 20, 20, 30),
-          child: StatefulBuilder(
-            builder: (context, setState) {
-              return Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              /// Title
+              Text(
+                S.of(context).calendarTitle,
+                style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(height: 16),
+
+              /// Calendar (نفس تصميمك بدون تغيير)
+              ValueListenableBuilder<DateTime?>(
+                valueListenable: selectedDayNotifier,
+                builder: (_, selectedDay, __) {
+                  return ValueListenableBuilder<DateTime>(
+                    valueListenable: focusedDayNotifier,
+                    builder: (_, focusedDay, __) {
+                      return TableCalendar(
+                        firstDay: DateTime.now(),
+                        lastDay: DateTime(2026, 12, 31),
+                        focusedDay: focusedDay,
+                        rowHeight: 56,
+
+                        selectedDayPredicate: (day) =>
+                            selectedDay != null && isSameDay(selectedDay, day),
+
+                        onDaySelected: (selected, focused) {
+                          selectedDayNotifier.value = selected;
+                          focusedDayNotifier.value = focused;
+                        },
+
+                        sixWeekMonthsEnforced: true,
+
+                        /// Header
+                        headerStyle: HeaderStyle(
+                          titleCentered: true,
+                          formatButtonVisible: false,
+                          titleTextStyle: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: isDark ? Colors.white : Colors.black,
+                          ),
+                          leftChevronIcon: Icon(
+                            Icons.chevron_left,
+                            color: isDark ? Colors.white : Colors.black,
+                          ),
+                          rightChevronIcon: Icon(
+                            Icons.chevron_right,
+                            color: isDark ? Colors.white : Colors.black,
+                          ),
+                        ),
+
+                        /// Days of week
+                        daysOfWeekStyle: DaysOfWeekStyle(
+                          weekdayStyle: TextStyle(
+                            fontSize: 11,
+                            color: isDark
+                                ? Colors.grey.shade300
+                                : Colors.grey.shade700,
+                          ),
+                          weekendStyle: TextStyle(
+                            fontSize: 11,
+                            color: isDark
+                                ? Colors.grey.shade300
+                                : Colors.grey.shade700,
+                          ),
+                        ),
+
+                        /// Calendar Style (نفسك)
+                        calendarStyle: CalendarStyle(
+                          outsideDaysVisible: false,
+                          defaultTextStyle: const TextStyle(fontSize: 14),
+                          weekendTextStyle: const TextStyle(fontSize: 14),
+                          selectedTextStyle: TextStyle(
+                            fontSize: 14,
+                            color: isDark ? Colors.black54 : Colors.white,
+                          ),
+                          todayTextStyle: TextStyle(
+                            fontSize: 14,
+                            color: isDark
+                                ? Colors.grey.shade500
+                                : Colors.black54,
+                          ),
+                          disabledTextStyle: TextStyle(
+                            fontSize: 14,
+                            color: Colors.grey.shade500,
+                          ),
+
+                          todayDecoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Theme.of(context).scaffoldBackgroundColor,
+                            border: Border.all(
+                              color: isDark
+                                  ? Colors.grey.shade500
+                                  : Colors.black54,
+                              width: 1.5,
+                            ),
+                          ),
+                          selectedDecoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: isDark ? Colors.white : kPrimaryColor,
+                          ),
+                        ),
+                      );
+                    },
+                  );
+                },
+              ),
+
+              const SizedBox(height: 24),
+
+              /// Buttons Confirm / Cancel (نفس تصميمك)
+              Row(
                 children: [
-                  /// Title
-                  Text(
-                    S.of(context).calendarTitle,
-                    style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
+                  Expanded(
+                    child: CustomButton(
+                      onPressed: () => Navigator.pop(context, null),
+                      backgroundColor: Theme.of(
+                        context,
+                      ).scaffoldBackgroundColor,
+                      borderColor: isDark ? Colors.white : Colors.black54,
+                      textColor: isDark ? Colors.white : Colors.black54,
+                      text: S.of(context).calendarCancel,
                     ),
                   ),
-                  const SizedBox(height: 16),
-
-                  /// Calendar
-                  MediaQuery(
-                    data: MediaQuery.of(context).copyWith(
-                      textScaleFactor: 1, // يمنع تكبير النص من إعدادات الجهاز
-                    ),
-                    child: TableCalendar(
-                      firstDay: DateTime.now(),
-                      lastDay: DateTime(2026, 12, 31),
-                      focusedDay: focusedDay,
-
-                      rowHeight: 36,
-
-                      // خليتها متناسقة مع النص
-                      selectedDayPredicate: (day) {
-                        return selectedDay != null &&
-                            isSameDay(selectedDay, day);
+                  const SizedBox(width: 16),
+                  Expanded(
+                    child: CustomButton(
+                      onPressed: () {
+                        Navigator.pop(context, selectedDayNotifier.value);
                       },
-
-                      onDaySelected: (selected, focused) {
-                        setState(() {
-                          selectedDay = selected;
-                          focusedDay = focused;
-                        });
-
-                        Navigator.pop(context, selected);
-                      },
-
-                      sixWeekMonthsEnforced: true,
-
-                      /// Header
-                      headerStyle: HeaderStyle(
-                        titleCentered: true,
-                        formatButtonVisible: false,
-                        titleTextStyle: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          color: isDark ? Colors.white : Colors.black,
-                        ),
-                        leftChevronIcon: Icon(
-                          Icons.chevron_left,
-                          color: isDark ? Colors.white : Colors.black,
-                        ),
-                        rightChevronIcon: Icon(
-                          Icons.chevron_right,
-                          color: isDark ? Colors.white : Colors.black,
-                        ),
-                      ),
-
-                      /// أيام الأسبوع
-                      daysOfWeekStyle: DaysOfWeekStyle(
-                        weekdayStyle: TextStyle(
-                          fontSize: 13,
-                          color: isDark
-                              ? Colors.grey.shade300
-                              : Colors.grey.shade700,
-                        ),
-                        weekendStyle: TextStyle(
-                          fontSize: 13,
-                          color: isDark
-                              ? Colors.grey.shade300
-                              : Colors.grey.shade700,
-                        ),
-                      ),
-
-                      /// شكل الأيام
-                      calendarStyle: CalendarStyle(
-                        outsideDaysVisible: false,
-
-                        /// كل النصوص نفس الحجم
-                        defaultTextStyle: const TextStyle(fontSize: 12),
-                        weekendTextStyle: const TextStyle(fontSize: 12),
-                        selectedTextStyle: const TextStyle(
-                          fontSize: 12,
-                          color: Colors.white,
-                        ),
-                        todayTextStyle: const TextStyle(
-                          fontSize: 12,
-                          color: Colors.white,
-                        ),
-                        disabledTextStyle: const TextStyle(fontSize: 11),
-
-                        /// اليوم الحالي
-                        todayDecoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: isDark ? Colors.grey.shade500 : kPrimaryColor,
-                        ),
-
-                        /// اليوم المختار
-                        selectedDecoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: isDark ? Colors.grey.shade500 : kPrimaryColor,
-                        ),
-                      ),
+                      backgroundColor: isDark
+                          ? Colors.grey.shade100
+                          : kPrimaryColor,
+                      borderColor: Colors.transparent,
+                      textColor: isDark ? Colors.black54 : Colors.white,
+                      text: S.of(context).calendarConfirm,
                     ),
                   ),
                 ],
-              );
-            },
+              ),
+            ],
           ),
         );
       },
