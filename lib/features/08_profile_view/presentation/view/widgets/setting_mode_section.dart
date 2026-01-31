@@ -16,14 +16,11 @@ class ModeSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final appSettingCubit = AppSettingCubit.get(context);
-    bool isDark = appSettingCubit.isDarkModeEnabled();
-    return BlocConsumer<AppSettingCubit, AppSettingStates>(
-      listener: (context, state) {
-        if (state is SelectedThemeSuccess) {
-          isDark = appSettingCubit.isDarkModeEnabled();
-        }
-      },
+
+    return BlocBuilder<AppSettingCubit, AppSettingStates>(
       builder: (context, state) {
+        final isDark = appSettingCubit.isDarkModeEnabled();
+
         return Column(
           spacing: 16,
           children: [

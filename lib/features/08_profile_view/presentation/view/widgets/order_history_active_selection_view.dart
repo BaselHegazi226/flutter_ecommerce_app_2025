@@ -13,7 +13,6 @@ import 'package:iconify_flutter/icons/carbon.dart';
 import '../../../../../core/helper/date_formatter.dart';
 import '../../../../07_cart_view/data/model/order_model.dart';
 import '../../../../07_cart_view/presentation/view_model/order_cubit/order_cubit.dart';
-import '../../../../07_cart_view/presentation/view_model/order_cubit/order_state.dart';
 
 class OrderHistoryActiveSelectionView extends StatefulWidget {
   const OrderHistoryActiveSelectionView({
@@ -154,83 +153,78 @@ class _OrderHistoryActiveSelectionViewState
     final isAllSelected = _isAllSelected(selectedMap);
     final isAnySelected = _isAnySelected(selectedMap);
 
-    return BlocBuilder<OrderCubit, OrderState>(
-      builder: (context, state) {
-        return Container(
-          height: 50,
-          padding: const EdgeInsets.symmetric(horizontal: 8),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return Container(
+      height: 50,
+      padding: const EdgeInsets.symmetric(horizontal: 8),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Row(
             children: [
-              Row(
-                children: [
-                  IconButton(
-                    onPressed: _undoSelected,
-                    icon: Iconify(
-                      Carbon.undo,
-                      color: Theme.of(context).brightness == Brightness.dark
-                          ? Colors.grey.shade100
-                          : Colors.black,
-                      size: 24,
-                    ),
-                  ),
-                  IconWithCircleStyle(
-                    backgroundColor:
-                        Theme.of(context).brightness == Brightness.dark
-                        ? Colors.grey.shade500.withAlpha(32)
-                        : Colors.grey.shade300.withAlpha(32),
-                    onPressed: _confirmDelete,
-                    icon: Icon(
-                      Icons.delete_outline,
-                      color: Theme.of(context).brightness == Brightness.dark
-                          ? Colors.grey.shade50
-                          : Colors.black,
-                      size: 24,
-                    ),
-                  ),
-                  const SizedBox(width: 12),
-                  CustomText(
-                    text: isAnySelected
-                        ? S
-                              .of(context)
-                              .deleteNumOfItems(
-                                context,
-                                widget.selectedOrders.length,
-                              )
-                        : '',
-                    fontSize: 14,
-                    alignment: Alignment.center,
-                  ),
-                ],
+              IconButton(
+                onPressed: _undoSelected,
+                icon: Iconify(
+                  Carbon.undo,
+                  color: Theme.of(context).brightness == Brightness.dark
+                      ? Colors.grey.shade100
+                      : Colors.black,
+                  size: 24,
+                ),
               ),
-              Row(
-                children: [
-                  CustomText(
-                    text: isAllSelected ? S.of(context).orderSelected : '',
-                    fontSize: 14,
-                    color: isAllSelected
-                        ? Theme.of(context).primaryColor
-                        : kGreyColor,
-                    alignment: Alignment.center,
-                  ),
-                  IconButton(
-                    onPressed: () => _onSelectAllPressed(isAllSelected),
-                    icon: Icon(
-                      isAllSelected
-                          ? Icons.check_box_outlined
-                          : Icons.check_box_outline_blank_outlined,
-                      color: isAllSelected
-                          ? Theme.of(context).primaryColor
-                          : kGreyColor,
-                      size: 24,
-                    ),
-                  ),
-                ],
+              IconWithCircleStyle(
+                backgroundColor: Theme.of(context).brightness == Brightness.dark
+                    ? Colors.grey.shade500.withAlpha(32)
+                    : Colors.grey.shade300.withAlpha(32),
+                onPressed: _confirmDelete,
+                icon: Icon(
+                  Icons.delete_outline,
+                  color: Theme.of(context).brightness == Brightness.dark
+                      ? Colors.grey.shade50
+                      : Colors.black,
+                  size: 24,
+                ),
+              ),
+              const SizedBox(width: 12),
+              CustomText(
+                text: isAnySelected
+                    ? S
+                          .of(context)
+                          .deleteNumOfItems(
+                            context,
+                            widget.selectedOrders.length,
+                          )
+                    : '',
+                fontSize: 12,
+                alignment: Alignment.center,
               ),
             ],
           ),
-        );
-      },
+          Row(
+            children: [
+              CustomText(
+                text: isAllSelected ? S.of(context).orderSelected : '',
+                fontSize: 12,
+                color: isAllSelected
+                    ? Theme.of(context).primaryColor
+                    : kGreyColor,
+                alignment: Alignment.center,
+              ),
+              IconButton(
+                onPressed: () => _onSelectAllPressed(isAllSelected),
+                icon: Icon(
+                  isAllSelected
+                      ? Icons.check_box_outlined
+                      : Icons.check_box_outline_blank_outlined,
+                  color: isAllSelected
+                      ? Theme.of(context).primaryColor
+                      : kGreyColor,
+                  size: 24,
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 

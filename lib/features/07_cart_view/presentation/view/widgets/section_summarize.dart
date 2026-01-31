@@ -82,44 +82,47 @@ class _SummarizeViewState extends State<SummarizeView> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                ShowOrderList(carts: orderModel.cartModelList),
-                Container(
-                  height: 1,
-                  color: Theme.of(context).brightness == Brightness.dark
-                      ? Colors.grey.shade50
-                      : Colors.black26,
+                _summarizeItem(
+                  ShowOrderList(carts: orderModel.cartModelList),
+                  S.of(context).orderProductList,
                 ),
                 const SizedBox(height: 16),
-                CustomText(
-                  text: _buildDeliverySummaryText(
-                    context,
-                    cubit.getDeliveryMethod!,
+                _summarizeItem(
+                  CustomText(
+                    text: _buildDeliverySummaryText(
+                      context,
+                      cubit.getDeliveryMethod!,
+                    ),
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18,
                   ),
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18,
+                  S.of(context).orderDeliveryTime,
                 ),
                 const SizedBox(height: 16),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Flexible(
-                      child: Text(
-                        '${S.of(context).formStreet1}: ${orderModel.locationModel.street1}\n'
-                        '${S.of(context).formStreet2}: ${orderModel.locationModel.street2}\n'
-                        '${S.of(context).formCity}: ${orderModel.locationModel.city}\n'
-                        '${S.of(context).formState}: ${orderModel.locationModel.state}\n'
-                        '${S.of(context).formCountry}: ${orderModel.locationModel.country}',
-                        softWrap: true,
-                        style: const TextStyle(fontSize: 16),
+                _summarizeItem(
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Flexible(
+                        child: Text(
+                          '${S.of(context).formStreet1}: ${orderModel.locationModel.street1}\n'
+                          '${S.of(context).formStreet2}: ${orderModel.locationModel.street2}\n'
+                          '${S.of(context).formCity}: ${orderModel.locationModel.city}\n'
+                          '${S.of(context).formState}: ${orderModel.locationModel.state}\n'
+                          '${S.of(context).formCountry}: ${orderModel.locationModel.country}',
+                          softWrap: true,
+                          style: const TextStyle(fontSize: 16),
+                        ),
                       ),
-                    ),
-                    Icon(
-                      Icons.check_circle,
-                      color: Theme.of(context).brightness == Brightness.dark
-                          ? Colors.grey.shade200
-                          : kPrimaryColor,
-                    ),
-                  ],
+                      Icon(
+                        Icons.check_circle,
+                        color: Theme.of(context).brightness == Brightness.dark
+                            ? Colors.grey.shade200
+                            : kPrimaryColor,
+                      ),
+                    ],
+                  ),
+                  S.of(context).orderAddress,
                 ),
                 const SizedBox(height: 16),
                 Row(
@@ -222,5 +225,30 @@ class _SummarizeViewState extends State<SummarizeView> {
     } else {
       return S.of(context).cartOrderWillBeResult;
     }
+  }
+
+  Widget _summarizeItem(Widget widget, String title) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        CustomText(
+          text: '$title :',
+          fontSize: 16,
+          fontWeight: FontWeight.bold,
+          color: Theme.of(context).brightness == Brightness.dark
+              ? Colors.grey.shade300
+              : Colors.grey.shade500,
+        ),
+        const SizedBox(height: 16),
+        widget,
+        const SizedBox(height: 8),
+        Container(
+          height: 1,
+          color: Theme.of(context).brightness == Brightness.dark
+              ? Colors.grey.shade50
+              : Colors.black26,
+        ),
+      ],
+    );
   }
 }

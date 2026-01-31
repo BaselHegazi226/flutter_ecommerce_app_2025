@@ -164,6 +164,13 @@ class MessageLookup extends MessageLookupByLibrary {
     "cart_orderWillBe_result": MessageLookupByLibrary.simpleMessage(
       "Order will be delivered between 3 - 5 business days",
     ),
+    "cart_order_address": MessageLookupByLibrary.simpleMessage("Order Address"),
+    "cart_order_delivery_time": MessageLookupByLibrary.simpleMessage(
+      "Delivery Time",
+    ),
+    "cart_order_product_list": MessageLookupByLibrary.simpleMessage(
+      "Order Product List",
+    ),
     "cart_payment": MessageLookupByLibrary.simpleMessage("Payment"),
     "cart_pickAParticular": MessageLookupByLibrary.simpleMessage(
       "Pick a particular date from the calendar and order will be delivered on selected date",

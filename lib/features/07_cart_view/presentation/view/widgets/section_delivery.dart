@@ -195,160 +195,166 @@ class _DeliveryViewState extends State<DeliveryView> {
     return showModalBottomSheet<DateTime>(
       context: context,
       isScrollControlled: true,
+      enableDrag: false,
       barrierColor: Colors.grey.withAlpha(32),
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
       ),
       builder: (context) {
-        return Padding(
-          padding: const EdgeInsets.fromLTRB(20, 20, 20, 30),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              /// Title
-              Text(
-                S.of(context).calendarTitle,
-                style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
+        return SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(20, 20, 20, 30),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                /// Title
+                Text(
+                  S.of(context).calendarTitle,
+                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-              ),
-              const SizedBox(height: 16),
+                const SizedBox(height: 16),
+                //Table calender
+                ValueListenableBuilder<DateTime?>(
+                  valueListenable: selectedDayNotifier,
+                  builder: (_, selectedDay, __) {
+                    return ValueListenableBuilder<DateTime>(
+                      valueListenable: focusedDayNotifier,
+                      builder: (_, focusedDay, __) {
+                        return TableCalendar(
+                          firstDay: DateTime.now(),
+                          lastDay: DateTime(2026, 12, 31),
+                          focusedDay: focusedDay,
+                          rowHeight: 56,
 
-              /// Calendar (نفس تصميمك بدون تغيير)
-              ValueListenableBuilder<DateTime?>(
-                valueListenable: selectedDayNotifier,
-                builder: (_, selectedDay, __) {
-                  return ValueListenableBuilder<DateTime>(
-                    valueListenable: focusedDayNotifier,
-                    builder: (_, focusedDay, __) {
-                      return TableCalendar(
-                        firstDay: DateTime.now(),
-                        lastDay: DateTime(2026, 12, 31),
-                        focusedDay: focusedDay,
-                        rowHeight: 56,
+                          selectedDayPredicate: (day) =>
+                              selectedDay != null &&
+                              isSameDay(selectedDay, day),
 
-                        selectedDayPredicate: (day) =>
-                            selectedDay != null && isSameDay(selectedDay, day),
+                          onDaySelected: (selected, focused) {
+                            selectedDayNotifier.value = selected;
+                            focusedDayNotifier.value = focused;
+                          },
 
-                        onDaySelected: (selected, focused) {
-                          selectedDayNotifier.value = selected;
-                          focusedDayNotifier.value = focused;
-                        },
+                          sixWeekMonthsEnforced: true,
 
-                        sixWeekMonthsEnforced: true,
-
-                        /// Header
-                        headerStyle: HeaderStyle(
-                          titleCentered: true,
-                          formatButtonVisible: false,
-                          titleTextStyle: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            color: isDark ? Colors.white : Colors.black,
-                          ),
-                          leftChevronIcon: Icon(
-                            Icons.chevron_left,
-                            color: isDark ? Colors.white : Colors.black,
-                          ),
-                          rightChevronIcon: Icon(
-                            Icons.chevron_right,
-                            color: isDark ? Colors.white : Colors.black,
-                          ),
-                        ),
-
-                        /// Days of week
-                        daysOfWeekStyle: DaysOfWeekStyle(
-                          weekdayStyle: TextStyle(
-                            fontSize: 11,
-                            color: isDark
-                                ? Colors.grey.shade300
-                                : Colors.grey.shade700,
-                          ),
-                          weekendStyle: TextStyle(
-                            fontSize: 11,
-                            color: isDark
-                                ? Colors.grey.shade300
-                                : Colors.grey.shade700,
-                          ),
-                        ),
-
-                        /// Calendar Style (نفسك)
-                        calendarStyle: CalendarStyle(
-                          outsideDaysVisible: false,
-                          defaultTextStyle: const TextStyle(fontSize: 14),
-                          weekendTextStyle: const TextStyle(fontSize: 14),
-                          selectedTextStyle: TextStyle(
-                            fontSize: 14,
-                            color: isDark ? Colors.black54 : Colors.white,
-                          ),
-                          todayTextStyle: TextStyle(
-                            fontSize: 14,
-                            color: isDark
-                                ? Colors.grey.shade500
-                                : Colors.black54,
-                          ),
-                          disabledTextStyle: TextStyle(
-                            fontSize: 14,
-                            color: Colors.grey.shade500,
+                          /// Header
+                          headerStyle: HeaderStyle(
+                            titleCentered: true,
+                            formatButtonVisible: false,
+                            titleTextStyle: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              color: isDark ? Colors.white : Colors.black,
+                            ),
+                            leftChevronIcon: Icon(
+                              Icons.chevron_left,
+                              color: isDark ? Colors.white : Colors.black,
+                            ),
+                            rightChevronIcon: Icon(
+                              Icons.chevron_right,
+                              color: isDark ? Colors.white : Colors.black,
+                            ),
                           ),
 
-                          todayDecoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: Theme.of(context).scaffoldBackgroundColor,
-                            border: Border.all(
+                          /// Days of week
+                          daysOfWeekStyle: DaysOfWeekStyle(
+                            weekdayStyle: TextStyle(
+                              fontSize: 11,
+                              color: isDark
+                                  ? Colors.grey.shade300
+                                  : Colors.grey.shade700,
+                            ),
+                            weekendStyle: TextStyle(
+                              fontSize: 11,
+                              color: isDark
+                                  ? Colors.grey.shade300
+                                  : Colors.grey.shade700,
+                            ),
+                          ),
+
+                          /// Calendar Style (نفسك)
+                          calendarStyle: CalendarStyle(
+                            outsideDaysVisible: false,
+                            defaultTextStyle: const TextStyle(fontSize: 11),
+                            weekendTextStyle: const TextStyle(fontSize: 11),
+                            selectedTextStyle: TextStyle(
+                              fontSize: 11,
+                              color: isDark ? Colors.black54 : Colors.white,
+                            ),
+                            todayTextStyle: TextStyle(
+                              fontSize: 11,
                               color: isDark
                                   ? Colors.grey.shade500
                                   : Colors.black54,
-                              width: 1.5,
+                            ),
+                            disabledTextStyle: TextStyle(
+                              fontSize: 11,
+                              color: Colors.grey.shade500,
+                            ),
+
+                            todayDecoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Theme.of(context).scaffoldBackgroundColor,
+                              border: Border.all(
+                                color: isDark
+                                    ? Colors.grey.shade500
+                                    : Colors.black54,
+                                width: 1.5,
+                              ),
+                            ),
+                            selectedDecoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: isDark ? Colors.white : kPrimaryColor,
                             ),
                           ),
-                          selectedDecoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: isDark ? Colors.white : kPrimaryColor,
-                          ),
-                        ),
-                      );
-                    },
-                  );
-                },
-              ),
-
-              const SizedBox(height: 24),
-
-              /// Buttons Confirm / Cancel (نفس تصميمك)
-              Row(
-                children: [
-                  Expanded(
-                    child: CustomButton(
-                      onPressed: () => Navigator.pop(context, null),
-                      backgroundColor: Theme.of(
-                        context,
-                      ).scaffoldBackgroundColor,
-                      borderColor: isDark ? Colors.white : Colors.black54,
-                      textColor: isDark ? Colors.white : Colors.black54,
-                      text: S.of(context).calendarCancel,
-                    ),
-                  ),
-                  const SizedBox(width: 16),
-                  Expanded(
-                    child: CustomButton(
-                      onPressed: () {
-                        Navigator.pop(context, selectedDayNotifier.value);
+                        );
                       },
-                      backgroundColor: isDark
-                          ? Colors.grey.shade100
-                          : kPrimaryColor,
-                      borderColor: Colors.transparent,
-                      textColor: isDark ? Colors.black54 : Colors.white,
-                      text: S.of(context).calendarConfirm,
-                    ),
+                    );
+                  },
+                ),
+                const SizedBox(height: 24),
+
+                /// Buttons Confirm / Cancel (نفس تصميمك)
+                Padding(
+                  padding: EdgeInsets.only(
+                    bottom: 20 + MediaQuery.of(context).padding.bottom,
                   ),
-                ],
-              ),
-            ],
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: CustomButton(
+                          onPressed: () => Navigator.pop(context, null),
+                          backgroundColor: Theme.of(
+                            context,
+                          ).scaffoldBackgroundColor,
+                          borderColor: isDark ? Colors.white : Colors.black54,
+                          textColor: isDark ? Colors.white : Colors.black54,
+                          text: S.of(context).calendarCancel,
+                        ),
+                      ),
+                      const SizedBox(width: 16),
+                      Expanded(
+                        child: CustomButton(
+                          onPressed: () {
+                            Navigator.pop(context, selectedDayNotifier.value);
+                          },
+                          backgroundColor: isDark
+                              ? Colors.grey.shade100
+                              : kPrimaryColor,
+                          borderColor: Colors.transparent,
+                          textColor: isDark ? Colors.black54 : Colors.white,
+                          text: S.of(context).calendarConfirm,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
         );
       },

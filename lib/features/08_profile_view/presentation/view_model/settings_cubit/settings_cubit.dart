@@ -23,11 +23,10 @@ class AppSettingCubit extends Cubit<AppSettingStates> {
   static AppSettingCubit get(context) => BlocProvider.of(context);
 
   //language variables
-  static LanguageEnum currentLanguage = LanguageEnum.system;
-  var systemLanguage = PlatformDispatcher.instance.locale.languageCode;
+  LanguageEnum currentLanguage = LanguageEnum.system;
+  ThemeMode currentTheme = ThemeMode.system;
 
   //theme variables
-  static ThemeMode currentTheme = ThemeMode.system;
 
   //1. select language
   Future<void> selectedLanguage({required LanguageEnum language}) async {
@@ -41,7 +40,7 @@ class AppSettingCubit extends Cubit<AppSettingStates> {
 
   //2. get language
   String getLanguage() {
-    String selectedLanguage = systemLanguage;
+    String selectedLanguage = getSystemLanguage;
     switch (currentLanguage) {
       case LanguageEnum.arabic:
         selectedLanguage = 'ar';
@@ -50,7 +49,7 @@ class AppSettingCubit extends Cubit<AppSettingStates> {
         selectedLanguage = 'en';
         break;
       case LanguageEnum.system:
-        selectedLanguage = systemLanguage;
+        selectedLanguage = getSystemLanguage;
         break;
     }
     return selectedLanguage;
@@ -111,4 +110,9 @@ class AppSettingCubit extends Cubit<AppSettingStates> {
     }
     emit(SelectedThemeSuccess());
   }
+
+  LanguageEnum get getCurrentLanguage => currentLanguage;
+
+  String get getSystemLanguage =>
+      PlatformDispatcher.instance.locale.languageCode;
 }

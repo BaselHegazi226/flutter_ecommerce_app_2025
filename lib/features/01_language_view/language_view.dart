@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:colorful_iconify_flutter/icons/twemoji.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -58,12 +60,14 @@ class SelectedLanguageSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final appSettingCubit = AppSettingCubit.get(context);
-    final currentLanguage = AppSettingCubit.currentLanguage;
+    final currentLanguage = appSettingCubit.getCurrentLanguage;
 
     String dropdownValue = currentLanguage == LanguageEnum.arabic
         ? 'العربية'
         : currentLanguage == LanguageEnum.english
         ? 'English'
+        : PlatformDispatcher.instance.locale.languageCode == 'ar'
+        ? 'العربية'
         : 'English';
 
     return Container(

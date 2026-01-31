@@ -339,6 +339,36 @@ class S {
     );
   }
 
+  /// `Order Product List`
+  String get cart_order_product_list {
+    return Intl.message(
+      'Order Product List',
+      name: 'cart_order_product_list',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Order Address`
+  String get cart_order_address {
+    return Intl.message(
+      'Order Address',
+      name: 'cart_order_address',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delivery Time`
+  String get cart_order_delivery_time {
+    return Intl.message(
+      'Delivery Time',
+      name: 'cart_order_delivery_time',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Choose delivery date`
   String get calendar_title {
     return Intl.message(

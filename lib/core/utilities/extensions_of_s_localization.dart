@@ -151,6 +151,12 @@ extension CartLocalizationX on S {
   String get calendarConfirm => calendar_confirm;
 
   String get changeOrder => cart_change_order;
+
+  String get orderProductList => cart_order_product_list;
+
+  String get orderAddress => cart_order_address;
+
+  String get orderDeliveryTime => cart_order_delivery_time;
 }
 
 //order extension of S
@@ -178,7 +184,7 @@ extension OrderLocalizationX on S {
   String get orderOrderId => order_order_id;
 
   String deleteNumOfItems(BuildContext context, int num) {
-    return '$order_delete $num $from $items';
+    return '$order_delete $num $items';
   }
 
   String areYouSureToDeleteItems(BuildContext context, int num) {

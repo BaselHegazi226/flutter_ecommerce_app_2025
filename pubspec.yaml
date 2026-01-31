@@ -108,6 +108,7 @@ flutter:
     - assets/images/profile/
     - assets/images/cart/
     - assets/images/onboarding/
+    - assets/images/logo/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
@@ -139,8 +140,8 @@ flutter_intl:
 flutter_launcher_icons:
   android: true
   ios: true
-  image_path: "assets/images/splash/app_logo_matgar.png"
+  image_path: "assets/images/logo/Logo_Matgana.png"
 flutter_native_splash:
-  image: assets/images/splash/app_logo_matgar.png
+  image: assets/images/logo/Logo_Matgana.png
   android: true
   ios: true
