@@ -1,6 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">ecommerce app auth 2025</string>
-    <string name="facebook_app_id">775213658628375</string>
-    <string name="fb_login_protocol_scheme">fb775213658628375</string>
-    <string name="facebook_client_token">efc5a5481b76a0ab2810e527e257e37f</string>
+  <string name="appName">Matgarna</string>
 </resources>

@@ -76,7 +76,7 @@ class FavouriteViewItemTablet extends StatelessWidget {
   const FavouriteViewItemTablet({super.key, required this.favouriteModel});
 
   final FavouriteModel favouriteModel;
-  static const double _itemHeight = 234;
+  static const double _itemHeight = 240;
 
   @override
   Widget build(BuildContext context) {
@@ -95,6 +95,7 @@ class FavouriteViewItemTablet extends StatelessWidget {
             child: FavouriteItemCustomImage(
               imageUrl: favouriteModel.image,
               itemHeight: _itemHeight,
+              paddingValue: 12,
             ),
           ),
           const SizedBox(width: 24),
@@ -119,7 +120,11 @@ class FavouriteViewItemTablet extends StatelessWidget {
             ),
             SizedBox(
               width: size.width * .3,
-              child: CustomText(text: favouriteModel.desc, fontSize: 14),
+              child: CustomText(
+                text: favouriteModel.desc,
+                maxLines: 4,
+                fontSize: 14,
+              ),
             ),
           ],
         ),

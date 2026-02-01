@@ -76,6 +76,9 @@ dependencies:
   flutter_rating_bar: ^4.0.1
   flutter_launcher_icons: ^0.14.4
   table_calendar: ^3.2.0
+  water_drop_nav_bar: ^2.2.2
+
+
 
 
 
@@ -140,8 +143,8 @@ flutter_intl:
 flutter_launcher_icons:
   android: true
   ios: true
-  image_path: "assets/images/logo/Logo_Matgana.png"
+  image_path: "assets/images/logo/Logo1.png"
 flutter_native_splash:
-  image: assets/images/logo/Logo_Matgana.png
+  image: assets/images/logo/Logo1.png
   android: true
   ios: true

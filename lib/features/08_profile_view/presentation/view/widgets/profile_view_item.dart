@@ -73,7 +73,7 @@ class ProfileViewItemMobile extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: ListTile(
-        contentPadding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+        contentPadding: const EdgeInsets.symmetric(horizontal: 8, vertical: 12),
         leading: Container(
           padding: const EdgeInsets.all(8),
           decoration: BoxDecoration(

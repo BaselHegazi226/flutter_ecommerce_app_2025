@@ -6,15 +6,18 @@ class FavouriteItemCustomImage extends StatelessWidget {
     super.key,
     required this.imageUrl,
     required this.itemHeight,
+    this.paddingValue = 4,
   });
 
   final String imageUrl;
   final double itemHeight;
+  final double paddingValue;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       height: itemHeight,
+      padding: EdgeInsets.all(paddingValue),
       decoration: BoxDecoration(
         color: Theme.of(context).brightness == Brightness.dark
             ? Colors.grey.shade400.withAlpha(32)
