@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:water_drop_nav_bar/water_drop_nav_bar.dart';
 
 import '../../core/helper/const.dart';
 import '../../core/helper/routes.dart';
@@ -39,43 +38,69 @@ class _MainViewState extends State<MainView> {
           backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           extendBody: true,
           body: SafeArea(bottom: true, child: widget.child),
-          bottomNavigationBar: _buildWaterDropNavBar(context, index),
+          bottomNavigationBar: _buildGlassNavBar(context, index),
         );
       },
     );
   }
 
-  Widget _buildWaterDropNavBar(BuildContext context, int currentIndex) {
+  Widget _buildGlassNavBar(BuildContext context, int currentIndex) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
-    return WaterDropNavBar(
-      selectedIndex: currentIndex,
-      iconSize: 28,
-      bottomPadding: 8,
-
-      backgroundColor: isDark
-          ? Colors.grey.shade500.withAlpha(32)
-          : kPrimaryColor,
-      waterDropColor: Colors.white,
-      inactiveIconColor: Colors.white60,
-
-      onItemSelected: (index) {
-        _selectedIndex.value = index;
-        context.go(tabs[index]);
-      },
-
-      barItems: [
-        BarItem(
-          filledIcon: Icons.home_filled,
-          outlinedIcon: Icons.home_outlined,
+    return Container(
+      margin: const EdgeInsets.all(12),
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+      decoration: BoxDecoration(
+        color: isDark ? Colors.grey.shade700 : Colors.white.withAlpha(228),
+        borderRadius: const BorderRadius.all(Radius.circular(16)),
+        border: Border.all(color: Colors.white24),
+        boxShadow: const [
+          BoxShadow(
+            color: Colors.black26,
+            blurRadius: 10,
+            offset: Offset(0, 4),
+          ),
+        ],
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: List.generate(
+          4,
+          (index) => GestureDetector(
+            onTap: () {
+              _selectedIndex.value = index;
+              context.go(tabs[index]);
+            },
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(
+                  [
+                    Icons.home_filled,
+                    Icons.search,
+                    Icons.shopping_cart,
+                    Icons.person,
+                  ][index],
+                  size: 28,
+                  color: _selectedIndex.value == index
+                      ? isDark
+                            ? Colors.grey.shade50
+                            : kPrimaryColor
+                      : Colors.grey.shade400,
+                ),
+                if (_selectedIndex.value == index)
+                  Icon(
+                    isDark
+                        ? Icons.dark_mode_outlined
+                        : Icons.light_mode_outlined,
+                    color: isDark ? Colors.grey.shade50 : kPrimaryColor,
+                    size: 12,
+                  ),
+              ],
+            ),
+          ),
         ),
-        BarItem(filledIcon: Icons.search, outlinedIcon: Icons.search_outlined),
-        BarItem(
-          filledIcon: Icons.shopping_cart,
-          outlinedIcon: Icons.shopping_cart_outlined,
-        ),
-        BarItem(filledIcon: Icons.person, outlinedIcon: Icons.person_outline),
-      ],
+      ),
     );
   }
 }
