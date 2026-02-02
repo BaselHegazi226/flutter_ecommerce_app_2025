@@ -6,6 +6,7 @@ import 'package:flutter_e_commerce_app_2025/core/utilities/custom_text.dart';
 import 'package:flutter_e_commerce_app_2025/core/utilities/extensions_of_s_localization.dart';
 import 'package:flutter_e_commerce_app_2025/core/utilities/icon_with_circle_style.dart';
 import 'package:flutter_e_commerce_app_2025/core/utilities/show_order_list.dart';
+import 'package:flutter_e_commerce_app_2025/core/utilities/total_price_section.dart';
 import 'package:flutter_e_commerce_app_2025/generated/l10n.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:iconify_flutter/icons/carbon.dart';
@@ -109,29 +110,7 @@ class _OrderHistoryActiveSelectionViewState
                             children: [
                               ShowOrderList(carts: cart),
                               const SizedBox(height: 16),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  CustomText(
-                                    text: S.of(context).cartTotal,
-                                    fontSize: 16,
-                                    alignment: Alignment.centerLeft,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                  CustomText(
-                                    text:
-                                        '${priceShowed(order.totalPrice)} ${S.of(context).EP}',
-                                    fontSize: 16,
-                                    alignment: Alignment.centerLeft,
-                                    color:
-                                        Theme.of(context).brightness ==
-                                            Brightness.dark
-                                        ? Colors.grey.shade200
-                                        : kPrimaryColor,
-                                  ),
-                                ],
-                              ),
+                              TotalPriceSection(total: order.totalPrice),
                             ],
                           ),
                           const SizedBox(height: 16),

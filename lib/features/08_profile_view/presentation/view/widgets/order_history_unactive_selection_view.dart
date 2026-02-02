@@ -5,6 +5,7 @@ import 'package:flutter_e_commerce_app_2025/core/utilities/show_order_list.dart'
 
 import '../../../../../core/helper/date_formatter.dart';
 import '../../../../../core/utilities/extensions_of_s_localization.dart';
+import '../../../../../core/utilities/total_price_section.dart';
 import '../../../../../generated/l10n.dart';
 import '../../../../07_cart_view/data/model/order_model.dart';
 
@@ -48,28 +49,7 @@ class OrderHistoryUnactiveSelectionView extends StatelessWidget {
                       children: [
                         ShowOrderList(carts: cart),
                         const SizedBox(height: 16),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            CustomText(
-                              text: S.of(context).cartTotal,
-                              fontSize: 16,
-                              alignment: Alignment.centerLeft,
-                              fontWeight: FontWeight.bold,
-                            ),
-                            CustomText(
-                              text:
-                                  '${priceShowed(order.totalPrice)} ${S.of(context).EP}',
-                              fontSize: 16,
-                              alignment: Alignment.centerLeft,
-                              color:
-                                  Theme.of(context).brightness ==
-                                      Brightness.dark
-                                  ? Colors.grey.shade200
-                                  : kPrimaryColor,
-                            ),
-                          ],
-                        ),
+                        TotalPriceSection(total: order.totalPrice),
                       ],
                     ),
                     const SizedBox(height: 16),

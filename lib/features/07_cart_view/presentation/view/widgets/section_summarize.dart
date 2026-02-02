@@ -9,6 +9,7 @@ import 'package:flutter_e_commerce_app_2025/core/utilities/show_order_list.dart'
 import 'package:flutter_e_commerce_app_2025/features/07_cart_view/data/model/order_model.dart';
 
 import '../../../../../core/helper/date_formatter.dart';
+import '../../../../../core/utilities/total_price_section.dart';
 import '../../../../../generated/l10n.dart';
 import '../../../data/model/delivery_method_model.dart';
 import '../../view_model/checkout_cubit/checkout_cubit.dart';
@@ -124,26 +125,7 @@ class _SummarizeViewState extends State<SummarizeView> {
                   S.of(context).orderAddress,
                 ),
                 const SizedBox(height: 16),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    CustomText(
-                      text: S.of(context).cartTotal,
-                      fontSize: 16,
-                      alignment: Alignment.centerLeft,
-                      fontWeight: FontWeight.bold,
-                    ),
-                    CustomText(
-                      text:
-                          '${priceShowed(orderModel.totalPrice)} ${S.of(context).EP}',
-                      fontSize: 16,
-                      alignment: Alignment.centerLeft,
-                      color: Theme.of(context).brightness == Brightness.dark
-                          ? Colors.grey.shade200
-                          : kPrimaryColor,
-                    ),
-                  ],
-                ),
+                TotalPriceSection(total: orderModel.totalPrice),
               ],
             ),
           ),
