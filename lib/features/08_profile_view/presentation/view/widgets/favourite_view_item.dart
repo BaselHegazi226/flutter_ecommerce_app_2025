@@ -119,11 +119,11 @@ class FavouriteViewItemTablet extends StatelessWidget {
               title: favouriteModel.title.split(" ").take(4).join(" "),
             ),
             SizedBox(
-              width: size.width * .3,
+              width: size.width * .55,
               child: CustomText(
                 text: favouriteModel.desc,
                 maxLines: 4,
-                fontSize: 14,
+                fontSize: 12,
               ),
             ),
           ],

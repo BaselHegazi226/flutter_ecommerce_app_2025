@@ -17,11 +17,13 @@ class CategoriesListView extends StatefulWidget {
   State<CategoriesListView> createState() => _CategoriesListViewState();
 }
 
-class _CategoriesListViewState extends State<CategoriesListView> {
+class _CategoriesListViewState extends State<CategoriesListView>
+    with AutomaticKeepAliveClientMixin {
   final ValueNotifier<int> selectedItem = ValueNotifier(-1);
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     final Size screenSize = MediaQuery.sizeOf(context);
 
     return BlocBuilder<CategoryCubit, CategoryState>(
@@ -30,7 +32,7 @@ class _CategoriesListViewState extends State<CategoriesListView> {
           final categories = state.categories;
 
           return SizedBox(
-            height: 44,
+            height: 50,
             child: ValueListenableBuilder<int>(
               valueListenable: selectedItem,
               builder: (context, value, _) {
@@ -51,6 +53,7 @@ class _CategoriesListViewState extends State<CategoriesListView> {
 
   ListView _buildListView(List<CategoryModel> categories) {
     return ListView.separated(
+      key: const PageStorageKey("categories"),
       padding: EdgeInsets.zero,
       scrollDirection: Axis.horizontal,
       physics: const BouncingScrollPhysics(),
@@ -80,6 +83,10 @@ class _CategoriesListViewState extends State<CategoriesListView> {
       },
     );
   }
+
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true;
 }
 
 /* -------------------------------------------------------------------------- */
@@ -108,20 +115,23 @@ class _CategoryItem extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       borderRadius: BorderRadius.circular(32),
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 350),
-        curve: Curves.easeOutCubic,
-        width: 156,
-        decoration: BoxDecoration(
-          color: backgroundColor,
-          borderRadius: BorderRadius.circular(32),
-        ),
-        alignment: Alignment.center,
-        child: CustomText(
-          text: text,
-          fontSize: 14,
-          fontWeight: isSelected ? FontWeight.w900 : FontWeight.w700,
-          color: textColor,
+      child: IntrinsicWidth(
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 350),
+          padding: const EdgeInsets.all(16),
+          curve: Curves.easeOutCubic,
+          decoration: BoxDecoration(
+            color: backgroundColor,
+            borderRadius: BorderRadius.circular(32),
+          ),
+          alignment: Alignment.center,
+          child: CustomText(
+            text: text,
+            fontSize: 12,
+            fontWeight: isSelected ? FontWeight.w700 : FontWeight.w500,
+            color: textColor,
+            alignment: Alignment.center,
+          ),
         ),
       ),
     );

@@ -6,7 +6,7 @@ Shimmer homeCategoryShimmerItem(Size screenSize) {
     baseColor: Colors.grey.shade300,
     highlightColor: Colors.grey.shade100,
     child: Container(
-      height: 44,
+      height: 50,
       width: 156,
       padding: const EdgeInsets.all(4),
       decoration: BoxDecoration(
@@ -19,7 +19,7 @@ Shimmer homeCategoryShimmerItem(Size screenSize) {
 
 Widget homeViewCategoriesShimmerList(Size screenSize) {
   return SizedBox(
-    height: 40,
+    height: 50,
     width: 156,
     child: ListView.separated(
       scrollDirection: Axis.horizontal,

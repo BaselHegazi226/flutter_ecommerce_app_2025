@@ -47,7 +47,9 @@ class _MainViewState extends State<MainView> {
   Widget _buildGlassNavBar(BuildContext context, int currentIndex) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
-    return Container(
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 400),
+      curve: Curves.easeInOut,
       margin: const EdgeInsets.all(12),
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
       decoration: BoxDecoration(
@@ -90,11 +92,9 @@ class _MainViewState extends State<MainView> {
                 ),
                 if (_selectedIndex.value == index)
                   Icon(
-                    isDark
-                        ? Icons.dark_mode_outlined
-                        : Icons.light_mode_outlined,
+                    Icons.circle,
                     color: isDark ? Colors.grey.shade50 : kPrimaryColor,
-                    size: 12,
+                    size: 10,
                   ),
               ],
             ),
