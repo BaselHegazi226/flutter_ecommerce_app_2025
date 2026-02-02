@@ -539,9 +539,9 @@ class S {
     return Intl.message('Order id', name: 'order_order_id', desc: '', args: []);
   }
 
-  /// `From`
+  /// ``
   String get from {
-    return Intl.message('From', name: 'from', desc: '', args: []);
+    return Intl.message('', name: 'from', desc: '', args: []);
   }
 
   /// `items`

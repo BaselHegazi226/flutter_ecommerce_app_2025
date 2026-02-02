@@ -98,7 +98,7 @@ class SectionPayment extends StatelessWidget {
             AutoSizeText(
               'OD-${orderModel!.orderId.split('-').take(2).join('-')}-N',
               style: const TextStyle(fontSize: 12),
-              minFontSize: 8,
+              minFontSize: 10,
               maxFontSize: 16,
               maxLines: 1,
             ),

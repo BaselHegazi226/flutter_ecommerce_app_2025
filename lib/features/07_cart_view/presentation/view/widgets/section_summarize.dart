@@ -93,8 +93,7 @@ class _SummarizeViewState extends State<SummarizeView> {
                       context,
                       cubit.getDeliveryMethod!,
                     ),
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18,
+                    fontSize: 16,
                   ),
                   S.of(context).orderDeliveryTime,
                 ),
@@ -104,14 +103,14 @@ class _SummarizeViewState extends State<SummarizeView> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Flexible(
-                        child: Text(
-                          '${S.of(context).formStreet1}: ${orderModel.locationModel.street1}\n'
-                          '${S.of(context).formStreet2}: ${orderModel.locationModel.street2}\n'
-                          '${S.of(context).formCity}: ${orderModel.locationModel.city}\n'
-                          '${S.of(context).formState}: ${orderModel.locationModel.state}\n'
-                          '${S.of(context).formCountry}: ${orderModel.locationModel.country}',
-                          softWrap: true,
-                          style: const TextStyle(fontSize: 16),
+                        child: CustomText(
+                          text:
+                              '${S.of(context).formStreet1}: ${orderModel.locationModel.street1}\n'
+                              '${S.of(context).formStreet2}: ${orderModel.locationModel.street2}\n'
+                              '${S.of(context).formCity}: ${orderModel.locationModel.city}\n'
+                              '${S.of(context).formState}: ${orderModel.locationModel.state}\n'
+                              '${S.of(context).formCountry}: ${orderModel.locationModel.country}',
+                          fontSize: 16,
                         ),
                       ),
                       Icon(
@@ -130,7 +129,7 @@ class _SummarizeViewState extends State<SummarizeView> {
                   children: [
                     CustomText(
                       text: S.of(context).cartTotal,
-                      fontSize: 18,
+                      fontSize: 16,
                       alignment: Alignment.centerLeft,
                       fontWeight: FontWeight.bold,
                     ),
@@ -237,7 +236,7 @@ class _SummarizeViewState extends State<SummarizeView> {
           fontWeight: FontWeight.bold,
           color: Theme.of(context).brightness == Brightness.dark
               ? Colors.grey.shade300
-              : Colors.grey.shade500,
+              : Colors.black87,
         ),
         const SizedBox(height: 16),
         widget,

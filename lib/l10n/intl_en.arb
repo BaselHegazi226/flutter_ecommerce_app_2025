@@ -60,7 +60,7 @@
   "order_delete": "Delete",
   "order_all": "All",
   "order_order_id": "Order id",
-  "from": "From",
+  "from": "",
   "items": "items",
   "order_total_price": "Total Price",
   "order_added_done": "Is Already added",

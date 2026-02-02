@@ -32,7 +32,7 @@ class _CategoriesListViewState extends State<CategoriesListView>
           final categories = state.categories;
 
           return SizedBox(
-            height: 50,
+            height: 58,
             child: ValueListenableBuilder<int>(
               valueListenable: selectedItem,
               builder: (context, value, _) {
@@ -118,7 +118,7 @@ class _CategoryItem extends StatelessWidget {
       child: IntrinsicWidth(
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 350),
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
           curve: Curves.easeOutCubic,
           decoration: BoxDecoration(
             color: backgroundColor,

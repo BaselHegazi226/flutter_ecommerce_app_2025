@@ -54,11 +54,19 @@ class OrderHistoryUnactiveSelectionView extends StatelessWidget {
                             CustomText(
                               text: S.of(context).cartTotal,
                               fontSize: 16,
+                              alignment: Alignment.centerLeft,
+                              fontWeight: FontWeight.bold,
                             ),
                             CustomText(
                               text:
                                   '${priceShowed(order.totalPrice)} ${S.of(context).EP}',
                               fontSize: 16,
+                              alignment: Alignment.centerLeft,
+                              color:
+                                  Theme.of(context).brightness ==
+                                      Brightness.dark
+                                  ? Colors.grey.shade200
+                                  : kPrimaryColor,
                             ),
                           ],
                         ),

@@ -361,7 +361,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "form_street2Required": MessageLookupByLibrary.simpleMessage(
       "Street 2 is required",
     ),
-    "from": MessageLookupByLibrary.simpleMessage("From"),
+    "from": MessageLookupByLibrary.simpleMessage(""),
     "home_addToCart": MessageLookupByLibrary.simpleMessage("Add To Cart"),
     "home_allProducts": MessageLookupByLibrary.simpleMessage("All Products"),
     "home_app_products": MessageLookupByLibrary.simpleMessage("App Products"),

@@ -184,7 +184,7 @@ extension OrderLocalizationX on S {
   String get orderOrderId => order_order_id;
 
   String deleteNumOfItems(BuildContext context, int num) {
-    return '$order_delete $num $items';
+    return '$order_delete $num $from $items';
   }
 
   String areYouSureToDeleteItems(BuildContext context, int num) {
