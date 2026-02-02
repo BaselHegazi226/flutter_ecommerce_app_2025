@@ -4,8 +4,8 @@ import 'package:flutter_e_commerce_app_2025/core/utilities/custom_text.dart';
 import 'package:flutter_e_commerce_app_2025/features/05_home_view/data/model/favourite_model.dart';
 
 import 'favourite_delete_price_section.dart';
+import 'favourite_heart_section.dart';
 import 'favourite_item_custom_image.dart';
-import 'favourite_title_heart_section.dart';
 
 class FavouriteViewItem extends StatelessWidget {
   const FavouriteViewItem({super.key, required this.favouriteModel});
@@ -57,16 +57,30 @@ class FavouriteViewItemMobile extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       spacing: 16,
       children: [
-        FavouriteTitleHeartSection(
-          title: favouriteModel.title.split(" ").take(2).join(" ").length < 15
-              ? favouriteModel.title.split(" ").take(2).join(" ")
-              : favouriteModel.title.split(" ").take(1).join(" "),
-        ),
+        _heartTitleSection(),
         CustomText(text: favouriteModel.desc, maxLines: 3, fontSize: 12),
         FavouriteDeletePriceSection(
           favouriteModel: favouriteModel,
           fontSize: 12,
         ),
+      ],
+    );
+  }
+
+  Widget _heartTitleSection() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        CustomText(
+          text: favouriteModel.title.split(" ").take(2).join(" ").length < 15
+              ? favouriteModel.title.split(" ").take(2).join(" ")
+              : favouriteModel.title.split(" ").take(1).join(" "),
+          maxLines: 1,
+          fontSize: 14,
+          fontWeight: FontWeight.bold,
+        ),
+        const FavouriteHeartSection(),
       ],
     );
   }
@@ -108,15 +122,19 @@ class FavouriteViewItemTablet extends StatelessWidget {
   Widget _detailsSection(BuildContext context, Size size) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      //spacing: 16,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
+        _favouriteItem(),
         Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
+          spacing: 4,
           children: [
-            FavouriteTitleHeartSection(
-              title: favouriteModel.title.split(" ").take(4).join(" "),
+            CustomText(
+              text: favouriteModel.title.split(" ").take(4).join(" "),
+              maxLines: 1,
+              fontSize: 14,
+              fontWeight: FontWeight.bold,
             ),
             SizedBox(
               width: size.width * .55,
@@ -133,6 +151,13 @@ class FavouriteViewItemTablet extends StatelessWidget {
           fontSize: 14,
         ),
       ],
+    );
+  }
+
+  Widget _favouriteItem() {
+    return const Row(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [FavouriteHeartSection()],
     );
   }
 }
