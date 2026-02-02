@@ -143,8 +143,8 @@ flutter_intl:
 flutter_launcher_icons:
   android: true
   ios: true
-  image_path: "assets/images/logo/Logo_Matgar.png"
+  image_path: "assets/images/logo/Logo_M.png"
 flutter_native_splash:
-  image: assets/images/logo/Logo_Matgar.png
+  image: assets/images/logo/Logo_M.png
   android: true
   ios: true
