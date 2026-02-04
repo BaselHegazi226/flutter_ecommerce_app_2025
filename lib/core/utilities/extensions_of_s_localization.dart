@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_e_commerce_app_2025/core/helper/date_formatter.dart';
+import 'package:flutter_e_commerce_app_2025/features/07_cart_view/data/model/order_model.dart';
 import 'package:flutter_e_commerce_app_2025/generated/l10n.dart';
 
 import '../../features/07_cart_view/data/model/delivery_method_model.dart';
@@ -182,6 +183,8 @@ extension OrderLocalizationX on S {
   String get orderDeleteHistory => delete_order_history_title;
 
   String get orderOrderId => order_order_id;
+
+  String get orderDeliveryState => order_delivery_state;
 
   String deleteNumOfItems(BuildContext context, int num) {
     return '$order_delete $num $from $items';
@@ -596,6 +599,23 @@ extension DeliveryMethodLocalization on DeliveryMethodModel {
         }
         return '${S.of(context).cart_pickAParticular_result} '
             '${DateFormatter.format(selectedTime!, S.of(context).cart_pickAParticular_result)}';
+    }
+  }
+}
+
+extension DeliveryStateEnumLocalization on OrderStateEnum {
+  String title(BuildContext context, OrderStateEnum stateEnum) {
+    switch (stateEnum) {
+      case OrderStateEnum.pending:
+        return S.of(context).orderPending;
+
+      case OrderStateEnum.delivered:
+        return S.of(context).orderDelivered;
+
+      case OrderStateEnum.transmit:
+        return S.of(context).orderTransmit;
+      default:
+        return S.of(context).orderPending;
     }
   }
 }

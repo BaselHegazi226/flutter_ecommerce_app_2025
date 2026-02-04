@@ -504,14 +504,9 @@ class S {
     );
   }
 
-  /// `Order History`
+  /// `Orders`
   String get order_history {
-    return Intl.message(
-      'Order History',
-      name: 'order_history',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Orders', name: 'order_history', desc: '', args: []);
   }
 
   /// `Not found order history now!`
@@ -519,6 +514,16 @@ class S {
     return Intl.message(
       'Not found order history now!',
       name: 'order_history_no_found_orders',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delivery state`
+  String get order_delivery_state {
+    return Intl.message(
+      'Delivery state',
+      name: 'order_delivery_state',
       desc: '',
       args: [],
     );

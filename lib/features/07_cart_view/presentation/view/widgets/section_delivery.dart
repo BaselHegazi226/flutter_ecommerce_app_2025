@@ -284,6 +284,40 @@ class _DeliveryViewState extends State<DeliveryView> {
 
                                     /// Days of week
                                     daysOfWeekStyle: DaysOfWeekStyle(
+                                      dowTextFormatter: (dateTime, _) {
+                                        final isArabic =
+                                            Localizations.localeOf(
+                                              context,
+                                            ).languageCode ==
+                                            'ar';
+
+                                        // index 0 = Sunday
+                                        const arWeekDays = [
+                                          'أ', // Sunday
+                                          'إ', // Monday
+                                          'ث', // Tuesday
+                                          'ع', // Wednesday
+                                          'خ', // Thursday
+                                          'ج', // Friday
+                                          'س', // Saturday
+                                        ];
+
+                                        const enWeekDays = [
+                                          'Sun',
+                                          'Mon',
+                                          'Tue',
+                                          'Wed',
+                                          'Thu',
+                                          'Fri',
+                                          'Sat',
+                                        ];
+
+                                        final index = dateTime.weekday % 7;
+
+                                        return isArabic
+                                            ? arWeekDays[index]
+                                            : enWeekDays[index];
+                                      },
                                       weekdayStyle: TextStyle(
                                         fontSize: 11,
                                         color: isDark

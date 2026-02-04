@@ -8,6 +8,7 @@ import '../../../../../core/utilities/extensions_of_s_localization.dart';
 import '../../../../../core/utilities/total_price_section.dart';
 import '../../../../../generated/l10n.dart';
 import '../../../../07_cart_view/data/model/order_model.dart';
+import '../../../../08_profile_view/presentation/view/widgets/delivery_state_section.dart';
 
 class OrderHistoryUnactiveSelectionView extends StatelessWidget {
   const OrderHistoryUnactiveSelectionView({
@@ -50,6 +51,8 @@ class OrderHistoryUnactiveSelectionView extends StatelessWidget {
                         ShowOrderList(carts: cart),
                         const SizedBox(height: 16),
                         TotalPriceSection(total: order.totalPrice),
+                        const SizedBox(height: 24),
+                        DeliveryStateSection(orderModel: order),
                       ],
                     ),
                     const SizedBox(height: 16),

@@ -5,11 +5,11 @@ import 'package:flutter_e_commerce_app_2025/core/utilities/custom_loading_indica
 import 'package:flutter_e_commerce_app_2025/core/utilities/custom_text.dart';
 import 'package:flutter_e_commerce_app_2025/core/utilities/extensions_of_s_localization.dart';
 import 'package:flutter_e_commerce_app_2025/core/utilities/not_item_found.dart';
+import 'package:flutter_e_commerce_app_2025/features/09_order_history_view/presentation/view_model/get_orders_cubit/get_orders_cubit.dart';
 import 'package:flutter_e_commerce_app_2025/generated/assets.dart';
 import 'package:flutter_e_commerce_app_2025/generated/l10n.dart';
 
-import '../../../../07_cart_view/presentation/view_model/order_cubit/order_cubit.dart';
-import '../../../../07_cart_view/presentation/view_model/order_cubit/order_state.dart';
+import '../../view_model/delete_order_cubit/delete_order_cubit.dart';
 import 'order_history_selection_class.dart';
 
 class OrderHistoryViewBody extends StatefulWidget {
@@ -22,15 +22,15 @@ class OrderHistoryViewBody extends StatefulWidget {
 class _OrderHistoryViewBodyState extends State<OrderHistoryViewBody> {
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<OrderCubit, OrderState>(
+    return BlocConsumer<GetOrdersCubit, GetOrdersState>(
       listener: (context, state) {
         if (state is DeleteMultipleOrdersSuccess ||
             state is DeleteAllOrdersSuccess) {
-          context.read<OrderCubit>().getOrderList();
+          context.read<GetOrdersCubit>().getOrderList();
         }
       },
       builder: (context, state) {
-        if (state is GetOrderListSuccess) {
+        if (state is GetOrdersSuccess) {
           final orders = state.orders;
           debugPrint('order length = ${orders.length} ==============>');
           if (orders.isEmpty) {
@@ -42,7 +42,7 @@ class _OrderHistoryViewBodyState extends State<OrderHistoryViewBody> {
             );
           }
           return OrderHistorySelectionClass(orders: orders);
-        } else if (state is GetOrderListFailure) {
+        } else if (state is GetOrdersFailure) {
           return Center(
             child: CustomText(
               text: state.errorMessage,

@@ -20,10 +20,10 @@ import '../../features/07_cart_view/presentation/view_model/get_cart_cubit/get_c
 import '../../features/08_profile_view/presentation/view/about_us_view.dart';
 import '../../features/08_profile_view/presentation/view/edit_profile_view.dart';
 import '../../features/08_profile_view/presentation/view/favourite_view.dart';
-import '../../features/08_profile_view/presentation/view/order_history_view.dart';
 import '../../features/08_profile_view/presentation/view/profile_view.dart';
 import '../../features/08_profile_view/presentation/view/settings_view.dart';
 import '../../features/08_profile_view/presentation/view/shipping_address_view.dart';
+import '../../features/09_order_history_view/presentation/view/order_history_view.dart';
 import '../helper/app_transitions.dart';
 import '../helper/routes.dart';
 
@@ -86,6 +86,15 @@ abstract class AppRouter {
             ],
           ),
 
+          ///Order History view
+          GoRoute(
+            path: Routes.orderHistoryView,
+            pageBuilder: (context, state) => AppTransitions.slideX(
+              key: state.pageKey,
+              child: const OrderHistoryView(),
+            ),
+          ),
+
           /// Search
           GoRoute(
             path: Routes.searchView,
@@ -144,13 +153,6 @@ abstract class AppRouter {
                 pageBuilder: (context, state) => AppTransitions.slideX(
                   key: state.pageKey,
                   child: const SettingsView(),
-                ),
-              ),
-              GoRoute(
-                path: Routes.orderHistoryView,
-                pageBuilder: (context, state) => AppTransitions.slideX(
-                  key: state.pageKey,
-                  child: const OrderHistoryView(),
                 ),
               ),
               GoRoute(

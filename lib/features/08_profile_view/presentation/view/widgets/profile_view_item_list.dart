@@ -77,11 +77,6 @@ class ProfileViewItemList extends StatelessWidget {
         title: S.of(context).profileShippingAddress,
       ),
       ProfileViewItemModel(
-        route: Routes.orderHistoryView,
-        iconData: Icons.history,
-        title: S.of(context).orderHistory,
-      ),
-      ProfileViewItemModel(
         route: Routes.favoriteView,
         iconData: Icons.favorite,
         title: S.of(context).profileFavourite,
@@ -106,7 +101,6 @@ class ProfileViewItemList extends StatelessWidget {
   static List<Color> itemsBackgroundColor = [
     kPrimaryColor.withAlpha(135),
     Colors.grey.withAlpha(135),
-    Colors.orange.withAlpha(135),
     Colors.red.withAlpha(135),
     Colors.black.withAlpha(135),
     Colors.black.withAlpha(50),

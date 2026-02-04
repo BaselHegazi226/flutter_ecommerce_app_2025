@@ -25,24 +25,25 @@ class CartViewItemMobile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.sizeOf(context);
-    return Row(
-      spacing: screenSize.width * .03,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Expanded(
-          flex: 1,
-          child: Container(
-            padding: const EdgeInsets.all(8),
-            decoration: BoxDecoration(
-              color: Theme.of(context).brightness == Brightness.dark
-                  ? Colors.grey.shade500.withAlpha(32)
-                  : Colors.grey.shade200,
-              borderRadius: const BorderRadius.all(Radius.circular(8)),
-            ),
-            child: AspectRatio(
-              aspectRatio: .75,
+    return SizedBox(
+      height: 150,
+      child: Row(
+        spacing: screenSize.width * .03,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Expanded(
+            flex: 1,
+            child: Container(
+              height: 150,
+              padding: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                color: Theme.of(context).brightness == Brightness.dark
+                    ? Colors.grey.shade500.withAlpha(32)
+                    : Colors.grey.shade200,
+                borderRadius: const BorderRadius.all(Radius.circular(8)),
+              ),
               child: CachedNetworkImage(
-                fit: BoxFit.cover,
+                fit: BoxFit.contain,
                 errorWidget: (error, url, x) {
                   return const Icon(Icons.image);
                 },
@@ -50,49 +51,55 @@ class CartViewItemMobile extends StatelessWidget {
               ),
             ),
           ),
-        ),
-        Expanded(
-          flex: 2,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  CustomText(
-                    text: title.split(" ").take(2).join(" ").length > 15
-                        ? title.split(" ").take(1).join(" ")
-                        : title.split(" ").take(2).join(" "),
-                    fontSize: 18,
-                    fontWeight: FontWeight.w500,
-                  ),
-                  const SizedBox(height: 4),
-                  CustomText(
-                    text: '${priceShowed(price)} ${S.of(context).EP}',
-                    fontSize: 20,
-                    color: kPrimaryColor,
-                  ),
-                ],
-              ),
-              const SizedBox(height: 16),
-              Row(
-                children: [
-                  Expanded(
-                    flex: 2,
-                    child: CartViewCountSection(count: count, id: productId),
-                  ),
-                  SizedBox(width: screenSize.width * .02),
-                  Expanded(
-                    flex: 1,
-                    child: DeleteCartProductSection(productId: productId),
-                  ),
-                ],
-              ),
-            ],
+          Expanded(
+            flex: 2,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        CustomText(
+                          text: title.split(" ").take(2).join(" ").length > 15
+                              ? title.split(" ").take(1).join(" ")
+                              : title.split(" ").take(2).join(" "),
+                          fontSize: 18,
+                          fontWeight: FontWeight.w500,
+                        ),
+                        DeleteCartProductSection(productId: productId),
+                      ],
+                    ),
+                    const SizedBox(height: 4),
+                    CustomText(
+                      text: '${priceShowed(price)} ${S.of(context).EP}',
+                      fontSize: 20,
+                      color: kPrimaryColor,
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 16),
+                Row(
+                  children: [
+                    Expanded(
+                      flex: 2,
+                      child: CartViewCountSection(count: count, id: productId),
+                    ),
+                    SizedBox(width: screenSize.width * .02),
+                    Expanded(
+                      flex: 1,
+                      child: CartView5CountSection(count: count, id: productId),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
@@ -119,8 +126,8 @@ class CartViewItemTablet extends StatelessWidget {
       spacing: screenSize.width * .03,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SizedBox(
-          height: 180,
+        Expanded(
+          flex: 1,
           child: Container(
             decoration: BoxDecoration(
               color: Theme.of(context).brightness == Brightness.dark
@@ -128,15 +135,18 @@ class CartViewItemTablet extends StatelessWidget {
                   : Colors.grey.shade200,
               borderRadius: const BorderRadius.all(Radius.circular(8)),
             ),
-            child: AspectRatio(
-              aspectRatio: .75,
-              child: CachedNetworkImage(
-                fit: BoxFit.contain,
-                errorWidget: (error, url, x) {
-                  return const Icon(Icons.image);
-                },
-                imageUrl: imageUrl,
-              ),
+            child: Column(
+              children: [
+                Expanded(
+                  child: CachedNetworkImage(
+                    fit: BoxFit.contain,
+                    errorWidget: (error, url, x) {
+                      return const Icon(Icons.image_not_supported);
+                    },
+                    imageUrl: imageUrl,
+                  ),
+                ),
+              ],
             ),
           ),
         ),
@@ -144,14 +154,23 @@ class CartViewItemTablet extends StatelessWidget {
           flex: 2,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  CustomText(
-                    text: title.split(" ").take(3).join(" "),
-                    fontSize: 20,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      CustomText(
+                        text: title.split(" ").take(2).join(" ").length > 15
+                            ? title.split(" ").take(1).join(" ")
+                            : title.split(" ").take(2).join(" "),
+                        fontSize: 18,
+                        fontWeight: FontWeight.w500,
+                      ),
+                      DeleteCartProductSection(productId: productId),
+                    ],
                   ),
                   const SizedBox(height: 4),
                   CustomText(
@@ -171,7 +190,7 @@ class CartViewItemTablet extends StatelessWidget {
                   SizedBox(width: screenSize.width * .02),
                   Expanded(
                     flex: 1,
-                    child: DeleteCartProductSection(productId: productId),
+                    child: CartView5CountSection(count: count, id: productId),
                   ),
                 ],
               ),

@@ -86,6 +86,7 @@ class _SummarizeViewState extends State<SummarizeView> {
                 _summarizeItem(
                   ShowOrderList(carts: orderModel.cartModelList),
                   S.of(context).orderProductList,
+                  Icons.shopping_cart_rounded,
                 ),
                 const SizedBox(height: 16),
                 _summarizeItem(
@@ -97,6 +98,7 @@ class _SummarizeViewState extends State<SummarizeView> {
                     fontSize: 16,
                   ),
                   S.of(context).orderDeliveryTime,
+                  Icons.access_time_outlined,
                 ),
                 const SizedBox(height: 16),
                 _summarizeItem(
@@ -123,6 +125,7 @@ class _SummarizeViewState extends State<SummarizeView> {
                     ],
                   ),
                   S.of(context).orderAddress,
+                  Icons.location_on_outlined,
                 ),
                 const SizedBox(height: 16),
                 TotalPriceSection(total: orderModel.totalPrice),
@@ -208,17 +211,24 @@ class _SummarizeViewState extends State<SummarizeView> {
     }
   }
 
-  Widget _summarizeItem(Widget widget, String title) {
+  Widget _summarizeItem(Widget widget, String title, IconData iconData) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        CustomText(
-          text: '$title :',
-          fontSize: 16,
-          fontWeight: FontWeight.bold,
-          color: Theme.of(context).brightness == Brightness.dark
-              ? Colors.grey.shade300
-              : Colors.black87,
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          spacing: 6,
+          children: [
+            Icon(iconData, size: 18),
+            CustomText(
+              text: '$title :',
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+              color: Theme.of(context).brightness == Brightness.dark
+                  ? Colors.grey.shade300
+                  : Colors.black87,
+            ),
+          ],
         ),
         const SizedBox(height: 16),
         widget,

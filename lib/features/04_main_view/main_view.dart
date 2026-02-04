@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../core/helper/const.dart';
 import '../../core/helper/routes.dart';
 
 class MainView extends StatefulWidget {
@@ -20,6 +19,7 @@ class _MainViewState extends State<MainView> {
     Routes.homeView,
     Routes.searchView,
     Routes.cartView,
+    Routes.orderHistoryView,
     Routes.profileView,
   ];
 
@@ -67,7 +67,7 @@ class _MainViewState extends State<MainView> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: List.generate(
-          4,
+          5,
           (index) => GestureDetector(
             onTap: () {
               _selectedIndex.value = index;
@@ -76,26 +76,50 @@ class _MainViewState extends State<MainView> {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Icon(
-                  [
-                    Icons.home_filled,
-                    Icons.search,
-                    Icons.shopping_cart,
-                    Icons.person,
-                  ][index],
-                  size: 28,
-                  color: _selectedIndex.value == index
-                      ? isDark
-                            ? Colors.grey.shade50
-                            : kPrimaryColor
-                      : Colors.grey.shade400,
-                ),
-                if (_selectedIndex.value == index)
-                  Icon(
-                    Icons.circle,
-                    color: isDark ? Colors.grey.shade50 : kPrimaryColor,
-                    size: 10,
-                  ),
+                _selectedIndex.value == index
+                    ? Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 12,
+                          vertical: 8,
+                        ),
+                        decoration: BoxDecoration(
+                          color: Colors.grey.withAlpha(32),
+                          borderRadius: const BorderRadius.all(
+                            Radius.circular(32),
+                          ),
+                        ),
+                        child: Icon(
+                          [
+                            Icons.home_filled,
+                            Icons.search,
+                            Icons.shopping_cart,
+                            Icons.history,
+                            Icons.person,
+                          ][index],
+                          size: 28,
+                          color: _selectedIndex.value == index
+                              ? isDark
+                                    ? Colors.grey.shade50
+                                    : Colors.grey.shade800
+                              : Colors.grey.shade400,
+                        ),
+                      )
+                    : Icon(
+                        [
+                          Icons.home_outlined,
+                          Icons.search,
+                          Icons.shopping_cart_outlined,
+                          Icons.history_outlined,
+                          Icons.person_outline_outlined,
+                        ][index],
+                        size: 28,
+                        color: _selectedIndex.value == index
+                            ? isDark
+                                  ? Colors.grey.shade50
+                                  : Colors.grey.shade800
+                            : Colors.grey.shade400,
+                      ),
+                SizedBox(height: _selectedIndex.value == index ? 8 : 0),
               ],
             ),
           ),

@@ -99,7 +99,7 @@ class CartViewListTablet extends StatelessWidget {
         crossAxisCount: 2,
         mainAxisSpacing: 16,
         crossAxisSpacing: 16,
-        childAspectRatio: 1.5,
+        childAspectRatio: 2,
       ),
       itemCount: cartList.length,
       itemBuilder: (context, index) {

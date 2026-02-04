@@ -7,13 +7,14 @@ import 'package:flutter_e_commerce_app_2025/core/utilities/extensions_of_s_local
 import 'package:flutter_e_commerce_app_2025/core/utilities/icon_with_circle_style.dart';
 import 'package:flutter_e_commerce_app_2025/core/utilities/show_order_list.dart';
 import 'package:flutter_e_commerce_app_2025/core/utilities/total_price_section.dart';
+import 'package:flutter_e_commerce_app_2025/features/08_profile_view/presentation/view/widgets/delivery_state_section.dart';
+import 'package:flutter_e_commerce_app_2025/features/09_order_history_view/presentation/view_model/delete_order_cubit/delete_order_cubit.dart';
 import 'package:flutter_e_commerce_app_2025/generated/l10n.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:iconify_flutter/icons/carbon.dart';
 
 import '../../../../../core/helper/date_formatter.dart';
 import '../../../../07_cart_view/data/model/order_model.dart';
-import '../../../../07_cart_view/presentation/view_model/order_cubit/order_cubit.dart';
 
 class OrderHistoryActiveSelectionView extends StatefulWidget {
   const OrderHistoryActiveSelectionView({
@@ -73,7 +74,10 @@ class _OrderHistoryActiveSelectionViewState
                   final cart = order.cartModelList;
                   final id = order.orderId;
                   final isSelected = selectedMap[id] ?? false;
-
+                  final stateEnumText = order.orderStateEnum.title(
+                    context,
+                    order.orderStateEnum,
+                  );
                   return InkWell(
                     splashColor: kPrimaryColor.withAlpha(8),
                     onTap: () => _selectOnly(order),
@@ -111,6 +115,8 @@ class _OrderHistoryActiveSelectionViewState
                               ShowOrderList(carts: cart),
                               const SizedBox(height: 16),
                               TotalPriceSection(total: order.totalPrice),
+                              const SizedBox(height: 24),
+                              DeliveryStateSection(orderModel: order),
                             ],
                           ),
                           const SizedBox(height: 16),
@@ -274,7 +280,7 @@ class _OrderHistoryActiveSelectionViewState
       buttonAcceptText: S.of(context).warning_button_title_ok,
       buttonCancelText: S.of(context).warning_button_title_Cancel,
       onPressed: () {
-        context.read<OrderCubit>().deleteMultipleOrders(
+        context.read<DeleteOrderCubit>().deleteMultipleOrders(
           orders: widget.selectedOrders,
         );
         widget.onCancel();

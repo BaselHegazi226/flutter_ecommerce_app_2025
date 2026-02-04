@@ -416,7 +416,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "order_cancel": MessageLookupByLibrary.simpleMessage("Cancel Order"),
     "order_delete": MessageLookupByLibrary.simpleMessage("Delete"),
     "order_delivered": MessageLookupByLibrary.simpleMessage("Delivered"),
-    "order_history": MessageLookupByLibrary.simpleMessage("Order History"),
+    "order_delivery_state": MessageLookupByLibrary.simpleMessage(
+      "Delivery state",
+    ),
+    "order_history": MessageLookupByLibrary.simpleMessage("Orders"),
     "order_history_no_found_orders": MessageLookupByLibrary.simpleMessage(
       "Not found order history now!",
     ),

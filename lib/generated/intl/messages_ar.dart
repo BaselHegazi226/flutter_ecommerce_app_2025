@@ -399,7 +399,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "order_cancel": MessageLookupByLibrary.simpleMessage("إلغاء الطلب"),
     "order_delete": MessageLookupByLibrary.simpleMessage("حذف"),
     "order_delivered": MessageLookupByLibrary.simpleMessage("تم التسليم"),
-    "order_history": MessageLookupByLibrary.simpleMessage("سجل الطلبات"),
+    "order_delivery_state": MessageLookupByLibrary.simpleMessage(
+      "حالة التوصيل",
+    ),
+    "order_history": MessageLookupByLibrary.simpleMessage("طلباتك"),
     "order_history_no_found_orders": MessageLookupByLibrary.simpleMessage(
       "لا يوجد سجل للطلبات حتى الآن",
     ),

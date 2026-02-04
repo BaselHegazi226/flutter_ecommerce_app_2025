@@ -31,7 +31,6 @@ class FavouriteViewItemMobile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: _itemHeight,
-      padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
         borderRadius: const BorderRadius.all(Radius.circular(4)),
         color: Colors.grey.shade500.withAlpha(32),
@@ -45,7 +44,7 @@ class FavouriteViewItemMobile extends StatelessWidget {
               itemHeight: _itemHeight,
             ),
           ),
-          const SizedBox(width: 20),
+          const SizedBox(width: 8),
           Expanded(flex: 2, child: _detailsSection(context)),
         ],
       ),
@@ -53,17 +52,21 @@ class FavouriteViewItemMobile extends StatelessWidget {
   }
 
   Widget _detailsSection(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      spacing: 16,
-      children: [
-        _heartTitleSection(),
-        CustomText(text: favouriteModel.desc, maxLines: 3, fontSize: 12),
-        FavouriteDeletePriceSection(
-          favouriteModel: favouriteModel,
-          fontSize: 12,
-        ),
-      ],
+    return Padding(
+      padding: const EdgeInsets.all(8),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        spacing: 16,
+        children: [
+          _heartTitleSection(),
+          CustomText(text: favouriteModel.desc, maxLines: 3, fontSize: 12),
+          FavouriteDeletePriceSection(
+            favouriteModel: favouriteModel,
+            fontSize: 12,
+          ),
+        ],
+      ),
     );
   }
 
@@ -97,7 +100,6 @@ class FavouriteViewItemTablet extends StatelessWidget {
     final size = MediaQuery.sizeOf(context);
     return Container(
       height: _itemHeight,
-      padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         borderRadius: const BorderRadius.all(Radius.circular(4)),
         color: Colors.grey.shade500.withAlpha(32),
@@ -120,44 +122,45 @@ class FavouriteViewItemTablet extends StatelessWidget {
   }
 
   Widget _detailsSection(BuildContext context, Size size) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        _favouriteItem(),
-        Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          spacing: 4,
-          children: [
-            CustomText(
-              text: favouriteModel.title.split(" ").take(4).join(" "),
-              maxLines: 1,
-              fontSize: 14,
-              fontWeight: FontWeight.bold,
+    return Padding(
+      padding: const EdgeInsets.all(16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          _heartTitleSection(),
+          SizedBox(
+            width: size.width * .55,
+            child: CustomText(
+              text: favouriteModel.desc,
+              maxLines: 4,
+              fontSize: 12,
             ),
-            SizedBox(
-              width: size.width * .55,
-              child: CustomText(
-                text: favouriteModel.desc,
-                maxLines: 4,
-                fontSize: 12,
-              ),
-            ),
-          ],
-        ),
-        FavouriteDeletePriceSection(
-          favouriteModel: favouriteModel,
-          fontSize: 14,
-        ),
-      ],
+          ),
+          FavouriteDeletePriceSection(
+            favouriteModel: favouriteModel,
+            fontSize: 14,
+          ),
+        ],
+      ),
     );
   }
 
-  Widget _favouriteItem() {
-    return const Row(
-      mainAxisAlignment: MainAxisAlignment.end,
-      children: [FavouriteHeartSection()],
+  Widget _heartTitleSection() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        CustomText(
+          text: favouriteModel.title.split(" ").take(2).join(" ").length < 15
+              ? favouriteModel.title.split(" ").take(2).join(" ")
+              : favouriteModel.title.split(" ").take(1).join(" "),
+          maxLines: 1,
+          fontSize: 14,
+          fontWeight: FontWeight.bold,
+        ),
+        const FavouriteHeartSection(),
+      ],
     );
   }
 }
