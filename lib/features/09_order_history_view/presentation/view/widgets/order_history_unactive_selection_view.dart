@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_e_commerce_app_2025/core/helper/const.dart';
-import 'package:flutter_e_commerce_app_2025/core/helper/routes.dart';
 import 'package:flutter_e_commerce_app_2025/core/utilities/custom_text.dart';
 import 'package:flutter_e_commerce_app_2025/core/utilities/show_order_list.dart';
-import 'package:go_router/go_router.dart';
 
 import '../../../../../core/helper/date_formatter.dart';
 import '../../../../../core/utilities/extensions_of_s_localization.dart';
@@ -71,52 +69,6 @@ class OrderHistoryUnactiveSelectionView extends StatelessWidget {
           ),
         );
       },
-    );
-  }
-
-  Widget _locationItem(BuildContext context, String title) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Row(
-          spacing: 4,
-          children: [
-            const Icon(Icons.location_on_outlined, size: 24),
-            CustomText(
-              text: S.of(context).cartLocation,
-              fontSize: 14,
-              fontWeight: FontWeight.bold,
-              maxLines: 1,
-            ),
-          ],
-        ),
-        InkWell(
-          onTap: () {
-            GoRouter.of(
-              context,
-            ).push('${Routes.orderHistoryView}${Routes.orderHistoryInfoView}');
-          },
-          child: Row(
-            spacing: 4,
-            children: [
-              CustomText(text: title, fontSize: 14),
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                decoration: const BoxDecoration(
-                  color: Colors.blue,
-                  borderRadius: BorderRadius.all(Radius.circular(24)),
-                ),
-                child: const Icon(
-                  Icons.edit_location_alt_outlined,
-                  size: 14,
-                  color: Colors.white,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ],
     );
   }
 }

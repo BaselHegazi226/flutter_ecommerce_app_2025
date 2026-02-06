@@ -98,7 +98,7 @@ class CheckoutViewBody extends StatelessWidget {
       stepRadius: size.width > 700 ? 46 : 16,
       borderThickness: 2,
       titleTextStyle: TextStyle(
-        fontSize: size.width > 700 ? 16 : 10,
+        fontSize: size.width > 700 ? 16 : 8,
         fontWeight: FontWeight.w500,
       ),
       // finished step

@@ -5,7 +5,6 @@ import 'package:flutter_e_commerce_app_2025/core/utilities/extensions_of_s_local
 import 'package:flutter_e_commerce_app_2025/features/09_order_history_view/presentation/view_model/order_info_cubit/order_info_cubit.dart';
 
 import '../../../../../core/helper/const.dart';
-import '../../../../../core/utilities/custom_text.dart';
 import '../../../../../core/utilities/custom_text_form_field.dart';
 import '../../../../../generated/l10n.dart';
 import '../../../../07_cart_view/data/model/location_model.dart';
@@ -101,7 +100,7 @@ class _OrderInfoSectionState extends State<OrderInfoSection> {
           Expanded(
             child: SingleChildScrollView(
               child: Column(
-                spacing: 16,
+                spacing: 20,
                 children: [
                   CustomTextFormField(
                     iconData: Icons.phone_outlined,
@@ -113,15 +112,12 @@ class _OrderInfoSectionState extends State<OrderInfoSection> {
                         : null,
                     onSaved: (_) {},
                   ),
-                  const SizedBox(height: 4),
                   _locationSection(context),
-
-                  const SizedBox(height: 20),
                 ],
               ),
             ),
           ),
-
+          const SizedBox(height: 12),
           CustomButton(
             text: S.of(context).profileEditSave,
             textColor: Theme.of(context).brightness == Brightness.dark
@@ -148,17 +144,6 @@ class _OrderInfoSectionState extends State<OrderInfoSection> {
     return Column(
       spacing: 24,
       children: [
-        Row(
-          children: [
-            const Icon(Icons.location_on_outlined),
-            const SizedBox(width: 8),
-            CustomText(
-              text: S.of(context).profileShippingAddress,
-              fontSize: 18,
-              alignment: Alignment.centerLeft,
-            ),
-          ],
-        ),
         CustomTextFormField(
           iconData: Icons.signpost_outlined,
           text: S.of(context).formStreet1,

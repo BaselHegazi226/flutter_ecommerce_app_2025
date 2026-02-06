@@ -244,7 +244,7 @@ class _DeliveryViewState extends State<DeliveryView> {
                                     focusedDay: focusedDay,
 
                                     /// 👇 Responsive height فقط
-                                    rowHeight: height < 700 ? 42 : 56,
+                                    rowHeight: height < 700 ? 48 : 60,
 
                                     selectedDayPredicate: (day) =>
                                         selectedDay != null &&
@@ -319,16 +319,18 @@ class _DeliveryViewState extends State<DeliveryView> {
                                             : enWeekDays[index];
                                       },
                                       weekdayStyle: TextStyle(
-                                        fontSize: 10,
+                                        fontSize: 11,
                                         color: isDark
                                             ? Colors.grey.shade300
                                             : Colors.grey.shade700,
+                                        height: 1.4,
                                       ),
                                       weekendStyle: TextStyle(
-                                        fontSize: 10,
+                                        fontSize: 11,
                                         color: isDark
                                             ? Colors.grey.shade300
                                             : Colors.grey.shade700,
+                                        height: 1.4,
                                       ),
                                     ),
 
@@ -337,10 +339,11 @@ class _DeliveryViewState extends State<DeliveryView> {
                                       outsideDaysVisible: false,
                                       defaultTextStyle: const TextStyle(
                                         fontSize: 11,
+                                        height: 1.4,
                                       ),
                                       weekendTextStyle: const TextStyle(
                                         fontSize: 11,
-                                        fontFamily: 'cairo',
+                                        height: 1.4,
                                       ),
                                       selectedTextStyle: TextStyle(
                                         fontSize: 11,
@@ -383,7 +386,7 @@ class _DeliveryViewState extends State<DeliveryView> {
                               );
                             },
                           ),
-                          const SizedBox(height: 20),
+                          const SizedBox(height: 16),
                         ],
                       ),
                     ),
