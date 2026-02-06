@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_e_commerce_app_2025/core/utilities/custom_text.dart';
 import 'package:flutter_e_commerce_app_2025/core/utilities/navigate_button.dart';
 import 'package:flutter_e_commerce_app_2025/generated/l10n.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 import '../../../../../core/helper/const.dart';
@@ -319,13 +318,13 @@ class _DeliveryViewState extends State<DeliveryView> {
                                             ? arWeekDays[index]
                                             : enWeekDays[index];
                                       },
-                                      weekdayStyle: GoogleFonts.cairo(
+                                      weekdayStyle: TextStyle(
                                         fontSize: 10,
                                         color: isDark
                                             ? Colors.grey.shade300
                                             : Colors.grey.shade700,
                                       ),
-                                      weekendStyle: GoogleFonts.cairo(
+                                      weekendStyle: TextStyle(
                                         fontSize: 10,
                                         color: isDark
                                             ? Colors.grey.shade300

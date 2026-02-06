@@ -186,6 +186,7 @@ class _OrderInfoViewState extends State<OrderInfoView> {
       spacing: 16,
       children: [
         CustomTextFormField(
+          iconData: Icons.signpost_outlined,
           text: S.of(context).formStreet1,
           hintText: S.of(context).formEnterStreet1,
           onSaved: (value) {
@@ -200,6 +201,7 @@ class _OrderInfoViewState extends State<OrderInfoView> {
           textEditingController: textEditingControllerStreet1,
         ),
         CustomTextFormField(
+          iconData: Icons.signpost_outlined,
           text: S.of(context).formStreet2,
           hintText: S.of(context).formEnterStreet2,
           onSaved: (value) {
@@ -214,6 +216,7 @@ class _OrderInfoViewState extends State<OrderInfoView> {
           textEditingController: textEditingControllerStreet2,
         ),
         CustomTextFormField(
+          iconData: Icons.location_city_outlined,
           text: S.of(context).formCity,
           hintText: S.of(context).formEnterCity,
           onSaved: (value) {
@@ -231,6 +234,7 @@ class _OrderInfoViewState extends State<OrderInfoView> {
           children: [
             Expanded(
               child: CustomTextFormField(
+                iconData: Icons.public,
                 text: S.of(context).formState,
                 hintText: S.of(context).formEnterState,
                 onSaved: (value) {
@@ -248,6 +252,7 @@ class _OrderInfoViewState extends State<OrderInfoView> {
             const SizedBox(width: 24),
             Expanded(
               child: CustomTextFormField(
+                iconData: Icons.flag_outlined,
                 text: S.of(context).formCountry,
                 hintText: S.of(context).formEnterCountry,
                 onSaved: (value) {
@@ -272,8 +277,9 @@ class _OrderInfoViewState extends State<OrderInfoView> {
     return Column(
       children: [
         CustomTextFormField(
+          iconData: Icons.phone_outlined,
           text: S.of(context).phoneNumber,
-          hintText: '+201287790732',
+          hintText: S.of(context).formEnterPhone,
           onSaved: (value) {
             phoneNumber = value!.trim();
           },

@@ -10,12 +10,14 @@ class CustomTextFormField extends StatelessWidget {
     required this.onSaved,
     required this.validator,
     required this.textEditingController,
+    required this.iconData,
   });
 
   final String text, hintText;
   final void Function(String?)? onSaved;
   final String? Function(String?)? validator;
   final TextEditingController textEditingController;
+  final IconData iconData;
 
   @override
   Widget build(BuildContext context) {
@@ -23,11 +25,17 @@ class CustomTextFormField extends StatelessWidget {
       spacing: 8,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        CustomText(
-          text: text,
-          color: Colors.black,
-          fontSize: 16,
-          fontWeight: FontWeight.bold,
+        Row(
+          spacing: 8,
+          children: [
+            Icon(iconData, size: 18),
+            CustomText(
+              text: text,
+              color: Colors.black,
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+            ),
+          ],
         ),
         TextFormField(
           onSaved: onSaved,

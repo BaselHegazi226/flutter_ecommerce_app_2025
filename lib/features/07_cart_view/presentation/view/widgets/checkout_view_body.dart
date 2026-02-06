@@ -143,8 +143,8 @@ class CheckoutViewBody extends StatelessWidget {
           title: S.of(context).cartDelivery,
         ),
         EasyStep(
-          icon: const Icon(Icons.location_on_outlined),
-          title: S.of(context).cartLocation,
+          icon: const Icon(Icons.inventory_2),
+          title: S.of(context).cartOrderInfo,
         ),
         EasyStep(
           icon: const Icon(Icons.note_alt_outlined),

@@ -111,13 +111,21 @@ class _EditProfileViewBodyState extends State<EditProfileViewBody> {
       padding: const EdgeInsets.all(16),
       child: Column(
         children: [
-          _buildImageSection(imageUrl: imageUrl, size: size),
-          const SizedBox(height: 24),
-          buildUserNameSection(context, userName),
-          const SizedBox(height: 32),
-          _buildUserEmailField(context, userEmail),
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  _buildImageSection(imageUrl: imageUrl, size: size),
+                  const SizedBox(height: 24),
+                  buildUserNameSection(context, userName),
+                  const SizedBox(height: 32),
+                  _buildUserEmailField(context, userEmail),
 
-          const SizedBox(height: 36),
+                  const SizedBox(height: 36),
+                ],
+              ),
+            ),
+          ),
           CustomButton(
             isLoading: isLoadingButton,
             text: S.of(context).profileEditSave,
@@ -205,8 +213,38 @@ class _EditProfileViewBodyState extends State<EditProfileViewBody> {
     required Size size,
   }) {
     return BlocConsumer<UpdateImageCubit, UpdateImageState>(
-      listener: (context, state) {},
+      listener: (context, state) {
+        if (state is UpdateImageSuccess) {
+          ToastNotification.flatColoredToastNotificationService(
+            onAutoCompleteCompleted: (_) {},
+            title: S.of(context).success_selected_Image_title,
+            description: S.of(context).success_selected_Image_desc,
+            toastNotificationType: ToastificationType.success,
+          );
+        } else if (state is UpdateImageFailure) {
+          ToastNotification.flatColoredToastNotificationService(
+            onAutoCompleteCompleted: (_) {},
+            title: S.of(context).failure_selected_Image_title,
+            description: S.of(context).failure_selected_Image_desc,
+            toastNotificationType: ToastificationType.warning,
+          );
+        }
+      },
       builder: (context, state) {
+        if (state is UpdateImageSuccess) {
+          return CustomImage(
+            imageSize: size.width * .35,
+            imageProvider: state.imageUrl.contains('http')
+                ? CachedNetworkImage(imageUrl: state.imageUrl)
+                : Image.asset(Assets.profileDefulatProfileImage),
+          );
+        } else if (state is UpdateImageFailure) {
+          if (imageUrl == null) {
+            return Image.asset(Assets.profileDefulatProfileImage);
+          } else {
+            return CachedNetworkImage(imageUrl: imageUrl);
+          }
+        }
         final String? imageShowed = (state is UpdateImageSuccess)
             ? state.imageUrl
             : imageUrl;

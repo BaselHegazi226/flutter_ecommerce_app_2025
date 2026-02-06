@@ -15,6 +15,7 @@ class Routes {
   static const String editProfileView = '/editProfileView';
   static const String shippingAddressView = '/shippingAddressView';
   static const String orderHistoryView = '/orderHistoryView';
+  static const String orderHistoryInfoView = '/orderHistoryInfoView';
   static const String settingsView = '/settingsView';
   static const String aboutUsView = '/aboutUsView';
   static const String aboutAppView = '/aboutAppView';

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_e_commerce_app_2025/features/07_cart_view/presentation/view_model/checkout_cubit/checkout_cubit.dart';
 import 'package:flutter_e_commerce_app_2025/features/08_profile_view/presentation/view/about_app.dart';
 import 'package:flutter_e_commerce_app_2025/features/08_profile_view/presentation/view_model/user_info_cubit/user_info_cubit.dart';
+import 'package:flutter_e_commerce_app_2025/features/09_order_history_view/presentation/view/order_history_info_view.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../features/00_splash_view/presentation/view/splash_view.dart';
@@ -93,6 +94,15 @@ abstract class AppRouter {
               key: state.pageKey,
               child: const OrderHistoryView(),
             ),
+            routes: [
+              GoRoute(
+                path: Routes.orderHistoryInfoView,
+                pageBuilder: (context, state) => AppTransitions.slideX(
+                  key: state.pageKey,
+                  child: const OrderHistoryInfoView(),
+                ),
+              ),
+            ],
           ),
 
           /// Search

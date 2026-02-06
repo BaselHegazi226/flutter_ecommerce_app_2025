@@ -219,6 +219,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "cart_order_delivery_time": MessageLookupByLibrary.simpleMessage(
       "ميعاد التوصيل",
     ),
+    "cart_order_info": MessageLookupByLibrary.simpleMessage("بيانات الطلب"),
     "cart_order_product_list": MessageLookupByLibrary.simpleMessage(
       "قائمة منتجات الطلب",
     ),
@@ -372,10 +373,22 @@ class MessageLookup extends MessageLookupByLibrary {
     "failure_register_title": MessageLookupByLibrary.simpleMessage(
       "فشل إنشاء الحساب",
     ),
+    "failure_selected_Image_desc": MessageLookupByLibrary.simpleMessage(
+      "فشل اختيار الصورة بسبب بعض المشاكل التي ممكن ان تكون متعلقه بالأنترنت حاول مره اخرى من فضلك!",
+    ),
+    "failure_selected_Image_title": MessageLookupByLibrary.simpleMessage(
+      "فشل في اختيار الصورة",
+    ),
     "failure_updateProfile_desc": MessageLookupByLibrary.simpleMessage(
       "فشل تحديث البيانات بسبب بعض المشاكل التي ممكن ان تكون متعلقه بالأنترنت حاول مره اخرى من فضلك!",
     ),
     "failure_updateProfile_title": MessageLookupByLibrary.simpleMessage(
+      "فشل تحديث البيانات",
+    ),
+    "failure_update_order_info_desc": MessageLookupByLibrary.simpleMessage(
+      "فشل تحديث البيانات بسبب بعض المشاكل التي ممكن ان تكون متعلقه بالأنترنت حاول مره اخرى من فضلك!",
+    ),
+    "failure_update_order_info_title": MessageLookupByLibrary.simpleMessage(
       "فشل تحديث البيانات",
     ),
     "form_city": MessageLookupByLibrary.simpleMessage("المدينة"),
@@ -589,11 +602,23 @@ class MessageLookup extends MessageLookupByLibrary {
     "success_removeOrder_title": MessageLookupByLibrary.simpleMessage(
       "تم حذف الطلب",
     ),
+    "success_selected_Image_desc": MessageLookupByLibrary.simpleMessage(
+      "تم اختيار صورتك الجديده بنجاح",
+    ),
+    "success_selected_Image_title": MessageLookupByLibrary.simpleMessage(
+      "تم اختيار صورتك",
+    ),
     "success_updateProfile_desc": MessageLookupByLibrary.simpleMessage(
       "تم تحديث بيانات حسابك بنجاح.",
     ),
     "success_updateProfile_title": MessageLookupByLibrary.simpleMessage(
       "تم تحديث البيانات",
+    ),
+    "success_update_order_info_desc": MessageLookupByLibrary.simpleMessage(
+      "تم تحديث بيانات الطلب بنجاح",
+    ),
+    "success_update_order_info_title": MessageLookupByLibrary.simpleMessage(
+      "تم تحديث البيانات ",
     ),
     "warning_button_title_Cancel": MessageLookupByLibrary.simpleMessage(
       "تراجع",

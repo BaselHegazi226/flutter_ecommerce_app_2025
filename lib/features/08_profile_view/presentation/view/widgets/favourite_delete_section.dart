@@ -35,7 +35,7 @@ class FavouriteDeleteSection extends StatelessWidget {
       icon: Icon(
         Icons.delete_rounded,
         color: Theme.of(context).brightness == Brightness.dark
-            ? Colors.grey.shade50
+            ? Colors.grey.shade400
             : Colors.black87,
         size: 18,
       ),

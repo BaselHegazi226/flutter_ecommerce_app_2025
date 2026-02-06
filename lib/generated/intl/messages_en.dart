@@ -224,6 +224,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "cart_order_delivery_time": MessageLookupByLibrary.simpleMessage(
       "Delivery Time",
     ),
+    "cart_order_info": MessageLookupByLibrary.simpleMessage("Order info"),
     "cart_order_product_list": MessageLookupByLibrary.simpleMessage(
       "Order Product List",
     ),
@@ -387,10 +388,22 @@ class MessageLookup extends MessageLookupByLibrary {
     "failure_register_title": MessageLookupByLibrary.simpleMessage(
       "Registration Failed",
     ),
+    "failure_selected_Image_desc": MessageLookupByLibrary.simpleMessage(
+      "The image update failed due to some problems that may be related to the internet. Please try again!",
+    ),
+    "failure_selected_Image_title": MessageLookupByLibrary.simpleMessage(
+      "Selected Image Failed",
+    ),
     "failure_updateProfile_desc": MessageLookupByLibrary.simpleMessage(
       "The data update failed due to some problems that may be related to the internet. Please try again!",
     ),
     "failure_updateProfile_title": MessageLookupByLibrary.simpleMessage(
+      "Update Failed",
+    ),
+    "failure_update_order_info_desc": MessageLookupByLibrary.simpleMessage(
+      "The data update failed due to some problems that may be related to the internet. Please try again!",
+    ),
+    "failure_update_order_info_title": MessageLookupByLibrary.simpleMessage(
       "Update Failed",
     ),
     "form_city": MessageLookupByLibrary.simpleMessage("City"),
@@ -604,11 +617,23 @@ class MessageLookup extends MessageLookupByLibrary {
     "success_removeOrder_title": MessageLookupByLibrary.simpleMessage(
       "Order Removed",
     ),
+    "success_selected_Image_desc": MessageLookupByLibrary.simpleMessage(
+      "Your New Image has been selected successfully.",
+    ),
+    "success_selected_Image_title": MessageLookupByLibrary.simpleMessage(
+      "Selected Image Success",
+    ),
     "success_updateProfile_desc": MessageLookupByLibrary.simpleMessage(
       "Your account information has been updated successfully.",
     ),
     "success_updateProfile_title": MessageLookupByLibrary.simpleMessage(
       "Profile Updated",
+    ),
+    "success_update_order_info_desc": MessageLookupByLibrary.simpleMessage(
+      "Your Order information has been updated successfully.",
+    ),
+    "success_update_order_info_title": MessageLookupByLibrary.simpleMessage(
+      "Order Info",
     ),
     "warning_button_title_Cancel": MessageLookupByLibrary.simpleMessage(
       "Cancel",

@@ -166,7 +166,7 @@ class CartViewItemTablet extends StatelessWidget {
                         text: title.split(" ").take(2).join(" ").length > 15
                             ? title.split(" ").take(1).join(" ")
                             : title.split(" ").take(2).join(" "),
-                        fontSize: 18,
+                        fontSize: 16,
                         fontWeight: FontWeight.w500,
                       ),
                       DeleteCartProductSection(productId: productId),
@@ -175,7 +175,7 @@ class CartViewItemTablet extends StatelessWidget {
                   const SizedBox(height: 4),
                   CustomText(
                     text: '${priceShowed(price)} ${S.of(context).EP}',
-                    fontSize: 20,
+                    fontSize: 18,
                     color: kPrimaryColor,
                   ),
                 ],

@@ -43,6 +43,7 @@ class _RegisterInputSectionState extends State<RegisterInputSection> {
         spacing: 20,
         children: [
           CustomTextFormField(
+            iconData: Icons.person_outline_outlined,
             text: S.of(context).authName,
             hintText: 'name',
             onSaved: (value) {
@@ -60,6 +61,7 @@ class _RegisterInputSectionState extends State<RegisterInputSection> {
             textEditingController: textEditingControllerName,
           ),
           CustomTextFormField(
+            iconData: Icons.email_outlined,
             text: S.of(context).authEmail,
             hintText: 'iamdavid@gmail.com',
             onSaved: (value) {
@@ -77,6 +79,7 @@ class _RegisterInputSectionState extends State<RegisterInputSection> {
             textEditingController: textEditingControllerEmail,
           ),
           CustomTextFormField(
+            iconData: Icons.password_outlined,
             text: S.of(context).authPassword,
             hintText: '**********',
             onSaved: (value) {

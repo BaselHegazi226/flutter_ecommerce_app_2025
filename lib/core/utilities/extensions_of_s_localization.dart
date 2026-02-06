@@ -115,6 +115,8 @@ extension CartLocalizationX on S {
 
   String get cartDelivery => cart_delivery;
 
+  String get cartOrderInfo => cart_order_info;
+
   String get cartLocation => cart_location;
 
   String get cartSummarize => cart_summarize;

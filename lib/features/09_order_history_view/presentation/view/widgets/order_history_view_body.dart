@@ -49,3 +49,37 @@ class _OrderHistoryViewBodyState extends State<OrderHistoryViewBody> {
     );
   }
 }
+
+class OrderInfoSectionItem extends StatelessWidget {
+  const OrderInfoSectionItem({
+    super.key,
+    required this.icon,
+    required this.title,
+    required this.value,
+  });
+
+  final IconData icon;
+  final String title, value;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          spacing: 4,
+          children: [
+            Icon(icon, size: 24),
+            CustomText(
+              text: '$title : ',
+              fontSize: 14,
+              fontWeight: FontWeight.bold,
+            ),
+          ],
+        ),
+        CustomText(text: value, fontSize: 14),
+      ],
+    );
+  }
+}

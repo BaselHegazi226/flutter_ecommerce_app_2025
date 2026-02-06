@@ -44,6 +44,7 @@ class _LoginEmailPasswordInputSectionState
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           CustomTextFormField(
+            iconData: Icons.email_outlined,
             text: S.of(context).authEmail,
             hintText: 'newuser@gmail.com',
             onSaved: (value) {
@@ -59,6 +60,7 @@ class _LoginEmailPasswordInputSectionState
             textEditingController: textEditingControllerEmail,
           ),
           CustomTextFormField(
+            iconData: Icons.password_outlined,
             text: S.of(context).authPassword,
             hintText: '1234638@Bd',
             onSaved: (value) {

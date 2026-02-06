@@ -214,6 +214,16 @@ class S {
     return Intl.message('Delivery', name: 'cart_delivery', desc: '', args: []);
   }
 
+  /// `Order info`
+  String get cart_order_info {
+    return Intl.message(
+      'Order info',
+      name: 'cart_order_info',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Location`
   String get cart_location {
     return Intl.message('Location', name: 'cart_location', desc: '', args: []);
@@ -1124,6 +1134,46 @@ class S {
     );
   }
 
+  /// `Order Info`
+  String get success_update_order_info_title {
+    return Intl.message(
+      'Order Info',
+      name: 'success_update_order_info_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your Order information has been updated successfully.`
+  String get success_update_order_info_desc {
+    return Intl.message(
+      'Your Order information has been updated successfully.',
+      name: 'success_update_order_info_desc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Selected Image Success`
+  String get success_selected_Image_title {
+    return Intl.message(
+      'Selected Image Success',
+      name: 'success_selected_Image_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your New Image has been selected successfully.`
+  String get success_selected_Image_desc {
+    return Intl.message(
+      'Your New Image has been selected successfully.',
+      name: 'success_selected_Image_desc',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Removed from Favorites`
   String get success_removeFavorite_title {
     return Intl.message(
@@ -1309,6 +1359,46 @@ class S {
     return Intl.message(
       'The data update failed due to some problems that may be related to the internet. Please try again!',
       name: 'failure_updateProfile_desc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Selected Image Failed`
+  String get failure_selected_Image_title {
+    return Intl.message(
+      'Selected Image Failed',
+      name: 'failure_selected_Image_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The image update failed due to some problems that may be related to the internet. Please try again!`
+  String get failure_selected_Image_desc {
+    return Intl.message(
+      'The image update failed due to some problems that may be related to the internet. Please try again!',
+      name: 'failure_selected_Image_desc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Update Failed`
+  String get failure_update_order_info_title {
+    return Intl.message(
+      'Update Failed',
+      name: 'failure_update_order_info_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The data update failed due to some problems that may be related to the internet. Please try again!`
+  String get failure_update_order_info_desc {
+    return Intl.message(
+      'The data update failed due to some problems that may be related to the internet. Please try again!',
+      name: 'failure_update_order_info_desc',
       desc: '',
       args: [],
     );
