@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_e_commerce_app_2025/core/helper/const.dart';
 import 'package:flutter_e_commerce_app_2025/core/utilities/custom_text.dart';
 
+import '../../../../../core/helper/const.dart';
 import '../../view_model/cart_bloc/cart_bloc.dart';
 import '../../view_model/cart_bloc/cart_state.dart';
 
@@ -51,8 +51,6 @@ class CartViewCountSection extends StatelessWidget {
                         productId: id,
                       ),
                     );
-                    debugPrint('product id = $id');
-                    debugPrint('product count = $count');
                   }
                 },
                 icon: const Icon(Icons.remove),
@@ -76,12 +74,21 @@ class CartView5CountSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return BlocBuilder<CartBloc, CartState>(
       builder: (context, state) {
         return Container(
           decoration: BoxDecoration(
-            color: Colors.yellow.shade500,
+            color: isDark
+                ? kGreyColor.withAlpha(60)
+                : kPrimaryColor.withAlpha(20),
             borderRadius: const BorderRadius.all(Radius.circular(32)),
+            border: Border.all(
+              color: isDark
+                  ? Colors.grey.shade300
+                  : kPrimaryColor.withAlpha(120),
+            ),
           ),
           child: IconButton(
             onPressed: () {
@@ -89,14 +96,13 @@ class CartView5CountSection extends StatelessWidget {
                 UpdateProductCountEvent(newCount: count + 5, productId: id),
               );
             },
-            icon: const Row(
-              spacing: 4,
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Icon(Icons.add, color: kPrimaryColor),
-                CustomText(text: '5', fontSize: 20, color: kPrimaryColor),
-              ],
+            icon: CustomText(
+              text: '+5',
+              fontSize: 18,
+              fontWeight: FontWeight.w600,
+              color: isDark
+                  ? Colors.grey.shade300
+                  : kPrimaryColor.withAlpha(120),
             ),
           ),
         );

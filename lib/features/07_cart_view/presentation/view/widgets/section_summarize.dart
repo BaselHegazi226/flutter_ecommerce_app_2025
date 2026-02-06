@@ -102,17 +102,26 @@ class _SummarizeViewState extends State<SummarizeView> {
                 ),
                 const SizedBox(height: 16),
                 _summarizeItem(
+                  CustomText(
+                    text: orderModel.orderInfoModel.phoneNumber!,
+                    fontSize: 16,
+                  ),
+                  S.of(context).phoneNumber,
+                  Icons.phone_outlined,
+                ),
+                const SizedBox(height: 16),
+                _summarizeItem(
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Flexible(
                         child: CustomText(
                           text:
-                              '${S.of(context).formStreet1}: ${orderModel.locationModel.street1}\n'
-                              '${S.of(context).formStreet2}: ${orderModel.locationModel.street2}\n'
-                              '${S.of(context).formCity}: ${orderModel.locationModel.city}\n'
-                              '${S.of(context).formState}: ${orderModel.locationModel.state}\n'
-                              '${S.of(context).formCountry}: ${orderModel.locationModel.country}',
+                              '${S.of(context).formStreet1}: ${orderModel.orderInfoModel.locationModel!.street1}\n'
+                              '${S.of(context).formStreet2}: ${orderModel.orderInfoModel.locationModel!.street2}\n'
+                              '${S.of(context).formCity}: ${orderModel.orderInfoModel.locationModel!.city}\n'
+                              '${S.of(context).formState}: ${orderModel.orderInfoModel.locationModel!.state}\n'
+                              '${S.of(context).formCountry}: ${orderModel.orderInfoModel.locationModel!.country}',
                           fontSize: 16,
                         ),
                       ),

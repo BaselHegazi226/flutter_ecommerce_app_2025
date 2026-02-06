@@ -50,6 +50,12 @@ class CustomTextFormField extends StatelessWidget {
             focusedBorder: UnderlineInputBorder(
               borderSide: BorderSide(color: Theme.of(context).primaryColor),
             ),
+            errorBorder: const UnderlineInputBorder(
+              borderSide: BorderSide(color: kPrimaryWrongColor),
+            ),
+            focusedErrorBorder: UnderlineInputBorder(
+              borderSide: BorderSide(color: Theme.of(context).primaryColor),
+            ),
           ),
         ),
       ],

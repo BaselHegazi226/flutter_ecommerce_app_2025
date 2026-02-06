@@ -5,32 +5,32 @@ abstract class OrderState {}
 
 final class OrderInitial extends OrderState {}
 
-final class SaveUserLocationInitial extends OrderState {}
+final class SaveOrderInfoInitial extends OrderState {}
 
-final class SaveUserLocationLoading extends OrderState {}
+final class SaveOrderInfoLoading extends OrderState {}
 
-final class SaveUserLocationSuccess extends OrderState {}
+final class SaveOrderInfoSuccess extends OrderState {}
 
-final class SaveUserLocationFailure extends OrderState {
+final class SaveOrderInfoFailure extends OrderState {
   final String errorMessage;
 
-  SaveUserLocationFailure({required this.errorMessage});
+  SaveOrderInfoFailure({required this.errorMessage});
 }
 
-final class GetUserLocationInitial extends OrderState {}
+final class GetOrderInfoInitial extends OrderState {}
 
-final class GetUserLocationLoading extends OrderState {}
+final class GetOrderInfoLoading extends OrderState {}
 
-final class GetUserLocationSuccess extends OrderState {
-  final LocationModel locationModel;
+final class GetOrderInfoSuccess extends OrderState {
+  final OrderInfoModel orderInfoModel;
 
-  GetUserLocationSuccess({required this.locationModel});
+  GetOrderInfoSuccess({required this.orderInfoModel});
 }
 
-final class GetUserLocationFailure extends OrderState {
+final class GetOrderInfoFailure extends OrderState {
   final String errorMessage;
 
-  GetUserLocationFailure({required this.errorMessage});
+  GetOrderInfoFailure({required this.errorMessage});
 }
 
 final class AddOrderInitial extends OrderState {}

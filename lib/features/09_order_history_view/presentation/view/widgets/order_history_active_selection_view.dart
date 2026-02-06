@@ -74,10 +74,6 @@ class _OrderHistoryActiveSelectionViewState
                   final cart = order.cartModelList;
                   final id = order.orderId;
                   final isSelected = selectedMap[id] ?? false;
-                  final stateEnumText = order.orderStateEnum.title(
-                    context,
-                    order.orderStateEnum,
-                  );
                   return InkWell(
                     splashColor: kPrimaryColor.withAlpha(8),
                     onTap: () => _selectOnly(order),

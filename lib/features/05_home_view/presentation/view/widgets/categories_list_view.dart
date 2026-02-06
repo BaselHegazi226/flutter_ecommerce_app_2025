@@ -118,7 +118,7 @@ class _CategoryItem extends StatelessWidget {
       child: IntrinsicWidth(
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 350),
-          padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
+          padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 32),
           curve: Curves.easeOutCubic,
           decoration: BoxDecoration(
             color: backgroundColor,

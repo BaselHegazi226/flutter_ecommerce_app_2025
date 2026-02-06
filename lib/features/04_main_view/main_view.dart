@@ -90,7 +90,7 @@ class _MainViewState extends State<MainView> {
                         ),
                         child: Icon(
                           [
-                            Icons.home_filled,
+                            Icons.home,
                             Icons.search,
                             Icons.shopping_cart,
                             Icons.history,

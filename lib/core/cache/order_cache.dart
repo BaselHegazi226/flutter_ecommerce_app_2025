@@ -18,7 +18,7 @@ abstract class OrderCache {
   Future<Either<Failure, OrderModel>> updateOrder({
     required String orderId,
     DeliveryMethodModel? deliverMethodModel,
-    LocationModel? locationModel,
+    OrderInfoModel? orderInfoModel,
     DateTime? updateTime,
     List<CartModel>? carts,
     double? totalPrice,
@@ -39,16 +39,16 @@ abstract class OrderCache {
     required List<OrderModel> orderList,
   });
 
-  Future<Either<Failure, void>> saveUserLocation({
-    required LocationModel locationModel,
+  Future<Either<Failure, void>> saveOrderInfo({
+    required OrderInfoModel orderInfoModel,
   });
 
-  Future<Either<Failure, LocationModel?>> getUserLocation();
+  Future<Either<Failure, OrderInfoModel?>> getOrderInfo();
 }
 
 class OrderCacheImplement implements OrderCache {
   late Box<OrderModel> _hiveBoxOrderModel;
-  late Box<LocationModel> _hiveBoxLocationModel;
+  late Box<OrderInfoModel> _hiveBoxOrderInfoModel;
   final String userId;
 
   OrderCacheImplement({required this.userId});
@@ -59,13 +59,13 @@ class OrderCacheImplement implements OrderCache {
     OrderCacheAdaptorsClass.registerAllAdaptors();
     //open hiveBoxProductModel
     final orderBoxName = 'OrderBox$userId';
-    final locationBoxName = 'LocationBox$userId';
+    final orderInfoBoxName = 'OrderInfoBox$userId';
     _hiveBoxOrderModel = Hive.isBoxOpen(orderBoxName)
         ? Hive.box<OrderModel>(orderBoxName)
         : await Hive.openBox<OrderModel>(orderBoxName);
-    _hiveBoxLocationModel = Hive.isBoxOpen(locationBoxName)
-        ? Hive.box<LocationModel>(locationBoxName)
-        : await Hive.openBox<LocationModel>(locationBoxName);
+    _hiveBoxOrderInfoModel = Hive.isBoxOpen(orderInfoBoxName)
+        ? Hive.box<OrderInfoModel>(orderInfoBoxName)
+        : await Hive.openBox<OrderInfoModel>(orderInfoBoxName);
   }
 
   @override
@@ -132,10 +132,43 @@ class OrderCacheImplement implements OrderCache {
   }
 
   @override
+  Future<Either<Failure, void>> saveOrderInfo({
+    required OrderInfoModel orderInfoModel,
+  }) async {
+    try {
+      final orderInfoModelIndependent = OrderInfoModel.fromJson(
+        orderInfoModel.toJson(),
+      );
+      debugPrint('order info of user = $orderInfoModelIndependent');
+      await _hiveBoxOrderInfoModel.put(userId, orderInfoModelIndependent);
+      return right(null);
+    } catch (e) {
+      return left(CatchErrorHandle.catchBack(failure: e));
+    }
+  }
+
+  @override
+  Future<Either<Failure, OrderInfoModel?>> getOrderInfo() async {
+    try {
+      final locationData = _hiveBoxOrderInfoModel.get(userId);
+
+      if (locationData != null) {
+        final OrderInfoModel locationModel = OrderInfoModel.fromJson(
+          locationData.toJson(),
+        );
+        return right(locationModel);
+      }
+      return right(null);
+    } catch (e) {
+      return left(CatchErrorHandle.catchBack(failure: e));
+    }
+  }
+
+  @override
   Future<Either<Failure, OrderModel>> updateOrder({
     required String orderId,
     DeliveryMethodModel? deliverMethodModel,
-    LocationModel? locationModel,
+    OrderInfoModel? orderInfoModel,
     DateTime? updateTime,
     List<CartModel>? carts,
     double? totalPrice,
@@ -152,7 +185,7 @@ class OrderCacheImplement implements OrderCache {
           newCartList: carts,
           newCheckoutDateAt: updateTime,
           newDeliveryMethodModel: deliverMethodModel,
-          newLocationModel: locationModel,
+          newOrderInfoModel: orderInfoModel,
           newTotalPrice: totalPrice,
           newOrderStateEnum: orderState,
         );
@@ -164,39 +197,6 @@ class OrderCacheImplement implements OrderCache {
       } else {
         return left(CatchErrorHandle.catchBack(failure: 'order not found'));
       }
-    } catch (e) {
-      return left(CatchErrorHandle.catchBack(failure: e));
-    }
-  }
-
-  @override
-  Future<Either<Failure, void>> saveUserLocation({
-    required LocationModel locationModel,
-  }) async {
-    try {
-      final locationModelIndependent = LocationModel.fromJson(
-        locationModel.toJson(),
-      );
-      debugPrint('location of user = $locationModelIndependent');
-      await _hiveBoxLocationModel.put(userId, locationModelIndependent);
-      return right(null);
-    } catch (e) {
-      return left(CatchErrorHandle.catchBack(failure: e));
-    }
-  }
-
-  @override
-  Future<Either<Failure, LocationModel?>> getUserLocation() async {
-    try {
-      final locationData = _hiveBoxLocationModel.get(userId);
-
-      if (locationData != null) {
-        final LocationModel locationModel = LocationModel.fromJson(
-          locationData.toJson(),
-        );
-        return right(locationModel);
-      }
-      return right(null);
     } catch (e) {
       return left(CatchErrorHandle.catchBack(failure: e));
     }
@@ -324,7 +324,10 @@ class OrderCacheAdaptorsClass {
       Hive.registerAdapter(DeliveryMethodModelAdapter());
     }
     if (!Hive.isAdapterRegistered(AdaptorsIdentifiers.locationModelAdapter)) {
-      Hive.registerAdapter(LocationModelAdapter());
+      Hive.registerAdapter((LocationModelAdapter()));
+    }
+    if (!Hive.isAdapterRegistered(AdaptorsIdentifiers.orderInfoModelAdapter)) {
+      Hive.registerAdapter((OrderInfoModelAdapter()));
     }
     if (!Hive.isAdapterRegistered(AdaptorsIdentifiers.orderStateEnumAdapter)) {
       Hive.registerAdapter(OrderStateEnumAdapter());

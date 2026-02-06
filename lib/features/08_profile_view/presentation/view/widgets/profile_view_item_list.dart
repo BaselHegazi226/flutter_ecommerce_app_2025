@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_e_commerce_app_2025/core/helper/const.dart';
@@ -72,11 +71,6 @@ class ProfileViewItemList extends StatelessWidget {
         title: S.of(context).profileEdit,
       ),
       ProfileViewItemModel(
-        route: Routes.shippingAddressView,
-        iconData: Icons.location_on_outlined,
-        title: S.of(context).profileShippingAddress,
-      ),
-      ProfileViewItemModel(
         route: Routes.favoriteView,
         iconData: Icons.favorite,
         title: S.of(context).profileFavourite,
@@ -88,8 +82,13 @@ class ProfileViewItemList extends StatelessWidget {
       ),
       ProfileViewItemModel(
         route: Routes.aboutUsView,
-        iconData: CupertinoIcons.globe,
+        iconData: Icons.code_outlined,
         title: S.of(context).aboutMeTitle,
+      ),
+      ProfileViewItemModel(
+        route: Routes.aboutAppView,
+        iconData: Icons.app_settings_alt_outlined,
+        title: S.of(context).aboutAppTitle,
       ),
       ProfileViewItemModel(
         iconData: Icons.logout_outlined,
@@ -100,10 +99,11 @@ class ProfileViewItemList extends StatelessWidget {
 
   static List<Color> itemsBackgroundColor = [
     kPrimaryColor.withAlpha(135),
-    Colors.grey.withAlpha(135),
     Colors.red.withAlpha(135),
     Colors.black.withAlpha(135),
-    Colors.black.withAlpha(50),
+    Colors.grey.withAlpha(200),
+
+    Colors.blueAccent.shade700.withAlpha(135),
     Colors.red.withAlpha(240),
   ];
 }

@@ -20,7 +20,7 @@ class OrderModelAdapter extends TypeAdapter<OrderModel> {
       orderId: fields[0] as String,
       cartModelList: (fields[1] as List).cast<CartModel>(),
       deliveryMethodModel: fields[2] as DeliveryMethodModel,
-      locationModel: fields[3] as LocationModel,
+      orderInfoModel: fields[3] as OrderInfoModel,
       totalPrice: fields[4] as double,
       checkoutDateAt: fields[5] as DateTime,
       orderStateEnum: fields[6] as OrderStateEnum,
@@ -38,7 +38,7 @@ class OrderModelAdapter extends TypeAdapter<OrderModel> {
       ..writeByte(2)
       ..write(obj.deliveryMethodModel)
       ..writeByte(3)
-      ..write(obj.locationModel)
+      ..write(obj.orderInfoModel)
       ..writeByte(4)
       ..write(obj.totalPrice)
       ..writeByte(5)

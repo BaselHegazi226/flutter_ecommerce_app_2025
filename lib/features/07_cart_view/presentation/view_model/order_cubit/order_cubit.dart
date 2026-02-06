@@ -28,7 +28,7 @@ class OrderCubit extends Cubit<OrderState> {
   Future<void> updateOrder({
     required String orderId,
     DeliveryMethodModel? deliverMethodModel,
-    LocationModel? locationModel,
+    OrderInfoModel? orderInfoModel,
     DateTime? updateTime,
     List<CartModel>? carts,
     double? totalPrice,
@@ -39,7 +39,7 @@ class OrderCubit extends Cubit<OrderState> {
       orderId: orderId,
       totalPrice: totalPrice,
       deliverMethodModel: deliverMethodModel,
-      locationModel: locationModel,
+      orderInfoModel: orderInfoModel,
       updateTime: updateTime,
       orderState: orderState,
     );
@@ -55,35 +55,33 @@ class OrderCubit extends Cubit<OrderState> {
     );
   }
 
-  Future<void> saveUserLocation({required LocationModel locationModel}) async {
-    emit(SaveUserLocationLoading());
-    final result = await orderCache.saveUserLocation(
-      locationModel: locationModel,
+  Future<void> saveUserInfo({required OrderInfoModel orderInfoModel}) async {
+    emit(SaveOrderInfoLoading());
+    final result = await orderCache.saveOrderInfo(
+      orderInfoModel: orderInfoModel,
     );
     result.fold(
       (error) {
-        emit(
-          SaveUserLocationFailure(errorMessage: error.errorKey ?? 'unknown'),
-        );
+        emit(SaveOrderInfoFailure(errorMessage: error.errorKey ?? 'unknown'));
       },
       (success) {
-        emit(SaveUserLocationSuccess());
+        emit(SaveOrderInfoSuccess());
       },
     );
   }
 
-  Future<void> getUserLocation() async {
-    emit(GetUserLocationLoading());
-    final result = await orderCache.getUserLocation();
+  Future<void> getOrderInfo() async {
+    emit(GetOrderInfoLoading());
+    final result = await orderCache.getOrderInfo();
     result.fold(
       (error) {
-        emit(GetUserLocationFailure(errorMessage: error.errorKey ?? 'unknown'));
+        emit(GetOrderInfoFailure(errorMessage: error.errorKey ?? 'unknown'));
       },
       (success) {
         if (success != null) {
-          emit(GetUserLocationSuccess(locationModel: success));
+          emit(GetOrderInfoSuccess(orderInfoModel: success));
         } else {
-          emit(GetUserLocationFailure(errorMessage: 'Not Found User Location'));
+          emit(GetOrderInfoFailure(errorMessage: 'Not Found User Location'));
         }
       },
     );

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_e_commerce_app_2025/features/07_cart_view/presentation/view_model/checkout_cubit/checkout_cubit.dart';
+import 'package:flutter_e_commerce_app_2025/features/08_profile_view/presentation/view/about_app.dart';
 import 'package:flutter_e_commerce_app_2025/features/08_profile_view/presentation/view_model/user_info_cubit/user_info_cubit.dart';
 import 'package:go_router/go_router.dart';
 
@@ -22,7 +23,6 @@ import '../../features/08_profile_view/presentation/view/edit_profile_view.dart'
 import '../../features/08_profile_view/presentation/view/favourite_view.dart';
 import '../../features/08_profile_view/presentation/view/profile_view.dart';
 import '../../features/08_profile_view/presentation/view/settings_view.dart';
-import '../../features/08_profile_view/presentation/view/shipping_address_view.dart';
 import '../../features/09_order_history_view/presentation/view/order_history_view.dart';
 import '../helper/app_transitions.dart';
 import '../helper/routes.dart';
@@ -155,13 +155,7 @@ abstract class AppRouter {
                   child: const SettingsView(),
                 ),
               ),
-              GoRoute(
-                path: Routes.shippingAddressView,
-                pageBuilder: (context, state) => AppTransitions.slideX(
-                  key: state.pageKey,
-                  child: const ShippingAddressView(),
-                ),
-              ),
+
               GoRoute(
                 path: Routes.favoriteView,
                 pageBuilder: (context, state) => AppTransitions.slideX(
@@ -174,6 +168,13 @@ abstract class AppRouter {
                 pageBuilder: (context, state) => AppTransitions.slideX(
                   key: state.pageKey,
                   child: const AboutUsView(),
+                ),
+              ),
+              GoRoute(
+                path: Routes.aboutAppView,
+                pageBuilder: (context, state) => AppTransitions.slideX(
+                  key: state.pageKey,
+                  child: const AboutAppView(),
                 ),
               ),
             ],

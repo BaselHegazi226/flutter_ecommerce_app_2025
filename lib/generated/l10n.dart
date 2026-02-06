@@ -194,6 +194,16 @@ class S {
     );
   }
 
+  /// `Phone Number`
+  String get cart_phone_number {
+    return Intl.message(
+      'Phone Number',
+      name: 'cart_phone_number',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Total`
   String get cart_total {
     return Intl.message('Total', name: 'cart_total', desc: '', args: []);
@@ -432,6 +442,11 @@ class S {
       desc: '',
       args: [],
     );
+  }
+
+  /// `Add`
+  String get cart_add {
+    return Intl.message('Add', name: 'cart_add', desc: '', args: []);
   }
 
   /// `Ok`
@@ -709,11 +724,41 @@ class S {
     );
   }
 
+  /// `Phone number is required`
+  String get form_phoneNumberRequired {
+    return Intl.message(
+      'Phone number is required',
+      name: 'form_phoneNumberRequired',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Enter street 2`
   String get form_enterStreet2 {
     return Intl.message(
       'Enter street 2',
       name: 'form_enterStreet2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter phone number`
+  String get form_enterPhoneNumber {
+    return Intl.message(
+      'Enter phone number',
+      name: 'form_enterPhoneNumber',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Not match For Masr Number`
+  String get form_phone_number_not_match {
+    return Intl.message(
+      'Not match For Masr Number',
+      name: 'form_phone_number_not_match',
       desc: '',
       args: [],
     );
@@ -2149,6 +2194,196 @@ class S {
     return Intl.message(
       'Admin Dashboards (Admin Panels)',
       name: 'about_me_app_admin',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `About App`
+  String get about_app_title {
+    return Intl.message(
+      'About App',
+      name: 'about_app_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Application Overview`
+  String get about_app_summary_title {
+    return Intl.message(
+      'Application Overview',
+      name: 'about_app_summary_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `This application is a modern e-commerce platform developed using Flutter to provide a fast and seamless shopping experience across Android and iOS using a single codebase. The app focuses on high performance, user-friendly navigation, and professional responsive UI design.\n\nIt provides a complete shopping journey including product browsing, cart management, order checkout, and multiple delivery options, with multi-language support and local data caching to ensure smooth performance and excellent user experience.`
+  String get about_app_summary_desc {
+    return Intl.message(
+      'This application is a modern e-commerce platform developed using Flutter to provide a fast and seamless shopping experience across Android and iOS using a single codebase. The app focuses on high performance, user-friendly navigation, and professional responsive UI design.\n\nIt provides a complete shopping journey including product browsing, cart management, order checkout, and multiple delivery options, with multi-language support and local data caching to ensure smooth performance and excellent user experience.',
+      name: 'about_app_summary_desc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Application Features`
+  String get about_app_features_title {
+    return Intl.message(
+      'Application Features',
+      name: 'about_app_features_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Browse products in an organized and simple way`
+  String get about_app_feature_products {
+    return Intl.message(
+      'Browse products in an organized and simple way',
+      name: 'about_app_feature_products',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cart management with quantity control`
+  String get about_app_feature_cart {
+    return Intl.message(
+      'Cart management with quantity control',
+      name: 'about_app_feature_cart',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Simple and clear checkout process`
+  String get about_app_feature_checkout {
+    return Intl.message(
+      'Simple and clear checkout process',
+      name: 'about_app_feature_checkout',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Multiple delivery options`
+  String get about_app_feature_delivery {
+    return Intl.message(
+      'Multiple delivery options',
+      name: 'about_app_feature_delivery',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Track order status`
+  String get about_app_feature_orders {
+    return Intl.message(
+      'Track order status',
+      name: 'about_app_feature_orders',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Local caching for better performance`
+  String get about_app_feature_local_storage {
+    return Intl.message(
+      'Local caching for better performance',
+      name: 'about_app_feature_local_storage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Supports Arabic and English languages`
+  String get about_app_feature_multi_lang {
+    return Intl.message(
+      'Supports Arabic and English languages',
+      name: 'about_app_feature_multi_lang',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Modern UI with smooth user experience`
+  String get about_app_feature_ui {
+    return Intl.message(
+      'Modern UI with smooth user experience',
+      name: 'about_app_feature_ui',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Technologies Used`
+  String get about_app_technical_title {
+    return Intl.message(
+      'Technologies Used',
+      name: 'about_app_technical_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Flutter & Dart`
+  String get about_app_tech_flutter {
+    return Intl.message(
+      'Flutter & Dart',
+      name: 'about_app_tech_flutter',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `State Management using Bloc / Cubit`
+  String get about_app_tech_state_management {
+    return Intl.message(
+      'State Management using Bloc / Cubit',
+      name: 'about_app_tech_state_management',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Local Storage using Hive`
+  String get about_app_tech_local_db {
+    return Intl.message(
+      'Local Storage using Hive',
+      name: 'about_app_tech_local_db',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Clean Architecture Implementation`
+  String get about_app_tech_architecture {
+    return Intl.message(
+      'Clean Architecture Implementation',
+      name: 'about_app_tech_architecture',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `REST API Integration`
+  String get about_app_tech_api {
+    return Intl.message(
+      'REST API Integration',
+      name: 'about_app_tech_api',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Responsive design supporting multiple screen sizes`
+  String get about_app_tech_responsive {
+    return Intl.message(
+      'Responsive design supporting multiple screen sizes',
+      name: 'about_app_tech_responsive',
       desc: '',
       args: [],
     );

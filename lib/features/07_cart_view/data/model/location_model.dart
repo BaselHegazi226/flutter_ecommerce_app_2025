@@ -3,6 +3,30 @@ import 'package:hive/hive.dart';
 part 'location_model.g.dart';
 
 @HiveType(typeId: 9)
+class OrderInfoModel {
+  @HiveField(0)
+  final LocationModel? locationModel;
+  @HiveField(1)
+  final String? phoneNumber;
+
+  const OrderInfoModel({
+    required this.locationModel,
+    required this.phoneNumber,
+  });
+
+  factory OrderInfoModel.fromJson(json) {
+    return OrderInfoModel(
+      locationModel: json['locationModel'],
+      phoneNumber: json['phoneNumber'],
+    );
+  }
+
+  toJson() {
+    return {'locationModel': locationModel, 'phoneNumber': phoneNumber};
+  }
+}
+
+@HiveType(typeId: 13)
 class LocationModel {
   @HiveField(0)
   final String street1;
@@ -14,7 +38,7 @@ class LocationModel {
   final String state;
   @HiveField(4)
   final String country;
-  @HiveField(5)
+
   const LocationModel({
     required this.street1,
     required this.street2,
@@ -32,6 +56,7 @@ class LocationModel {
       country: json['country'],
     );
   }
+
   toJson() {
     return {
       'street1': street1,

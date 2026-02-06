@@ -145,6 +145,8 @@ extension CartLocalizationX on S {
 
   String get cartAlreadyInCart => cart_alreadyInCart;
 
+  String get cartAdd => cart_add;
+
   String get calendarTitle => calendar_title;
 
   String get calendarCancel => calendar_cancel;
@@ -207,6 +209,8 @@ extension FormLocalizationX on S {
 
   String get formCountry => form_country;
 
+  String get phoneNumber => cart_phone_number;
+
   String get formCountryRequired => form_countryRequired;
 
   String get formEnterCountry => form_enterCountry;
@@ -226,6 +230,12 @@ extension FormLocalizationX on S {
   String get formStreet2Required => form_street2Required;
 
   String get formEnterStreet2 => form_enterStreet2;
+
+  String get formEnterPhone => form_enterPhoneNumber;
+
+  String get formPhoneNumberRequired => form_phoneNumberRequired;
+
+  String get formPhoneNumberNotMatch => form_phone_number_not_match;
 }
 
 //success extension of S
@@ -456,6 +466,50 @@ extension AboutMeLocaliztionX on S {
   String get aboutMeAppApi => about_me_app_api;
 
   String get aboutMeAppAdmin => about_me_app_admin;
+}
+
+// About App extension of S
+extension AboutAppLocaliztionX on S {
+  // Titles & Summary
+  String get aboutAppTitle => about_app_title;
+
+  String get aboutAppSummary => about_app_summary_title;
+
+  String get aboutAppDesc => about_app_summary_desc;
+
+  // Features
+  String get aboutAppFeaturesTitle => about_app_features_title;
+
+  String get aboutAppFeatureProducts => about_app_feature_products;
+
+  String get aboutAppFeatureCart => about_app_feature_cart;
+
+  String get aboutAppFeatureCheckout => about_app_feature_checkout;
+
+  String get aboutAppFeatureDelivery => about_app_feature_delivery;
+
+  String get aboutAppFeatureOrders => about_app_feature_orders;
+
+  String get aboutAppFeatureLocalStorage => about_app_feature_local_storage;
+
+  String get aboutAppFeatureMultiLang => about_app_feature_multi_lang;
+
+  String get aboutAppFeatureUi => about_app_feature_ui;
+
+  // Technical
+  String get aboutAppTechnicalTitle => about_app_technical_title;
+
+  String get aboutAppTechFlutter => about_app_tech_flutter;
+
+  String get aboutAppTechStateManagement => about_app_tech_state_management;
+
+  String get aboutAppTechLocalDb => about_app_tech_local_db;
+
+  String get aboutAppTechArchitecture => about_app_tech_architecture;
+
+  String get aboutAppTechApi => about_app_tech_api;
+
+  String get aboutAppTechResponsive => about_app_tech_responsive;
 }
 
 //category

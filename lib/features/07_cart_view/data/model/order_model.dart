@@ -19,7 +19,7 @@ class OrderModel {
   final DeliveryMethodModel deliveryMethodModel;
 
   @HiveField(3)
-  final LocationModel locationModel;
+  final OrderInfoModel orderInfoModel;
 
   @HiveField(4)
   final double totalPrice;
@@ -34,7 +34,7 @@ class OrderModel {
     required this.orderId,
     required this.cartModelList,
     required this.deliveryMethodModel,
-    required this.locationModel,
+    required this.orderInfoModel,
     required this.totalPrice,
     required this.checkoutDateAt,
     required this.orderStateEnum,
@@ -59,7 +59,7 @@ class OrderModel {
       deliveryMethodModel: DeliveryMethodModel.fromJson(
         jsonData['deliveryMethodModel'],
       ),
-      locationModel: LocationModel.fromJson(jsonData['locationModel']),
+      orderInfoModel: OrderInfoModel.fromJson(jsonData['locationModel']),
       totalPrice: (jsonData['totalPrice'] as num).toDouble(),
       checkoutDateAt: parsedAddAt,
       orderStateEnum: OrderStateEnum.values.firstWhere(
@@ -74,7 +74,7 @@ class OrderModel {
       'orderId': orderId,
       'cartModel': cartModelList.map((e) => e.toJson()).toList(),
       'deliveryMethodModel': deliveryMethodModel.toJson(),
-      'locationModel': locationModel.toJson(),
+      'locationModel': orderInfoModel.toJson(),
       'totalPrice': totalPrice,
       'checkoutDateAt': checkoutDateAt.toIso8601String(),
       'orderStateEnum': orderStateEnum.name,
@@ -84,7 +84,7 @@ class OrderModel {
   OrderModel copyWith({
     List<CartModel>? newCartList,
     DeliveryMethodModel? newDeliveryMethodModel,
-    LocationModel? newLocationModel,
+    OrderInfoModel? newOrderInfoModel,
     double? newTotalPrice,
     DateTime? newCheckoutDateAt,
     OrderStateEnum? newOrderStateEnum,
@@ -93,7 +93,7 @@ class OrderModel {
       orderId: orderId,
       cartModelList: newCartList ?? cartModelList,
       deliveryMethodModel: newDeliveryMethodModel ?? deliveryMethodModel,
-      locationModel: newLocationModel ?? locationModel,
+      orderInfoModel: newOrderInfoModel ?? orderInfoModel,
       totalPrice: newTotalPrice ?? totalPrice,
       checkoutDateAt: newCheckoutDateAt ?? checkoutDateAt,
       orderStateEnum: newOrderStateEnum ?? orderStateEnum,

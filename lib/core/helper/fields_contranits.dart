@@ -11,4 +11,5 @@ class FieldsContranits {
   static final RegExp passwordReg = RegExp(
     r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#\$&*~^%()_+\-=\[\]{};:"\\|,.<>\/?]).{8,}$',
   );
+  static final RegExp egyptPhoneReg = RegExp(r'^\+201[0125][0-9]{8}$');
 }

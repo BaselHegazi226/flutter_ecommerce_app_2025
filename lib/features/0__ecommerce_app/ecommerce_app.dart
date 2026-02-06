@@ -62,10 +62,10 @@ class EcommerceApp extends StatelessWidget {
 
               // ===== الثيم =====
               themeMode: appSettingCubit.getTheme(),
-              theme: AppTheme.lightTheme,
-              darkTheme: AppTheme.darkTheme,
+              theme: AppTheme.lightTheme(appSettingCubit.getLanguage()),
+              darkTheme: AppTheme.darkTheme(appSettingCubit.getLanguage()),
 
-              // ===== أنيميشن لتغيير الثيم أو اللغة =====
+              // ===== أنيميشن =====
               themeAnimationDuration: const Duration(milliseconds: 400),
               themeAnimationCurve: Curves.easeInOut,
             );

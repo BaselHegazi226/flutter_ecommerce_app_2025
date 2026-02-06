@@ -23,6 +23,61 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "EP": MessageLookupByLibrary.simpleMessage("ج.م"),
+    "about_app_feature_cart": MessageLookupByLibrary.simpleMessage(
+      "إدارة السلة وإضافة المنتجات وتعديل الكميات",
+    ),
+    "about_app_feature_checkout": MessageLookupByLibrary.simpleMessage(
+      "إتمام عملية الشراء بخطوات بسيطة وواضحة",
+    ),
+    "about_app_feature_delivery": MessageLookupByLibrary.simpleMessage(
+      "اختيار طرق توصيل متعددة",
+    ),
+    "about_app_feature_local_storage": MessageLookupByLibrary.simpleMessage(
+      "تخزين البيانات محليًا لتحسين الأداء",
+    ),
+    "about_app_feature_multi_lang": MessageLookupByLibrary.simpleMessage(
+      "دعم اللغتين العربية والإنجليزية",
+    ),
+    "about_app_feature_orders": MessageLookupByLibrary.simpleMessage(
+      "متابعة حالة الطلبات",
+    ),
+    "about_app_feature_products": MessageLookupByLibrary.simpleMessage(
+      "تصفح المنتجات بطريقة سهلة ومنظمة",
+    ),
+    "about_app_feature_ui": MessageLookupByLibrary.simpleMessage(
+      "تصميم عصري وتجربة مستخدم سلسة",
+    ),
+    "about_app_features_title": MessageLookupByLibrary.simpleMessage(
+      "مميزات التطبيق",
+    ),
+    "about_app_summary_desc": MessageLookupByLibrary.simpleMessage(
+      "هذا التطبيق هو منصة تجارة إلكترونية حديثة تم تطويرها باستخدام Flutter لتوفير تجربة تسوق سريعة وسلسة على أنظمة Android و iOS من خلال كود موحد. يركز التطبيق على الأداء العالي، سهولة الاستخدام، وتصميم واجهات احترافية ومتجاوبة.\n\nيوفر التطبيق تجربة شراء متكاملة تشمل تصفح المنتجات، إدارة السلة، إتمام الطلبات، واختيار طرق التوصيل المختلفة، مع دعم تعدد اللغات وتخزين البيانات محليًا لضمان سرعة الأداء وتجربة مستخدم مميزة.",
+    ),
+    "about_app_summary_title": MessageLookupByLibrary.simpleMessage(
+      "ملخص عن التطبيق وما يقدمه",
+    ),
+    "about_app_tech_api": MessageLookupByLibrary.simpleMessage(
+      "التكامل مع REST APIs",
+    ),
+    "about_app_tech_architecture": MessageLookupByLibrary.simpleMessage(
+      "تطبيق Clean Architecture",
+    ),
+    "about_app_tech_flutter": MessageLookupByLibrary.simpleMessage(
+      "Flutter & Dart",
+    ),
+    "about_app_tech_local_db": MessageLookupByLibrary.simpleMessage(
+      "التخزين المحلي باستخدام Hive",
+    ),
+    "about_app_tech_responsive": MessageLookupByLibrary.simpleMessage(
+      "تصميم متجاوب يدعم مختلف أحجام الشاشات",
+    ),
+    "about_app_tech_state_management": MessageLookupByLibrary.simpleMessage(
+      "إدارة الحالة باستخدام Bloc / Cubit",
+    ),
+    "about_app_technical_title": MessageLookupByLibrary.simpleMessage(
+      "التقنيات المستخدمة",
+    ),
+    "about_app_title": MessageLookupByLibrary.simpleMessage("نبذة عن التطبيق"),
     "about_me_app_admin": MessageLookupByLibrary.simpleMessage(
       "لوحات تحكم (Admin Panels)",
     ),
@@ -128,6 +183,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "calendar_title": MessageLookupByLibrary.simpleMessage(
       "اختر تاريخ التوصيل",
     ),
+    "cart_add": MessageLookupByLibrary.simpleMessage("اضف"),
     "cart_alreadyInCart": MessageLookupByLibrary.simpleMessage(
       "هذا المنتج مضاف بالفعل إلى السلة",
     ),
@@ -167,6 +223,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "قائمة منتجات الطلب",
     ),
     "cart_payment": MessageLookupByLibrary.simpleMessage("الدفع"),
+    "cart_phone_number": MessageLookupByLibrary.simpleMessage("رقم الموبايل"),
     "cart_pickAParticular": MessageLookupByLibrary.simpleMessage(
       "اختر تاريخًا من التقويم ليتم التوصيل في هذا اليوم",
     ),
@@ -329,9 +386,18 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "form_enterCity": MessageLookupByLibrary.simpleMessage("أدخل المدينة"),
     "form_enterCountry": MessageLookupByLibrary.simpleMessage("أدخل الدولة"),
+    "form_enterPhoneNumber": MessageLookupByLibrary.simpleMessage(
+      "ادخل رقم الموبايل",
+    ),
     "form_enterState": MessageLookupByLibrary.simpleMessage("أدخل المحافظة"),
     "form_enterStreet1": MessageLookupByLibrary.simpleMessage("أدخل الشارع 1"),
     "form_enterStreet2": MessageLookupByLibrary.simpleMessage("أدخل الشارع 2"),
+    "form_phoneNumberRequired": MessageLookupByLibrary.simpleMessage(
+      "رقم الموبايل مطلوب",
+    ),
+    "form_phone_number_not_match": MessageLookupByLibrary.simpleMessage(
+      "غير مطابق لرقم مصري",
+    ),
     "form_state": MessageLookupByLibrary.simpleMessage("المحافظة"),
     "form_stateRequired": MessageLookupByLibrary.simpleMessage(
       "المحافظة مطلوبة",

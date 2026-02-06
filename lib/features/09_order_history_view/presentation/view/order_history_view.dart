@@ -31,7 +31,16 @@ class OrderHistoryView extends StatelessWidget {
       child: SafeArea(
         child: Scaffold(
           appBar: customTabsAppbar(context, S.of(context).orderHistory),
-          body: const OrderHistoryViewBody(),
+          body: BlocListener<DeleteOrderCubit, DeleteOrderState>(
+            listener: (context, state) {
+              if (state is DeleteOrderSuccess ||
+                  state is DeleteAllOrdersSuccess ||
+                  state is DeleteMultipleOrdersSuccess) {
+                context.read<GetOrdersCubit>().getOrderList();
+              }
+            },
+            child: const OrderHistoryViewBody(),
+          ),
         ),
       ),
     );

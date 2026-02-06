@@ -60,10 +60,9 @@ class _LoginEmailPasswordInputSectionState
           ),
           CustomTextFormField(
             text: S.of(context).authPassword,
-            hintText: '**********',
+            hintText: '1234638@Bd',
             onSaved: (value) {
               password = value!.trim();
-              debugPrint('password : $password');
             },
             validator: (value) {
               if (value == null || value.isEmpty) {

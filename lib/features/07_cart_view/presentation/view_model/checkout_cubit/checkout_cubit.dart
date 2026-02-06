@@ -27,9 +27,8 @@ class CheckoutCubit extends Cubit<CheckoutState> {
   int _currentStep = 0;
 
   DeliveryMethodModel? _deliveryMethodModel;
-  LocationModel? _locationModel;
   OrderModel? _orderModel;
-
+  OrderInfoModel? _orderInfoModel;
   List<CartModel> _carts = [];
   double _totalPrice = 0;
 
@@ -56,10 +55,27 @@ class CheckoutCubit extends Cubit<CheckoutState> {
   }
 
   /* ========================= LOCATION ========================= */
-  void fillLocation({required LocationModel locationModel}) {
-    _locationModel = locationModel;
+  void fillOrderInfo({
+    required String street1,
+    required String street2,
+    required String city,
+    required String state,
+    required String country,
+    required String phoneNumber,
+  }) {
+    final locationModel = LocationModel(
+      street1: street1,
+      street2: street2,
+      city: city,
+      state: state,
+      country: country,
+    );
+    _orderInfoModel = OrderInfoModel(
+      locationModel: locationModel,
+      phoneNumber: phoneNumber,
+    );
 
-    emit(FillLocationDone(locationModel: locationModel));
+    emit(FillOrderInfoDone(orderInfoModel: _orderInfoModel!));
     _tryBuildOrder();
   }
 
@@ -69,7 +85,7 @@ class CheckoutCubit extends Cubit<CheckoutState> {
     if (_orderModel != null) return;
 
     if (_deliveryMethodModel == null ||
-        _locationModel == null ||
+        _orderInfoModel == null ||
         _carts.isEmpty ||
         _totalPrice <= 0) {
       return;
@@ -79,7 +95,7 @@ class CheckoutCubit extends Cubit<CheckoutState> {
       orderId: generateOrderNumber(),
       cartModelList: _carts,
       deliveryMethodModel: _deliveryMethodModel!,
-      locationModel: _locationModel!,
+      orderInfoModel: _orderInfoModel!,
       totalPrice: _totalPrice,
       checkoutDateAt: DateTime.now(),
       orderStateEnum: OrderStateEnum.pending,
@@ -107,7 +123,7 @@ class CheckoutCubit extends Cubit<CheckoutState> {
   void resetStep() {
     _currentStep = 0;
     _deliveryMethodModel = null;
-    _locationModel = null;
+    _orderInfoModel = null;
     _orderModel = null;
     _carts = [];
     _totalPrice = 0;

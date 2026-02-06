@@ -23,6 +23,61 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "EP": MessageLookupByLibrary.simpleMessage("EP"),
+    "about_app_feature_cart": MessageLookupByLibrary.simpleMessage(
+      "Cart management with quantity control",
+    ),
+    "about_app_feature_checkout": MessageLookupByLibrary.simpleMessage(
+      "Simple and clear checkout process",
+    ),
+    "about_app_feature_delivery": MessageLookupByLibrary.simpleMessage(
+      "Multiple delivery options",
+    ),
+    "about_app_feature_local_storage": MessageLookupByLibrary.simpleMessage(
+      "Local caching for better performance",
+    ),
+    "about_app_feature_multi_lang": MessageLookupByLibrary.simpleMessage(
+      "Supports Arabic and English languages",
+    ),
+    "about_app_feature_orders": MessageLookupByLibrary.simpleMessage(
+      "Track order status",
+    ),
+    "about_app_feature_products": MessageLookupByLibrary.simpleMessage(
+      "Browse products in an organized and simple way",
+    ),
+    "about_app_feature_ui": MessageLookupByLibrary.simpleMessage(
+      "Modern UI with smooth user experience",
+    ),
+    "about_app_features_title": MessageLookupByLibrary.simpleMessage(
+      "Application Features",
+    ),
+    "about_app_summary_desc": MessageLookupByLibrary.simpleMessage(
+      "This application is a modern e-commerce platform developed using Flutter to provide a fast and seamless shopping experience across Android and iOS using a single codebase. The app focuses on high performance, user-friendly navigation, and professional responsive UI design.\n\nIt provides a complete shopping journey including product browsing, cart management, order checkout, and multiple delivery options, with multi-language support and local data caching to ensure smooth performance and excellent user experience.",
+    ),
+    "about_app_summary_title": MessageLookupByLibrary.simpleMessage(
+      "Application Overview",
+    ),
+    "about_app_tech_api": MessageLookupByLibrary.simpleMessage(
+      "REST API Integration",
+    ),
+    "about_app_tech_architecture": MessageLookupByLibrary.simpleMessage(
+      "Clean Architecture Implementation",
+    ),
+    "about_app_tech_flutter": MessageLookupByLibrary.simpleMessage(
+      "Flutter & Dart",
+    ),
+    "about_app_tech_local_db": MessageLookupByLibrary.simpleMessage(
+      "Local Storage using Hive",
+    ),
+    "about_app_tech_responsive": MessageLookupByLibrary.simpleMessage(
+      "Responsive design supporting multiple screen sizes",
+    ),
+    "about_app_tech_state_management": MessageLookupByLibrary.simpleMessage(
+      "State Management using Bloc / Cubit",
+    ),
+    "about_app_technical_title": MessageLookupByLibrary.simpleMessage(
+      "Technologies Used",
+    ),
+    "about_app_title": MessageLookupByLibrary.simpleMessage("About App"),
     "about_me_app_admin": MessageLookupByLibrary.simpleMessage(
       "Admin Dashboards (Admin Panels)",
     ),
@@ -133,6 +188,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "calendar_title": MessageLookupByLibrary.simpleMessage(
       "Choose delivery date",
     ),
+    "cart_add": MessageLookupByLibrary.simpleMessage("Add"),
     "cart_alreadyInCart": MessageLookupByLibrary.simpleMessage(
       "This product is already added to the cart",
     ),
@@ -172,6 +228,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Order Product List",
     ),
     "cart_payment": MessageLookupByLibrary.simpleMessage("Payment"),
+    "cart_phone_number": MessageLookupByLibrary.simpleMessage("Phone Number"),
     "cart_pickAParticular": MessageLookupByLibrary.simpleMessage(
       "Pick a particular date from the calendar and order will be delivered on selected date",
     ),
@@ -346,9 +403,18 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "form_enterCity": MessageLookupByLibrary.simpleMessage("Enter city"),
     "form_enterCountry": MessageLookupByLibrary.simpleMessage("Enter country"),
+    "form_enterPhoneNumber": MessageLookupByLibrary.simpleMessage(
+      "Enter phone number",
+    ),
     "form_enterState": MessageLookupByLibrary.simpleMessage("Enter state"),
     "form_enterStreet1": MessageLookupByLibrary.simpleMessage("Enter street 1"),
     "form_enterStreet2": MessageLookupByLibrary.simpleMessage("Enter street 2"),
+    "form_phoneNumberRequired": MessageLookupByLibrary.simpleMessage(
+      "Phone number is required",
+    ),
+    "form_phone_number_not_match": MessageLookupByLibrary.simpleMessage(
+      "Not match For Masr Number",
+    ),
     "form_state": MessageLookupByLibrary.simpleMessage("State"),
     "form_stateRequired": MessageLookupByLibrary.simpleMessage(
       "State is required",

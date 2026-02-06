@@ -9,7 +9,6 @@ import 'package:flutter_e_commerce_app_2025/features/09_order_history_view/prese
 import 'package:flutter_e_commerce_app_2025/generated/assets.dart';
 import 'package:flutter_e_commerce_app_2025/generated/l10n.dart';
 
-import '../../view_model/delete_order_cubit/delete_order_cubit.dart';
 import 'order_history_selection_class.dart';
 
 class OrderHistoryViewBody extends StatefulWidget {
@@ -22,17 +21,10 @@ class OrderHistoryViewBody extends StatefulWidget {
 class _OrderHistoryViewBodyState extends State<OrderHistoryViewBody> {
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<GetOrdersCubit, GetOrdersState>(
-      listener: (context, state) {
-        if (state is DeleteMultipleOrdersSuccess ||
-            state is DeleteAllOrdersSuccess) {
-          context.read<GetOrdersCubit>().getOrderList();
-        }
-      },
+    return BlocBuilder<GetOrdersCubit, GetOrdersState>(
       builder: (context, state) {
         if (state is GetOrdersSuccess) {
           final orders = state.orders;
-          debugPrint('order length = ${orders.length} ==============>');
           if (orders.isEmpty) {
             return Center(
               child: NoItemFound(

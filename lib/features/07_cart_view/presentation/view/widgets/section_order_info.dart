@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_e_commerce_app_2025/core/utilities/navigate_button.dart';
 
 import '../../../../../core/helper/const.dart';
+import '../../../../../core/helper/fields_contranits.dart';
 import '../../../../../core/utilities/custom_text.dart';
 import '../../../../../core/utilities/custom_text_form_field.dart';
 import '../../../../../core/utilities/extensions_of_s_localization.dart';
@@ -14,26 +15,28 @@ import '../../view_model/get_cart_cubit/get_cart_state.dart';
 import '../../view_model/order_cubit/order_cubit.dart';
 import '../../view_model/order_cubit/order_state.dart';
 
-class LocationView extends StatefulWidget {
+class OrderInfoView extends StatefulWidget {
   final VoidCallback onNext;
   final VoidCallback onBack;
 
-  const LocationView({super.key, required this.onBack, required this.onNext});
+  const OrderInfoView({super.key, required this.onBack, required this.onNext});
 
   @override
-  State<LocationView> createState() => _LocationViewState();
+  State<OrderInfoView> createState() => _OrderInfoViewState();
 }
 
-class _LocationViewState extends State<LocationView> {
+class _OrderInfoViewState extends State<OrderInfoView> {
   String street1 = '', street2 = '', city = '', stateEnum = '', country = '';
+  String phoneNumber = '';
   final GlobalKey<FormState> _formKey = GlobalKey();
   AutovalidateMode autoValidateMode = AutovalidateMode.disabled;
-  late LocationModel locationModel;
+  late OrderInfoModel orderInfoModel;
   TextEditingController textEditingControllerStreet1 = TextEditingController(),
       textEditingControllerStreet2 = TextEditingController(),
       textEditingControllerCity = TextEditingController(),
       textEditingControllerState = TextEditingController(),
-      textEditingControllerCountry = TextEditingController();
+      textEditingControllerCountry = TextEditingController(),
+      phoneNumberController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -41,17 +44,25 @@ class _LocationViewState extends State<LocationView> {
     final size = MediaQuery.sizeOf(context);
     return BlocBuilder<OrderCubit, OrderState>(
       builder: (context, state) {
-        if (state is GetUserLocationSuccess &&
+        if (state is GetOrderInfoSuccess &&
             textEditingControllerStreet1.text.isEmpty &&
             textEditingControllerStreet2.text.isEmpty &&
             textEditingControllerCity.text.isEmpty &&
             textEditingControllerState.text.isEmpty &&
             textEditingControllerCountry.text.isEmpty) {
-          textEditingControllerStreet1.text = state.locationModel.street1;
-          textEditingControllerStreet2.text = state.locationModel.street2;
-          textEditingControllerCity.text = state.locationModel.city;
-          textEditingControllerState.text = state.locationModel.state;
-          textEditingControllerCountry.text = state.locationModel.country;
+          textEditingControllerStreet1.text =
+              state.orderInfoModel.locationModel!.street1;
+          textEditingControllerStreet2.text =
+              state.orderInfoModel.locationModel!.street2;
+          textEditingControllerCity.text =
+              state.orderInfoModel.locationModel!.city;
+          textEditingControllerState.text =
+              state.orderInfoModel.locationModel!.state;
+          textEditingControllerCountry.text =
+              state.orderInfoModel.locationModel!.country;
+          phoneNumberController.text = state.orderInfoModel.phoneNumber!;
+        } else if (state is GetOrderInfoFailure) {
+          debugPrint('${state.errorMessage} ======================>');
         }
         return Form(
           key: _formKey,
@@ -63,21 +74,15 @@ class _LocationViewState extends State<LocationView> {
                   child: SingleChildScrollView(
                     child: Column(
                       children: [
-                        Row(
-                          spacing: 8,
-                          children: [
-                            Icon(
-                              Icons.check_circle,
-                              color: Theme.of(context).primaryColor,
-                            ),
-                            CustomText(
-                              text: S.of(context).cart_billing_address,
-                              fontSize: 14,
-                              alignment: Alignment.centerLeft,
-                            ),
-                          ],
+                        const SizedBox(height: 16),
+                        buildPhoneNumberSection(context),
+                        const SizedBox(height: 24),
+                        buildIconTitleSection(
+                          context,
+                          Icons.location_on_outlined,
+                          S.of(context).cart_billing_address,
                         ),
-                        const SizedBox(height: 20),
+                        const SizedBox(height: 16),
                         buildFieldsSection(context),
                       ],
                     ),
@@ -117,16 +122,13 @@ class _LocationViewState extends State<LocationView> {
                             if (_formKey.currentState!.validate()) {
                               _formKey.currentState!.save();
 
-                              locationModel = LocationModel(
+                              checkoutCubit.fillOrderInfo(
+                                state: stateEnum,
                                 street1: street1,
                                 street2: street2,
                                 city: city,
-                                state: stateEnum,
                                 country: country,
-                              );
-
-                              checkoutCubit.fillLocation(
-                                locationModel: locationModel,
+                                phoneNumber: phoneNumber,
                               );
 
                               final cartState = context
@@ -141,9 +143,6 @@ class _LocationViewState extends State<LocationView> {
 
                               if (checkoutCubit.orderModel != null) {
                                 widget.onNext();
-                                context.read<OrderCubit>().saveUserLocation(
-                                  locationModel: locationModel,
-                                );
                               }
                             } else {
                               autoValidateMode =
@@ -169,6 +168,16 @@ class _LocationViewState extends State<LocationView> {
           ),
         );
       },
+    );
+  }
+
+  Row buildIconTitleSection(BuildContext context, IconData icon, String text) {
+    return Row(
+      spacing: 8,
+      children: [
+        Icon(icon, color: Theme.of(context).primaryColor),
+        CustomText(text: text, fontSize: 14, alignment: Alignment.centerLeft),
+      ],
     );
   }
 
@@ -254,6 +263,29 @@ class _LocationViewState extends State<LocationView> {
               ),
             ),
           ],
+        ),
+      ],
+    );
+  }
+
+  Column buildPhoneNumberSection(BuildContext context) {
+    return Column(
+      children: [
+        CustomTextFormField(
+          text: S.of(context).phoneNumber,
+          hintText: '+201287790732',
+          onSaved: (value) {
+            phoneNumber = value!.trim();
+          },
+          validator: (value) {
+            if (value == null || value.isEmpty) {
+              return S.of(context).formPhoneNumberRequired;
+            } else if (!FieldsContranits.egyptPhoneReg.hasMatch(value)) {
+              return S.of(context).formPhoneNumberNotMatch;
+            }
+            return null;
+          },
+          textEditingController: phoneNumberController,
         ),
       ],
     );

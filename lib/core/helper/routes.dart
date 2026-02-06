@@ -17,6 +17,7 @@ class Routes {
   static const String orderHistoryView = '/orderHistoryView';
   static const String settingsView = '/settingsView';
   static const String aboutUsView = '/aboutUsView';
+  static const String aboutAppView = '/aboutAppView';
   static const String favoriteView = '/favoriteView';
   static const String showAllView = '/showAllView';
   static const String paymentView = '/paymentView';

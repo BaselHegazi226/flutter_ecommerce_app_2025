@@ -6,9 +6,46 @@ part of 'location_model.dart';
 // TypeAdapterGenerator
 // **************************************************************************
 
-class LocationModelAdapter extends TypeAdapter<LocationModel> {
+class OrderInfoModelAdapter extends TypeAdapter<OrderInfoModel> {
   @override
   final int typeId = 9;
+
+  @override
+  OrderInfoModel read(BinaryReader reader) {
+    final numOfFields = reader.readByte();
+    final fields = <int, dynamic>{
+      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
+    };
+    return OrderInfoModel(
+      locationModel: fields[0] as LocationModel?,
+      phoneNumber: fields[1] as String?,
+    );
+  }
+
+  @override
+  void write(BinaryWriter writer, OrderInfoModel obj) {
+    writer
+      ..writeByte(2)
+      ..writeByte(0)
+      ..write(obj.locationModel)
+      ..writeByte(1)
+      ..write(obj.phoneNumber);
+  }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is OrderInfoModelAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
+}
+
+class LocationModelAdapter extends TypeAdapter<LocationModel> {
+  @override
+  final int typeId = 13;
 
   @override
   LocationModel read(BinaryReader reader) {

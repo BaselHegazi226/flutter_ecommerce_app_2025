@@ -21,10 +21,10 @@ final class ChooseDeliveryMethodDone extends CheckoutState {
 
 /* ========================= LOCATION ========================= */
 
-final class FillLocationDone extends CheckoutState {
-  final LocationModel locationModel;
+final class FillOrderInfoDone extends CheckoutState {
+  final OrderInfoModel orderInfoModel;
 
-  FillLocationDone({required this.locationModel});
+  FillOrderInfoDone({required this.orderInfoModel});
 }
 
 /* ========================= ORDER ========================= */
