@@ -76,12 +76,6 @@ class _OrderInfoViewState extends State<OrderInfoView> {
                       children: [
                         const SizedBox(height: 16),
                         buildPhoneNumberSection(context),
-                        const SizedBox(height: 24),
-                        buildIconTitleSection(
-                          context,
-                          Icons.location_on_outlined,
-                          S.of(context).cart_billing_address,
-                        ),
                         const SizedBox(height: 16),
                         buildFieldsSection(context),
                       ],

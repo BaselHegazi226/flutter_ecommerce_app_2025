@@ -192,6 +192,7 @@ class _DeliveryViewState extends State<DeliveryView> {
 
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
 
     return showModalBottomSheet<DateTime>(
       context: context,
@@ -284,49 +285,15 @@ class _DeliveryViewState extends State<DeliveryView> {
 
                                     /// Days of week
                                     daysOfWeekStyle: DaysOfWeekStyle(
-                                      dowTextFormatter: (dateTime, _) {
-                                        final isArabic =
-                                            Localizations.localeOf(
-                                              context,
-                                            ).languageCode ==
-                                            'ar';
-
-                                        // index 0 = Sunday
-                                        const arWeekDays = [
-                                          'أ', // Sunday
-                                          'إ', // Monday
-                                          'ث', // Tuesday
-                                          'ع', // Wednesday
-                                          'خ', // Thursday
-                                          'ج', // Friday
-                                          'س', // Saturday
-                                        ];
-
-                                        const enWeekDays = [
-                                          'Sun',
-                                          'Mon',
-                                          'Tue',
-                                          'Wed',
-                                          'Thu',
-                                          'Fri',
-                                          'Sat',
-                                        ];
-
-                                        final index = dateTime.weekday % 7;
-
-                                        return isArabic
-                                            ? arWeekDays[index]
-                                            : enWeekDays[index];
-                                      },
                                       weekdayStyle: TextStyle(
-                                        fontSize: 11,
+                                        fontSize: width > 700 ? 12 : 8,
                                         color: isDark
                                             ? Colors.grey.shade300
                                             : Colors.grey.shade700,
                                         height: 1.4,
                                       ),
                                       weekendStyle: TextStyle(
-                                        fontSize: 11,
+                                        fontSize: width > 700 ? 12 : 8,
                                         color: isDark
                                             ? Colors.grey.shade300
                                             : Colors.grey.shade700,
