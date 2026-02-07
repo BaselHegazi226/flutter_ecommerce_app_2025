@@ -5,6 +5,7 @@ import 'package:flutter_e_commerce_app_2025/core/utilities/extensions_of_s_local
 import 'package:flutter_e_commerce_app_2025/features/09_order_history_view/presentation/view_model/order_info_cubit/order_info_cubit.dart';
 
 import '../../../../../core/helper/const.dart';
+import '../../../../../core/helper/fields_contranits.dart';
 import '../../../../../core/utilities/custom_text_form_field.dart';
 import '../../../../../generated/l10n.dart';
 import '../../../../07_cart_view/data/model/location_model.dart';
@@ -107,9 +108,16 @@ class _OrderInfoSectionState extends State<OrderInfoSection> {
                     text: S.of(context).phoneNumber,
                     hintText: S.of(context).phoneNumber,
                     textEditingController: phoneNumberController,
-                    validator: (value) => value!.isEmpty
-                        ? S.of(context).formPhoneNumberRequired
-                        : null,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return S.of(context).formPhoneNumberRequired;
+                      } else if (!FieldsConstraints.egyptPhoneReg.hasMatch(
+                        value,
+                      )) {
+                        return S.of(context).formPhoneNumberNotMatch;
+                      }
+                      return null;
+                    },
                     onSaved: (_) {},
                   ),
                   _locationSection(context),

@@ -280,7 +280,7 @@ class _OrderInfoViewState extends State<OrderInfoView> {
           validator: (value) {
             if (value == null || value.isEmpty) {
               return S.of(context).formPhoneNumberRequired;
-            } else if (!FieldsContranits.egyptPhoneReg.hasMatch(value)) {
+            } else if (!FieldsConstraints.egyptPhoneReg.hasMatch(value)) {
               return S.of(context).formPhoneNumberNotMatch;
             }
             return null;

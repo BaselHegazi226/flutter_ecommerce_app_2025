@@ -53,7 +53,7 @@ class _RegisterInputSectionState extends State<RegisterInputSection> {
             validator: (value) {
               if (value == null || value.isEmpty) {
                 return S.of(context).authNameRequired;
-              } else if (!FieldsContranits.nameReg.hasMatch(value)) {
+              } else if (!FieldsConstraints.nameReg.hasMatch(value)) {
                 return S.of(context).authEnterValidName;
               }
               return null;
@@ -71,7 +71,7 @@ class _RegisterInputSectionState extends State<RegisterInputSection> {
             validator: (value) {
               if (value == null || value.isEmpty) {
                 return S.of(context).authEmailRequired;
-              } else if (!FieldsContranits.emailReg.hasMatch(value)) {
+              } else if (!FieldsConstraints.emailReg.hasMatch(value)) {
                 return S.of(context).auth_enterValidEmail;
               }
               return null;
@@ -89,7 +89,7 @@ class _RegisterInputSectionState extends State<RegisterInputSection> {
             validator: (value) {
               if (value == null || value.isEmpty) {
                 return S.of(context).authPasswordRequired;
-              } else if (!FieldsContranits.passwordReg.hasMatch(value)) {
+              } else if (!FieldsConstraints.passwordReg.hasMatch(value)) {
                 return S.of(context).authEnterStrongPassword;
               }
               return null;
