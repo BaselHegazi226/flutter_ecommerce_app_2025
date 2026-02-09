@@ -11,7 +11,7 @@ class AppTheme {
   // ===== Helper لتحديد الخط =====
   static TextTheme _getFontTextTheme(String languageCode, TextTheme baseTheme) {
     if (languageCode == 'ar') {
-      return GoogleFonts.notoSansTextTheme(baseTheme);
+      return GoogleFonts.cairoTextTheme(baseTheme);
     } else {
       return GoogleFonts.manropeTextTheme(baseTheme);
     }
@@ -19,7 +19,7 @@ class AppTheme {
 
   static TextStyle _getAppBarFont(String languageCode) {
     if (languageCode == 'ar') {
-      return GoogleFonts.notoSansArabic(
+      return GoogleFonts.cairo(
         fontSize: 22,
         color: Colors.white,
         fontWeight: FontWeight.w600,
@@ -43,14 +43,15 @@ class AppTheme {
       appBarTheme: AppBarTheme(
         backgroundColor: kScaffoldColor,
         surfaceTintColor: kScaffoldColor,
-        foregroundColor: Colors.red,
         elevation: 0,
         titleTextStyle: _getAppBarFont(languageCode),
       ),
 
       textTheme: _getFontTextTheme(
         languageCode,
-        ThemeData.light().textTheme,
+        ThemeData
+            .light()
+            .textTheme,
       ).apply(bodyColor: lightTextColor, displayColor: lightTextColor),
 
       elevatedButtonTheme: ElevatedButtonThemeData(
@@ -90,7 +91,9 @@ class AppTheme {
 
       textTheme: _getFontTextTheme(
         languageCode,
-        ThemeData.dark().textTheme,
+        ThemeData
+            .dark()
+            .textTheme,
       ).apply(bodyColor: darkTextColor, displayColor: darkTextColor),
 
       elevatedButtonTheme: ElevatedButtonThemeData(

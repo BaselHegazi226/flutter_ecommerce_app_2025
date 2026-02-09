@@ -25,7 +25,7 @@ class RegisterHeader extends StatelessWidget {
               alignment: Alignment.topLeft,
             ),
             CustomButton(
-              paddingValue: 8,
+              paddingValue: 12,
               text: S.of(context).authSignIn,
               textColor: Theme.of(context).brightness == Brightness.dark
                   ? Colors.grey.shade600

@@ -20,14 +20,22 @@ class LoginHeader extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            CustomText(text: S.of(context).homeWelcome, fontSize: 20),
+            CustomText(text: S
+                .of(context)
+                .homeWelcome, fontSize: 20),
             CustomButton(
-              paddingValue: 8,
-              text: S.of(context).authSignUp,
-              textColor: Theme.of(context).brightness == Brightness.dark
+              paddingValue: 12,
+              text: S
+                  .of(context)
+                  .authSignUp,
+              textColor: Theme
+                  .of(context)
+                  .brightness == Brightness.dark
                   ? Colors.grey.shade600
                   : Colors.grey.shade200,
-              backgroundColor: Theme.of(context).brightness == Brightness.dark
+              backgroundColor: Theme
+                  .of(context)
+                  .brightness == Brightness.dark
                   ? Colors.grey.shade200
                   : kPrimaryColor,
               onPressed: () {
@@ -37,7 +45,9 @@ class LoginHeader extends StatelessWidget {
           ],
         ),
         CustomText(
-          text: S.of(context).authSignInToContinue,
+          text: S
+              .of(context)
+              .authSignInToContinue,
           fontSize: 14,
           color: kGreyColor,
         ),
