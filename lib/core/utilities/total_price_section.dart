@@ -15,15 +15,21 @@ class TotalPriceSection extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        CustomText(
-          text: S.of(context).cartTotal,
-          fontSize: 16,
-          alignment: Alignment.centerLeft,
-          fontWeight: FontWeight.bold,
+        Row(
+          spacing: 2,
+          children: [
+            const Icon(Icons.attach_money_outlined, size: 16),
+            CustomText(
+              text: '${S.of(context).cartTotal} : ',
+              fontSize: 14,
+              alignment: Alignment.centerLeft,
+              fontWeight: FontWeight.bold,
+            ),
+          ],
         ),
         CustomText(
           text: '${priceShowed(total)} ${S.of(context).EP}',
-          fontSize: 16,
+          fontSize: 12,
           alignment: Alignment.centerLeft,
           color: Theme.of(context).brightness == Brightness.dark
               ? Colors.grey.shade200

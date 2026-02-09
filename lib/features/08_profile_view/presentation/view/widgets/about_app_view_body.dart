@@ -14,8 +14,11 @@ class AboutAppViewBody extends StatelessWidget {
       spacing: 16,
       children: [
         AboutUsItem(
-          title: S.of(context).aboutAppSummary,
-          value: CustomText(text: S.of(context).aboutMeDesc, fontSize: 14),
+          title: S.of(context).aboutAppSummaryTitle,
+          value: CustomText(
+            text: S.of(context).aboutAppSummaryDesc,
+            fontSize: 14,
+          ),
         ),
         AboutUsItem(
           title: S.of(context).aboutAppFeaturesTitle,

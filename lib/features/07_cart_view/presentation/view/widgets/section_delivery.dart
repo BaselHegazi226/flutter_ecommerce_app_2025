@@ -165,10 +165,10 @@ class _DeliveryViewState extends State<DeliveryView> {
       activeColor: Theme.of(context).primaryColor,
       title: CustomText(
         text: model.title(context),
-        fontSize: 18,
+        fontSize: 16,
         fontWeight: FontWeight.bold,
       ),
-      subtitle: CustomText(text: model.subtitle(context), fontSize: 14),
+      subtitle: CustomText(text: model.subtitle(context), fontSize: 12),
     );
   }
 

@@ -61,25 +61,25 @@ class HomeViewProfileSection extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            CustomText(text: S.of(context).homeWelcome, fontSize: 24),
+            CustomText(text: S.of(context).homeWelcome, fontSize: 18),
             SizedBox(
               width: size.width * .7,
               child: AutoSizeText(
                 userName,
-                minFontSize: 14,
+                minFontSize: 10,
                 maxLines: 1,
-                maxFontSize: 20,
+                maxFontSize: 16,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
                   color: Theme.of(context).primaryColor,
-                  fontSize: 18,
+                  fontSize: 14,
                 ),
               ),
             ),
           ],
         ),
         CustomImage(
-          imageSize: size.width * .2,
+          imageSize: size.width * .18,
           imageProvider: photoUrl != null && photoUrl.startsWith('http')
               ? CachedNetworkImage(
                   imageUrl: photoUrl,

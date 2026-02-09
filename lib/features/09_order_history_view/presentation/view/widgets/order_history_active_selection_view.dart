@@ -109,13 +109,13 @@ class _OrderHistoryActiveSelectionViewState
                           Column(
                             children: [
                               ShowOrderList(carts: cart),
+                              DeliveryStateSection(orderModel: order),
                               const SizedBox(height: 16),
                               TotalPriceSection(total: order.totalPrice),
-                              const SizedBox(height: 24),
-                              DeliveryStateSection(orderModel: order),
                             ],
                           ),
                           const SizedBox(height: 16),
+
                           Container(
                             height: 1,
                             color: index < cart.length

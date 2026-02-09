@@ -79,7 +79,7 @@ class ProfileViewHeader extends StatelessWidget {
                 child: CustomText(
                   text: userModel.name,
                   maxLines: 2,
-                  fontSize: 20,
+                  fontSize: 18,
                   alignment: Alignment.center,
                   color: Theme.of(context).brightness == Brightness.dark
                       ? Colors.grey.shade200
@@ -90,7 +90,7 @@ class ProfileViewHeader extends StatelessWidget {
                 fit: BoxFit.scaleDown,
                 child: CustomText(
                   text: userModel.email,
-                  fontSize: 14,
+                  fontSize: 12,
                   alignment: Alignment.center,
                   color: Theme.of(context).brightness == Brightness.dark
                       ? Colors.grey.shade200

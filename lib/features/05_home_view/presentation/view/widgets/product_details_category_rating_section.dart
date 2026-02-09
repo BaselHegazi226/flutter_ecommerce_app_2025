@@ -27,7 +27,7 @@ class ProductDetailsCategoryRatingSection extends StatelessWidget {
           title: S.of(context).homeCategory,
           value: CustomText(
             text: category,
-            fontSize: 14,
+            fontSize: 12,
             alignment: Alignment.centerRight,
             color: kGreyColor,
           ),

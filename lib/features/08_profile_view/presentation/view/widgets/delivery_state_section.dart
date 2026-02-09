@@ -18,7 +18,7 @@ class DeliveryStateSection extends StatelessWidget {
         Row(
           spacing: 4,
           children: [
-            const Icon(Icons.delivery_dining_outlined, size: 24),
+            const Icon(Icons.delivery_dining_outlined, size: 16),
             CustomText(
               text: S.of(context).orderDeliveryState,
               fontSize: 14,
@@ -37,7 +37,7 @@ class DeliveryStateSection extends StatelessWidget {
             children: [
               Icon(
                 itemIconColor(orderModel.orderStateEnum).iconData,
-                size: 14,
+                size: 12,
                 color: Colors.white,
               ),
               CustomText(

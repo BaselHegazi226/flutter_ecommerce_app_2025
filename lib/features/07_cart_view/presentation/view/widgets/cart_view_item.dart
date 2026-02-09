@@ -76,7 +76,7 @@ class CartViewItemMobile extends StatelessWidget {
                     const SizedBox(height: 4),
                     CustomText(
                       text: '${priceShowed(price)} ${S.of(context).EP}',
-                      fontSize: 20,
+                      fontSize: 14,
                       color: kPrimaryColor,
                     ),
                   ],

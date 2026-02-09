@@ -80,12 +80,12 @@ class ProfileViewItemMobile extends StatelessWidget {
             color: primaryColor,
             borderRadius: const BorderRadius.all(Radius.circular(4)),
           ),
-          child: Icon(iconData, size: 24, color: iconColor),
+          child: Icon(iconData, size: 20, color: iconColor),
         ),
-        title: CustomText(text: title, fontSize: 18, color: textColor),
+        title: CustomText(text: title, fontSize: 16, color: textColor),
         trailing: title == S.of(context).settingsLogout
             ? null
-            : const Icon(Icons.arrow_forward_ios_outlined, size: 20),
+            : const Icon(Icons.arrow_forward_ios_outlined, size: 18),
       ),
     );
   }

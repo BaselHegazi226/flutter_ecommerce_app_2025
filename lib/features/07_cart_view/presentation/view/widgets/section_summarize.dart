@@ -95,7 +95,7 @@ class _SummarizeViewState extends State<SummarizeView> {
                       context,
                       cubit.getDeliveryMethod!,
                     ),
-                    fontSize: 16,
+                    fontSize: 12,
                   ),
                   S.of(context).orderDeliveryTime,
                   Icons.access_time_outlined,
@@ -104,7 +104,7 @@ class _SummarizeViewState extends State<SummarizeView> {
                 _summarizeItem(
                   CustomText(
                     text: orderModel.orderInfoModel.phoneNumber!,
-                    fontSize: 16,
+                    fontSize: 12,
                   ),
                   S.of(context).phoneNumber,
                   Icons.phone_outlined,
@@ -122,7 +122,7 @@ class _SummarizeViewState extends State<SummarizeView> {
                               '${S.of(context).formCity}: ${orderModel.orderInfoModel.locationModel!.city}\n'
                               '${S.of(context).formState}: ${orderModel.orderInfoModel.locationModel!.state}\n'
                               '${S.of(context).formCountry}: ${orderModel.orderInfoModel.locationModel!.country}',
-                          fontSize: 16,
+                          fontSize: 12,
                         ),
                       ),
                       Icon(
@@ -228,10 +228,10 @@ class _SummarizeViewState extends State<SummarizeView> {
           mainAxisAlignment: MainAxisAlignment.start,
           spacing: 6,
           children: [
-            Icon(iconData, size: 18),
+            Icon(iconData, size: 16),
             CustomText(
               text: '$title :',
-              fontSize: 16,
+              fontSize: 14,
               fontWeight: FontWeight.bold,
               color: Theme.of(context).brightness == Brightness.dark
                   ? Colors.grey.shade300

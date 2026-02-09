@@ -11,21 +11,21 @@ class AppTheme {
   // ===== Helper لتحديد الخط =====
   static TextTheme _getFontTextTheme(String languageCode, TextTheme baseTheme) {
     if (languageCode == 'ar') {
-      return GoogleFonts.cairoTextTheme(baseTheme);
+      return GoogleFonts.notoSansTextTheme(baseTheme);
     } else {
-      return GoogleFonts.poppinsTextTheme(baseTheme);
+      return GoogleFonts.manropeTextTheme(baseTheme);
     }
   }
 
   static TextStyle _getAppBarFont(String languageCode) {
     if (languageCode == 'ar') {
-      return GoogleFonts.cairo(
+      return GoogleFonts.notoSansArabic(
         fontSize: 22,
         color: Colors.white,
         fontWeight: FontWeight.w600,
       );
     } else {
-      return GoogleFonts.poppins(
+      return GoogleFonts.manrope(
         fontSize: 22,
         color: Colors.white,
         fontWeight: FontWeight.w600,

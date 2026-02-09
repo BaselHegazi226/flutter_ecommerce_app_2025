@@ -475,9 +475,9 @@ extension AboutAppLocaliztionX on S {
   // Titles & Summary
   String get aboutAppTitle => about_app_title;
 
-  String get aboutAppSummary => about_app_summary_title;
+  String get aboutAppSummaryTitle => about_app_summary_title;
 
-  String get aboutAppDesc => about_app_summary_desc;
+  String get aboutAppSummaryDesc => about_app_summary_desc;
 
   // Features
   String get aboutAppFeaturesTitle => about_app_features_title;

@@ -40,9 +40,11 @@ class OrderHistoryView extends StatelessWidget {
         child: Scaffold(
           appBar: AppBar(
             centerTitle: true,
+            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+            surfaceTintColor: Theme.of(context).scaffoldBackgroundColor,
             title: CustomText(
               text: S.of(context).orderHistory,
-              fontSize: 20,
+              fontSize: 18,
               height: 1,
               maxLines: 1,
               fontWeight: FontWeight.w700,

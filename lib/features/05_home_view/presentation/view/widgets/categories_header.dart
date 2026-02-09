@@ -14,7 +14,7 @@ class CategoriesHeader extends StatelessWidget {
       children: [
         CustomText(
           text: S.of(context).homeCategories,
-          fontSize: 18,
+          fontSize: 16,
           fontWeight: FontWeight.bold,
         ),
       ],

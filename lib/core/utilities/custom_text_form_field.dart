@@ -28,11 +28,11 @@ class CustomTextFormField extends StatelessWidget {
         Row(
           spacing: 8,
           children: [
-            Icon(iconData, size: 18),
+            Icon(iconData, size: 16),
             CustomText(
               text: text,
               color: Colors.black,
-              fontSize: 16,
+              fontSize: 14,
               fontWeight: FontWeight.bold,
             ),
           ],
@@ -41,12 +41,14 @@ class CustomTextFormField extends StatelessWidget {
           onSaved: onSaved,
           validator: validator,
           controller: textEditingController,
+          style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
           decoration: InputDecoration(
             contentPadding: const EdgeInsets.all(0),
             fillColor: Theme.of(context).scaffoldBackgroundColor,
+
             hintText: hintText,
             hintStyle: const TextStyle(
-              fontSize: 14,
+              fontSize: 12,
               fontWeight: FontWeight.w400,
               color: kGreyColor,
             ),

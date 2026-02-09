@@ -27,7 +27,7 @@ class CustomTitleValueItem extends StatelessWidget {
         children: [
           CustomText(
             text: title,
-            fontSize: 14,
+            fontSize: 12,
             alignment: Alignment.centerLeft,
           ),
           value,

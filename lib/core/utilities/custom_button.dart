@@ -14,6 +14,7 @@ class CustomButton extends StatelessWidget {
     this.paddingValue = 12,
     this.textSize = 14,
     this.isLoading = false,
+    this.enableGradient = true,
     this.fontWeight = FontWeight.w700,
   });
 
@@ -25,6 +26,7 @@ class CustomButton extends StatelessWidget {
   final double textSize;
   final double paddingValue;
   final bool isLoading;
+  final bool enableGradient;
   final FontWeight fontWeight;
 
   @override
@@ -32,28 +34,49 @@ class CustomButton extends StatelessWidget {
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
 
-    return ElevatedButton(
-      style: ElevatedButton.styleFrom(
-        shape: RoundedRectangleBorder(
-          side: BorderSide(color: borderColor ?? Colors.transparent),
-          borderRadius: BorderRadius.circular(12),
-        ),
+    return InkWell(
+      onTap: isLoading ? null : onPressed,
+      child: Container(
         padding: EdgeInsets.all(paddingValue),
-        elevation: 1,
-        backgroundColor:
-            backgroundColor ?? (isDark ? Colors.grey.shade400 : kScaffoldColor),
+        decoration: BoxDecoration(
+          color:
+              backgroundColor ??
+              (isDark ? Colors.grey.shade400 : kScaffoldColor),
+          borderRadius: BorderRadius.circular(12),
+          gradient: enableGradient
+              ? isDark
+                    ? LinearGradient(
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                        colors: [
+                          Colors.grey.shade300,
+                          Colors.white,
+                          Colors.grey.shade200,
+                        ],
+                      )
+                    : const LinearGradient(
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                        colors: [
+                          Color(0xff7fe0b8), // mint highlight
+                          Color(0xff3d9970), // primary
+                          Color(0xff2a6f56),
+                        ], // deep shadow],
+                        stops: [0.0, 0.55, 1.0],
+                      )
+              : null,
+        ),
+        child: isLoading
+            ? CustomCircleIndicator(color: textColor, size: 24)
+            : CustomText(
+                key: const ValueKey('text'),
+                text: text,
+                color: textColor,
+                fontSize: textSize,
+                alignment: Alignment.center,
+                fontWeight: fontWeight,
+              ),
       ),
-      onPressed: isLoading ? null : onPressed,
-      child: isLoading
-          ? CustomCircleIndicator(color: textColor, size: 24)
-          : CustomText(
-              key: const ValueKey('text'),
-              text: text,
-              color: textColor,
-              fontSize: textSize,
-              alignment: Alignment.center,
-              fontWeight: fontWeight,
-            ),
     );
   }
 }
@@ -69,6 +92,7 @@ class CustomTextIconButton extends StatelessWidget {
     this.textColor = Colors.white,
     this.paddingValue = 8,
     this.textSize = 14,
+    this.enableGradient = true,
     this.isLoading = false,
     this.fontWeight = FontWeight.w700,
     this.iconSize = 20,
@@ -80,8 +104,10 @@ class CustomTextIconButton extends StatelessWidget {
   final Color? borderColor;
   final Color textColor;
   final double textSize;
+
   final double paddingValue;
   final double iconSize;
+  final bool enableGradient;
   final bool isLoading;
   final IconData iconData;
   final FontWeight fontWeight;
@@ -91,35 +117,56 @@ class CustomTextIconButton extends StatelessWidget {
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
 
-    return ElevatedButton(
-      style: ElevatedButton.styleFrom(
-        shape: RoundedRectangleBorder(
-          side: BorderSide(color: borderColor ?? Colors.transparent),
+    return InkWell(
+      onTap: isLoading ? null : onPressed,
+      child: Container(
+        padding: EdgeInsets.all(paddingValue),
+        decoration: BoxDecoration(
+          color:
+              backgroundColor ??
+              (isDark ? Colors.grey.shade400 : kScaffoldColor),
           borderRadius: BorderRadius.circular(12),
+          gradient: enableGradient
+              ? isDark
+                    ? LinearGradient(
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                        colors: [
+                          Colors.grey.shade300,
+                          Colors.white,
+                          Colors.grey.shade200,
+                        ],
+                      )
+                    : const LinearGradient(
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                        colors: [
+                          Color(0xff7fe0b8), // mint highlight
+                          Color(0xff3d9970), // primary
+                          Color(0xff2a6f56),
+                        ], // deep shadow],
+                        stops: [0.0, 0.55, 1.0],
+                      )
+              : null,
         ),
-        padding: EdgeInsets.symmetric(horizontal: paddingValue),
-        elevation: 1,
-        backgroundColor:
-            backgroundColor ?? (isDark ? Colors.grey.shade400 : kScaffoldColor),
+        child: isLoading
+            ? CustomCircleIndicator(color: textColor, size: 24)
+            : Row(
+                key: const ValueKey('content'),
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  CustomText(
+                    text: text,
+                    color: textColor,
+                    fontSize: textSize,
+                    alignment: Alignment.center,
+                    fontWeight: fontWeight,
+                  ),
+                  const SizedBox(width: 8),
+                  Icon(iconData, size: iconSize, color: textColor),
+                ],
+              ),
       ),
-      onPressed: isLoading ? null : onPressed,
-      child: isLoading
-          ? CustomCircleIndicator(color: textColor, size: 24)
-          : Row(
-              key: const ValueKey('content'),
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                CustomText(
-                  text: text,
-                  color: textColor,
-                  fontSize: textSize,
-                  alignment: Alignment.center,
-                  fontWeight: fontWeight,
-                ),
-                const SizedBox(width: 8),
-                Icon(iconData, size: iconSize, color: textColor),
-              ],
-            ),
     );
   }
 }

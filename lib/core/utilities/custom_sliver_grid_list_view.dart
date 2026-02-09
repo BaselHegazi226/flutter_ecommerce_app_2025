@@ -110,7 +110,7 @@ class CustomSliverGridItem extends StatelessWidget {
       children: [
         CustomText(
           text: title.replaceAll("\"n", " "),
-          fontSize: 16,
+          fontSize: 14,
           maxLines: 1,
           fontWeight: FontWeight.bold,
         ),
@@ -122,7 +122,7 @@ class CustomSliverGridItem extends StatelessWidget {
         ),
         CustomText(
           text: '${priceShowed(price)} ${S.of(context).EP}',
-          fontSize: 16,
+          fontSize: 12,
           color: kPrimaryColor,
         ),
       ],

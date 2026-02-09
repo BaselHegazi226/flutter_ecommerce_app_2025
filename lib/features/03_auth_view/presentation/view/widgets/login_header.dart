@@ -20,7 +20,7 @@ class LoginHeader extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            CustomText(text: S.of(context).homeWelcome, fontSize: 30),
+            CustomText(text: S.of(context).homeWelcome, fontSize: 20),
             CustomButton(
               paddingValue: 8,
               text: S.of(context).authSignUp,
@@ -38,7 +38,7 @@ class LoginHeader extends StatelessWidget {
         ),
         CustomText(
           text: S.of(context).authSignInToContinue,
-          fontSize: 16,
+          fontSize: 14,
           color: kGreyColor,
         ),
       ],

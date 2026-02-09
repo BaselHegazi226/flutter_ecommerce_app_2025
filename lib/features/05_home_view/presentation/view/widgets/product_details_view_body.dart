@@ -58,7 +58,7 @@ class ProductDetailsViewBody extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                CustomText(text: productModel.title, fontSize: 22),
+                CustomText(text: productModel.title, fontSize: 18),
                 const SizedBox(height: 26),
                 ProductDetailsCategoryRatingSection(
                   category: productModel.category,

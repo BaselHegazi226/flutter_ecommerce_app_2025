@@ -46,10 +46,10 @@ class OrderHistoryUnactiveSelectionView extends StatelessWidget {
                 child: Column(
                   children: [
                     Column(
-                      spacing: 24,
                       children: [
                         ShowOrderList(carts: cart),
                         DeliveryStateSection(orderModel: order),
+                        const SizedBox(height: 16),
                         TotalPriceSection(total: order.totalPrice),
                       ],
                     ),

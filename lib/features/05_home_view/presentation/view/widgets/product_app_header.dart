@@ -16,7 +16,7 @@ class ProductAppHeader extends StatelessWidget {
       children: [
         CustomText(
           text: S.of(context).homeAppProducts,
-          fontSize: 18,
+          fontSize: 16,
           fontWeight: FontWeight.bold,
         ),
         InkWell(
@@ -28,7 +28,7 @@ class ProductAppHeader extends StatelessWidget {
           borderRadius: const BorderRadius.all(Radius.circular(16)),
           child: CustomText(
             text: S.of(context).homeShowAll,
-            fontSize: 16,
+            fontSize: 14,
             fontWeight: FontWeight.w500,
             color: Theme.of(context).primaryColor.withAlpha(200),
           ),

@@ -21,7 +21,7 @@ class RegisterHeader extends StatelessWidget {
           children: [
             CustomText(
               text: S.of(context).homeWelcome,
-              fontSize: 30,
+              fontSize: 20,
               alignment: Alignment.topLeft,
             ),
             CustomButton(
@@ -41,7 +41,7 @@ class RegisterHeader extends StatelessWidget {
         ),
         CustomText(
           text: S.of(context).authSignInToContinue,
-          fontSize: 16,
+          fontSize: 14,
           color: kGreyColor,
         ),
       ],

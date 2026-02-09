@@ -7,7 +7,7 @@ customAppBar(BuildContext context, String title, VoidCallback onPressed) {
   return AppBar(
     title: CustomText(
       text: title,
-      fontSize: 20,
+      fontSize: 18,
       height: 1,
       maxLines: 1,
       fontWeight: FontWeight.w700,
@@ -37,7 +37,7 @@ AppBar customTabsAppbar(BuildContext context, String title) {
   return AppBar(
     backgroundColor: Theme.of(context).scaffoldBackgroundColor,
     surfaceTintColor: Theme.of(context).scaffoldBackgroundColor,
-    title: CustomText(text: title, fontSize: 20, fontWeight: FontWeight.bold),
+    title: CustomText(text: title, fontSize: 18, fontWeight: FontWeight.bold),
     centerTitle: true,
   );
 }

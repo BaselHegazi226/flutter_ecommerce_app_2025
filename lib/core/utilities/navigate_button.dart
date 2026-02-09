@@ -44,77 +44,96 @@ class NavigateButton extends StatelessWidget {
     return _buildElevatedButtonNext(isDark);
   }
 
-  ElevatedButton _buildElevatedButtonNext(bool isDark) {
-    return ElevatedButton(
-      style: ElevatedButton.styleFrom(
-        shape: RoundedRectangleBorder(
-          side: BorderSide(color: borderColor ?? Colors.transparent),
+  Widget _buildElevatedButtonNext(bool isDark) {
+    return InkWell(
+      onTap: isLoading ? null : onPressed,
+      child: Container(
+        padding: const EdgeInsets.all(8),
+        decoration: BoxDecoration(
+          color:
+              backgroundColor ??
+              (isDark ? Colors.grey.shade400 : kScaffoldColor),
           borderRadius: BorderRadius.circular(12),
+          border: Border.all(color: borderColor ?? Colors.transparent),
+          gradient: isDark
+              ? LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [
+                    Colors.grey.shade300,
+                    Colors.white,
+                    Colors.grey.shade200,
+                  ],
+                )
+              : const LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [
+                    Color(0xff7fe0b8), // mint highlight
+                    Color(0xff3d9970), // primary
+                    Color(0xff2a6f56),
+                  ], // deep shadow],
+                  stops: [0.0, 0.55, 1.0],
+                ),
         ),
-        padding: EdgeInsets.symmetric(horizontal: paddingValue),
-        elevation: 1,
-        backgroundColor:
-            backgroundColor ?? (isDark ? Colors.grey.shade400 : kScaffoldColor),
+        child: isLoading
+            ? CustomCircleIndicator(color: textColor, size: 24)
+            : Row(
+                key: const ValueKey('content'),
+                spacing: 8,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  CustomText(
+                    text: text,
+                    color: textColor,
+                    fontSize: textSize,
+                    alignment: Alignment.center,
+                    fontWeight: fontWeight,
+                  ),
+                  Icon(
+                    Icons.arrow_forward_ios_outlined,
+                    size: iconSize,
+                    color: textColor,
+                  ),
+                ],
+              ),
       ),
-      onPressed: isLoading ? null : onPressed,
-      child: isLoading
-          ? CustomCircleIndicator(color: textColor, size: 24)
-          : Row(
-              key: const ValueKey('content'),
-              spacing: 8,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                CustomText(
-                  text: text,
-                  color: textColor,
-                  fontSize: textSize,
-                  alignment: Alignment.center,
-                  fontWeight: fontWeight,
-                ),
-                Icon(
-                  Icons.arrow_forward_ios_outlined,
-                  size: iconSize,
-                  color: textColor,
-                ),
-              ],
-            ),
     );
   }
 
-  ElevatedButton _buildElevatedButtonBack(bool isDark) {
-    return ElevatedButton(
-      style: ElevatedButton.styleFrom(
-        shape: RoundedRectangleBorder(
-          side: BorderSide(color: borderColor ?? Colors.transparent),
+  Widget _buildElevatedButtonBack(bool isDark) {
+    return InkWell(
+      onTap: isLoading ? null : onPressed,
+      child: Container(
+        padding: const EdgeInsets.all(8),
+        decoration: BoxDecoration(
+          color: isDark ? Colors.grey.shade400 : kScaffoldColor,
           borderRadius: BorderRadius.circular(12),
+          border: Border.all(color: borderColor ?? Colors.transparent),
         ),
-        padding: EdgeInsets.symmetric(horizontal: paddingValue),
-        elevation: 1,
-        backgroundColor:
-            backgroundColor ?? (isDark ? Colors.grey.shade400 : kScaffoldColor),
+
+        child: isLoading
+            ? CustomCircleIndicator(color: textColor, size: 24)
+            : Row(
+                key: const ValueKey('content'),
+                mainAxisAlignment: MainAxisAlignment.center,
+                spacing: 8,
+                children: [
+                  Icon(
+                    Icons.arrow_back_ios_new_outlined,
+                    size: iconSize,
+                    color: textColor,
+                  ),
+                  CustomText(
+                    text: text,
+                    color: textColor,
+                    fontSize: textSize,
+                    alignment: Alignment.center,
+                    fontWeight: fontWeight,
+                  ),
+                ],
+              ),
       ),
-      onPressed: isLoading ? null : onPressed,
-      child: isLoading
-          ? CustomCircleIndicator(color: textColor, size: 24)
-          : Row(
-              key: const ValueKey('content'),
-              mainAxisAlignment: MainAxisAlignment.center,
-              spacing: 8,
-              children: [
-                Icon(
-                  Icons.arrow_back_ios_new_outlined,
-                  size: iconSize,
-                  color: textColor,
-                ),
-                CustomText(
-                  text: text,
-                  color: textColor,
-                  fontSize: textSize,
-                  alignment: Alignment.center,
-                  fontWeight: fontWeight,
-                ),
-              ],
-            ),
     );
   }
 }

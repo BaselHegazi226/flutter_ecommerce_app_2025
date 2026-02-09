@@ -10,48 +10,44 @@ class SearchBarSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final color = isDark
+        ? Theme.of(context).primaryColor
+        : Colors.grey.shade700;
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8),
-      child: SearchBar(
-        backgroundColor: WidgetStatePropertyAll(
-          Theme.of(context).scaffoldBackgroundColor.withAlpha(32),
-        ),
-        side: WidgetStatePropertyAll(
-          BorderSide(
-            color: Theme.of(context).brightness == Brightness.dark
-                ? Theme.of(context).primaryColor
-                : Colors.grey.shade500,
+      child: SizedBox(
+        height: 44,
+        child: SearchBar(
+          autoFocus: false,
+          backgroundColor: WidgetStatePropertyAll(
+            Theme.of(context).scaffoldBackgroundColor.withAlpha(32),
           ),
-        ),
-        shadowColor: const WidgetStatePropertyAll(Colors.transparent),
-        hintText: S.of(context).navSearch,
-        textStyle: WidgetStatePropertyAll(
-          TextStyle(
-            color: Theme.of(context).brightness == Brightness.dark
-                ? Theme.of(context).primaryColor
-                : Colors.grey.shade500,
+          surfaceTintColor: WidgetStatePropertyAll(
+            Theme.of(context).scaffoldBackgroundColor.withAlpha(32),
           ),
-        ),
-        padding: const WidgetStatePropertyAll(
-          EdgeInsets.symmetric(horizontal: 20),
-        ),
-        leading: Icon(
-          Icons.search_outlined,
-          color: Theme.of(context).brightness == Brightness.dark
-              ? Theme.of(context).primaryColor
-              : Colors.grey.shade500,
-        ),
-        onSubmitted: (String? category) {
-          if (category == null || category.isEmpty) {
+          side: WidgetStatePropertyAll(BorderSide(color: color)),
+
+          shadowColor: const WidgetStatePropertyAll(Colors.transparent),
+          hintText: S.of(context).navSearch,
+
+          textStyle: WidgetStatePropertyAll(
+            TextStyle(fontSize: 14, height: 1.2, color: color),
+          ),
+
+          padding: const WidgetStatePropertyAll(
+            EdgeInsets.symmetric(horizontal: 14),
+          ),
+
+          leading: Icon(Icons.search_outlined, size: 18, color: color),
+
+          onSubmitted: (String? category) {
             context.read<SearchResultCubit>().getSearchResultByCategory(
-              category: '',
+              category: category?.trim() ?? '',
             );
-          } else {
-            context.read<SearchResultCubit>().getSearchResultByCategory(
-              category: category,
-            );
-          }
-        },
+          },
+        ),
       ),
     );
   }

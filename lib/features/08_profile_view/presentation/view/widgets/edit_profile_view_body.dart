@@ -151,12 +151,13 @@ class _EditProfileViewBodyState extends State<EditProfileViewBody> {
         children: [
           CustomText(
             text: S.of(context).profileUserName,
-            fontSize: 16,
+            fontSize: 14,
             fontWeight: FontWeight.w700,
           ),
           const SizedBox(height: 16),
           TextFormField(
             controller: nameController,
+            style: const TextStyle(fontSize: 12),
             decoration: InputDecoration(
               fillColor: Theme.of(context).scaffoldBackgroundColor,
               prefixIcon: const Icon(Icons.person, color: Colors.grey),
@@ -182,7 +183,7 @@ class _EditProfileViewBodyState extends State<EditProfileViewBody> {
       children: [
         CustomText(
           text: S.of(context).profileUserEmail,
-          fontSize: 16,
+          fontSize: 14,
           fontWeight: FontWeight.w700,
         ),
         const SizedBox(height: 16),
@@ -197,7 +198,7 @@ class _EditProfileViewBodyState extends State<EditProfileViewBody> {
               const Icon(Icons.email, color: Colors.grey),
               const SizedBox(width: 16),
               Expanded(
-                child: CustomText(text: email, fontSize: 16, maxLines: 1),
+                child: CustomText(text: email, fontSize: 12, maxLines: 1),
               ),
               const Icon(Icons.lock_outline, color: Colors.grey),
             ],

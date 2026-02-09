@@ -86,10 +86,14 @@ class ShowOrderItem extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 8),
-          CustomText(text: title.split(" ").take(2).join(" "), fontSize: 16),
+          CustomText(
+            text: title.split(" ").take(2).join(" "),
+            fontSize: 14,
+            fontWeight: FontWeight.bold,
+          ),
           CustomText(
             text: '${priceShowed(price)} ${S.of(context).EP}',
-            fontSize: 16,
+            fontSize: 12,
             color: kPrimaryColor,
           ),
           CustomText(text: '$count x', fontSize: 14, color: kGreyColor),

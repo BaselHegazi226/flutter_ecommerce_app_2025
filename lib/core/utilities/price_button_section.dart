@@ -70,18 +70,28 @@ class CustomButtonSectionMobile extends StatelessWidget {
               children: [
                 FittedBox(
                   fit: BoxFit.scaleDown,
-                  child: CustomText(
-                    text: title,
-                    fontSize: 14,
-                    alignment: Alignment.centerLeft,
-                    color: kGreyColor,
+                  child: Row(
+                    spacing: 4,
+                    children: [
+                      const Icon(
+                        Icons.attach_money_outlined,
+                        size: 18,
+                        color: kGreyColor,
+                      ),
+                      CustomText(
+                        text: title,
+                        fontSize: 16,
+                        alignment: Alignment.centerLeft,
+                        color: kGreyColor,
+                      ),
+                    ],
                   ),
                 ),
                 FittedBox(
                   fit: BoxFit.scaleDown,
                   child: CustomText(
                     text: value,
-                    fontSize: 18,
+                    fontSize: 14,
                     alignment: Alignment.centerLeft,
                     color: Theme.of(context).brightness == Brightness.dark
                         ? Colors.grey.shade200
