@@ -45,8 +45,8 @@ class ModeSection extends StatelessWidget {
                         const Icon(Icons.change_circle, size: 20),
                         CustomText(
                           text: isDark
-                              ? S.of(context).settingsDark
-                              : S.of(context).settingsLight,
+                              ? S.of(context).settingsLight
+                              : S.of(context).settingsDark,
                           fontSize: 14,
                           alignment: Alignment.center,
                         ),
@@ -63,8 +63,8 @@ class ModeSection extends StatelessWidget {
                       },
                       icon: Icon(
                         isDark
-                            ? Icons.dark_mode_outlined
-                            : Icons.light_mode_outlined,
+                            ? Icons.light_mode_outlined
+                            : Icons.dark_mode_outlined,
                         color: isDark
                             ? Colors.grey.shade100
                             : Colors.grey.shade400,
