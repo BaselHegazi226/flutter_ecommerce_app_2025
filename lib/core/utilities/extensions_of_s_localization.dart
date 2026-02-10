@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_e_commerce_app_2025/core/helper/date_formatter.dart';
+import 'package:flutter_e_commerce_app_2025/features/05_home_view/data/model/category_model.dart';
 import 'package:flutter_e_commerce_app_2025/features/07_cart_view/data/model/order_model.dart';
 import 'package:flutter_e_commerce_app_2025/generated/l10n.dart';
 
 import '../../features/07_cart_view/data/model/delivery_method_model.dart';
+import '../helper/const.dart';
 
 extension OnboardingLoclicationX on S {
   String get onBoardingTitleImg1 => onboarding_title_img1;
@@ -625,6 +627,12 @@ extension CategoryLocalizationX on S {
   String get categoryWomensShoes => category_womens_shoes;
 
   String get categoryWomensWatches => category_womens_watches;
+}
+
+extension ArabicCategory on CategoryModel {
+  String get getArabicCategoryName {
+    return categoryArabicNames[slug] ?? name;
+  }
 }
 
 extension DeliveryMethodLocalization on DeliveryMethodModel {

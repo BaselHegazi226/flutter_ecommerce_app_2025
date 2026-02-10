@@ -85,7 +85,7 @@ class _CategoriesListViewState extends State<CategoriesListView>
   }
 
   @override
-  // TODO: implement wantKeepAlive
+  // to make category item keep alive
   bool get wantKeepAlive => true;
 }
 

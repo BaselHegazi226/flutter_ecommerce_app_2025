@@ -20,7 +20,9 @@ class SearchBarSection extends StatelessWidget {
       child: SizedBox(
         height: 44,
         child: SearchBar(
-          autoFocus: false,
+          padding: const WidgetStatePropertyAll(
+            EdgeInsets.symmetric(horizontal: 14),
+          ),
           backgroundColor: WidgetStatePropertyAll(
             Theme.of(context).scaffoldBackgroundColor.withAlpha(32),
           ),
@@ -30,14 +32,11 @@ class SearchBarSection extends StatelessWidget {
           side: WidgetStatePropertyAll(BorderSide(color: color)),
 
           shadowColor: const WidgetStatePropertyAll(Colors.transparent),
+
           hintText: S.of(context).navSearch,
 
           textStyle: WidgetStatePropertyAll(
             TextStyle(fontSize: 14, height: 1.2, color: color),
-          ),
-
-          padding: const WidgetStatePropertyAll(
-            EdgeInsets.symmetric(horizontal: 14),
           ),
 
           leading: Icon(Icons.search_outlined, size: 18, color: color),

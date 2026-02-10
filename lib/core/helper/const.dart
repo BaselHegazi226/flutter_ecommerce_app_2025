@@ -59,296 +59,191 @@ starFunctionLikeGooglePlay(BuildContext context, {required double rating}) {
   );
 }
 
+const Map<String, String> categoryArabicNames = {
+  'beauty': 'الجمال',
+  'fragrances': 'العطور',
+  'furniture': 'الأثاث',
+  'groceries': 'البقالة',
+  'home-decoration': 'ديكور المنزل',
+  'kitchen-accessories': 'مستلزمات المطبخ',
+  'laptops': 'أجهزة لابتوب',
+  'mens-shirts': 'قمصان رجالي',
+  'mens-shoes': 'أحذية رجالي',
+  'mens-watches': 'ساعات رجالي',
+  'mobile-accessories': 'إكسسوارات الموبايل',
+  'motorcycle': 'دراجات نارية',
+  'skin-care': 'العناية بالبشرة',
+  'smartphones': 'هواتف ذكية',
+  'sports-accessories': 'مستلزمات رياضية',
+  'sunglasses': 'نظارات شمس',
+  'tablets': 'أجهزة لوحية',
+  'tops': 'ملابس علوية',
+  'vehicle': 'مركبات',
+  'womens-bags': 'حقائب نسائية',
+  'womens-dresses': 'فساتين نسائية',
+  'womens-jewellery': 'مجوهرات نسائية',
+  'womens-shoes': 'أحذية نسائية',
+  'womens-watches': 'ساعات نسائية',
+};
+
 const List<CategoryModel> categories = [
   CategoryModel(
-    slug: 'الجمال',
+    slug: 'beauty',
     name: 'الجمال',
     requestForCategoryUrl: 'https://dummyjson.com/products/category/beauty',
   ),
   CategoryModel(
-    slug: 'العطور',
+    slug: 'fragrances',
     name: 'العطور',
     requestForCategoryUrl: 'https://dummyjson.com/products/category/fragrances',
   ),
   CategoryModel(
-    slug: 'الأثاث',
+    slug: 'furniture',
     name: 'الأثاث',
     requestForCategoryUrl: 'https://dummyjson.com/products/category/furniture',
   ),
   CategoryModel(
-    slug: 'البقالة',
+    slug: 'groceries',
     name: 'البقالة',
     requestForCategoryUrl: 'https://dummyjson.com/products/category/groceries',
   ),
   CategoryModel(
-    slug: 'ديكور المنزل',
+    slug: 'home-decoration',
     name: 'ديكور المنزل',
     requestForCategoryUrl:
         'https://dummyjson.com/products/category/home-decoration',
   ),
   CategoryModel(
-    slug: 'مستلزمات المطبخ',
+    slug: 'kitchen-accessories',
     name: 'مستلزمات المطبخ',
     requestForCategoryUrl:
         'https://dummyjson.com/products/category/kitchen-accessories',
   ),
   CategoryModel(
-    slug: 'أجهزة لابتوب',
+    slug: 'laptops',
     name: 'أجهزة لابتوب',
     requestForCategoryUrl: 'https://dummyjson.com/products/category/laptops',
   ),
   CategoryModel(
-    slug: 'قمصان رجالي',
+    slug: 'mens-shirts',
     name: 'قمصان رجالي',
     requestForCategoryUrl:
         'https://dummyjson.com/products/category/mens-shirts',
   ),
   CategoryModel(
-    slug: 'أحذية رجالي',
+    slug: 'mens-shoes',
     name: 'أحذية رجالي',
     requestForCategoryUrl: 'https://dummyjson.com/products/category/mens-shoes',
   ),
   CategoryModel(
-    slug: 'ساعات رجالي',
+    slug: 'mens-watches',
     name: 'ساعات رجالي',
     requestForCategoryUrl:
         'https://dummyjson.com/products/category/mens-watches',
   ),
   CategoryModel(
-    slug: 'إكسسوارات الموبايل',
+    slug: 'mobile-accessories',
     name: 'إكسسوارات الموبايل',
     requestForCategoryUrl:
         'https://dummyjson.com/products/category/mobile-accessories',
   ),
   CategoryModel(
-    slug: 'دراجات نارية',
+    slug: 'motorcycle',
     name: 'دراجات نارية',
     requestForCategoryUrl: 'https://dummyjson.com/products/category/motorcycle',
   ),
   CategoryModel(
-    slug: 'العناية بالبشرة',
+    slug: 'skin-care',
     name: 'العناية بالبشرة',
     requestForCategoryUrl: 'https://dummyjson.com/products/category/skin-care',
   ),
   CategoryModel(
-    slug: 'هواتف ذكية',
+    slug: 'smartphones',
     name: 'هواتف ذكية',
     requestForCategoryUrl:
         'https://dummyjson.com/products/category/smartphones',
   ),
   CategoryModel(
-    slug: 'مستلزمات رياضية',
+    slug: 'sports-accessories',
     name: 'مستلزمات رياضية',
     requestForCategoryUrl:
         'https://dummyjson.com/products/category/sports-accessories',
   ),
   CategoryModel(
-    slug: 'نظارات شمس',
+    slug: 'sunglasses',
     name: 'نظارات شمس',
     requestForCategoryUrl: 'https://dummyjson.com/products/category/sunglasses',
   ),
   CategoryModel(
-    slug: 'أجهزة لوحية',
+    slug: 'tablets',
     name: 'أجهزة لوحية',
     requestForCategoryUrl: 'https://dummyjson.com/products/category/tablets',
   ),
   CategoryModel(
-    slug: 'ملابس علوية',
+    slug: 'tops',
     name: 'ملابس علوية',
     requestForCategoryUrl: 'https://dummyjson.com/products/category/tops',
   ),
   CategoryModel(
-    slug: 'مركبات',
+    slug: 'vehicle',
     name: 'مركبات',
     requestForCategoryUrl: 'https://dummyjson.com/products/category/vehicle',
   ),
   CategoryModel(
-    slug: 'حقائب نسائية',
+    slug: 'womens-bags',
     name: 'حقائب نسائية',
     requestForCategoryUrl:
         'https://dummyjson.com/products/category/womens-bags',
   ),
   CategoryModel(
-    slug: 'فساتين نسائية',
+    slug: 'womens-dresses',
     name: 'فساتين نسائية',
     requestForCategoryUrl:
         'https://dummyjson.com/products/category/womens-dresses',
   ),
   CategoryModel(
-    slug: 'مجوهرات نسائية',
+    slug: 'womens-jewellery',
     name: 'مجوهرات نسائية',
     requestForCategoryUrl:
         'https://dummyjson.com/products/category/womens-jewellery',
   ),
   CategoryModel(
-    slug: 'أحذية نسائية',
+    slug: 'womens-shoes',
     name: 'أحذية نسائية',
     requestForCategoryUrl:
         'https://dummyjson.com/products/category/womens-shoes',
   ),
   CategoryModel(
-    slug: 'ساعات نسائية',
-    name: 'ساعات نسائية',
-    requestForCategoryUrl:
-        'https://dummyjson.com/products/category/womens-watches',
-  ),
-  CategoryModel(
-    slug: 'beauty',
-    name: 'Beauty',
-    requestForCategoryUrl: 'https://dummyjson.com/products/category/beauty',
-  ),
-  CategoryModel(
-    slug: 'fragrances',
-    name: 'Fragrances',
-    requestForCategoryUrl: 'https://dummyjson.com/products/category/fragrances',
-  ),
-  CategoryModel(
-    slug: 'furniture',
-    name: 'Furniture',
-    requestForCategoryUrl: 'https://dummyjson.com/products/category/furniture',
-  ),
-  CategoryModel(
-    slug: 'groceries',
-    name: 'Groceries',
-    requestForCategoryUrl: 'https://dummyjson.com/products/category/groceries',
-  ),
-  CategoryModel(
-    slug: 'home-decoration',
-    name: 'Home Decoration',
-    requestForCategoryUrl:
-        'https://dummyjson.com/products/category/home-decoration',
-  ),
-  CategoryModel(
-    slug: 'kitchen-accessories',
-    name: 'Kitchen Accessories',
-    requestForCategoryUrl:
-        'https://dummyjson.com/products/category/kitchen-accessories',
-  ),
-  CategoryModel(
-    slug: 'laptops',
-    name: 'Laptops',
-    requestForCategoryUrl: 'https://dummyjson.com/products/category/laptops',
-  ),
-  CategoryModel(
-    slug: 'mens-shirts',
-    name: 'Mens Shirts',
-    requestForCategoryUrl:
-        'https://dummyjson.com/products/category/mens-shirts',
-  ),
-  CategoryModel(
-    slug: 'mens-shoes',
-    name: 'Mens Shoes',
-    requestForCategoryUrl: 'https://dummyjson.com/products/category/mens-shoes',
-  ),
-  CategoryModel(
-    slug: 'mens-watches',
-    name: 'Mens Watches',
-    requestForCategoryUrl:
-        'https://dummyjson.com/products/category/mens-watches',
-  ),
-  CategoryModel(
-    slug: 'mobile-accessories',
-    name: 'Mobile Accessories',
-    requestForCategoryUrl:
-        'https://dummyjson.com/products/category/mobile-accessories',
-  ),
-  CategoryModel(
-    slug: 'motorcycle',
-    name: 'Motorcycle',
-    requestForCategoryUrl: 'https://dummyjson.com/products/category/motorcycle',
-  ),
-  CategoryModel(
-    slug: 'skin-care',
-    name: 'Skin Care',
-    requestForCategoryUrl: 'https://dummyjson.com/products/category/skin-care',
-  ),
-  CategoryModel(
-    slug: 'smartphones',
-    name: 'Smartphones',
-    requestForCategoryUrl:
-        'https://dummyjson.com/products/category/smartphones',
-  ),
-  CategoryModel(
-    slug: 'sports-accessories',
-    name: 'Sports Accessories',
-    requestForCategoryUrl:
-        'https://dummyjson.com/products/category/sports-accessories',
-  ),
-  CategoryModel(
-    slug: 'sunglasses',
-    name: 'Sunglasses',
-    requestForCategoryUrl: 'https://dummyjson.com/products/category/sunglasses',
-  ),
-  CategoryModel(
-    slug: 'tablets',
-    name: 'Tablets',
-    requestForCategoryUrl: 'https://dummyjson.com/products/category/tablets',
-  ),
-  CategoryModel(
-    slug: 'tops',
-    name: 'Tops',
-    requestForCategoryUrl: 'https://dummyjson.com/products/category/tops',
-  ),
-  CategoryModel(
-    slug: 'vehicle',
-    name: 'Vehicle',
-    requestForCategoryUrl: 'https://dummyjson.com/products/category/vehicle',
-  ),
-  CategoryModel(
-    slug: 'womens-bags',
-    name: 'Womens Bags',
-    requestForCategoryUrl:
-        'https://dummyjson.com/products/category/womens-bags',
-  ),
-  CategoryModel(
-    slug: 'womens-dresses',
-    name: 'Womens Dresses',
-    requestForCategoryUrl:
-        'https://dummyjson.com/products/category/womens-dresses',
-  ),
-  CategoryModel(
-    slug: 'womens-jewellery',
-    name: 'Womens Jewellery',
-    requestForCategoryUrl:
-        'https://dummyjson.com/products/category/womens-jewellery',
-  ),
-  CategoryModel(
-    slug: 'womens-shoes',
-    name: 'Womens Shoes',
-    requestForCategoryUrl:
-        'https://dummyjson.com/products/category/womens-shoes',
-  ),
-  CategoryModel(
     slug: 'womens-watches',
-    name: 'Womens Watches',
+    name: 'ساعات نسائية',
     requestForCategoryUrl:
         'https://dummyjson.com/products/category/womens-watches',
   ),
 ];
 
+String normalizeArabic(String text) {
+  return text
+      .toLowerCase()
+      .trim()
+      .replaceAll('أ', 'ا')
+      .replaceAll('إ', 'ا')
+      .replaceAll('آ', 'ا')
+      .replaceAll('ى', 'ي')
+      .replaceAll('ة', 'ه');
+}
+
 String? searchFilter(String input) {
-  final query = input.toLowerCase().trim();
+  final query = normalizeArabic(input);
 
   if (query.isEmpty) return null;
 
-  // 1️⃣ match مباشر في slug
   for (final category in categories) {
-    if (category.slug.contains(query)) {
-      return category.slug;
-    }
-  }
+    final arabicName = normalizeArabic(category.getArabicCategoryName);
+    final englishName = category.name.toLowerCase();
 
-  // 2️⃣ match في الاسم
-  for (final category in categories) {
-    if (category.name.toLowerCase().contains(query)) {
-      return category.slug;
-    }
-  }
-
-  // 3️⃣ match جزئي (fuzzy)
-  for (final category in categories) {
-    final slugParts = category.slug.split('-');
-    if (slugParts.any((part) => part.contains(query))) {
+    if (arabicName.contains(query) ||
+        englishName.contains(query) ||
+        category.slug.contains(query)) {
       return category.slug;
     }
   }
