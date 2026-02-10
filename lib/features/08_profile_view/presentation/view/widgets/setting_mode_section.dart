@@ -40,11 +40,13 @@ class ModeSection extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Row(
-                      spacing: 4,
+                      spacing: 8,
                       children: [
-                        const Icon(Icons.change_circle, size: 16),
+                        const Icon(Icons.change_circle, size: 20),
                         CustomText(
-                          text: S.of(context).settingsChangeTheme,
+                          text: isDark
+                              ? S.of(context).settingsDark
+                              : S.of(context).settingsLight,
                           fontSize: 14,
                           alignment: Alignment.center,
                         ),
@@ -61,8 +63,8 @@ class ModeSection extends StatelessWidget {
                       },
                       icon: Icon(
                         isDark
-                            ? Icons.light_mode_outlined
-                            : Icons.dark_mode_outlined,
+                            ? Icons.dark_mode_outlined
+                            : Icons.light_mode_outlined,
                         color: isDark
                             ? Colors.grey.shade100
                             : Colors.grey.shade400,

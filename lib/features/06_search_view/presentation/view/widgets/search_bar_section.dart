@@ -36,10 +36,10 @@ class SearchBarSection extends StatelessWidget {
           hintText: S.of(context).navSearch,
 
           textStyle: WidgetStatePropertyAll(
-            TextStyle(fontSize: 14, height: 1.2, color: color),
+            TextStyle(fontSize: 12, height: 1.2, color: color),
           ),
 
-          leading: Icon(Icons.search_outlined, size: 18, color: color),
+          leading: Icon(Icons.search_outlined, size: 16, color: color),
 
           onSubmitted: (String? category) {
             context.read<SearchResultCubit>().getSearchResultByCategory(
