@@ -39,10 +39,16 @@ class ModeSection extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    CustomText(
-                      text: S.of(context).settingsChangeTheme,
-                      fontSize: 16,
-                      alignment: Alignment.center,
+                    Row(
+                      spacing: 4,
+                      children: [
+                        const Icon(Icons.change_circle, size: 16),
+                        CustomText(
+                          text: S.of(context).settingsChangeTheme,
+                          fontSize: 14,
+                          alignment: Alignment.center,
+                        ),
+                      ],
                     ),
                     IconWithCircleStyle(
                       backgroundColor: isDark

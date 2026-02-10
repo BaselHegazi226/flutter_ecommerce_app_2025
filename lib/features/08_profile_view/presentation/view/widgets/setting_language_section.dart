@@ -66,14 +66,14 @@ class LanguageSection extends StatelessWidget {
                         value == 'العربية'
                             ? const Iconify(
                                 Twemoji.flag_for_flag_egypt,
-                                size: 20,
+                                size: 16,
                               )
                             : const Iconify(
                                 Twemoji.flag_for_flag_united_states,
-                                size: 20,
+                                size: 16,
                               ),
                         const SizedBox(width: 12),
-                        Text(value),
+                        Text(value, style: const TextStyle(fontSize: 14)),
                       ],
                     );
                   }).toList();
@@ -81,7 +81,7 @@ class LanguageSection extends StatelessWidget {
                 icon: IconWithCircleStyle(
                   backgroundColor:
                       Theme.of(context).brightness == Brightness.dark
-                      ? Colors.grey.shade50.withAlpha(32)
+                      ? Colors.grey.shade100.withAlpha(32)
                       : Colors.grey.shade300.withAlpha(32),
                   icon: Icon(
                     Icons.keyboard_arrow_down_outlined,
@@ -107,11 +107,11 @@ class LanguageSection extends StatelessWidget {
                         value == 'العربية'
                             ? const Iconify(
                                 Twemoji.flag_for_flag_egypt,
-                                size: 20,
+                                size: 16,
                               )
                             : const Iconify(
                                 Twemoji.flag_for_flag_united_states,
-                                size: 20,
+                                size: 16,
                               ),
                         const SizedBox(width: 12),
                         Text(
@@ -121,6 +121,7 @@ class LanguageSection extends StatelessWidget {
                                 Theme.of(context).brightness == Brightness.dark
                                 ? Colors.grey.shade800
                                 : Colors.grey.shade100,
+                            fontSize: 14,
                           ),
                         ),
                       ],

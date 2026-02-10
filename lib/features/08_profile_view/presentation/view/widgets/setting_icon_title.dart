@@ -24,12 +24,13 @@ class CustomIconTitle extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       spacing: screenSize.width * .02,
       children: [
-        Icon(iconData, size: 24, color: iconColor),
+        Icon(iconData, size: 20, color: iconColor),
         CustomText(
           text: title,
           fontSize: 16,
           alignment: Alignment.center,
           color: textColor,
+          fontWeight: FontWeight.bold,
         ),
       ],
     );
