@@ -94,13 +94,13 @@ class SelectedLanguageSection extends StatelessWidget {
             return Row(
               children: [
                 value == 'العربية'
-                    ? const Iconify(Twemoji.flag_for_flag_egypt, size: 20)
+                    ? const Iconify(Twemoji.flag_for_flag_egypt, size: 16)
                     : const Iconify(
                         Twemoji.flag_for_flag_united_states,
-                        size: 20,
+                        size: 16,
                       ),
                 const SizedBox(width: 12),
-                Text(value),
+                Text(value, style: const TextStyle(fontSize: 14)),
               ],
             );
           }).toList();
@@ -126,10 +126,10 @@ class SelectedLanguageSection extends StatelessWidget {
             child: Row(
               children: [
                 value == 'العربية'
-                    ? const Iconify(Twemoji.flag_for_flag_egypt, size: 20)
+                    ? const Iconify(Twemoji.flag_for_flag_egypt, size: 16)
                     : const Iconify(
                         Twemoji.flag_for_flag_united_states,
-                        size: 20,
+                        size: 16,
                       ),
                 const SizedBox(width: 12),
                 Text(
@@ -138,6 +138,7 @@ class SelectedLanguageSection extends StatelessWidget {
                     color: Theme.of(context).brightness == Brightness.dark
                         ? Colors.grey.shade800
                         : Colors.grey.shade100,
+                    fontSize: 14,
                   ),
                 ),
               ],

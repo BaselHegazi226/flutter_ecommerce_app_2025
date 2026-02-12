@@ -7,6 +7,7 @@ import 'package:go_router/go_router.dart';
 import 'package:toastification/toastification.dart';
 
 import '../../../../../core/helper/const.dart';
+import '../../../../../core/helper/fields_contranits.dart';
 import '../../../../../core/utilities/custom_button.dart';
 import '../../../../../core/utilities/custom_text_form_field.dart';
 import '../../../../../generated/l10n.dart';
@@ -54,6 +55,8 @@ class _LoginEmailPasswordInputSectionState
             validator: (value) {
               if (value == null || value.isEmpty) {
                 return S.of(context).authEmailRequired;
+              } else if (!FieldsConstraints.emailReg.hasMatch(value)) {
+                return S.of(context).auth_enterValidEmail;
               }
               return null;
             },

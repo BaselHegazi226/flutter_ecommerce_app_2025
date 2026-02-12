@@ -56,12 +56,12 @@ class OnboardingContent extends StatelessWidget {
         CustomText(
           text: data.title1,
           textAlign: TextAlign.center,
-          fontSize: 24,
+          fontSize: 18,
         ),
         CustomText(
           text: data.subTitle,
           textAlign: TextAlign.center,
-          fontSize: 16,
+          fontSize: 14,
         ),
       ],
     );

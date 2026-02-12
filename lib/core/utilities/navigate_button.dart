@@ -39,7 +39,7 @@ class NavigateButton extends StatelessWidget {
     final isDark = theme.brightness == Brightness.dark;
 
     if (isBack) {
-      return _buildElevatedButtonBack(isDark);
+      return _buildElevatedButtonBack(context, isDark);
     }
     return _buildElevatedButtonNext(isDark);
   }
@@ -101,13 +101,13 @@ class NavigateButton extends StatelessWidget {
     );
   }
 
-  Widget _buildElevatedButtonBack(bool isDark) {
+  Widget _buildElevatedButtonBack(BuildContext context, bool isDark) {
     return InkWell(
       onTap: isLoading ? null : onPressed,
       child: Container(
         padding: const EdgeInsets.all(8),
         decoration: BoxDecoration(
-          color: isDark ? Colors.grey.shade400 : kScaffoldColor,
+          color: Theme.of(context).scaffoldBackgroundColor,
           borderRadius: BorderRadius.circular(12),
           border: Border.all(color: borderColor ?? Colors.transparent),
         ),

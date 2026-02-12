@@ -96,7 +96,7 @@ class ShowOrderItem extends StatelessWidget {
             fontSize: 12,
             color: kPrimaryColor,
           ),
-          CustomText(text: '$count x', fontSize: 14, color: kGreyColor),
+          CustomText(text: '$count x', fontSize: 12, color: kGreyColor),
         ],
       ),
     );

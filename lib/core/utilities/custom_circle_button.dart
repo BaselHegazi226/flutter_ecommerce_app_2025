@@ -10,23 +10,52 @@ class CustomCircleButton extends StatelessWidget {
     this.iconColor = Colors.white,
     this.backgroundColor = kPrimaryColor,
     this.borderColor = Colors.transparent,
+    this.enableGradient = false,
   });
 
   final VoidCallback onPressed;
   final IconData iconData;
   final Color iconColor, backgroundColor, borderColor;
+  final bool enableGradient;
 
   @override
   Widget build(BuildContext context) {
-    return OutlinedButton(
-      style: OutlinedButton.styleFrom(
-        backgroundColor: backgroundColor,
-        side: BorderSide(color: borderColor),
-        shape: const CircleBorder(),
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
+    return InkWell(
+      onTap: onPressed,
+      borderRadius: const BorderRadius.all(Radius.circular(64)),
+      child: Container(
         padding: const EdgeInsets.all(8),
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          color: backgroundColor,
+          border: Border.all(color: borderColor),
+          gradient: enableGradient
+              ? isDark
+                    ? LinearGradient(
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                        colors: [
+                          Colors.grey.shade300,
+                          Colors.white,
+                          Colors.grey.shade200,
+                        ],
+                      )
+                    : const LinearGradient(
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                        colors: [
+                          Color(0xff7fe0b8), // mint highlight
+                          Color(0xff3d9970), // primary
+                          Color(0xff2a6f56),
+                        ], // deep shadow],
+                        stops: [0.0, 0.55, 1.0],
+                      )
+              : null,
+        ),
+        child: Icon(iconData, size: 24, color: iconColor),
       ),
-      onPressed: onPressed,
-      child: Icon(iconData, size: 24, color: iconColor),
     );
   }
 }

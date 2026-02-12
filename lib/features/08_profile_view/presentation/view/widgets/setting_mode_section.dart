@@ -42,11 +42,17 @@ class ModeSection extends StatelessWidget {
                     Row(
                       spacing: 8,
                       children: [
-                        const Icon(Icons.change_circle, size: 20),
+                        Icon(
+                          Icons.change_circle,
+                          color: isDark ? Colors.grey.shade100 : Colors.black87,
+                          size: 20,
+                        ),
                         CustomText(
                           text: isDark
                               ? S.of(context).settingsLight
                               : S.of(context).settingsDark,
+                          color: isDark ? Colors.grey.shade100 : Colors.black87,
+
                           fontSize: 14,
                           alignment: Alignment.center,
                         ),
@@ -55,7 +61,7 @@ class ModeSection extends StatelessWidget {
                     IconWithCircleStyle(
                       backgroundColor: isDark
                           ? Colors.grey.shade50.withAlpha(32)
-                          : Colors.grey.shade300.withAlpha(32),
+                          : Colors.grey.shade400.withAlpha(32),
                       onPressed: () {
                         appSettingCubit.selectedTheme(
                           theme: isDark ? ThemeMode.light : ThemeMode.dark,

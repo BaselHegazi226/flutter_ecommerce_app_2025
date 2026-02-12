@@ -82,7 +82,7 @@ class LanguageSection extends StatelessWidget {
                   backgroundColor:
                       Theme.of(context).brightness == Brightness.dark
                       ? Colors.grey.shade100.withAlpha(32)
-                      : Colors.grey.shade300.withAlpha(32),
+                      : Colors.grey.shade400.withAlpha(32),
                   icon: Icon(
                     Icons.keyboard_arrow_down_outlined,
                     color: Theme.of(context).brightness == Brightness.dark

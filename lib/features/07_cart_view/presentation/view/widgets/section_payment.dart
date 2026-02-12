@@ -115,17 +115,13 @@ class SectionPayment extends StatelessWidget {
                   children: [
                     Icon(
                       Icons.arrow_back,
-                      color: isDark
-                          ? Colors.blueGrey.shade200
-                          : Colors.deepOrange,
+                      color: isDark ? Colors.grey.shade200 : Colors.black87,
                       size: 16,
                     ),
                     CustomText(
                       text: S.of(context).cart_back,
                       fontSize: 12,
-                      color: isDark
-                          ? Colors.blueGrey.shade200
-                          : Colors.deepOrange,
+                      color: isDark ? Colors.grey.shade50 : Colors.black87,
                     ),
                   ],
                 ),
@@ -143,13 +139,14 @@ class SectionPayment extends StatelessWidget {
       children: [
         CustomText(
           text: S.of(context).orderReady,
-          fontSize: 16,
+          fontSize: 14,
           alignment: Alignment.center,
           fontWeight: FontWeight.bold,
         ),
         Icon(
           Icons.check_circle,
           color: isDark ? Colors.grey.shade200 : kPrimaryColor,
+          size: 16,
         ),
       ],
     );

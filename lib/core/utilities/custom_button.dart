@@ -39,6 +39,7 @@ class CustomButton extends StatelessWidget {
       child: Container(
         padding: EdgeInsets.all(paddingValue),
         decoration: BoxDecoration(
+          border: Border.all(color: borderColor ?? Colors.transparent),
           color:
               backgroundColor ??
               (isDark ? Colors.grey.shade400 : kScaffoldColor),
@@ -122,6 +123,7 @@ class CustomTextIconButton extends StatelessWidget {
       child: Container(
         padding: EdgeInsets.all(paddingValue),
         decoration: BoxDecoration(
+          border: Border.all(color: borderColor ?? Colors.transparent),
           color:
               backgroundColor ??
               (isDark ? Colors.grey.shade400 : kScaffoldColor),

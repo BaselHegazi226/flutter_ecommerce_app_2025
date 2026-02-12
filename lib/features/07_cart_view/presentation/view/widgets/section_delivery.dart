@@ -371,6 +371,7 @@ class _DeliveryViewState extends State<DeliveryView> {
                       children: [
                         Expanded(
                           child: CustomButton(
+                            enableGradient: false,
                             onPressed: () => Navigator.pop(context, null),
                             backgroundColor: Theme.of(
                               context,

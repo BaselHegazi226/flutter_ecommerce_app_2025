@@ -34,6 +34,7 @@ class OnBoardingViewButtonSection extends StatelessWidget {
             : const SizedBox.shrink(),
 
         CustomCircleButton(
+          enableGradient: true,
           onPressed: nextButtonOnPressed,
           backgroundColor: Theme.of(context).brightness == Brightness.dark
               ? Colors.grey.shade500.withAlpha(124)
