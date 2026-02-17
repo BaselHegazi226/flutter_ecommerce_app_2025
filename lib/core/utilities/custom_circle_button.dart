@@ -37,9 +37,9 @@ class CustomCircleButton extends StatelessWidget {
                         begin: Alignment.topLeft,
                         end: Alignment.bottomRight,
                         colors: [
-                          Colors.grey.shade300,
-                          Colors.white,
+                          Colors.grey.shade50,
                           Colors.grey.shade200,
+                          Colors.grey.shade400,
                         ],
                       )
                     : const LinearGradient(

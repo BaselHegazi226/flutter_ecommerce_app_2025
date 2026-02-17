@@ -57,6 +57,7 @@ class OnboardingContent extends StatelessWidget {
           text: data.title1,
           textAlign: TextAlign.center,
           fontSize: 18,
+          fontWeight: FontWeight.bold,
         ),
         CustomText(
           text: data.subTitle,

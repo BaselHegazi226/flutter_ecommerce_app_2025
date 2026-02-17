@@ -41,6 +41,7 @@ class LanguageView extends StatelessWidget {
           ),
         ),
         floatingActionButton: CustomCircleButton(
+          enableGradient: true,
           backgroundColor: Theme.of(context).brightness == Brightness.dark
               ? Colors.grey.shade500.withAlpha(124)
               : kPrimaryColor,

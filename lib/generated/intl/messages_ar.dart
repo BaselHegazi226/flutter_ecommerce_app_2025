@@ -135,6 +135,19 @@ class MessageLookup extends MessageLookupByLibrary {
       "مهاراتي التقنية",
     ),
     "about_me_title": MessageLookupByLibrary.simpleMessage("نبذه عني"),
+    "at_least_1_lowercase_letter": MessageLookupByLibrary.simpleMessage(
+      "على الأقل حرف صغير",
+    ),
+    "at_least_1_number": MessageLookupByLibrary.simpleMessage("على الأقل رقم"),
+    "at_least_1_special_character": MessageLookupByLibrary.simpleMessage(
+      "على الأقل حرف خاص @#!",
+    ),
+    "at_least_1_uppercase_letter": MessageLookupByLibrary.simpleMessage(
+      "على الأقل حرف كبير",
+    ),
+    "at_least_8_character": MessageLookupByLibrary.simpleMessage(
+      "على الأقل 8 حروف",
+    ),
     "auth_confirmPassword": MessageLookupByLibrary.simpleMessage(
       "تأكيد كلمة المرور",
     ),
@@ -143,7 +156,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "البريد الإلكتروني مطلوب",
     ),
     "auth_enterStrongPassword": MessageLookupByLibrary.simpleMessage(
-      "أدخل كلمة مرور قوية",
+      "أدخل كلمة مرور آمنة",
     ),
     "auth_enterValidEmail": MessageLookupByLibrary.simpleMessage(
       "أدخل بريدًا إلكترونيًا صحيحًا",
@@ -153,6 +166,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "auth_forgetPassword": MessageLookupByLibrary.simpleMessage(
       "هل نسيت كلمة المرور؟",
+    ),
+    "auth_generate_password": MessageLookupByLibrary.simpleMessage(
+      "انشئ كلمه مرور",
     ),
     "auth_name": MessageLookupByLibrary.simpleMessage("الاسم"),
     "auth_nameRequired": MessageLookupByLibrary.simpleMessage("الاسم مطلوب"),
@@ -295,6 +311,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "delete_order_history_title": MessageLookupByLibrary.simpleMessage(
       "حذف تاريخ الطلبات",
     ),
+    "empty_password": MessageLookupByLibrary.simpleMessage("فارغ"),
     "error_badRequest": MessageLookupByLibrary.simpleMessage("طلب غير صالح"),
     "error_conflict": MessageLookupByLibrary.simpleMessage("حدث تعارض"),
     "error_connection": MessageLookupByLibrary.simpleMessage(
@@ -447,6 +464,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "language_selected_text": MessageLookupByLibrary.simpleMessage(
       "اختر لغتك المفضله",
     ),
+    "medium_password": MessageLookupByLibrary.simpleMessage("متوسط"),
     "nav_cart": MessageLookupByLibrary.simpleMessage("السلة"),
     "nav_home": MessageLookupByLibrary.simpleMessage("الرئيسية"),
     "nav_profile": MessageLookupByLibrary.simpleMessage("الملف الشخصي"),
@@ -493,6 +511,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "order_ready": MessageLookupByLibrary.simpleMessage("الطلب جاهز للتنفيذ"),
     "order_total_price": MessageLookupByLibrary.simpleMessage("السعر الإجمالي"),
     "order_transmit": MessageLookupByLibrary.simpleMessage("قيد الإرسال"),
+    "password_requirement": MessageLookupByLibrary.simpleMessage(
+      "متطلبات كلمة المرور",
+    ),
+    "password_strength": MessageLookupByLibrary.simpleMessage(
+      "قوة كلمه المرور",
+    ),
     "profile": MessageLookupByLibrary.simpleMessage("الملف الشخصي"),
     "profile_delete_favourite_Item_desc": MessageLookupByLibrary.simpleMessage(
       "هل تريد بالفعل حذف العنصر من المفضله",
@@ -525,6 +549,8 @@ class MessageLookup extends MessageLookupByLibrary {
       "البريد الإلكتروني",
     ),
     "profile_userName": MessageLookupByLibrary.simpleMessage("اسم المستخدم"),
+    "search_with_category": MessageLookupByLibrary.simpleMessage("ابحث بالفئه"),
+    "secure_password": MessageLookupByLibrary.simpleMessage("آمن"),
     "settings_change_theme": MessageLookupByLibrary.simpleMessage(
       "تغيير الوضع",
     ),
@@ -536,6 +562,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "settings_notifications": MessageLookupByLibrary.simpleMessage("الإشعارات"),
     "settings_onOff": MessageLookupByLibrary.simpleMessage("تشغيل / إيقاف"),
     "settings_title": MessageLookupByLibrary.simpleMessage("الإعدادات"),
+    "strong_password": MessageLookupByLibrary.simpleMessage("قوي"),
     "success_addToCart_desc": MessageLookupByLibrary.simpleMessage(
       "تمت إضافة المنتج إلى السلة بنجاح.",
     ),
@@ -624,5 +651,6 @@ class MessageLookup extends MessageLookupByLibrary {
       "تراجع",
     ),
     "warning_button_title_ok": MessageLookupByLibrary.simpleMessage("موافق"),
+    "weak_password": MessageLookupByLibrary.simpleMessage("ضعيف"),
   };
 }

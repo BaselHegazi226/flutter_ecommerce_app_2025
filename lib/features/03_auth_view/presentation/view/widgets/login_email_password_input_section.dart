@@ -65,7 +65,7 @@ class _LoginEmailPasswordInputSectionState
           CustomTextFormField(
             iconData: Icons.password_outlined,
             text: S.of(context).authPassword,
-            hintText: '1234638@Bd',
+            hintText: '12B!b2331',
             onSaved: (value) {
               password = value!.trim();
             },

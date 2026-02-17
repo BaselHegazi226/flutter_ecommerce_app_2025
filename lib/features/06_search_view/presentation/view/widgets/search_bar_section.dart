@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_e_commerce_app_2025/core/utilities/extensions_of_s_localization.dart';
 import 'package:flutter_e_commerce_app_2025/generated/l10n.dart';
 
 import '../../view_model/search_result_cubit/search_result_cubit.dart';
@@ -33,13 +32,15 @@ class SearchBarSection extends StatelessWidget {
 
           shadowColor: const WidgetStatePropertyAll(Colors.transparent),
 
-          hintText: S.of(context).navSearch,
-
+          hintText: S.of(context).search_with_category,
+          hintStyle: WidgetStatePropertyAll(
+            TextStyle(fontSize: 14, height: 1.2, color: color),
+          ),
           textStyle: WidgetStatePropertyAll(
-            TextStyle(fontSize: 12, height: 1.2, color: color),
+            TextStyle(fontSize: 14, height: 1.2, color: color),
           ),
 
-          leading: Icon(Icons.search_outlined, size: 16, color: color),
+          leading: Icon(Icons.search_outlined, size: 18, color: color),
 
           onSubmitted: (String? category) {
             context.read<SearchResultCubit>().getSearchResultByCategory(

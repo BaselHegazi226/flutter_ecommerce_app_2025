@@ -138,6 +138,21 @@ class MessageLookup extends MessageLookupByLibrary {
       "Technical Skills",
     ),
     "about_me_title": MessageLookupByLibrary.simpleMessage("About me"),
+    "at_least_1_lowercase_letter": MessageLookupByLibrary.simpleMessage(
+      "At least 1 lowercase",
+    ),
+    "at_least_1_number": MessageLookupByLibrary.simpleMessage(
+      "At least 1 number",
+    ),
+    "at_least_1_special_character": MessageLookupByLibrary.simpleMessage(
+      "At least 1 special character @#!",
+    ),
+    "at_least_1_uppercase_letter": MessageLookupByLibrary.simpleMessage(
+      "At least 1 uppercase",
+    ),
+    "at_least_8_character": MessageLookupByLibrary.simpleMessage(
+      "At least 8 character",
+    ),
     "auth_confirmPassword": MessageLookupByLibrary.simpleMessage(
       "Confirm Password",
     ),
@@ -146,7 +161,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Email is required",
     ),
     "auth_enterStrongPassword": MessageLookupByLibrary.simpleMessage(
-      "Enter a strong password",
+      "Enter a secure password",
     ),
     "auth_enterValidEmail": MessageLookupByLibrary.simpleMessage(
       "Enter a valid email (example@email.com)",
@@ -156,6 +171,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "auth_forgetPassword": MessageLookupByLibrary.simpleMessage(
       "Forgot password?",
+    ),
+    "auth_generate_password": MessageLookupByLibrary.simpleMessage(
+      "Generate password",
     ),
     "auth_name": MessageLookupByLibrary.simpleMessage("Name"),
     "auth_nameRequired": MessageLookupByLibrary.simpleMessage(
@@ -300,6 +318,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "delete_order_history_title": MessageLookupByLibrary.simpleMessage(
       "Delete Order History",
     ),
+    "empty_password": MessageLookupByLibrary.simpleMessage("Empty"),
     "error_badRequest": MessageLookupByLibrary.simpleMessage(
       "Invalid request.",
     ),
@@ -464,6 +483,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "language_selected_text": MessageLookupByLibrary.simpleMessage(
       "Select Favourite Language",
     ),
+    "medium_password": MessageLookupByLibrary.simpleMessage("Medium"),
     "nav_cart": MessageLookupByLibrary.simpleMessage("Cart"),
     "nav_home": MessageLookupByLibrary.simpleMessage("Home"),
     "nav_profile": MessageLookupByLibrary.simpleMessage("Profile"),
@@ -512,6 +532,12 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "order_total_price": MessageLookupByLibrary.simpleMessage("Total Price"),
     "order_transmit": MessageLookupByLibrary.simpleMessage("Transmit"),
+    "password_requirement": MessageLookupByLibrary.simpleMessage(
+      "Password Requirement",
+    ),
+    "password_strength": MessageLookupByLibrary.simpleMessage(
+      "Password Strength",
+    ),
     "profile": MessageLookupByLibrary.simpleMessage("Profile"),
     "profile_delete_favourite_Item_desc": MessageLookupByLibrary.simpleMessage(
       "Are you sure to delete item from favourite products",
@@ -540,6 +566,10 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "profile_userEmail": MessageLookupByLibrary.simpleMessage("User Email"),
     "profile_userName": MessageLookupByLibrary.simpleMessage("User Name"),
+    "search_with_category": MessageLookupByLibrary.simpleMessage(
+      "Search with category",
+    ),
+    "secure_password": MessageLookupByLibrary.simpleMessage("Secure"),
     "settings_change_theme": MessageLookupByLibrary.simpleMessage(
       "Change Theme",
     ),
@@ -553,6 +583,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "settings_onOff": MessageLookupByLibrary.simpleMessage("On / Off"),
     "settings_title": MessageLookupByLibrary.simpleMessage("Settings"),
+    "strong_password": MessageLookupByLibrary.simpleMessage("Strong"),
     "success_addToCart_desc": MessageLookupByLibrary.simpleMessage(
       "The product has been added to your cart successfully.",
     ),
@@ -639,5 +670,6 @@ class MessageLookup extends MessageLookupByLibrary {
       "Cancel",
     ),
     "warning_button_title_ok": MessageLookupByLibrary.simpleMessage("Ok"),
+    "weak_password": MessageLookupByLibrary.simpleMessage("Weak"),
   };
 }

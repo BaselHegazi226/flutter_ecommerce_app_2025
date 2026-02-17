@@ -9,6 +9,7 @@ import '../../../../../core/helper/fields_contranits.dart';
 import '../../../../../core/helper/routes.dart';
 import '../../../../../core/utilities/custom_button.dart';
 import '../../../../../core/utilities/custom_text_form_field.dart';
+import '../../../../../core/utilities/password_widget/password_with_overlay.dart';
 import '../../../../../core/utilities/toastnotification.dart';
 import '../../../../../generated/l10n.dart';
 import '../../view_model/auth_bloc/auth_bloc.dart';
@@ -24,10 +25,12 @@ class _RegisterInputSectionState extends State<RegisterInputSection> {
   TextEditingController textEditingControllerEmail = TextEditingController();
   TextEditingController textEditingControllerPassword = TextEditingController();
   TextEditingController textEditingControllerName = TextEditingController();
+
   String email = '', password = '', name = '';
+
   ValueNotifier<bool> isLoadingValueNotifier = ValueNotifier(false);
+
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  AutovalidateMode autoValidateMode = AutovalidateMode.disabled;
 
   @override
   void dispose() {
@@ -46,10 +49,7 @@ class _RegisterInputSectionState extends State<RegisterInputSection> {
             iconData: Icons.person_outline_outlined,
             text: S.of(context).authName,
             hintText: 'name',
-            onSaved: (value) {
-              name = value!.trim();
-              debugPrint('name : $name');
-            },
+            onSaved: (value) => name = value!.trim(),
             validator: (value) {
               if (value == null || value.isEmpty) {
                 return S.of(context).authNameRequired;
@@ -60,14 +60,12 @@ class _RegisterInputSectionState extends State<RegisterInputSection> {
             },
             textEditingController: textEditingControllerName,
           ),
+
           CustomTextFormField(
             iconData: Icons.email_outlined,
             text: S.of(context).authEmail,
             hintText: 'iamdavid@gmail.com',
-            onSaved: (value) {
-              email = value!.trim();
-              debugPrint('email : $email');
-            },
+            onSaved: (value) => email = value!.trim(),
             validator: (value) {
               if (value == null || value.isEmpty) {
                 return S.of(context).authEmailRequired;
@@ -78,14 +76,13 @@ class _RegisterInputSectionState extends State<RegisterInputSection> {
             },
             textEditingController: textEditingControllerEmail,
           ),
-          CustomTextFormField(
-            iconData: Icons.password_outlined,
-            text: S.of(context).authPassword,
-            hintText: '**********',
-            onSaved: (value) {
-              password = value!.trim();
-              debugPrint('password : $password');
-            },
+
+          /// 🔥 Password With Overlay
+          PasswordWithOverlayBody(
+            controller: textEditingControllerPassword,
+            labelText: S.of(context).authPassword,
+            hintText: '12B!b2331',
+            onSaved: (value) => password = value!.trim(),
             validator: (value) {
               if (value == null || value.isEmpty) {
                 return S.of(context).authPasswordRequired;
@@ -94,13 +91,13 @@ class _RegisterInputSectionState extends State<RegisterInputSection> {
               }
               return null;
             },
-            textEditingController: textEditingControllerPassword,
           ),
+
           const SizedBox(height: 8),
+
           BlocConsumer<AuthBloc, AuthState>(
             listener: (context, state) {
               if (state is SignUpWithEmailSuccess) {
-                debugPrint('sign up success');
                 ToastNotification.flatColoredToastNotificationService(
                   title: S.of(context).registerSuccessTitle,
                   description: S.of(context).registerSuccessDesc,
@@ -110,23 +107,23 @@ class _RegisterInputSectionState extends State<RegisterInputSection> {
                   },
                 );
               } else if (state is SignUpWithEmailFailure) {
-                final errorMessage = state.errorMessage;
                 ToastNotification.flatColoredToastNotificationService(
                   toastNotificationType: ToastificationType.error,
                   title: S.of(context).registerFailureTitle,
-                  description: S.of(context).error(errorMessage),
+                  description: S.of(context).error(state.errorMessage),
                   onAutoCompleteCompleted: (value) {},
                 );
               }
             },
             builder: (context, state) {
-              changeIsLoadingValue(state);
+              isLoadingValueNotifier.value = state is SignUpWithEmailLoading;
+
               return ValueListenableBuilder(
                 valueListenable: isLoadingValueNotifier,
-                builder: (context, value, child) {
+                builder: (context, isLoading, _) {
                   return CustomButton(
                     text: S.of(context).authSignUp,
-                    isLoading: value,
+                    isLoading: isLoading,
                     textSize: 18,
                     textColor: Theme.of(context).brightness == Brightness.dark
                         ? Colors.grey.shade600
@@ -138,6 +135,7 @@ class _RegisterInputSectionState extends State<RegisterInputSection> {
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
                         _formKey.currentState!.save();
+
                         context.read<AuthBloc>().add(
                           SignUpWithEmailEvent(
                             name: name,
@@ -145,8 +143,6 @@ class _RegisterInputSectionState extends State<RegisterInputSection> {
                             password: password,
                           ),
                         );
-                      } else {
-                        autoValidateMode = AutovalidateMode.always;
                       }
                     },
                   );
@@ -157,9 +153,5 @@ class _RegisterInputSectionState extends State<RegisterInputSection> {
         ],
       ),
     );
-  }
-
-  void changeIsLoadingValue(AuthState state) {
-    isLoadingValueNotifier.value = state is SignUpWithEmailLoading;
   }
 }

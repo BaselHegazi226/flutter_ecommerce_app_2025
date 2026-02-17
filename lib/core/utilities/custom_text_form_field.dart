@@ -29,12 +29,7 @@ class CustomTextFormField extends StatelessWidget {
           spacing: 8,
           children: [
             Icon(iconData, size: 16),
-            CustomText(
-              text: text,
-              color: Colors.black,
-              fontSize: 14,
-              fontWeight: FontWeight.bold,
-            ),
+            CustomText(text: text, fontSize: 14, fontWeight: FontWeight.bold),
           ],
         ),
         TextFormField(

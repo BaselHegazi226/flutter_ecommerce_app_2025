@@ -67,6 +67,8 @@ extension AuthLocalizationX on S {
   String get authEnterStrongPassword => auth_enterStrongPassword;
 
   String get authPasswordNotMatch => auth_passwordNotMatch;
+
+  String get authGeneratePassword => auth_generate_password;
 }
 
 //main view extension of S

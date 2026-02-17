@@ -864,6 +864,101 @@ class S {
     return Intl.message('Password', name: 'auth_password', desc: '', args: []);
   }
 
+  /// `At least 8 character`
+  String get at_least_8_character {
+    return Intl.message(
+      'At least 8 character',
+      name: 'at_least_8_character',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `At least 1 uppercase`
+  String get at_least_1_uppercase_letter {
+    return Intl.message(
+      'At least 1 uppercase',
+      name: 'at_least_1_uppercase_letter',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `At least 1 lowercase`
+  String get at_least_1_lowercase_letter {
+    return Intl.message(
+      'At least 1 lowercase',
+      name: 'at_least_1_lowercase_letter',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `At least 1 number`
+  String get at_least_1_number {
+    return Intl.message(
+      'At least 1 number',
+      name: 'at_least_1_number',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `At least 1 special character @#!`
+  String get at_least_1_special_character {
+    return Intl.message(
+      'At least 1 special character @#!',
+      name: 'at_least_1_special_character',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Empty`
+  String get empty_password {
+    return Intl.message('Empty', name: 'empty_password', desc: '', args: []);
+  }
+
+  /// `Weak`
+  String get weak_password {
+    return Intl.message('Weak', name: 'weak_password', desc: '', args: []);
+  }
+
+  /// `Medium`
+  String get medium_password {
+    return Intl.message('Medium', name: 'medium_password', desc: '', args: []);
+  }
+
+  /// `Strong`
+  String get strong_password {
+    return Intl.message('Strong', name: 'strong_password', desc: '', args: []);
+  }
+
+  /// `Secure`
+  String get secure_password {
+    return Intl.message('Secure', name: 'secure_password', desc: '', args: []);
+  }
+
+  /// `Password Strength`
+  String get password_strength {
+    return Intl.message(
+      'Password Strength',
+      name: 'password_strength',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password Requirement`
+  String get password_requirement {
+    return Intl.message(
+      'Password Requirement',
+      name: 'password_requirement',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Confirm Password`
   String get auth_confirmPassword {
     return Intl.message(
@@ -994,10 +1089,10 @@ class S {
     );
   }
 
-  /// `Enter a strong password`
+  /// `Enter a secure password`
   String get auth_enterStrongPassword {
     return Intl.message(
-      'Enter a strong password',
+      'Enter a secure password',
       name: 'auth_enterStrongPassword',
       desc: '',
       args: [],
@@ -1009,6 +1104,16 @@ class S {
     return Intl.message(
       'Passwords do not match',
       name: 'auth_passwordNotMatch',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Generate password`
+  String get auth_generate_password {
+    return Intl.message(
+      'Generate password',
+      name: 'auth_generate_password',
       desc: '',
       args: [],
     );
@@ -2474,6 +2579,16 @@ class S {
     return Intl.message(
       'Responsive design supporting multiple screen sizes',
       name: 'about_app_tech_responsive',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Search with category`
+  String get search_with_category {
+    return Intl.message(
+      'Search with category',
+      name: 'search_with_category',
       desc: '',
       args: [],
     );
